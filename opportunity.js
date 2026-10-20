@@ -53,6 +53,35 @@ export function deriveOpportunitySignals(lead){
     {label:'海外融資',detail:'確認借款主體、所在地、資金用途、幣別與還款來源。'}
   ],note:'尚未確認交易金額、交易量與定價，不計入年度潛在貢獻數字；也不把投資預算當成可核貸額度。'}];
 }
+export const FOLLOWUP_STATUSES=Object.freeze(['待確認','待補資料','跟進中','完成示範','暫不跟進']);
+export function getOpportunityFollowup(lead,key){
+  const saved=lead?.followups?.[key];
+  return {status:FOLLOWUP_STATUSES.includes(saved?.status)?saved.status:'待確認',note:typeof saved?.note==='string'?saved.note.slice(0,500):'',at:typeof saved?.at==='string'?saved.at:null};
+}
+// This explanation layer never changes financial inputs, consent, routing,
+// selected services or contribution formulas. Purpose alone is not consent.
+export function deriveOpportunityDetails(lead){
+  const selected=new Set(Array.isArray(lead?.services)?lead.services:[]),model=lead?.plan?.model,purpose=MODELS[model]||'目前規劃';
+  const amount=lead?.plan?.out?.value,unit=lead?.plan?.out?.unit||'萬元';
+  const need=typeof amount==='number'&&Number.isFinite(amount)?`本次規劃顯示 ${new Intl.NumberFormat('zh-TW',{maximumFractionDigits:2}).format(amount)} ${unit}，僅作討論背景，不是核貸額度。`:'實際金額、用途與時間尚待確認。';
+  const definitions=[
+    {key:'deposit',label:'活存與資金管理',trigger:'使用者勾選活存與資金管理服務，表示願意討論資金留存；尚不能由營收或自有資金推定可留存餘額。',questions:['每月平均有多少資金可留存？最低營運水位與付款高峰落在何時？','主要收款與付款帳戶在哪裡？是否需要整合薪轉、供應商付款與對帳？','所填月平均活存餘額是否有實際往來資料支持，且未重複計入其他用途？']},
+    {key:'loan',label:model==='working'?'週轉融資':'融資規劃',trigger:`使用者勾選融資服務，規劃用途為「${purpose}」。${need}`,questions:[model==='working'?'新增訂單或營收需要先墊付多久？收款、備貨及付款時間是否符合實際交易？':'實際支出時點、資金用途與還款來源是什麼？是否需要分期動用？','目前可用授信與實際動用餘額多少？預估日平均貸款餘額如何推導？','是否有其他借款、到期集中還款、季節性高峰或尚未揭露的資金需求？']},
+    {key:'collateral',label:'廠房／店面抵押',trigger:`使用者勾選廠房／店面抵押討論，${model==='equipment'?'目前亦選擇廠房與設備用途。':'可進一步確認是否有適合本次用途的不動產。'}尚未查證產權、估價或抵押設定，不推定擔保價值。`,questions:['不動產屬誰所有，實際用途及所在地為何？是否涉及興建或購置？','目前有無抵押設定、其他權利、租約或使用限制？應備何種權利文件？','擬議融資與工程／購置款如何銜接？抵押品評估與額度仍需正式審查。']},
+    {key:'payment',label:model==='expansion'?'展店收款／收付通':'收付通與收款整合',trigger:`使用者勾選收款整合服務${model==='expansion'?'，並選擇展店與擴張，具門市收款及對帳整合的討論情境。':'，願意討論收付款及對帳流程。'}收付通與收單的計價方式仍應分別確認。`,questions:['有幾個門市或收款通路？目前使用現金、刷卡、轉帳或其他收款方式？','每月可導入的實際交易量、退款、撥款時間與對帳方式為何？','需要收付通、商店收單或兩者整合？實際費率、淨收入與導入成本如何計算？']},
+    {key:'ebank',label:'企業網路銀行',trigger:'使用者勾選企業網路銀行服務，願意討論操作權限與付款流程；尚未確認是否開通或有收費收入。',questions:['目前誰經辦、誰覆核？需要多少操作人員及分層授權？','是否有批次付款、薪資、跨境匯款或 ERP 對接需求？','現有網銀功能是否足夠？導入、教育訓練及年度淨手續費需如何確認？']}
+  ];
+  const details=definitions.filter(d=>selected.has(d.key)).map(d=>({...d,origin:'使用者明確勾選，待進一步確認需求',derived:false}));
+  for(const signal of deriveOpportunitySignals(lead))details.push({key:signal.key,label:signal.label,trigger:'本次用途選擇「海外投資」，因此顯示外匯收付、換匯與海外融資的潛在線索。這不代表使用者已同意申辦其中任何服務。',questions:signal.items.map(item=>`${item.label}：${item.detail}`),origin:signal.origin,derived:true,note:signal.note});
+  return details;
+}
+export function updateOpportunityFollowup(lead,key,{status,note},{at=new Date().toISOString()}={}){
+  if(!deriveOpportunityDetails(lead).some(signal=>signal.key===key))throw new Error('此案例沒有相符的商機線索，無法儲存跟進紀錄。');
+  if(!FOLLOWUP_STATUSES.includes(status))throw new Error('請選擇有效的線索跟進狀態。');
+  if(typeof note!=='string'||note.length>500)throw new Error('跟進備註最多 500 字，請只填示範內容。');
+  if(!Number.isFinite(new Date(at).getTime()))throw new Error('跟進紀錄時間無效。');
+  return {...lead,followups:{...(lead.followups||{}),[key]:{status,note:note.trim(),at}}};
+}
 export const DEMO_SAMPLE_SET='esun-sme-built-in-samples-v2';
 const legacySampleKeys=new Set(['假案例 A｜擴充產線','假案例 B｜第二間門市','假案例 C｜批發備貨']);
 export function isBuiltInDemoSample(lead){return lead?.sampleSet===DEMO_SAMPLE_SET||(lead?.source==='手動載入假資料'&&legacySampleKeys.has(lead.sampleKey));}
@@ -102,7 +131,7 @@ export function createLead({plan,city,district,services=[],label,source='網站�
   const selected=[...new Set(services)].filter(k=>Object.hasOwn(SERVICES,k));if(!selected.length&&snapshot.model!=='overseas')throw new Error('請勾選至少一項想討論的服務。');
   if(!consent)throw new Error('請先勾選同意本次示範轉交。');
   const now=new Date().toISOString(),id=globalThis.crypto?.randomUUID?.()||('demo-'+Date.now()+'-'+Math.random().toString(16).slice(2));
-  return {id,label:label||'網站規劃 '+new Date().toLocaleTimeString('zh-TW',{hour12:false}),city,district,services:selected,source,plan:snapshot,at:now,status:'未分派',assignment:null,finance:emptyFinance(),consent:{version:CONSENT_VERSION,at:now,scope:'僅於同一瀏覽器儲存本次試算、地區及服務意願，示範轉交；未實際通知 RM。'}};
+  return {id,label:label||'網站規劃 '+new Date().toLocaleTimeString('zh-TW',{hour12:false}),city,district,services:selected,source,plan:snapshot,at:now,status:'未分派',assignment:null,finance:emptyFinance(),followups:{},consent:{version:CONSENT_VERSION,at:now,scope:'僅於同一瀏覽器儲存本次試算、地區及服務意願，示範轉交；未實際通知 RM。'}};
 }
 export function fillCities(select){select.innerHTML='<option value="">請選擇縣市</option>'+Object.keys(AREAS).map(c=>`<option>${esc(c)}</option>`).join('');}
 export function fillDistricts(select,city){select.innerHTML='<option value="">請選擇行政區</option>'+[...new Set((AREAS[city]||'').split(' ').filter(Boolean))].map(d=>`<option>${esc(d)}</option>`).join('');}
