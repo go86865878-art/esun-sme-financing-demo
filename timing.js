@@ -32,8 +32,8 @@ export function mountTiming({ target, getPlan, onChange } = {}) {
   container.innerHTML = `<section class="timing-panel" aria-label="可選月度資金規劃">
     <div class="timing-heading"><div><h3>月度收付款規劃</h3><p>選填，用每月實際收付時點，看看何時需要準備資金。</p></div><span class="timing-status" role="status">尚未規劃</span></div>
     <p class="timing-context"></p>
-    <p class="timing-note">這份規劃獨立計算，不會與上方年度四模型自動加總，也不會把年度數字平均分配。請自行填寫每月預估；沒有收付請明確填0，空白不當作0。</p>
-    <form class="timing-form" novalidate><fieldset class="timing-fieldset"><legend>填入月度規劃資料（金額單位：萬元）</legend>
+    <p class="timing-note">金額皆為新臺幣萬元；海外收支請先依自行設定的匯率換算為台幣，不直接填美元原幣。這份規劃獨立計算，不會與上方年度四模型自動加總，也不會把年度數字平均分配。請自行填寫每月預估；沒有收付請明確填0，空白不當作0。</p>
+    <form class="timing-form" novalidate><fieldset class="timing-fieldset"><legend>填入月度規劃資料（金額單位：新臺幣萬元）</legend>
       <div class="timing-basics"><label>月度規劃起始月份<input name="startMonth" type="month" required><small>從這個月開始，最多連續規劃12個月；與預計開始用款月份可不同。</small></label><label>可動用期初現金<input name="openingCash" type="number" min="0" step="0.01" inputmode="decimal" required placeholder="請填金額"><small>起始月開始時可投入本計畫的現金；已計入的款項，勿再列當月收款。</small></label></div>
       <p class="timing-help">支出請包含營運、投資、稅款及還本付息等實際付款；按各月實際時點填寫。</p>
       <div class="timing-table-wrap"><table class="timing-input-table"><caption>每月預估收款與支出</caption><thead><tr><th scope="col">月份</th><th scope="col">預估收款（萬元）</th><th scope="col">預估支出（萬元）</th></tr></thead><tbody></tbody></table></div>
@@ -57,6 +57,7 @@ export function mountTiming({ target, getPlan, onChange } = {}) {
     if (!last || dirty || !activePlan()) return null;
     const lines = [
       '月度資金規劃摘要（選填、獨立試算）',
+      '以下金額皆為新臺幣萬元；海外原幣收支已由填寫者自行換算。',
       `討論用途：${models[plan?.model] || '本次資金計畫'}`,
       `期間：${monthLabel(last.startMonth)}至${monthLabel(last.endMonth)}`,
       `可動用期初現金：${fmt(last.openingCash)}萬元`,
