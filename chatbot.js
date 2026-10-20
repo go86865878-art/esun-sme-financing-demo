@@ -61,19 +61,17 @@
     if (text !== undefined) node.textContent = text;
     return node;
   }
-  function chatIcon() {
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('aria-hidden', 'true');
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', 'M4 4h16v12H9l-5 4ZM8 8h8M8 12h5');
-    svg.append(path); return svg;
+  function chatAvatar() {
+    const avatar = el('span', 'esun-assistant-avatar'); avatar.setAttribute('aria-hidden', 'true');
+    const image = el('img'); image.src = 'esun-meow.png'; image.alt = ''; image.width = 448; image.height = 602;
+    avatar.append(image); return avatar;
   }
   function init() {
     if (document.getElementById('esun-assistant')) return;
     const root = el('aside', 'esun-assistant'); root.id = 'esun-assistant'; root.setAttribute('aria-label', 'AI 顧問小幫手｜文件知識庫示範');
     const launcher = el('button', 'esun-assistant-launch'); launcher.id = 'esun-assistant-toggle'; launcher.type = 'button';
     launcher.setAttribute('aria-expanded', 'false'); launcher.setAttribute('aria-controls', 'esun-assistant-panel');
-    launcher.append(chatIcon()); const launchText = el('span', '', 'AI 顧問小幫手'); launchText.append(el('small', '', '文件・試算問答')); launcher.append(launchText);
+    launcher.append(chatAvatar()); const launchText = el('span', 'esun-assistant-launch-text', 'AI 顧問小幫手'); launchText.append(el('small', '', '文件・試算問答')); launcher.append(launchText);
     const panel = el('section', 'esun-assistant-panel'); panel.id = 'esun-assistant-panel'; panel.hidden = true; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'false'); panel.setAttribute('aria-labelledby', 'esun-assistant-title');
     const head = el('div', 'esun-assistant-head'); const heading = el('div'); const title = el('h2', '', 'AI 顧問小幫手'); title.id = 'esun-assistant-title'; heading.append(title, el('p', '', '文件知識庫示範'));
     const close = el('button', 'esun-assistant-close', '×'); close.type = 'button'; close.setAttribute('aria-label', '關閉問答助手'); head.append(heading, close);
