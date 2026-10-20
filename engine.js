@@ -248,5 +248,5 @@ export function diagnose(v) {
       { red: '年度可用現金低於本息，需調整投資、還款安排或資金來源。', yellow: '剛好或接近涵蓋本息，宜測試營收下滑與利率上升。', green: '本息支應達測試參考值；仍須留意季節性與付款時點。' })
   ];
   const overall = items.some(i => i.status === 'red') ? 'red' : items.some(i => i.status === 'yellow') ? 'yellow' : items.some(i => i.status === 'na') ? 'na' : 'green';
-  return { items, overall, note: '紅黃綠門檻為本測試網自訂參考值，並非玉山銀行授信標準，也不是臺企銀門檻。請以同一期間、同一公司與相同金額單位填寫；資料不足或分母為0不視為健康。' };
+  return { items, overall, note: '紅黃綠門檻為本測試網自訂參考值，並非銀行授信標準。請以同一期間、同一公司與相同金額單位填寫；資料不足或分母為0不視為健康。' };
 }

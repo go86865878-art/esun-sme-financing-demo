@@ -5,7 +5,7 @@
     documents: { label: '本頁文件準備清單', href: '#documents' },
     forms: { label: '本頁制式文件下載區', href: '#formDownloads' },
     official: { label: '玉山銀行官方表單下載', href: 'https://www.esunbank.com/zh-tw/about/customer-service/applications' },
-    rm: { label: '玉山企業線上申請／RM 諮詢入口', href: 'https://www.esunbank.com.tw/s/BusinessProductApply/Login' },
+    rm: { label: '專人聯繫', href: 'https://www.esunbank.com/zh-tw/about/services/customer/message-board' },
     cash: { label: '玉山收付通官方介紹', href: 'https://www.esunbank.com/zh-tw/business/corporate/cash-management/cash-flow' },
     gib: { label: '玉山全球智匯網官方入口', href: 'https://gib.esunbank.com' },
     models: { label: '本頁試算與模型假設', href: '#simulator' },
@@ -31,6 +31,7 @@
   }
   function knowledge(question) {
     const q = question.toLowerCase().replace(/\s+/g, '');
+    if (/專人聯繫|留言板|留言聯繫|聯絡|聯繫/.test(q)) return answer('專人聯繫：留言後等候銀行回覆', '請點選下方「專人聯繫」至玉山官方留言板，依官網表單指示留言，由銀行專人回覆。\n\n本頁試算結果、輸入資料與文件不會自動傳送；需要提供試算摘要時，請先與專人確認交付方式。留言不等同申貸送件或核貸。', ['rm']);
     if (/目前用途|現在.*準備|我.*需要.*文件|要準備哪些|文件清單|申貸.*文件|貸款.*文件|申請.*文件|準備.*文件/.test(q)) {
       const key = /建廠|擴廠|興建|廠房|設備/.test(q) ? 'equipment' : /展店|開店|新店|店面/.test(q) ? 'expansion' : /海外|雙幣|美元/.test(q) ? 'overseas' : /週轉|周轉/.test(q) ? 'working' : currentModel();
       return answer((key === currentModel() ? '您目前選擇：' : '您詢問的用途：') + modelNames[key], commonDocs + '\n\n' + purposeDocs[key] + '\n\n這是討論前的準備方向。實際應備文件、期間與適用表單，請先與服務銀行確認，再進行填寫。制式表單集中在右側下載區。', ['documents', 'forms', 'rm']);
@@ -48,11 +49,11 @@
     if (/展店|新店|開店|店面|爬坡/.test(q)) return answer('展店：把開幕前與開幕後的資金分開看', purposeDocs.expansion + '\n\n本頁把裝修設備等一次投入與營運準備金納入資金需求，再檢查穩定營收、變動成本與固定支出。還款採月繳本息攤還並按年彙總；爬坡期的簡化假設仍須按實際營運調整。', ['documents', 'models', 'cash', 'rm']);
     if (/海外|雙幣|台幣|美元|美金|匯率|幣別/.test(q)) return answer('海外投資：台幣、美元各算各的缺口', purposeDocs.overseas + '\n\n目前「雙幣別」指投資支出預算同時包含台幣與美元，各幣別的自有資金分別抵用。匯率情境只換算美元需求的台幣等值，並非美元借款金額變多，也不等同雙幣借款方案。實際借款主體、還款幣別與避險安排，請再與銀行討論。', ['documents', 'models', 'rm']);
     if (/週轉|周轉|收款天|存貨|付款天|營收|公式/.test(q)) return answer('週轉金：先看貨款回來前，要墊多少錢', '本頁以一年 365 天估算：\n應收貨款＝明年預估營收 × 收款天數 ÷ 365\n存貨占用＝明年預估營收 × 成本率 × 存貨賣出天數 ÷ 365\n可延後支付貨款＝明年預估營收 × 成本率 × 付款天數 ÷ 365\n\n三者加減後，估計明年營運資金占用，再扣除可投入的自有週轉金及已確認可使用的既有週轉融資。結果低於零時以零呈現；新增占用與總需求會分開看。\n\n季節性備貨、工程進度款或預收款等特殊情況，需要另外分析。試算缺口不是銀行核准額度。', ['models', 'rm']);
-    if (/利率|報價|核貸|額度|保證通過|一定.*貸|可以.*貸/.test(q)) return answer('試算利率是情境假設，額度仍須審查', '本頁利率由使用者自行輸入，只供規劃與比較，並非銀行報價。資金缺口也不等同可核貸額度。\n\n銀行仍須了解實際資金用途、還款來源、企業與保證人情況及擔保條件，才能討論合適的額度、利率、年限與費用。您可以帶著試算摘要，從官方入口與專員聯繫。', ['models', 'rm']);
+    if (/利率|報價|核貸|額度|保證通過|一定.*貸|可以.*貸/.test(q)) return answer('試算利率是情境假設，額度仍須審查', '本頁利率由使用者自行輸入，只供規劃與比較，並非銀行報價。資金缺口也不等同可核貸額度。\n\n銀行仍須了解實際資金用途、還款來源、企業與保證人情況及擔保條件，才能討論合適的額度、利率、年限與費用。您可以先至官方留言板留言，等候專人回覆；本頁試算摘要不會自動傳送。', ['models', 'rm']);
     if (/健檢|紅燈|黃燈|綠燈|財務健康/.test(q)) return answer('紅黃綠是提醒，請搭配指標定義一起看', '本頁用白話輸入估計付款能力、負債負擔、獲利與還款餘裕，分為警示（紅）、注意（黃）及健康（綠）。\n\n請先確認資料期間、金額與可動用範圍一致，再閱讀各指標定義。門檻是本測試網的參考規則，不是玉山銀行授信標準，也不代表授信評分或核貸結果。', ['health', 'rm']);
     if (/資料.*(送|存)|上傳|隱私|安全|後台|ai|人工智慧|機器人|知識庫/.test(q)) return answer('本版是文件知識庫示範', '我依預先整理的知識庫與關鍵字回覆，尚未串接生成式 AI。試算與這段對話在本頁處理，不會由此小幫手傳送至銀行或外部 AI 服務，也不會保存對話供下次使用。\n\n本版不收取證件照片或財報檔案，請勿在問題中貼上身分證字號、帳號或客戶機密。正式申貸與文件交付，請依銀行指定的管道辦理。', ['rm']);
     if (/你好|您好|哈囉|hi|hello/.test(q)) return answer('您好，從文件或資金用途開始都可以', '我能協助整理申貸文件、說明四種資金試算，並提供收付通與企業網銀的官方入口。\n\n您可以問：「目前用途要準備哪些文件？」或「財報、稅簽、401 表有什麼不同？」', ['documents', 'models']);
-    return answer('這個問題還不在本版知識庫範圍內', '目前能提供申貸文件、四種試算與金流服務的基本說明，無法判斷個案核貸、法律稅務或即時產品條件。\n\n您可以換成更具體的文件問題，或從玉山官方入口與專員確認。', ['forms', 'rm']);
+    return answer('這個問題還不在本版知識庫範圍內', '目前能提供申貸文件、四種試算與金流服務的基本說明，無法判斷個案核貸、法律稅務或即時產品條件。\n\n您可以換成更具體的文件問題，或點選「專人聯繫」至玉山官方留言板，等候專人回覆；本頁試算不會自動傳送。', ['forms', 'rm']);
   }
   function el(tag, className, text) {
     const node = document.createElement(tag);
