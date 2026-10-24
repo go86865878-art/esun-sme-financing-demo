@@ -1,0 +1,4 @@
+*.pdf
+*progress*.json
+.openai/
+.env*
