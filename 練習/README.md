@@ -1,4 +1,5 @@
-# 銀行考前練習室
-663題，外匯30題基礎版，英文只考觀念。全題庫隨機：20、50或全部題目，確認後顯示答案。
-GitHub Pages採本機紀錄；雲端同步版：https://steven-banking-exam-2026.surecurry10.chatgpt.site
-原始PDF未公開。
+# Steven銀行考前練習室
+799題。本次永續經營新增136題，含10題複選。責任授信／ESG可選四領域、淨零承諾、報告書及IFRS、防漂綠、自然與普惠金融等細項。外匯30題基礎版，英文僅考觀念。
+全題庫隨機可選20、50或全部；確認後立即顯示答案與解析。
+GitHub Pages使用本機紀錄；雲端同步版：https://steven-banking-exam-2026.surecurry10.chatgpt.site
+原始講義、照片及個人浮水印未公開上傳。
