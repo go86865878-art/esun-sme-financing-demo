@@ -16296,5 +16296,137 @@
     "focus": true,
     "edition": "20261027-three",
     "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-en-active",
+    "family": "hl3-active-card",
+    "cat": "金融英文",
+    "src": "信用卡.pdf",
+    "page": "7",
+    "topic": "card-en",
+    "q": "Which term refers to credit cards with recent purchase activity?",
+    "options": [
+      "Active Cards",
+      "Stopped Cards",
+      "New Applications",
+      "Expired Cards"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Active Cards為有效卡；本次講義定義是最近六個月有刷卡消費紀錄的卡片。流通卡數則是Card In Force。",
+    "lang": "en",
+    "focus": true,
+    "edition": "20261027-three-en"
+  },
+  {
+    "id": "hl3-en-limit",
+    "family": "hl3-wallet-limit",
+    "cat": "金融英文",
+    "src": "信用卡.pdf",
+    "page": "15",
+    "topic": "card-en",
+    "q": "What is the main purpose of a transaction limit in a card app?",
+    "options": [
+      "To control the amount allowed for a transaction",
+      "To guarantee a reward on every purchase",
+      "To remove all identity checks",
+      "To convert every purchase into a loan"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Transaction limit為交易限額，用來控制允許的交易金額；不等於保證沒有盜刷，也不會取代全部驗證。",
+    "lang": "en",
+    "focus": true,
+    "edition": "20261027-three-en"
+  },
+  {
+    "id": "hl3-en-ftp",
+    "family": "hl3-ftp-purpose",
+    "cat": "金融英文",
+    "src": "台外幣.pdf",
+    "page": "8",
+    "topic": "deposit-en",
+    "q": "In bank funding management, what does FTP stand for?",
+    "options": [
+      "Fund Transfer Pricing",
+      "Foreign Trade Protection",
+      "Fixed Term Payment",
+      "Financial Tax Planning"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "FTP為Fund Transfer Pricing，銀行內部資金移轉計價，用來衡量部門間資金成本與效益。",
+    "lang": "en",
+    "focus": true,
+    "edition": "20261027-three-en"
+  },
+  {
+    "id": "hl3-en-lcr",
+    "family": "hl3-lcr-purpose",
+    "cat": "金融英文",
+    "src": "台外幣.pdf",
+    "page": "13",
+    "topic": "deposit-en",
+    "q": "What does LCR stand for in liquidity risk management?",
+    "options": [
+      "Liquidity Coverage Ratio",
+      "Loan Conversion Rate",
+      "Local Currency Return",
+      "Long-term Credit Ranking"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "LCR為Liquidity Coverage Ratio，流動性覆蓋比率，衡量銀行應付短期流動性壓力的能力。",
+    "lang": "en",
+    "focus": true,
+    "edition": "20261027-three-en"
+  },
+  {
+    "id": "hl3-en-etf",
+    "family": "hl3-etf-name",
+    "cat": "金融英文",
+    "src": "私人銀行.pdf",
+    "page": "7",
+    "topic": "private-en",
+    "q": "What does ETF stand for?",
+    "options": [
+      "Exchange Traded Fund",
+      "Equity Transfer Fee",
+      "External Trust Financing",
+      "Electronic Transaction Facility"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "ETF為Exchange Traded Fund，講義中文稱指數股票型基金；本題只考名詞。",
+    "lang": "en",
+    "focus": true,
+    "edition": "20261027-three-en"
+  },
+  {
+    "id": "hl3-en-bond",
+    "family": "hl3-bond-relation",
+    "cat": "金融英文",
+    "src": "私人銀行.pdf",
+    "page": "8",
+    "topic": "private-en",
+    "q": "When an investor buys a bond, what is the basic relationship with the issuer?",
+    "options": [
+      "The investor lends money to the issuer",
+      "The investor becomes the issuer’s employee",
+      "The investor manages all of the issuer’s assets",
+      "The investor becomes the issuer’s insurance agent"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "投資人買債券是將資金借給發行人，形成債權債務關係；不等於成為經理人或員工。",
+    "lang": "en",
+    "focus": true,
+    "edition": "20261027-three-en"
   }
 ]
