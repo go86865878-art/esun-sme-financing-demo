@@ -15323,5 +15323,978 @@
     "edition": "20261027-photos",
     "focus": true,
     "evidenceFile": "IMG_9629.jpeg"
+  },
+  {
+    "id": "hl3-5a-order",
+    "family": "hl3-5a-order",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "4",
+    "topic": "card-core",
+    "q": "依信用卡講義標記，5A顧客經營階段的順序為何？",
+    "options": [
+      "覺察→獲客→活客→留客→悅客",
+      "獲客→留客→覺察→悅客→活客",
+      "活客→覺察→留客→獲客→悅客",
+      "覺察→活客→悅客→獲客→留客"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列為Access、Acquire、Activate、Adhere、Advocate。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-5a-access",
+    "family": "hl3-5a-access",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "4",
+    "topic": "card-core",
+    "q": "講義認為「支付」對顧客經營最直接扮演什麼角色？",
+    "options": [
+      "覺察與獲客的重要策略",
+      "只在顧客結束往來時才使用",
+      "完全取代後續顧客服務",
+      "只限於高資產顧客的投資工具"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "支付是認識顧客與建立往來的敲門磚。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-card-inforce",
+    "family": "hl3-card-inforce",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "7",
+    "topic": "card-core",
+    "q": "依講義「業務指標」標記，流通卡數（Card In Force）指什麼？",
+    "options": [
+      "發卡總數減停卡總數，且卡片狀況正常者",
+      "最近六個月有消費的卡片數",
+      "本月所有刷卡交易筆數",
+      "全部歷年發卡張數，包含已停卡者"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "流通卡與有近期消費紀錄的有效卡不同。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-active-card",
+    "family": "hl3-active-card",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "7",
+    "topic": "card-core",
+    "q": "依講義定義，有效卡數（Active Cards）的消費紀錄觀察期間為何？",
+    "options": [
+      "最近六個月",
+      "最近一個月",
+      "最近一年",
+      "自發卡以來不限期間"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以最近六個月有刷卡消費紀錄作為有效卡定義。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-acquiring-value",
+    "family": "hl3-acquiring-value",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "8",
+    "topic": "acquiring",
+    "q": "收單業務除了創造手續費收入，講義標記的經營價值為何？",
+    "options": [
+      "帶進穩定活存，延伸授信與理財等金融往來",
+      "所有商戶必須取消存款帳戶",
+      "只處理刷卡，不可能連結其他需求",
+      "承諾商戶營收永遠成長"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "收單可協助經營商戶金流及深化金融合作。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-acquiring-tools",
+    "family": "hl3-acquiring-tools",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "8",
+    "topic": "acquiring",
+    "q": "哪些是收單業務頁面標記的產品或作業發展方向？",
+    "options": [
+      "刷卡機All in One功能",
+      "Cardlink及O2O掃碼付款",
+      "線上申請與無紙化審核",
+      "所有交易都必須回到紙本簽單"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義標記整合收款方式及擴大電子簽單等數位服務。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-wallet-region",
+    "family": "hl3-wallet-region",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "15",
+    "topic": "card-fraud",
+    "q": "依防詐頁的玉山Wallet功能標記，持卡人可設定哪種交易範圍？",
+    "options": [
+      "國內外線上或實體交易的開關",
+      "任意更改所有商店的營業項目",
+      "自行核定永久無上限信用額度",
+      "取消銀行全部交易驗證"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "卡片自主管理用以控制允許的交易類型。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-wallet-limit",
+    "family": "hl3-wallet-limit",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "15",
+    "topic": "card-fraud",
+    "q": "玉山Wallet防詐管理中，「單筆交易限額」的功能為何？",
+    "options": [
+      "限制一筆交易可使用的金額",
+      "保證每筆交易都可取得回饋",
+      "等同把所有帳單一律分期",
+      "取代全部身分驗證程序"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "單筆限額是風險控管工具，不能視為交易安全保證。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-wallet-tools",
+    "family": "hl3-wallet-tools",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "15",
+    "topic": "card-fraud",
+    "q": "依講義螢光標記，哪些屬於玉山Wallet防詐功能？",
+    "options": [
+      "不明金額即時消費推播",
+      "3D交易驗證推播至玉山Wallet進行認證",
+      "由陌生人代管OTP驗證碼",
+      "將交易限額設定功能完全取消"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "講義列出不明金額即時消費推播、卡片即時管理及3D驗證推播等；具體名稱依講義版本。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-epay-vs-third",
+    "family": "hl3-epay-vs-third",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "20",
+    "topic": "electronic-payment",
+    "q": "依講義，電子支付機構和一般第三方支付的功能差異，哪個敘述正確？",
+    "options": [
+      "電子支付有帳戶概念，可提供儲值、轉帳等服務",
+      "一般第三方支付必然都是銀行",
+      "電子支付只能使用現金且無帳戶",
+      "兩者監理與服務範圍完全相同"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "本題為講義概念比較，不將所有支付方式混為一談。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-wallet-qr",
+    "family": "hl3-wallet-qr",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "22",
+    "topic": "electronic-payment",
+    "q": "依本次講義標記，玉山Wallet整合電子支付後可到哪個共同通路網使用？",
+    "options": [
+      "台灣Pay共同通路網",
+      "所有境外商店均無限制",
+      "只能在本行分行使用",
+      "僅限持有私人銀行資格者"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列示可至台灣Pay約25萬通路使用，為當時版本快照。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-accountlink",
+    "family": "hl3-accountlink",
+    "cat": "信用卡與支付",
+    "src": "信用卡.pdf",
+    "page": "22",
+    "topic": "electronic-payment",
+    "q": "玉山Wallet整合電支服務時，Account-Link及Card-Link分別對應何者？",
+    "options": [
+      "帳戶付款、信用卡儲值付款",
+      "信用卡儲值付款、帳戶付款",
+      "外幣定存、臺幣定存",
+      "基金申購、保險理賠"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義明列綁定玉山帳戶付款與玉山信用卡儲值付款。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-deposit-risk",
+    "family": "hl3-deposit-risk",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "3",
+    "topic": "deposit-value",
+    "q": "講義將存款視為銀行重要基礎，但特別提醒外幣存款仍有哪種風險？",
+    "options": [
+      "匯率風險",
+      "完全沒有任何價值變動風險",
+      "只會有支票背書風險",
+      "等同必然獲得固定臺幣報酬"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義對銀行端的價值描述，不可解讀為顧客外幣存款沒有匯率風險。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-reserve-effect",
+    "family": "hl3-reserve-effect",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "5",
+    "topic": "ftp-lcr",
+    "q": "依存款準備金頁面標記，調高存款準備率最直接會產生什麼效果？",
+    "options": [
+      "減少銀行可用資金，產生緊縮信用效果",
+      "增加銀行可任意使用的全部資金",
+      "使所有外幣風險歸零",
+      "保證存款利率立即等幅上升"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "準備率變動會影響銀行可運用資金及信用供給。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-reserve-accounts",
+    "family": "hl3-reserve-accounts",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "6",
+    "topic": "ftp-lcr",
+    "q": "依講義標記，準備金甲戶與乙戶的孳息敘述何者正確？",
+    "options": [
+      "甲戶不計利息；乙戶得酌予給息",
+      "甲戶與乙戶一律不計息",
+      "甲戶計息，乙戶一律不得給息",
+      "甲戶與乙戶都是顧客個人定存帳戶"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "此為講義的金融機構準備金帳戶概念。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-ftp-purpose",
+    "family": "hl3-ftp-purpose",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "8",
+    "topic": "ftp-lcr",
+    "q": "依FTP頁面標記，FTP最主要用於銀行內部什麼目的？",
+    "options": [
+      "衡量資金在部門間移轉的成本與效益，作為內部計價依據",
+      "決定所有顧客完全相同的外匯成交價",
+      "保證銀行存款無須付息",
+      "取代法定存款準備制度"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "FTP是內部資金移轉計價，與顧客直接報價不同。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-ftp-basis",
+    "family": "hl3-ftp-basis",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "8",
+    "topic": "ftp-lcr",
+    "q": "講義指出FTP訂價會參考哪種基礎？",
+    "options": [
+      "市場價格，例如TAIFX、TAIBOR",
+      "只有分行裝潢費",
+      "只有信用卡片顏色",
+      "只由單一顧客自行指定"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "FTP用以反映資金成本與效益，並引導產品行銷及業務方向。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-ftp-spreadloss",
+    "family": "hl3-ftp-spreadloss",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "9",
+    "topic": "ftp-lcr",
+    "q": "依講義的臺幣定存說明，發生利差損時如何看待分行損益責任？",
+    "options": [
+      "講義列示分行須負擔利差損金額之全部",
+      "所有利差損都必然由顧客吸收",
+      "只要存款金額大就不會有利差損",
+      "一律以匯款手續費抵銷，不需計算"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "此題依本次講義內部計價說明，不代表對外商品條件。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-ftp-strategy",
+    "family": "hl3-ftp-strategy",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "9",
+    "topic": "ftp-lcr",
+    "q": "依2026年9月起的講義規則，臺幣存款若以專案牌告辦理，FTP利率加碼如何處理？",
+    "options": [
+      "取消本項FTP利率加碼",
+      "自動同時適用全部加碼",
+      "不需確認專案條件即可自行加碼",
+      "視同所有存款都免提準備金"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "策略加碼與專案牌告不可不看規則就重複計入。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-payroll-target",
+    "family": "hl3-payroll-target",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "11",
+    "topic": "deposit-customers",
+    "q": "依薪轉戶頁面標記，目標對象的人數或金額條件為何？",
+    "options": [
+      "撥薪人數15人以上，或月均撥薪金額4萬元",
+      "撥薪人數150人以上，且月均撥薪40萬元",
+      "只接受員工超過1,000人的公司",
+      "只要開一般活存即可，無須實際撥薪"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義使用「或」，不要改記成兩項都須符合。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-natural-mainbank",
+    "family": "hl3-natural-mainbank",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "12",
+    "topic": "deposit-customers",
+    "q": "依2026年存款重點，自然人存款經營較符合哪項？",
+    "options": [
+      "透過數位通路經營多幣別存款，提升主力帳戶往來",
+      "只做一次性高利活動，不關心金流留存",
+      "要求房貸顧客取消本行主力帳戶",
+      "以最少產品往來作為唯一目標"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標記數位通路、多幣別、主力帳戶及財管顧客存款。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-lcr-purpose",
+    "family": "hl3-lcr-purpose",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "13",
+    "topic": "ftp-lcr",
+    "q": "依LCR頁面標記，LCR最主要衡量哪種能力？",
+    "options": [
+      "面對短期流動性壓力時，持有足夠高品質流動資產的因應能力",
+      "只衡量長期股價漲幅",
+      "只衡量每位顧客信用卡回饋",
+      "衡量銀行是否完全沒有信用風險"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "LCR是流動性管理指標，不能取代所有風險衡量。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-lcr-horizon",
+    "family": "hl3-lcr-horizon",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "13",
+    "topic": "ftp-lcr",
+    "q": "講義LCR分母所觀察的淨現金流出期間為何？",
+    "options": [
+      "未來30個日曆日",
+      "未來30個營業日",
+      "未來12個月",
+      "前一個會計年度"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "30個日曆日不是30個營業日。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-lcr-components",
+    "family": "hl3-lcr-components",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "13",
+    "topic": "ftp-lcr",
+    "q": "依講義LCR公式，哪些敘述正確？",
+    "options": [
+      "分子為高品質流動性資產（HQLA）",
+      "分母為30個日曆日內淨現金流出總額",
+      "分子只包含固定資產",
+      "分母為全年稅後淨利"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "LCR以流動性資產因應壓力情境下的短期淨流出。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-esg-corporate",
+    "family": "hl3-esg-corporate",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "18",
+    "topic": "deposit-esg-remit",
+    "q": "依ESG存款頁面的標記，其適用限制應如何記？",
+    "options": [
+      "私銀會員及其關係戶等列示客群仍僅限企業戶承作",
+      "所有自然人皆可直接以個人戶承作",
+      "只接受未與本行往來的個人戶",
+      "企業戶一律不得承作"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "不可把私人銀行會員資格直接等同可用個人名義承作；本題依講義方案。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-esg-process",
+    "family": "hl3-esg-process",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "18",
+    "topic": "deposit-esg-remit",
+    "q": "ESG存款承作前，講義標記的流程原則為何？",
+    "options": [
+      "先由營業單位主管確認，依規定取得同意後承作及設定資訊",
+      "顧客口頭表示支持ESG就可免除流程",
+      "承作後才開始確認是否符合條件",
+      "只需先更換商品名稱即可"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "依本次講義流程，須先確認適用性與同意，再設定存帳號及金融等資訊。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-remit-plan",
+    "family": "hl3-remit-plan",
+    "cat": "存匯",
+    "src": "台外幣.pdf",
+    "page": "19",
+    "topic": "deposit-esg-remit",
+    "q": "依「外幣匯款吃到飽」頁面標記，哪些敘述正確？",
+    "options": [
+      "採固定匯款費用，一次預繳全年費用",
+      "E化匯款限使用本行自動化匯款平台",
+      "所有管道與所有交易均無限制",
+      "必然包含所有行轉帳與全部幣別交易"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "講義列明一般匯款、RTGS及指定E化平台等範圍，不能因名稱吃到飽就推論所有交易都包含。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-fund-definition",
+    "family": "hl3-fund-definition",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "6",
+    "topic": "wealth-products",
+    "q": "依螢光標記，共同基金如何運作？",
+    "options": [
+      "集合投資大眾資金，由專業經理人管理並由保管機構保管資產",
+      "由單一顧客自行操作所有其他顧客帳戶",
+      "只要成立基金就不需保管機構",
+      "基金經理人保證每年固定獲利"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "基金集合資金並由專業管理，仍須注意風險。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-fund-risk",
+    "family": "hl3-fund-risk",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "6",
+    "topic": "wealth-products",
+    "q": "依講義標記，一般共同基金的本金與收益特性為何？",
+    "options": [
+      "不保本、不保息",
+      "全部保本保息",
+      "只要每月配息就一定保本",
+      "只要由銀行銷售就沒有市場風險"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "配息或由銀行通路銷售，都不等於本金或報酬保證。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-etf-name",
+    "family": "hl3-etf-name",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "7",
+    "topic": "wealth-products",
+    "q": "講義中ETF的中文名稱為何？",
+    "options": [
+      "指數股票型基金",
+      "固定利率存款",
+      "企業保證授信",
+      "保本型年金保險"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "ETF為Exchange Traded Fund；此題依講義中文用語。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-etf-active",
+    "family": "hl3-etf-active",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "8",
+    "topic": "wealth-products",
+    "q": "依講義比較表，傳統指數型ETF與主動管理共同基金的主要投資目標差異為何？",
+    "options": [
+      "前者追求與指數一致，後者通常以打敗大盤為目標",
+      "前者保證高於指數，後者保證不虧損",
+      "兩者都只追求固定票面利息",
+      "兩者都沒有任何投資目標"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "題幹限定講義的傳統指數型ETF比較，不能推論所有ETF都只能被動管理。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-bond-relation",
+    "family": "hl3-bond-relation",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "8",
+    "topic": "wealth-products",
+    "q": "依債券頁面標記，投資人買入債券，本質上與發行機構建立何種關係？",
+    "options": [
+      "債權債務關係，將資金借給發行機構",
+      "成為發行機構所有營運決策的經理人",
+      "自動取得無限責任合夥人資格",
+      "成為保險契約的被保險人"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "債券反映借貸關係，不等同股票的股東關係。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-bond-interest",
+    "family": "hl3-bond-interest",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "8",
+    "topic": "wealth-products",
+    "q": "依講義的固定票息債券概念，發行機構承諾的現金流為何？",
+    "options": [
+      "依約定支付票面利息，並於到期償還本金",
+      "任何時間市價都等於面額",
+      "投資人必然不受發行人信用風險影響",
+      "所有債券都只配股票股利"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "契約給付承諾不等於保證發行人不會違約或市價不會變動。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-insurance-mutual",
+    "family": "hl3-insurance-mutual",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "9",
+    "topic": "wealth-products",
+    "q": "依保險頁面標記，保險制度的核心作用為何？",
+    "options": [
+      "透過眾人力量平均分攤、消化損失",
+      "保證所有投資交易沒有虧損",
+      "只用來提高短期投資報酬",
+      "讓每位投保人承擔全部其他人的損失"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "保險透過風險集合形成社會互助機制。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-insurance-class",
+    "family": "hl3-insurance-class",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "9",
+    "topic": "wealth-products",
+    "q": "依講義保險分類，哪些配對正確？",
+    "options": [
+      "健康保險—人身保險",
+      "住宅火災保險—財產保險",
+      "汽車保險—人身保險",
+      "年金保險—財產保險"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "依保險標的區分人身及財產保險。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-ipad-year",
+    "family": "hl3-ipad-year",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "14",
+    "topic": "private-service",
+    "q": "依人機整合時間軸的螢光標記，玉山首家理專配置iPad是哪一年？",
+    "options": [
+      "2013年",
+      "2014年",
+      "2015年",
+      "2017年"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "2013配置iPad、2014配置率100%、2015開發理專應用APP；只記一個主要里程碑。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-private-value",
+    "family": "hl3-private-value",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "35",
+    "topic": "private-service",
+    "q": "高端財管的差異化價值主張，較符合哪個做法？",
+    "options": [
+      "滿足個人、家庭、家族成員及事業體的多元需求",
+      "只以單一商品當月銷售額安排全部服務",
+      "所有顧客都接受完全相同的標準方案",
+      "只處理個人帳戶，不看家庭及企業關係"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義強調客製化與跨境的一致體驗。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-private-advisor",
+    "family": "hl3-private-advisor",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "35",
+    "topic": "private-service",
+    "q": "依標記，高端財管的顧客服務模式應如何定位理財顧問？",
+    "options": [
+      "以顧問為主，結合專家團隊提供顧問式諮詢",
+      "只以單一商品推銷為主",
+      "取代顧客自行決定所有交易",
+      "只在交易成交當天提供一次聯繫"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "重點是顧問式經營，兼顧AUM增長及整體營收。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-private-offshore",
+    "family": "hl3-private-offshore",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "35",
+    "topic": "private-service",
+    "q": "依差異化經營頁面標記，高端財管在商品及服務上應兼顧什麼？",
+    "options": [
+      "資產／負債面的金融解方與財富傳承等非金融需求，並提供合適資產配置",
+      "只要顧客資產高就不必評估風險屬性",
+      "所有顧客都應配置相同境外商品",
+      "用跨境交易完全取代顧客需求訪談"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "顧客需求與風險屬性仍是配置基礎。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-awm-policy",
+    "family": "hl3-awm-policy",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "37",
+    "topic": "private-service",
+    "q": "依亞洲資產管理中心頁面標記，其政策精神較符合哪組？",
+    "options": [
+      "留財引資、對標星港並放眼亞洲、發揮臺灣優勢",
+      "只增加本地帳戶數而停止國際合作",
+      "只服務銀行自營投資部位",
+      "以取消所有風險管理吸引資金"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "本題依講義政策方向，不將特定試辦視為一般無限制金融服務。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-lombard",
+    "family": "hl3-lombard",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "37",
+    "topic": "private-service",
+    "q": "依亞洲資產管理中心獲准開辦項目的標記，哪些屬於「融資類」？",
+    "options": [
+      "金融資產組合融資（Lombard Lending）",
+      "保費融資與保單融資",
+      "家族辦公室服務",
+      "多元特色私募基金"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "講義將項目分成投資類、融資類、境內外及家族等不同類型。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
+  },
+  {
+    "id": "hl3-private-start",
+    "family": "hl3-private-start",
+    "cat": "財富管理與私人銀行",
+    "src": "私人銀行.pdf",
+    "page": "31",
+    "topic": "private-service",
+    "q": "依玉山私人銀行發展時間軸，著手規劃私人銀行業務的起始年為何？",
+    "options": [
+      "2016年",
+      "2018年",
+      "2021年",
+      "2024年"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "本題依時間軸螢光標記，2016年開始籌備；後續年度為不同發展里程碑。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261027-three",
+    "highlight": "紅字或螢光標記"
   }
 ]
