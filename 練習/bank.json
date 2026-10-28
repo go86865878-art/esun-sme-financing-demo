@@ -16428,5 +16428,687 @@
     "lang": "en",
     "focus": true,
     "edition": "20261027-three-en"
+  },
+  {
+    "id": "cf-5p",
+    "family": "cf-5p",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9667",
+    "evidenceFile": "IMG_9667.jpeg",
+    "topic": "loan-basics",
+    "q": "依授信5P，評估貸款清償來源及收入能否支應收支，屬於哪一項？",
+    "options": [
+      "Payment",
+      "Purpose",
+      "Protection",
+      "Perspective"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Payment是還款來源；Purpose是資金用途，Protection是債權保障，Perspective是授信展望。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-position",
+    "family": "cf-position",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9665",
+    "evidenceFile": "IMG_9665.jpeg",
+    "topic": "loan-basics",
+    "q": "依講義的消金產品定位，哪項最符合房貸的經營價值？",
+    "options": [
+      "提供長期且穩健的經常收入",
+      "完全不必評估擔保品",
+      "只適用短期無擔保週轉",
+      "以信用卡循環利息為唯一收入"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標記房貸是「兆元規模，長期且穩健的經常收入」；仍須衡量信用與擔保品風險。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-sb",
+    "family": "cf-sb",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9671",
+    "evidenceFile": "IMG_9671.jpeg",
+    "topic": "loan-basics",
+    "q": "依講義，小型事業SB授信的承作特色為何？",
+    "options": [
+      "授信總額度通常較企業金融低，且不動產擔保常見",
+      "一律只能承作大型跨國集團聯貸",
+      "不需了解企業主與企業往來",
+      "只能以公司債方式提供資金"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以小型事業SB為消金服務範疇，標記授信總額度較低、不動產擔保及企業主經營；不代表每件SB都必須有不動產。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-income",
+    "family": "cf-income",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9672",
+    "evidenceFile": "IMG_9672.jpeg",
+    "topic": "loan-basics",
+    "q": "信貸申請時提供近期收入證明，主要是為了評估什麼？",
+    "options": [
+      "借款人的還款能力",
+      "擔保房屋的樓層",
+      "信用卡卡片的材質",
+      "銀行廣告曝光率"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標記近期收入證明及穩定收入；這些資料用來了解還款能力，不能只看申請人希望借多少。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-outbound",
+    "family": "cf-outbound",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9674",
+    "evidenceFile": "IMG_9674.jpeg",
+    "topic": "smart-outbound",
+    "q": "智能外撥後，對表達有意願的顧客應如何銜接？",
+    "options": [
+      "彙整名單交由OB團隊進行精準行銷",
+      "無論意願都直接核准信貸",
+      "刪除所有有回應的名單",
+      "停止一切人工服務"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標記將回應有意願的顧客彙整成名單，再交OB團隊執行；智能外撥並不等於自動核貸。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-outbound-role",
+    "family": "cf-outbound-role",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9674",
+    "evidenceFile": "IMG_9674.jpeg",
+    "topic": "smart-outbound",
+    "q": "依講義，較低回應率或成交率的名單交由智能外撥接觸，其主要效益為何？",
+    "options": [
+      "提升大量名單接觸效率，協助名單再分級",
+      "保證每位顧客都申貸",
+      "取代所有徵授信審查",
+      "免除顧客意願確認"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "智能外撥協助執行大量名單、辨識回應意願，再把較高意願名單提供OB團隊。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-esg-four",
+    "family": "cf-esg-four",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9675",
+    "evidenceFile": "IMG_9675.jpeg",
+    "topic": "consumer-esg",
+    "q": "【複選】講義「永續家園」的四個消金ESG方向包括哪些？",
+    "options": [
+      "綠建築",
+      "危老都更",
+      "地方創生",
+      "Farm to Table",
+      "高槓桿短線投機"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "四方向分別對應低碳健康建築、消除危險老舊建築、地方經濟發展及綠色食材價值鏈。前四項正確；高槓桿短線投機不是圖中的永續家園方向。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-green-building",
+    "family": "cf-green-building",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9675",
+    "evidenceFile": "IMG_9675.jpeg",
+    "topic": "consumer-esg",
+    "q": "消金ESG中，綠建築的重點最符合下列何者？",
+    "options": [
+      "實踐低碳生活，兼顧生態、節能、減廢與健康",
+      "只增加建築外牆的綠色塗料",
+      "僅以提高貸款利率為目標",
+      "取消所有建築安全要求"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義綠建築欄標記「實踐低碳生活」以及生態、節能、減廢、健康，並強調減少不動產碳排放。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-renewal",
+    "family": "cf-renewal",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9675",
+    "evidenceFile": "IMG_9675.jpeg",
+    "topic": "consumer-esg",
+    "q": "危老都更在「永續家園」的主要目的為何？",
+    "options": [
+      "解決人屋雙老問題，提升居住安全",
+      "只服務新落成豪宅",
+      "保證所有房價必然上漲",
+      "以降低建築安全標準換取效率"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將危老都更連結到消除危險老舊建築、解決人屋雙老及提升居住安全。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-regional",
+    "family": "cf-regional",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9675",
+    "evidenceFile": "IMG_9675.jpeg",
+    "topic": "consumer-esg",
+    "q": "地方創生的經營目標，何者最符合講義？",
+    "options": [
+      "協助在地產業，促進城鄉均衡發展",
+      "使所有產業集中到同一都市",
+      "只追求大型企業併購",
+      "停止特色產業與地方合作"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義地方創生標記「協助在地產業、均衡城鄉發展」，並以特色客群經營扶植在地產業。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-farm",
+    "family": "cf-farm",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9676",
+    "evidenceFile": "IMG_9676.jpeg",
+    "topic": "consumer-esg",
+    "q": "Farm to Table永續食材價值鏈的核心概念為何？",
+    "options": [
+      "串連生產、運輸與消費，推動永續食材",
+      "只在餐廳端提供信用卡點數",
+      "以取消農產品驗證降低成本",
+      "僅提供境外證券交易"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Farm to Table是從產地到餐桌，串連上游生產、中間運輸及下游消費，並推廣永續食材。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-farm-chain",
+    "family": "cf-farm-chain",
+    "cat": "消費金融與信貸",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9676",
+    "evidenceFile": "IMG_9676.jpeg",
+    "topic": "consumer-esg",
+    "q": "Farm to Table的中間運輸端，講義強調串接哪幾種流？",
+    "options": [
+      "金流、物流及資訊流",
+      "只串接股票交易委託單",
+      "只蒐集餐廳裝潢照片",
+      "只處理員工差勤"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標記以子公司、金財通與建置中的平台串接金流、物流及資訊流，提供價值鏈金融服務。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-contract",
+    "family": "cf-contract",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9680",
+    "evidenceFile": "IMG_9680.jpeg",
+    "topic": "fair-principles",
+    "q": "金融契約條款有疑義時，依講義的訂約公平誠信原則，應如何解釋？",
+    "options": [
+      "採有利於消費者的解釋",
+      "一律採銀行最有利的解釋",
+      "只依銷售人員的口頭偏好",
+      "直接視為顧客放棄權利"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標記契約條款有疑義時，以有利於消費者之解釋為原則；重要事項應明確標示。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-care",
+    "family": "cf-care",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9681",
+    "evidenceFile": "IMG_9681.jpeg",
+    "topic": "fair-principles",
+    "q": "哪個行為違反注意與忠實義務原則？",
+    "options": [
+      "業務人員私自留存已蓋顧客印章的空白取款文件",
+      "依程序核驗顧客身分",
+      "妥善管理顧客文件",
+      "確實記錄顧客委託內容"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以私留蓋有顧客印章文件為負面案例；應以善良管理人之注意執行業務，避免空白文件遭濫用。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-ad",
+    "family": "cf-ad",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9681",
+    "evidenceFile": "IMG_9681.jpeg",
+    "topic": "fair-principles",
+    "q": "招攬金融商品時，哪個做法符合廣告招攬真實原則？",
+    "options": [
+      "確保廣告內容真實，並履行廣告及招攬所載義務",
+      "將投資型保單宣稱為一定保本的定存",
+      "只要是口頭話術就可以誇大",
+      "省略風險即可提升成交率"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義螢光標記內容真實，以及廣告、業務招攬活動資料所載義務；不得以不當話術誤導顧客。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-suitability",
+    "family": "cf-suitability",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9682",
+    "evidenceFile": "IMG_9682.jpeg",
+    "topic": "fair-principles",
+    "q": "產品或服務適合度原則，最重要的是什麼？",
+    "options": [
+      "了解顧客與商品風險特性後，提供適合的產品",
+      "只挑佣金最高的商品",
+      "由業務人員代填風險答案以利成交",
+      "不論顧客屬性都推同一產品"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以KYC了解顧客、KYP了解商品，並確認顧客最終風險評估結果，作為適合度評估的基礎。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-disclosure",
+    "family": "cf-disclosure",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9682",
+    "evidenceFile": "IMG_9682.jpeg",
+    "topic": "fair-principles",
+    "q": "依告知與揭露原則，從事商品或服務交易時應充分揭露什麼？",
+    "options": [
+      "商品或服務內容及其風險",
+      "僅揭露最高可能報酬",
+      "只提供業務人員姓名",
+      "只揭露優惠活動的截止時間"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義螢光標記充分揭露商品或服務內容與其風險；對帳資訊也須完整且確實通知顧客。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-incentive",
+    "family": "cf-incentive",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9683",
+    "evidenceFile": "IMG_9683.jpeg",
+    "topic": "fair-principles",
+    "q": "【複選】訂定銷售獎酬制度時，應納入哪些衡量？",
+    "options": [
+      "客戶權益",
+      "產品或服務可能產生的風險",
+      "非財務指標因素",
+      "僅看業績達標情形即可"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "酬金與業績衡平原則要求兼顧客戶權益、各種風險及非財務因素；不能以業績達標作為唯一依據。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-complaint",
+    "family": "cf-complaint",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9683",
+    "evidenceFile": "IMG_9683.jpeg",
+    "topic": "fair-principles",
+    "q": "顧客提出申訴後，何者符合申訴保障原則？",
+    "options": [
+      "妥善有效處理，並落實後續管理與陳報",
+      "只要未造成損失就一律不受理",
+      "要求顧客先撤回才開始調查",
+      "不留紀錄以減少案件數"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標記顧客申訴應妥善有效處理，建立處理機制，並落實後續管理及陳報。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-professional",
+    "family": "cf-professional",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9684",
+    "evidenceFile": "IMG_9684.jpeg",
+    "topic": "fair-principles",
+    "q": "為落實業務人員專業性原則，銀行應採取何種做法？",
+    "options": [
+      "定期教育訓練，並確認人員具有相關專業證照與資格",
+      "以年資取代所有必要資格",
+      "證照一旦取得便永不需學習",
+      "只要求業務量，不需專業能力"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義螢光標記定期教育訓練及相關專業證照，並要求由具資格者辦理相關業務。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-friendly",
+    "family": "cf-friendly",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9684",
+    "evidenceFile": "IMG_9684.jpeg",
+    "topic": "fair-principles",
+    "q": "金融友善服務應納入商品及服務的哪些階段？",
+    "options": [
+      "從設計到銷售及檢討等所有階段",
+      "只在顧客申訴之後",
+      "只限臨櫃叫號階段",
+      "僅在廣告拍攝階段"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "友善服務須在發想、開發、測試、推出、銷售、檢討等階段，考量高齡者、身心障礙者及外籍人士等族群。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-access",
+    "family": "cf-access",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9684",
+    "evidenceFile": "IMG_9684.jpeg",
+    "topic": "fair-principles",
+    "q": "【複選】講義列出的分行身心障礙友善措施包括哪些？",
+    "options": [
+      "無障礙櫃台及人員引導",
+      "合適輪椅高度的ATM",
+      "遠距視訊手語翻譯服務",
+      "要求所有顧客自行攜帶服務人員"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義標記分行服務鈴、無障礙櫃台、人員引導、合適輪椅高度ATM及遠距視訊手語翻譯等措施。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-culture",
+    "family": "cf-culture",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9685",
+    "evidenceFile": "IMG_9685.jpeg",
+    "topic": "fair-governance",
+    "q": "落實誠信經營與顧客權益保障，講義舉出哪種員工機制？",
+    "options": [
+      "提供多元檢舉管道，鼓勵發現並舉報違法或不當行為",
+      "禁止員工反映不當行為",
+      "僅以刪除申訴紀錄改善績效",
+      "只需口頭宣示，不需行為規範"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義的落實誠信經營原則包含由上而下推動誠信文化、行為守則、教育訓練及員工溝通檢舉管道。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-lines",
+    "family": "cf-lines",
+    "cat": "公平待客",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9679",
+    "evidenceFile": "IMG_9679.jpeg",
+    "topic": "fair-governance",
+    "q": "【複選】講義公平待客三道防線的職責，哪些配對正確？",
+    "options": [
+      "第一道：執行與落實",
+      "第二道：督導與追蹤",
+      "第三道：查核與建議",
+      "第三道：取代第一線辦理所有交易"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義強調由上而下推動公平待客，委員會推動統籌，三道防線分別負責執行落實、督導追蹤及查核建議。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-en-purpose",
+    "family": "cf-purpose",
+    "cat": "金融英文",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9667",
+    "evidenceFile": "IMG_9667.jpeg",
+    "topic": "consumer-fair-en",
+    "q": "In the five Ps of credit analysis, what does Purpose refer to?",
+    "options": [
+      "The intended use of the loan",
+      "The borrower’s telephone number",
+      "The bank’s logo",
+      "The branch opening date"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Purpose是資金用途；申請授信時須了解資金用來做什麼。",
+    "lang": "en",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-en-payment",
+    "family": "cf-5p",
+    "cat": "金融英文",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9667",
+    "evidenceFile": "IMG_9667.jpeg",
+    "topic": "consumer-fair-en",
+    "q": "In credit analysis, which P focuses on the source of repayment?",
+    "options": [
+      "Payment",
+      "People",
+      "Purpose",
+      "Protection"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Payment是還款來源，重點在收入、資產及收支能否支持償還。",
+    "lang": "en",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-en-farm",
+    "family": "cf-farm",
+    "cat": "金融英文",
+    "src": "消費金融趨勢與信貸（照片）",
+    "page": "照片 IMG_9676",
+    "evidenceFile": "IMG_9676.jpeg",
+    "topic": "consumer-fair-en",
+    "q": "What is the main idea of Farm to Table?",
+    "options": [
+      "Connecting food production, transport and consumption sustainably",
+      "Trading only in foreign stocks",
+      "Replacing every farm with a restaurant",
+      "Offering guaranteed investment returns"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Farm to Table是從產地到餐桌，串連生產、運輸與消費的永續食材價值鏈。",
+    "lang": "en",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
+  },
+  {
+    "id": "cf-en-suitability",
+    "family": "cf-suitability",
+    "cat": "金融英文",
+    "src": "顧客服務與公平待客（照片）",
+    "page": "照片 IMG_9682",
+    "evidenceFile": "IMG_9682.jpeg",
+    "topic": "consumer-fair-en",
+    "q": "What does product suitability mean in financial services?",
+    "options": [
+      "Matching a product to the customer’s needs and risk profile",
+      "Always selling the product with the highest commission",
+      "Giving every customer the same product",
+      "Avoiding all customer assessments"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Suitability是適合度，須了解顧客需求、風險屬性及商品特性，提供適合的商品。",
+    "lang": "en",
+    "focus": true,
+    "highlight": "螢光或手寫標記",
+    "edition": "20261028-consumer-fair"
   }
 ]
