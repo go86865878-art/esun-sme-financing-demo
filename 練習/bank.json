@@ -17730,5 +17730,1175 @@
       "result": "2000",
       "unit": "港幣"
     }
+  },
+  {
+    "id": "drive29-id-watermark",
+    "family": "drive29-id-watermark",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "10",
+    "topic": "id-methods",
+    "q": "要觀察國民身分證紙張內的水印與安全線，講義對應哪種檢查方法？",
+    "options": [
+      "迎光透視",
+      "只看影本的顏色",
+      "手指觸摸",
+      "只查證號是否存在"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將水印及安全線列於迎光透視：將證件迎向光源，觀察紙張內的防偽特徵。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-uv",
+    "family": "drive29-id-uv",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "11",
+    "topic": "id-methods",
+    "q": "身分證背面隱性螢光油墨圖案，例如蝴蝶圖樣，應以何種方法觀察？",
+    "options": [
+      "紫光照視",
+      "只用放大鏡",
+      "只摸紙張厚度",
+      "只轉動證件"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義把背面的隱性螢光油墨圖案列在紫光照視；不同防偽特徵須搭配對應光源。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-ovd",
+    "family": "drive29-id-ovd",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "11",
+    "topic": "id-methods",
+    "q": "要觀察身分證視覺變化裝置（OVD）隨角度改變的影像，應如何操作？",
+    "options": [
+      "轉動證件，從不同角度檢視",
+      "只用手指按壓照片",
+      "只核對戶籍地址",
+      "把證件影印後只看影本"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將視覺變化裝置OVD列於轉動檢視，重點在角度改變時的視覺變化。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-ovi",
+    "family": "drive29-id-ovi",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "11",
+    "topic": "id-methods",
+    "q": "講義中，身分證變色油墨（OVI）的金色、綠色變化，對應哪一種檢查方法？",
+    "options": [
+      "轉動檢視",
+      "只用手指觸摸",
+      "只查發證日期",
+      "只聽紙張摩擦聲"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列出變色油墨OVI「金色↔綠色」，要藉轉動觀察色彩變化；不是用觸感判斷顏色。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-micro",
+    "family": "drive29-id-micro",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "12",
+    "topic": "id-methods",
+    "q": "身分證上微小字「THE REPUBLIC OF CHINA」，應使用哪種方式檢查？",
+    "options": [
+      "放大檢視",
+      "只迎光看水印",
+      "只觸摸凹凸感",
+      "只核對出生年月日"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義在放大檢視示例指出微小字THE REPUBLIC OF CHINA，放大後檢查細節。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-touch",
+    "family": "drive29-id-touch",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "12",
+    "topic": "id-methods",
+    "q": "以手指觸摸身分證時，講義要檢查的是什麼？",
+    "options": [
+      "壓凸台灣圖案的觸感",
+      "蝴蝶螢光的顏色",
+      "水印中的文字是否拼對",
+      "照片是否與本人完全同一髮型"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義的手指觸摸示例為壓凸台灣圖案；觸摸、紫光、迎光與轉動各有不同檢查目標。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-pairs",
+    "family": "drive29-id-pairs",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "11",
+    "topic": "id-methods",
+    "q": "【複選】依講義，哪些身分證辨識方法與特徵配對正確？",
+    "options": [
+      "轉動檢視—OVD視覺變化裝置",
+      "紫光照視—隱性螢光圖案",
+      "手指觸摸—判斷金色與綠色變換",
+      "放大檢視—判斷本人是否有整形"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "OVD藉轉動觀察，隱性螢光圖案搭配紫光；變色不是靠觸摸，人像比對也不是微小字檢查。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-laser",
+    "family": "drive29-id-laser",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "9",
+    "topic": "id-methods",
+    "q": "關於常說的身分證雷射／變化圖紋，依講義的檢查流程，何者正確？",
+    "options": [
+      "按圖紋性質轉動檢視，不是拿雷射筆照射就能驗證",
+      "只要有閃亮貼膜就一定是真證件",
+      "所有特徵都只需用紫光看",
+      "只需檢查護貝是否平整"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義正式方法為迎光透視、紫光照視、轉動檢視、放大檢視及手指觸摸；OVD列於轉動檢視，不能把閃亮外觀當唯一真偽依據。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-twd-water",
+    "family": "drive29-twd-water",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "講義新臺幣辨識圖中，水印（白水印）應用哪種方法檢查？",
+    "options": [
+      "迎光透視",
+      "只用手指觸摸",
+      "只看鈔票序號末碼",
+      "只在桌面平放不透光看"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "新臺幣水印與安全線列在迎光透視圖例；本題依講義示範版本作答。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-twd-thread",
+    "family": "drive29-twd-thread",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "想檢查新臺幣紙張內的安全線，哪種方法符合講義？",
+    "options": [
+      "迎光透視鈔票",
+      "只比較鈔票是否很新",
+      "只摸四個角",
+      "只看鈔票張數"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "安全線在講義迎光透視示例中；紙鈔新舊程度不是可靠的真偽判準。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-twd-uv",
+    "family": "drive29-twd-uv",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "新臺幣上的螢光油墨與螢光纖維，應配合哪種檢視？",
+    "options": [
+      "紫光照視",
+      "只用手指觸摸",
+      "只轉動看變色數字",
+      "只看流水號是否連號"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將螢光油墨及螢光纖維列在紫光照視；不能只憑普通光下的顏色判斷。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-twd-tilt",
+    "family": "drive29-twd-tilt",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "20",
+    "topic": "twd-methods",
+    "q": "要檢查講義新臺幣圖中的變色油墨、隱藏字或光影變化，主要應採哪種方法？",
+    "options": [
+      "轉動檢視，改變觀看角度",
+      "只迎光看水印",
+      "只核對紙鈔張數",
+      "只量序號長度"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義轉動檢視圖例包含變色油墨、隱藏字及光影變化裝置；藉不同角度觀察。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-twd-micro",
+    "family": "drive29-twd-micro",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "新臺幣的微小字及細密印刷線條，最適合用哪種方法檢查？",
+    "options": [
+      "放大檢視",
+      "只聽聲音",
+      "只摸紙鈔邊角",
+      "只查發行年份"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以放大檢視觀察微小字及精細印紋，不能只用肉眼看大致圖樣是否相像。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-twd-touch",
+    "family": "drive29-twd-touch",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "手指觸摸新臺幣時，講義強調可檢查哪些觸感？",
+    "options": [
+      "凹版印刷與點字等凸起特徵",
+      "螢光油墨發出的光色",
+      "水印是否透光",
+      "轉動時圖紋變化方向"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義手指觸摸示例標示凹版印刷及點字，以手感檢查凸起特徵。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-twd-pairs",
+    "family": "drive29-twd-pairs",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "【複選】依講義，新臺幣防偽特徵與檢查方式，哪些配對正確？",
+    "options": [
+      "水印—迎光透視",
+      "螢光油墨—紫光照視",
+      "凹版印刷觸感—手指觸摸",
+      "微小字—只用紫光即可取代放大檢視"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三項對應講義圖例；微小字應放大檢視，不宜混用單一方式取代其他檢查。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-twd-all",
+    "family": "drive29-twd-all",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "遇到外觀相似、真偽存疑的新臺幣，最符合講義的做法為何？",
+    "options": [
+      "綜合迎光、紫光、轉動、放大及觸摸等不同特徵判斷",
+      "只要序號存在就接受",
+      "只看其中一個圖案相像便接受",
+      "只要鈔票很新就不必檢查"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列出五種辨識方法，應交叉核對各類防偽特徵，不能只靠一個外觀或鈔票新舊。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-three-checks",
+    "family": "drive29-id-three-checks",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "14",
+    "topic": "identity-check",
+    "q": "【複選】講義的身分證驗證要領，包括哪些工作？",
+    "options": [
+      "查詢身分證領補換資料",
+      "檢查證件防偽安全措施",
+      "比對顧客人貌與證上相片",
+      "只要有一張影本即可免看本人"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義列三項：查詢領補換資料、檢查安全措施及比對人貌與相片，須搭配判斷。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-id-query",
+    "family": "drive29-id-query",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "8",
+    "topic": "identity-check",
+    "q": "身分證資料查詢顯示有發證資料，是否就能單獨證明來客本人及證件都是真的？",
+    "options": [
+      "不能，仍須檢查證件安全措施與人像",
+      "可以，其他步驟完全不需要",
+      "只要姓名相同就能確認",
+      "只需再問來客喜歡哪個顏色"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義指出資料查詢結果不能單獨取代真偽及本人確認；須結合防偽檢查、人像比對等步驟。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-outline-org",
+    "family": "drive29-outline-org",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "45",
+    "topic": "fund-outline",
+    "q": "投信大綱1「組織架構」中，CEO、CIO、CMO、COO分別對應哪組職能？",
+    "options": [
+      "總經理、投資長、行銷長、營運長",
+      "投資長、總經理、營運長、行銷長",
+      "行銷長、營運長、總經理、投資長",
+      "營運長、行銷長、投資長、總經理"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義組織架構列出總經理CEO、投資長CIO、行銷長CMO及營運長COO。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-outline-sales",
+    "family": "drive29-outline-sales",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "45",
+    "topic": "fund-outline",
+    "q": "投信大綱2「銷售管道」中，透過銀行等合作機構銷售基金，屬於哪一類？",
+    "options": [
+      "通路銷售",
+      "只限投信直銷",
+      "證件防偽檢查",
+      "證券自營部位"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將銷售管道列為直銷、通路、機構法人及多元理財服務中心；透過合作機構銷售屬通路。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-outline-types",
+    "family": "drive29-outline-types",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "45",
+    "topic": "fund-outline",
+    "q": "【複選】投信大綱3「基金類型」列出的類別包括哪些？",
+    "options": [
+      "股票型與ETF",
+      "組合型與平衡型",
+      "債券型與貨幣市場型",
+      "銀行活期儲蓄存款型"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義大綱列股票型、ETF、組合型、平衡型、多重資產型、債券型及貨幣市場型／固定收益型基金；銀行存款不等於基金。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-outline-manager",
+    "family": "drive29-outline-manager",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "45",
+    "topic": "fund-outline",
+    "q": "依講義大綱4的註記，經理人有幾年經理人資歷後，才能接多檔基金？",
+    "options": [
+      "二年",
+      "零年",
+      "半年",
+      "十年"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "本題依大綱原文「二年經理人資歷才能接多檔」作答；同欄另列證券投資分析人員、投信投顧業務員及證券商高級業務員等專業資格。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-outline-group",
+    "family": "drive29-outline-group",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "46",
+    "topic": "fund-outline",
+    "q": "投信大綱5的「投信與銀行／證券關係」，何者最符合講義金控理財生態圈？",
+    "options": [
+      "串連銀行、證券、保險等子公司，共同服務顧客資產管理需求",
+      "各子公司完全不得提供互補服務",
+      "投信只負責承作銀行存款",
+      "證券僅負責鈔票印製"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以金控理財生態圈呈現各子公司攜手共同經營顧客，結合投信投資管理核心。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-9827-name",
+    "family": "drive29-9827-name",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "8",
+    "topic": "etf-9827",
+    "q": "依本次講義，009827是哪項ETF？",
+    "options": [
+      "玉山未來全象算力ETF",
+      "玉山全球跨國藍籌100ETF",
+      "玉山臺灣市值動能50ETF",
+      "玉山臺灣關鍵科技主動式ETF"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "009827是玉山未來全象算力ETF；其他選項分別是不同產品，須分清代碼與名稱。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-9827-pillars",
+    "family": "drive29-9827-pillars",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "4",
+    "topic": "etf-9827",
+    "q": "【複選】009827的「算力三本柱」包括哪些？",
+    "options": [
+      "AI科技",
+      "AI基建",
+      "太空衛星",
+      "傳統高股息金融股專屬策略"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義三本柱為AI科技、AI基建及太空衛星；不是單純高股息金融類股商品。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-9827-weights",
+    "family": "drive29-9827-weights",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "3",
+    "topic": "etf-9827",
+    "q": "依本次講義示意，009827三本柱的配置比例為何？",
+    "options": [
+      "AI科技50%、AI基建30%、太空衛星20%",
+      "AI科技20%、AI基建30%、太空衛星50%",
+      "三類均各約33.3%",
+      "AI科技80%、AI基建10%、太空衛星10%"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義圖示為AI科技50%、AI基建30%、太空衛星20%；本題依課堂示意配置作答，不作即時持股查詢。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-9827-135",
+    "family": "drive29-9827-135",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "7",
+    "topic": "etf-9827",
+    "q": "009827的「算力135」中，5對應哪一項講義特色？",
+    "options": [
+      "頂尖50強企業",
+      "保證每年報酬5%",
+      "五年內一定保本",
+      "只能持有五檔股票"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以國內第1檔、算力3本柱、頂尖50強說明「135」；不是績效或保本承諾。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-9827-world",
+    "family": "drive29-9827-world",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "5",
+    "topic": "etf-9827",
+    "q": "009827「全台首創、布局全球算力航向」最接近哪個投資範圍？",
+    "options": [
+      "全球算力產業鏈，含AI科技、基建與衛星相關領域",
+      "只投資臺灣一家半導體公司",
+      "只投資臺灣銀行定存",
+      "完全排除基礎建設與衛星產業"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以全球配置及算力三本柱呈現策略，不應把科技主題誤認為只持有單一公司。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-compare-trade",
+    "family": "drive29-compare-trade",
+    "cat": "投信業務",
+    "src": "投信補充照片 IMG_9698.jpeg",
+    "page": "共同基金 vs ETF比較表",
+    "topic": "fund-etf-compare",
+    "q": "依課堂共同基金與ETF比較，一般開放式共同基金與掛牌ETF的主要交易方式差異為何？",
+    "options": [
+      "共同基金向基金公司申購／贖回；ETF可在證券市場買賣",
+      "兩者都只能向戶政機關申購",
+      "共同基金只能盤中逐秒撮合，ETF只在收盤申購",
+      "ETF完全不能在交易所交易"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "照片比較表：共同基金採申購／贖回；ETF像股票一樣在證券市場買賣。本題指課堂比較的一般情形。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3",
+    "evidenceFile": "IMG_9698.jpeg"
+  },
+  {
+    "id": "drive29-compare-time",
+    "family": "drive29-compare-time",
+    "cat": "投信業務",
+    "src": "投信補充照片 IMG_9698.jpeg",
+    "page": "共同基金 vs ETF比較表",
+    "topic": "fund-etf-compare",
+    "q": "課堂比較中，哪一種工具可以在證券市場盤中依即時市場價格買賣？",
+    "options": [
+      "掛牌ETF",
+      "只能依每日淨值申購的一般共同基金",
+      "未到期銀行定存單",
+      "尚未發行的公司股票"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "ETF盤中可交易；一般共同基金通常每日計算一次淨值，交易機制不同。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3",
+    "evidenceFile": "IMG_9698.jpeg"
+  },
+  {
+    "id": "drive29-compare-nav",
+    "family": "drive29-compare-nav",
+    "cat": "投信業務",
+    "src": "投信補充照片 IMG_9698.jpeg",
+    "page": "共同基金 vs ETF比較表",
+    "topic": "fund-etf-compare",
+    "q": "一般共同基金的申購／贖回定價，課堂比較表使用哪項依據？",
+    "options": [
+      "依規定適用的當日淨值NAV",
+      "固定保證年息",
+      "IPO承銷抽籤中籤率",
+      "新臺幣鈔票票面金額"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "課堂表格列共同基金為當日淨值NAV，ETF市場價格由供需即時形成。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3",
+    "evidenceFile": "IMG_9698.jpeg"
+  },
+  {
+    "id": "drive29-compare-price",
+    "family": "drive29-compare-price",
+    "cat": "投信業務",
+    "src": "投信補充照片 IMG_9698.jpeg",
+    "page": "共同基金 vs ETF比較表",
+    "topic": "fund-etf-compare",
+    "q": "ETF的盤中成交價格與基金淨值，應如何理解？",
+    "options": [
+      "成交價由市場供需形成，可能與淨值有差異",
+      "每筆成交價都必定等於淨值",
+      "只要成交價低就代表一定保本",
+      "市場價格由投資人自行填寫且一定成交"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "照片表格列ETF以市場供需即時定價、接近淨值；接近不代表每一刻都完全相等。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3",
+    "evidenceFile": "IMG_9698.jpeg"
+  },
+  {
+    "id": "drive29-compare-active",
+    "family": "drive29-compare-active",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "24",
+    "topic": "fund-etf-compare",
+    "q": "共同基金與ETF比較時，為何不能說「所有ETF都是被動追蹤指數」？",
+    "options": [
+      "講義也介紹了主動式ETF，可由經理人主動選股",
+      "因為ETF不能持有股票",
+      "因為共同基金都不能主動管理",
+      "因為只有定存可以上市交易"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "比較表的「多為被動」不是「全部被動」；同份講義的00413A即為主動式ETF。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-rule72",
+    "family": "drive29-rule72",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "33",
+    "topic": "fund-basics",
+    "q": "依72法則，假設年報酬率為6%，資產約幾年翻倍？",
+    "options": [
+      "12年",
+      "6年",
+      "18年",
+      "72年"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "72法則是約略估算：72 ÷ 6 ＝12年；不是報酬保證，僅以假設固定報酬率練習。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-rule72-rate",
+    "family": "drive29-rule72-rate",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "33",
+    "topic": "fund-basics",
+    "q": "依72法則，若希望資產約9年翻倍，假設所需年報酬率約為多少？",
+    "options": [
+      "8%",
+      "9%",
+      "18%",
+      "72%"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "72 ÷ 9 ＝8（%）。這是近似估算法，實際投資報酬不固定，也不保證達成。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-wealth-three",
+    "family": "drive29-wealth-three",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "34",
+    "topic": "fund-basics",
+    "q": "【複選】講義的「財富三要素」包括哪些？",
+    "options": [
+      "本金",
+      "報酬率",
+      "時間",
+      "保證獲利的消息來源"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義以本金、報酬率及時間說明長期累積財富的重要因素；沒有保證獲利消息這一項。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-ipo-name",
+    "family": "drive29-ipo-name",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "7",
+    "topic": "ipo-benefits",
+    "q": "IPO在講義中代表什麼？",
+    "options": [
+      "首次公開發行／初次上市",
+      "已上市公司每一次日常交易",
+      "銀行對企業的短期借款",
+      "只向單一股東配發現金股利"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以Initial Public Offerings說明企業首次公開募股／初次上市，與上市後的日常買賣不同。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-ipo-capital",
+    "family": "drive29-ipo-capital",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "6",
+    "topic": "ipo-benefits",
+    "q": "企業考慮IPO時，擴充營運規模與提升市場知名度，屬於哪類效果？",
+    "options": [
+      "企業成長與品牌能見度",
+      "保證任何投資都不會失敗",
+      "從此不必再揭露資訊",
+      "免除所有股東監督"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將擴充營運規模及市場知名度列為企業邁向資本市場的考量因素。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-ipo-finance",
+    "family": "drive29-ipo-finance",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "6",
+    "topic": "ipo-benefits",
+    "q": "依講義，企業走向資本市場對財務結構的可能幫助為何？",
+    "options": [
+      "強化財務結構，取得較低成本資金",
+      "保證所有時點籌資成本都為零",
+      "永遠無須衡量資金成本",
+      "上市就自動免除既有負債"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列出強化財務結構與取得低成本資金，這是可能效益，不代表成本永遠為零或債務自動消失。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-ipo-talent",
+    "family": "drive29-ipo-talent",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "6",
+    "topic": "ipo-benefits",
+    "q": "企業上市後，具流通性的股票對人才與股東有何可能用途？",
+    "options": [
+      "吸引人才、增加股東理財工具並支援傳承規劃",
+      "保證每位員工立即致富",
+      "使股票從此沒有價格波動",
+      "讓公司不需要處理接班問題"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義考量因素包括吸引優秀人才、第二代接班及股票具流通性、增加股東理財工具。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-ipo-ma",
+    "family": "drive29-ipo-ma",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "6",
+    "topic": "ipo-benefits",
+    "q": "講義指出股票有公開市場價格後，對企業併購與策略合作可能有何幫助？",
+    "options": [
+      "提供較透明的價格參考，利於股票出售、併購與合作",
+      "使所有併購都不用再評價",
+      "保證買方與賣方永無歧見",
+      "使企業可以免做盡職調查"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列「公平市價有利股票出售／併購／策略合作」；市場價格可作參考，但不會取消交易評價與查核。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-ipo-multi",
+    "family": "drive29-ipo-multi",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "6",
+    "topic": "ipo-benefits",
+    "q": "【複選】依講義，企業邁向資本市場的合理考量有哪些？",
+    "options": [
+      "市場知名度與營運規模",
+      "股東實現經營成果",
+      "永續經營與接班安排",
+      "保證股價只漲不跌"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三者均在講義的考量因素中；IPO不保證股價或獲利。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-broker",
+    "family": "drive29-broker",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "34",
+    "topic": "securities-core",
+    "q": "證券公司「經紀」業務的核心是什麼？",
+    "options": [
+      "受託提供證券交易服務",
+      "只使用公司自有資金投資",
+      "替央行印製鈔票",
+      "只負責企業承銷上市"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義產品地圖將證券、複委託、期貨等列在經紀；與自營自行操作資金不同。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-dealer",
+    "family": "drive29-dealer",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "34",
+    "topic": "securities-core",
+    "q": "哪種情境最符合證券公司「自營」業務？",
+    "options": [
+      "以公司自有資金建立投資部位",
+      "只轉送顧客的委託買賣單",
+      "為企業IPO提供承銷服務",
+      "僅核對顧客證件真偽"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義自營欄明列自有資金操作，與受託交易的經紀業務不同。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-underwriting",
+    "family": "drive29-underwriting",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "34",
+    "topic": "securities-core",
+    "q": "輔導公司IPO、SPO或承銷可轉換公司債，主要屬於哪項業務？",
+    "options": [
+      "承銷",
+      "證件辨識",
+      "銀行存款",
+      "現鈔兌換"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義產品地圖將股票IPO／SPO及可轉債CB列於承銷。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-bigthree",
+    "family": "drive29-bigthree",
+    "cat": "證券業務",
+    "src": "證券手寫筆記 IMG_9701.jpeg",
+    "page": "三大法人",
+    "topic": "securities-core",
+    "q": "【複選】手寫筆記提到的市場「三大法人」包括哪些？",
+    "options": [
+      "外資",
+      "投信",
+      "自營商",
+      "一般自然人散戶"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "筆記明列外資、投信與自營；三大法人不包括一般自然人散戶。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3",
+    "evidenceFile": "IMG_9701.jpeg"
+  },
+  {
+    "id": "drive29-subbroker",
+    "family": "drive29-subbroker",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "23",
+    "topic": "securities-overseas",
+    "q": "依講義，投資人透過國內券商，委託海外券商在外國市場交易，稱為什麼？",
+    "options": [
+      "複委託",
+      "只限國內證券自營",
+      "票據交換",
+      "股票現金股利發放"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義的Sub-brokerage流程：投資人→國內券商→海外券商→海外交易所。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-dsu-osu",
+    "family": "drive29-dsu-osu",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "17",
+    "topic": "securities-overseas",
+    "q": "講義中，境內海外商品平台與境外國際證券業務平台的配對為何？",
+    "options": [
+      "DSU—境內；OSU—境外",
+      "DSU—境外；OSU—境內",
+      "DSU與OSU都只做國內現鈔交換",
+      "DSU與OSU都是ETF代碼"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義圖例用DSU Domestic及OSU Offshore區分境內／境外平台，本題僅考名詞與平台定位。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-etrader",
+    "family": "drive29-etrader",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "28",
+    "topic": "securities-tools",
+    "q": "講義介紹的E-Trader，主要屬於哪種工具？",
+    "options": [
+      "證券投資與交易的數位平台",
+      "身分證領補換查詢網站",
+      "銀行鈔票印製設備",
+      "企業IPO的英文全名"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以E-Trader帶你投資旅程，介紹證券的數位投資交易平台。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
+  },
+  {
+    "id": "drive29-signals",
+    "family": "drive29-signals",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "26",
+    "topic": "securities-tools",
+    "q": "講義的台股指存2.0介紹KD、RSI、均線等內容，較適合如何理解？",
+    "options": [
+      "協助篩選與判斷的技術指標，不是保證獲利",
+      "保證顧客每次都買在最低點",
+      "完全取代顧客需求及風險評估",
+      "只用來判別新臺幣真偽"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義介紹條件與指標輔助投資判斷；技術指標不代表獲利承諾，也不免除風險評估。",
+    "lang": "zh",
+    "focus": true,
+    "highlight": "指定考點／講義重點",
+    "edition": "20261029-drive3"
   }
 ]
