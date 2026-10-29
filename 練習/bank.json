@@ -18900,5 +18900,2812 @@
     "focus": true,
     "highlight": "指定考點／講義重點",
     "edition": "20261029-drive3"
+  },
+  {
+    "id": "more29-five-complete",
+    "family": "more29-five-complete",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "18",
+    "topic": "five-methods",
+    "q": "講義對鈔票列出的五種辨識方法，哪組完整正確？",
+    "options": [
+      "迎光透視、紫光照視、轉動檢視、放大檢視、手指觸摸",
+      "掃描條碼、查驗戶籍、核對電話、量體溫、聞氣味",
+      "只看顏色、只看面額、只看新舊、只看尺寸、只看序號",
+      "迎光透視、只看影本、只問姓名、只查電話、只看簽名"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義五方法為迎光、紫光、轉動、放大與觸摸，外幣亦採同一套檢查架構。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-five-missing",
+    "family": "more29-five-missing",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "20",
+    "topic": "five-methods",
+    "q": "行員已做迎光透視、紫光照視、轉動檢視與放大檢視，依講義還缺哪項？",
+    "options": [
+      "手指觸摸",
+      "量測顧客身高",
+      "核對手機品牌",
+      "查詢股票代碼"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "五種方法中尚缺觸摸凹版印刷等特徵；前四項不能涵蓋全部檢查。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-five-four",
+    "family": "more29-five-four",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "18",
+    "topic": "five-methods",
+    "q": "【複選】下列哪些屬於講義鈔票辨識方法？",
+    "options": [
+      "迎光透視",
+      "紫光照視",
+      "轉動檢視",
+      "放大檢視",
+      "依顧客職業直接認定真偽"
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "前四項均是正式辨識方法，另有手指觸摸；職業不是真偽特徵。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-five-class",
+    "family": "more29-five-class",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "five-methods",
+    "q": "要用「看紙張內部、看螢光反應、看角度變化」分別檢查，正確順序是哪組？",
+    "options": [
+      "迎光透視→紫光照視→轉動檢視",
+      "手指觸摸→放大檢視→查詢序號",
+      "紫光照視→手指觸摸→迎光透視",
+      "轉動檢視→迎光透視→放大檢視"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "紙張內部的水印／安全線、螢光特徵及角度變化，對應三種不同方式。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-id-water-case",
+    "family": "drive29-id-watermark",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "10",
+    "topic": "id-methods",
+    "q": "證件平放看不清紙張內部水印，下一步應如何檢查？",
+    "options": [
+      "將證件迎向光源透視",
+      "只用雷射筆照照片",
+      "只摸證件四角",
+      "只看護貝反光"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "水印須迎光透視；雷射筆照射不是講義列出的檢查法。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-id-fiber-case",
+    "family": "more29-id-fiber-case",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "10",
+    "topic": "id-methods",
+    "q": "要觀察身分證的螢光安全線及螢光圖案，應準備哪項檢查？",
+    "options": [
+      "紫光照視",
+      "只用手摸字形",
+      "只看印章是否紅色",
+      "只量證件長寬"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義紫光照視包含螢光安全線、圖案及其他螢光防偽特徵。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-id-magnifier-case",
+    "family": "drive29-id-micro",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "12",
+    "topic": "id-methods",
+    "q": "行員使用放大鏡看身分證細密字紋，主要是在查什麼？",
+    "options": [
+      "微小字與精細印紋",
+      "顧客指紋是否吻合",
+      "變色油墨的金綠變化",
+      "證件水印的透光效果"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "放大檢視著重微小字及細節；變色油墨須轉動，水印須迎光。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-id-gold-green",
+    "family": "drive29-id-ovi",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "11",
+    "topic": "id-methods",
+    "q": "身分證圖紋隨角度呈金色、綠色，這項現象主要屬於哪類特徵？",
+    "options": [
+      "變色油墨OVI",
+      "凹凸觸感",
+      "戶籍資料查詢",
+      "單純紙張厚度"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義OVI變色油墨以金色／綠色示例，藉轉動檢視觀察。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-id-raised-case",
+    "family": "drive29-id-touch",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "12",
+    "topic": "id-methods",
+    "q": "行員輕觸身分證上的壓凸臺灣圖案，是在執行哪項檢查？",
+    "options": [
+      "手指觸摸",
+      "紫光照視",
+      "迎光透視",
+      "放大檢視"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "壓凸圖案屬觸感檢查，不能用螢光反應取代。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-ovd-ovi-pair",
+    "family": "more29-ovd-ovi-pair",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "11",
+    "topic": "id-methods",
+    "q": "【複選】對OVD與OVI的理解，哪些符合講義？",
+    "options": [
+      "OVD為視覺變化裝置",
+      "OVI為變色油墨",
+      "兩者均可藉轉動檢視觀察變化",
+      "OVI必須用手指摸才看得出顏色"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義將OVD與OVI都列於轉動檢視；色彩與影像變化不是靠觸摸辨認。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-twd-glow-v-water",
+    "family": "more29-twd-glow-v-water",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "行員把「水印」誤當成一定要用紫光才能看到的圖案，應如何修正？",
+    "options": [
+      "水印採迎光透視；螢光圖案採紫光照視",
+      "兩者都只看鈔票是否乾淨",
+      "水印只靠手摸；螢光只靠轉動",
+      "兩者均只需查序號"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "水印與螢光特徵對應不同光源，是五方法配對的常見混淆。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-twd-tilt-case",
+    "family": "more29-twd-tilt-case",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "20",
+    "topic": "twd-methods",
+    "q": "觀察新臺幣的隱藏字時，行員應著重哪個動作？",
+    "options": [
+      "改變鈔票觀看角度",
+      "只提高紫光強度",
+      "只觸摸流水號",
+      "只檢查鈔票是否連號"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將隱藏字列在轉動檢視，需改變角度觀察。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-twd-touch-case",
+    "family": "drive29-twd-touch",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "鈔票看起來相似，但要核對凹版印刷是否有凸起感，應使用哪個方法？",
+    "options": [
+      "手指觸摸",
+      "只比面額",
+      "只查發行年",
+      "只看顧客身分"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "凹版印刷觸感屬手指觸摸的檢查目標，不是只看大致圖樣。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-twd-micro-case",
+    "family": "drive29-twd-micro",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "19",
+    "topic": "twd-methods",
+    "q": "看到鈔票微小文字模糊、線條疑似連成一片，最直接的進一步檢查是什麼？",
+    "options": [
+      "放大檢視字紋細節",
+      "只依紙鈔新舊判斷",
+      "只問顧客從何處拿到",
+      "只看面額大不大"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "放大檢視可比對微小字及細密印刷品質；異常仍須結合其他特徵判斷。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-foreign-five",
+    "family": "more29-foreign-five",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "20",
+    "topic": "foreign-methods",
+    "q": "外幣與新臺幣在講義中的辨識架構，何者正確？",
+    "options": [
+      "均可運用五種方法，但須對照幣別、面額與版本的防偽特徵",
+      "外幣只能看序號",
+      "所有外幣防偽圖案都完全相同",
+      "新臺幣只用觸摸、外幣只用紫光"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "外幣也列五方法；各幣別、版本的圖案與配置不同，不能照搬單一鈔票特徵。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-foreign-all-methods",
+    "family": "more29-foreign-all-methods",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "20",
+    "topic": "foreign-methods",
+    "q": "【複選】依你補充的外幣辨識圖，下列哪些說法正確？",
+    "options": [
+      "迎光透視是其中一種方法",
+      "紫光照視與放大檢視用途不同",
+      "轉動檢視是改變角度觀察",
+      "只看一個特徵便可省略其餘核對"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "補充圖列出五種方法；各有檢查目標，應綜合核對。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-foreign-usd100",
+    "family": "more29-foreign-usd100",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "22",
+    "topic": "foreign-methods",
+    "q": "講義100美元鈔票上的微小字，要看清印刷細節，應用哪種方法？",
+    "options": [
+      "放大檢視",
+      "只看總面額",
+      "只看鈔票是否摺過",
+      "只看顧客是否常往來"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "美元防偽圖也把微小字列在放大檢視；是同一方法在不同幣別的應用。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-foreign-rmb",
+    "family": "more29-foreign-rmb",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "27",
+    "topic": "foreign-methods",
+    "q": "依講義人民幣示例，要觀察數字或光影特徵隨角度改變，應採何法？",
+    "options": [
+      "轉動檢視",
+      "只查身分證領補換紀錄",
+      "只看提款日期",
+      "只按鈔票邊緣"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "人民幣示例將動態、變色等角度相關特徵放在轉動檢視。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-foreign-jpy",
+    "family": "more29-foreign-jpy",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "28",
+    "topic": "foreign-methods",
+    "q": "講義日圓示例也列迎光、紫光、轉動、放大與觸摸，主要提醒什麼？",
+    "options": [
+      "同一套五方法可用於不同幣別，特徵須按版本核對",
+      "日圓只要認得人物就是真的",
+      "舊版鈔票一定都是偽鈔",
+      "所有幣別都必須有同一種動物水印"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "辨識方法可以通用，但人物、圖紋、位置及版本不同，應依相應防偽資料核對。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-five-combine-case",
+    "family": "more29-five-combine-case",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "18",
+    "topic": "five-methods",
+    "q": "某鈔票迎光水印看似正常，是否就可以停止全部檢查？",
+    "options": [
+      "不宜，仍應綜合其他防偽特徵核對",
+      "可以，水印能取代所有方法",
+      "可以，只要顧客願意保證",
+      "可以，面額小就不需辨識"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以五方法交叉檢查，不應把單一看似正常的特徵當全部依據。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-force-def",
+    "family": "more29-signature-force-def",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "52",
+    "topic": "signature-force",
+    "q": "簽名核對中的「筆力」主要指什麼？",
+    "options": [
+      "運筆的用力輕重",
+      "簽名所花的總秒數",
+      "每個字的讀音",
+      "簽名人的職位高低"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義筆力指運筆的用力輕重，觀察粗細、刻痕深淺與墨色濃淡。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-force-features",
+    "family": "more29-signature-force-features",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "52",
+    "topic": "signature-force",
+    "q": "【複選】觀察簽名筆力時，講義列出哪些細部特徵？",
+    "options": [
+      "筆劃線條粗細",
+      "刻痕深淺",
+      "墨色濃淡",
+      "顧客的工作年資"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三項是筆力觀察要點；年資不是筆跡特徵。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-speed-def",
+    "family": "more29-signature-speed-def",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "53",
+    "topic": "signature-speed",
+    "q": "簽名核對中的「筆速」主要是在比對什麼？",
+    "options": [
+      "運筆快慢與流利度",
+      "紙張售價",
+      "墨水品牌",
+      "印章重量"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "筆速為運筆快慢，講義尤其注意轉彎與長筆劃處的順暢度。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-order-def",
+    "family": "more29-signature-order-def",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "53",
+    "topic": "signature-order",
+    "q": "簽名的筆序核對，應特別看哪些內容？",
+    "options": [
+      "運筆順序及連筆習慣",
+      "墨水是否昂貴",
+      "顧客是否穿西裝",
+      "印章是否圓形"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "筆序觀察書寫順序與連筆習慣；不是只看最後形成的字形輪廓。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-macro",
+    "family": "more29-signature-macro",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "54",
+    "topic": "signature-general",
+    "q": "簽名核對的「宏觀比對」主要看什麼？",
+    "options": [
+      "整體大小、形狀、結構與布局",
+      "僅看某一條線的刻痕",
+      "僅看筆劃轉彎是否停頓",
+      "僅看墨色濃淡"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將整體大小、形狀、結構、布局列在外形的宏觀比對。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-micro",
+    "family": "more29-signature-micro",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "54",
+    "topic": "signature-general",
+    "q": "【複選】簽名的微觀比對包括哪些重點？",
+    "options": [
+      "筆力",
+      "筆速",
+      "筆序",
+      "只看整個名字占紙張的面積"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "微觀細部為筆力、筆速、筆序；整體面積與布局偏向宏觀外形。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-pressure-case",
+    "family": "more29-signature-pressure-case",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "52",
+    "topic": "signature-force",
+    "q": "核對兩份簽名時，行員比較紙背刻痕深淺與線條粗細，這是在看哪一項？",
+    "options": [
+      "筆力",
+      "筆序",
+      "單純外形大小",
+      "簽名字數"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "刻痕深淺、粗細與墨色為筆力的具體檢查內容。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-speed-case",
+    "family": "more29-signature-speed-case",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "53",
+    "topic": "signature-speed",
+    "q": "兩份簽名外形相近，但其中一份長筆劃及轉彎處頻繁停頓，應加強哪項比對？",
+    "options": [
+      "筆速與運筆流利度",
+      "只看簽名人的服裝",
+      "只核對字的讀音",
+      "只查印章尺寸"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義在筆速部分特別要求注意長筆劃及轉彎處的順暢程度。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-order-case",
+    "family": "more29-signature-order-case",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "53",
+    "topic": "signature-order",
+    "q": "外形很像，但連筆方向與運筆先後不同，應加強哪項核對？",
+    "options": [
+      "筆序與連筆習慣",
+      "只看整體大小",
+      "只看顧客年齡",
+      "只看筆的顏色"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "最後字形相近，不代表書寫動作相同；須檢查筆序及連筆。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-poor-lines",
+    "family": "more29-signature-poor-lines",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "50",
+    "topic": "signature-general",
+    "q": "講義列出的疑似偽造簽名筆劃特徵，何者較值得注意？",
+    "options": [
+      "運筆緩慢、停頓中斷、僵硬滯澀",
+      "每次完全相同的自然手感必然成立",
+      "只要名字寫對就不可能偽造",
+      "只要有連筆就必定真實"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列出緩慢、停頓、中斷、僵硬、滯澀、顫抖等筆劃品質異常，仍須綜合比對。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-line-multi",
+    "family": "more29-signature-line-multi",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "50",
+    "topic": "signature-general",
+    "q": "【複選】哪些是講義所列應留意的筆劃品質異常？",
+    "options": [
+      "不自然的停頓或中斷",
+      "僵硬、滯澀的線條",
+      "線條粗細一味一致且少露筆鋒",
+      "只要字寫得漂亮就可直接接受"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三項列於偽造簽名常見筆劃特徵；字漂亮不是驗證依據。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-natural-health",
+    "family": "more29-signature-natural-health",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "50",
+    "topic": "signature-natural",
+    "q": "簽名出現顫抖，是否能只憑這點斷定偽造？",
+    "options": [
+      "不能，健康、衰老等也可能造成自然變異",
+      "可以，任何顫抖均為偽造",
+      "可以，只要字形有變就能定案",
+      "可以，簽名永遠不會受環境影響"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列健康狀況、衰老、飲酒等可能造成顫抖或變形，不能孤立判斷。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-natural-surface",
+    "family": "more29-signature-natural-surface",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "51",
+    "topic": "signature-natural",
+    "q": "顧客在不平坦表面簽名，出現少許變形，較合理的判斷為何？",
+    "options": [
+      "考量書寫條件及自然變異，再綜合核對",
+      "立即認定顧客犯罪",
+      "只因變形就完全不需再比對",
+      "要求簽名與印鑑卡百分之百重疊才承認"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將書寫表面不平坦列為可接受變化的可能原因；應結合其他特徵。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-natural-style",
+    "family": "more29-signature-natural-style",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "51",
+    "topic": "signature-natural",
+    "q": "同一人的簽名風格隨時間略有改變，依講義應如何看待？",
+    "options": [
+      "可能屬自然變異，仍須綜合比對習慣特徵",
+      "一定是他人代簽",
+      "一定表示以前簽名無效",
+      "可以完全不核對筆跡"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義列筆跡風格略變為自然變異之一；不是每次都必須完全重疊。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-no-overlap",
+    "family": "more29-signature-no-overlap",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "47",
+    "topic": "signature-natural",
+    "q": "依講義，同一人多次簽名的筆畫線條是否必然完全重合？",
+    "options": [
+      "不必然，會有自然變異",
+      "必然，每次如影印一樣",
+      "只要不重合就必定偽造",
+      "筆跡與個人習慣無關"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義研究說明同一人多次簽名也不會條條完全重合，故不能只看重疊程度。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-individuality",
+    "family": "more29-signature-individuality",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "44",
+    "topic": "signature-general",
+    "q": "筆跡鑑定理論中的「個別性」，主要強調什麼？",
+    "options": [
+      "不同人的生理、習慣等綜合影響，使筆跡具有個人特徵",
+      "所有人寫同一名字會完全一樣",
+      "只有印章才有個別特徵",
+      "只憑顧客說法即可免核對"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以個別性與習慣性說明筆跡可以成為比對依據。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-habit",
+    "family": "more29-signature-habit",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "44",
+    "topic": "signature-general",
+    "q": "簽名比對重視「習慣性」，最接近哪個觀念？",
+    "options": [
+      "反覆書寫形成相對穩定的運筆習慣",
+      "每一次簽名都必須如複印般相同",
+      "只要用同一支筆就一定本人",
+      "習慣不會反映在連筆或順序"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "習慣性是比較運筆、結構與連筆等相對穩定特徵的依據，同時容許自然變異。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-force-v-speed",
+    "family": "more29-signature-force-v-speed",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "54",
+    "topic": "signature-general",
+    "q": "「粗細、刻痕、濃淡」與「長筆劃轉彎流利度」分別主要對應什麼？",
+    "options": [
+      "筆力與筆速",
+      "筆序與戶籍",
+      "筆速與墨水售價",
+      "外形與職位"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "前者是筆力，後者是筆速；兩者應分開觀察再綜合判斷。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-macro-not-enough",
+    "family": "more29-signature-macro-not-enough",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "54",
+    "topic": "signature-general",
+    "q": "只要簽名整體外形很像，就可以省略筆力、筆速、筆序比對嗎？",
+    "options": [
+      "不可以，宏觀外形與微觀筆劃應搭配核對",
+      "可以，字形是唯一依據",
+      "可以，名字字數相同即可",
+      "可以，只要顧客是熟客"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義把外形與筆力、筆速、筆序並列，不能以外形取代全部核對。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-signature-context-multi",
+    "family": "more29-signature-context-multi",
+    "cat": "證件與鈔票辨識",
+    "src": "辨認.pdf",
+    "page": "50",
+    "topic": "signature-natural",
+    "q": "【複選】核對一份有些變化的簽名，哪些做法較符合講義？",
+    "options": [
+      "觀察整體布局及細部筆劃",
+      "考量健康與書寫表面等條件",
+      "比對運筆習慣並留意疑點",
+      "只看到一筆不同便直接定為偽造"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "應結合宏觀、微觀及自然變異因素；單一差異不宜直接定案。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-broker-excludes",
+    "family": "more29-broker-excludes",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "34",
+    "topic": "securities-core",
+    "q": "「經紀業務包括自營買賣」這句話哪裡有問題？",
+    "options": [
+      "經紀為受託交易；自營是以公司自有資金操作，應分開",
+      "經紀只能處理存款",
+      "自營只是經紀業務的別稱",
+      "證券公司不能辦理自營"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "依講義產品地圖，經紀、承銷、自營分欄；不能將公司業務範圍誤當經紀子項。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-integrated-three",
+    "family": "more29-integrated-three",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "34",
+    "topic": "securities-core",
+    "q": "【複選】綜合證券商所涵蓋的三大證券業務是哪些？",
+    "options": [
+      "經紀",
+      "承銷",
+      "自營",
+      "中央銀行發行鈔票"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "三大業務為經紀、承銷、自營，綜合證券商的範圍大於其中一項經紀業務。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-ownmoney-case",
+    "family": "more29-ownmoney-case",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "2",
+    "topic": "securities-core",
+    "q": "同一券商一邊替顧客買股票、一邊使用公司資金買債券，應如何分類？",
+    "options": [
+      "前者為經紀、後者為自營",
+      "兩者都叫經紀",
+      "兩者都叫承銷",
+      "前者為自營、後者為經紀"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "分類重點為是否受顧客委託及使用誰的資金；不能因都在券商發生便混為一談。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-ipo-case-underwrite",
+    "family": "more29-ipo-case-underwrite",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "34",
+    "topic": "securities-core",
+    "q": "協助企業首次進入公開資本市場，與顧客日常委託買賣股票，主要分別是哪兩種業務？",
+    "options": [
+      "承銷與經紀",
+      "自營與鈔票辨識",
+      "經紀與銀行存款",
+      "只有經紀一種"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "IPO承銷與受託證券交易是不同業務，講義分別列於承銷、經紀。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-daily-weekly",
+    "family": "more29-daily-weekly",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "26",
+    "topic": "securities-services",
+    "q": "台股e指存2.0中的日日存、週週存，較接近哪種設定概念？",
+    "options": [
+      "依約定日程進行定期存股",
+      "每次由行員保證最低價買進",
+      "只適用銀行活存利息",
+      "不需任何證券約定即可成交"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義簡單存依日／週等日程設定頻率；與指標條件型的技術存不同。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-technical-three",
+    "family": "more29-technical-three",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "26",
+    "topic": "securities-services",
+    "q": "【複選】講義台股e指存2.0的技術存方式包括哪些？",
+    "options": [
+      "KD存",
+      "RSI存",
+      "均線存",
+      "身分證水印存"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義畫面明列KD存、RSI存、均線存；另有日日存、週週存等簡單存。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-kd-v-week",
+    "family": "more29-kd-v-week",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "27",
+    "topic": "securities-services",
+    "q": "顧客希望依KD條件判斷存股時點，與固定每週存股相比，主要差異為何？",
+    "options": [
+      "KD存屬指標條件方式；週週存屬固定日程方式",
+      "兩者都只能用銀行定存辦理",
+      "KD存保證每次都買最低價",
+      "週週存完全沒有約定頻率"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義分技術存與簡單存；技術存依條件觸發，簡單存依固定掛單頻率。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-rsi-match",
+    "family": "more29-rsi-match",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "26",
+    "topic": "securities-services",
+    "q": "依講義，RSI存、均線存與KD存共同屬於哪一組？",
+    "options": [
+      "台股e指存的技術存方式",
+      "三種IPO承銷方式",
+      "三種印鑑比對方式",
+      "三種銀行定存種類"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "這三種以技術指標條件為基礎，與日日存、週週存的固定日程作區分。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-backtest-not-guarantee",
+    "family": "more29-backtest-not-guarantee",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "26",
+    "topic": "securities-services",
+    "q": "台股e指存畫面顯示近半年、近一年回測資訊，應如何理解？",
+    "options": [
+      "歷史模擬資訊可供參考，但不保證未來成果",
+      "表示未來一年必定取得相同報酬",
+      "代表完全無須風險評估",
+      "只要回測正報酬便等於存款保本"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義介紹回測與約定功能；回測是依歷史條件計算，不能當未來報酬承諾。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-screens-tools",
+    "family": "more29-screens-tools",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "27",
+    "topic": "securities-services",
+    "q": "講義把「e指回測＋約定」放在一起，主要讓顧客做什麼？",
+    "options": [
+      "先了解歷史策略資訊，再依需求辦理存股約定",
+      "不用開任何交易帳戶就能自動保證成交",
+      "以回測取代所有交易風險",
+      "查詢鈔票水印真假"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "回測和約定是不同環節：前者提供歷史模擬參考，後者建立服務設定。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-filters",
+    "family": "more29-filters",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "26",
+    "topic": "securities-services",
+    "q": "【複選】講義台股e指存2.0增加哪些標的篩選方向？",
+    "options": [
+      "ETF",
+      "殖利率",
+      "ESG",
+      "身分證發證日期"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義上方明列ETF、殖利率、ESG等篩選方式。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-many-backtests",
+    "family": "more29-many-backtests",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "26",
+    "topic": "securities-services",
+    "q": "顧客想比較不只一檔標的的歷史策略資訊，講義畫面提供何種功能？",
+    "options": [
+      "同時多檔回測",
+      "直接保證多檔都獲利",
+      "自動取代所有顧客同意",
+      "將股票轉成保本定存"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義右側標示同時多檔回測；回測不等於保證投資績效。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-stock-v-us",
+    "family": "more29-stock-v-us",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "12",
+    "topic": "securities-services",
+    "q": "台股e指存與講義美股e指聰明存的主要區分為何？",
+    "options": [
+      "前者對應台股存股；後者對應美股定期定額",
+      "兩者都是身分證查詢",
+      "前者是證券自營、後者是鈔票交換",
+      "兩者都只能辦理新臺幣定存"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "本題依服務名稱與講義定位區分市場；美股服務須依複委託等約定辦理。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-us-account",
+    "family": "more29-us-account",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "12",
+    "topic": "securities-services",
+    "q": "顧客想依講義辦理美股定期定額，首先應具備哪種證券交易帳戶約定？",
+    "options": [
+      "複委託帳戶",
+      "只有信用卡即可",
+      "只有身分證領補換查詢即可",
+      "只有外幣現鈔即可"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義STEP1為開複委託帳戶，既有證券顧客也須依流程加開或確認複委託。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-apps-list",
+    "family": "more29-apps-list",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "28",
+    "topic": "securities-apps",
+    "q": "【複選】依講義及本次補充，玉山證券相關APP／行動服務包括哪些？",
+    "options": [
+      "玉山A+行動下單",
+      "E-Trader",
+      "玉山證券APP",
+      "內政部戶役政網站"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "講義介紹A+、E-Trader，另提e櫃台升級玉山證券APP；戶役政是證件查詢來源。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-aplus-screen",
+    "family": "more29-aplus-screen",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "29",
+    "topic": "securities-apps",
+    "q": "講義A+行動下單介紹的「個人資產總覽、常用功能、我的追蹤」，主要服務什麼情境？",
+    "options": [
+      "顧客查看資產、追蹤標的與便捷下單",
+      "檢查身分證蝴蝶螢光",
+      "申報鈔票印製張數",
+      "代替基金公司計算每日淨值"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "A+行動下單著重證券顧客操作體驗，講義畫面包括個人資產與追蹤功能。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-etrader-overview",
+    "family": "more29-etrader-overview",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "28",
+    "topic": "securities-apps",
+    "q": "講義E-Trader畫面的視覺化帳務圖表，主要功能較接近何者？",
+    "options": [
+      "呈現證券帳務及提供快捷操作入口",
+      "判定每筆投資必定獲利",
+      "替政府核發身分證",
+      "自動免除交易驗證"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標示視覺化帳務圖表與快捷功能，屬證券數位服務介面。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-app-v-product",
+    "family": "more29-app-v-product",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "28",
+    "topic": "securities-apps",
+    "q": "把「E-Trader是一檔ETF」當成答案，錯在何處？",
+    "options": [
+      "E-Trader是數位交易服務，ETF是投資商品",
+      "E-Trader是新臺幣面額",
+      "ETF只能是銀行活存",
+      "兩者完全相同"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "應分清APP／服務與投資商品，不能把下單入口當成基金代碼。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-app-brand",
+    "family": "more29-app-brand",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "28",
+    "topic": "securities-apps",
+    "q": "講義提到「e櫃台升級玉山證券APP」，最適合如何記憶？",
+    "options": [
+      "玉山證券APP屬證券數位服務體系，別與銀行APP混為同一項",
+      "玉山證券APP就是一種自營商交易策略",
+      "玉山證券APP是央行鈔票驗證器",
+      "所有帶玉山二字的APP都是同一功能"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "本題依講義升級通知標題及補充辨識服務名稱，不推論未列明的功能。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-service-match",
+    "family": "more29-service-match",
+    "cat": "證券業務",
+    "src": "證券.pdf",
+    "page": "26",
+    "topic": "securities-services",
+    "q": "【複選】哪些服務配對符合講義？",
+    "options": [
+      "日日存／週週存—簡單存的日程方式",
+      "KD存／RSI存—技術存",
+      "E-Trader—證券數位交易服務",
+      "綜合證券商—只辦經紀且不得承銷自營"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三組正確；綜合證券商涵蓋經紀、承銷、自營，並非只有經紀。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-cio-role",
+    "family": "more29-cio-role",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "45",
+    "topic": "fund-outline",
+    "q": "投信組織架構的CIO與CMO，依講義應如何配對？",
+    "options": [
+      "CIO投資長、CMO行銷長",
+      "CIO行銷長、CMO投資長",
+      "CIO營運長、CMO總經理",
+      "CIO董事長、CMO營運長"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "組織架構中的專業分工：CIO投資、CMO行銷，CEO總經理、COO營運。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-direct-sales",
+    "family": "more29-direct-sales",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "45",
+    "topic": "fund-outline",
+    "q": "顧客直接透過投信公司的服務管道辦理基金業務，最接近哪類銷售管道？",
+    "options": [
+      "直銷",
+      "只屬券商自營",
+      "只屬IPO承銷",
+      "戶政查詢"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "投信大綱將直銷與其他通路分開；直接服務顧客屬直銷。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-distribution-multi",
+    "family": "more29-distribution-multi",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "45",
+    "topic": "fund-outline",
+    "q": "【複選】依投信大綱，哪些是銷售管道？",
+    "options": [
+      "直銷",
+      "通路",
+      "銀行支票存款收受櫃台",
+      "鈔票印製廠"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "直銷與通路是銷售管道；銀行收受支票存款及鈔票印製不是本題的投信銷售管道。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fund-types-more",
+    "family": "more29-fund-types-more",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "45",
+    "topic": "fund-outline",
+    "q": "哪組全部是投信大綱列出的基金類型？",
+    "options": [
+      "股票型、債券型、平衡型、多重資產型",
+      "活期存款、定存、支票、匯票",
+      "房貸、信貸、循環貸、薪轉貸",
+      "戶籍謄本、身分證、護照、印鑑"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "大綱基金類型包含股票型、ETF、組合型、平衡型、多重資產型、債券型、貨幣市場型／固定收益型。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-manager-advanced",
+    "family": "more29-manager-advanced",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "47",
+    "topic": "fund-outline",
+    "q": "依講義資格地圖，高業人員進階擔任基金經理人的其中一項路徑，另需何種經驗？",
+    "options": [
+      "投資分析／決策3年",
+      "收銀操作3個月",
+      "任何行政工作半年",
+      "只要持有一檔股票即可"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "本題依講義「高業＋投資分析／決策3年」路徑作答，並非把任何一般業務年資都視為相同。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-manager-qualified",
+    "family": "more29-manager-qualified",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "47",
+    "topic": "fund-outline",
+    "q": "講義基金經理人進階條件中，「投信投顧業務員」搭配投資分析／決策經驗，列示幾年？",
+    "options": [
+      "2年",
+      "0年",
+      "半年",
+      "10年"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義資格地圖列投信投顧業務員＋投資分析／決策2年；本題依課堂版本。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fund-staff-multi",
+    "family": "more29-fund-staff-multi",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "47",
+    "topic": "fund-outline",
+    "q": "【複選】講義哪些投信職務需重視投信投顧專業資格？",
+    "options": [
+      "投資研究分析",
+      "基金經營管理",
+      "風險管理與法令遵循",
+      "只要不是基金經理人，其他職務都完全不需資格"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "資格地圖不只列基金經理人，也列研究、管理、交易、稽核、法遵及風控等職務。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-mandate-needs",
+    "family": "more29-mandate-needs",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "42",
+    "topic": "fund-management",
+    "q": "全權委託強調「以客為尊、量身訂做」，應先考量什麼？",
+    "options": [
+      "客戶投資需求與風險承受度",
+      "只挑近期漲最多的商品",
+      "只看顧客是否認識經理人",
+      "只以銷售人員獎金最高為準"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義依不同需求與風險承受度提供客製化規劃，不是所有顧客使用同一策略。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-mandate-absolute-relative",
+    "family": "more29-mandate-absolute-relative",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "42",
+    "topic": "fund-management",
+    "q": "講義全權委託的相對報酬投資型態，主要以什麼作為績效衡量基準？",
+    "options": [
+      "股價指數等比較基準",
+      "每筆存款固定利息",
+      "所有商品都必須相同的保證收益",
+      "顧客的身分證號"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "相對報酬是相對比較基準衡量；與追求絕對目標報酬的型態不同。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-mandate-not-guarantee",
+    "family": "more29-mandate-not-guarantee",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "42",
+    "topic": "fund-management",
+    "q": "講義提到「追求絕對目標報酬」，是否等於保證獲利？",
+    "options": [
+      "不是，目標報酬不等於保證報酬",
+      "是，所有全權委託都保本",
+      "是，出現絕對二字就不能有損失",
+      "是，投信一定補足全部虧損"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "投資目標與保證是不同概念；講義也註明績效不保證最低收益。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-topdown",
+    "family": "more29-topdown",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "54",
+    "topic": "fund-management",
+    "q": "總體經濟、利率走勢、政策法規與地緣政治，依講義屬哪個投資分析層次？",
+    "options": [
+      "Top-down由上而下分析",
+      "只屬印鑑比對",
+      "只屬單筆股票撮合",
+      "只屬客戶帳單寄送"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Top-down用來界定趨勢及市場前景，再搭配其他分析形成投資組合。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-bottomup",
+    "family": "more29-bottomup",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "54",
+    "topic": "fund-management",
+    "q": "公司獲利、信用研究、估值水準及產業動態，較接近講義哪個分析層次？",
+    "options": [
+      "Bottom-up由下而上分析",
+      "身分證迎光透視",
+      "只看宏觀國際政治",
+      "只看交易APP顏色"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Bottom-up評估產業及公司等標的條件，搜尋合理評價標的。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-portfolio-limits",
+    "family": "more29-portfolio-limits",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "54",
+    "topic": "fund-management",
+    "q": "形成投資組合時，講義Portfolio層次要整合哪些項目？",
+    "options": [
+      "投資方針、目標及限制",
+      "顧客衣著與髮型",
+      "鈔票水印與安全線",
+      "基金名稱字數與字體"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Portfolio依投資方針、目標、限制整合構建投資組合，並搭配風險管理。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-risk-control-multi",
+    "family": "more29-risk-control-multi",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "53",
+    "topic": "fund-management",
+    "q": "【複選】講義內部控管機制強調哪些事項？",
+    "options": [
+      "確保業務合法化",
+      "避免利益衝突",
+      "提供合理公司治理",
+      "報酬好就可忽略法遵"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "內控、稽核、法遵與風控共同把關客戶資產，不能因投資績效好而忽略。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-values-four",
+    "family": "more29-values-four",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "57",
+    "topic": "fund-management",
+    "q": "玉山投信永續經營企業理念的四項精神，依講義為何？",
+    "options": [
+      "誠信、專業、創新、服務",
+      "保本、保息、零風險、必中",
+      "經紀、承銷、自營、存款",
+      "水印、紫光、筆力、筆速"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義四個山形圖分別標示誠信、專業、創新、服務。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-9827-rank",
+    "family": "more29-9827-rank",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "3",
+    "topic": "etf-9827",
+    "q": "依009827三本柱示意配置，比例由高到低的順序為何？",
+    "options": [
+      "AI科技→AI基建→太空衛星",
+      "太空衛星→AI科技→AI基建",
+      "AI基建→太空衛星→AI科技",
+      "三者配置比例相同"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義示意為50%、30%、20%，本題只考排序，不視為即時持股。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-9827-chain-case",
+    "family": "more29-9827-chain-case",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "3",
+    "topic": "etf-9827",
+    "q": "009827為何不只看AI晶片，還強調AI的「筋膜神經」？",
+    "options": [
+      "策略也涵蓋資料中心、電力等AI基礎建設",
+      "因為它完全不投資科技產業",
+      "因為AI科技占比是零",
+      "因為衛星與算力策略毫無關係"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以AI科技、AI基建、太空衛星涵蓋更完整算力生態，而非只有晶片單一領域。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-9827-135-match",
+    "family": "more29-9827-135-match",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "7",
+    "topic": "etf-9827",
+    "q": "【複選】009827的「算力135」配對，哪些正確？",
+    "options": [
+      "1—國內第1檔相關主題產品定位",
+      "3—算力三本柱",
+      "5—頂尖50強企業",
+      "5—保證五年獲利五倍"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "依講義135為產品定位、三本柱及50強；並無保證報酬。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-etf-active-v-all",
+    "family": "more29-etf-active-v-all",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "24",
+    "topic": "fund-etf-compare",
+    "q": "講義同時介紹一般ETF與主動式ETF，較正確的比較是什麼？",
+    "options": [
+      "ETF可有被動與主動策略，不能把全部ETF視為只追蹤指數",
+      "所有ETF都由銀行保證本金",
+      "主動式ETF只能在基金公司贖回而不能掛牌",
+      "只要稱ETF就不能由經理人選股"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "課堂比較表的「多為被動」不是全稱；00413A是講義中的主動式ETF例子。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-rule72-variation",
+    "family": "more29-rule72-variation",
+    "cat": "投信業務",
+    "src": "投信.pdf",
+    "page": "33",
+    "topic": "fund-basics",
+    "q": "用72法則近似估算，假設年報酬率8%，資產翻倍約需要多久？",
+    "options": [
+      "9年",
+      "8年",
+      "18年",
+      "72年"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "72÷8＝9年。僅為假設固定報酬率的近似估算，不是投資承諾。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-people",
+    "family": "more29-people",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9667.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-basics",
+    "q": "授信5P中的People，主要是在了解什麼？",
+    "options": [
+      "借款人的背景、經營與往來狀況",
+      "只看貸款用途",
+      "只看銀行資本額",
+      "只看鈔票防偽"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義People借款人欄包含債務戶整體狀況、責任感、經營成效及銀行往來。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-purpose-case",
+    "family": "more29-purpose-case",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9667.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-basics",
+    "q": "顧客借款用途從購置設備改成另一用途，授信5P首先應重新釐清哪項？",
+    "options": [
+      "Purpose資金用途",
+      "只看Protection印章是否圓形",
+      "只看Perspective的字義",
+      "完全不必了解用途"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Purpose要確認用途合法、合理，並了解取得資產、償還負債或週轉等目的。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-protection",
+    "family": "more29-protection",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9667.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-basics",
+    "q": "授信條件中的擔保品、保證人與限制條件，主要對應授信5P哪項？",
+    "options": [
+      "Protection債權保障",
+      "Purpose資金用途",
+      "People借款人",
+      "Payment還款來源"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義Protection包含內部保障與外部保障，內部如財務結構、擔保品、限制條件，外部如保證人。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-perspective",
+    "family": "more29-perspective",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9667.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-basics",
+    "q": "評估貸後風險是否可控、能否建立長期有效往來，較接近5P哪項？",
+    "options": [
+      "Perspective授信展望",
+      "只屬Payment收入證明",
+      "只屬Purpose支出用途",
+      "完全與授信無關"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義Perspective授信展望關注貸後風險可控及後續往來效益。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-5p-multi",
+    "family": "more29-5p-multi",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9667.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-basics",
+    "q": "【複選】授信5P配對哪些正確？",
+    "options": [
+      "People—借款人",
+      "Payment—還款來源",
+      "Protection—債權保障",
+      "Purpose—銀行Logo顏色"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三項正確；Purpose是資金用途，Perspective是授信展望。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-income-v-collateral",
+    "family": "more29-income-v-collateral",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9672.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-basics",
+    "q": "信貸缺少不動產擔保，為何更須了解穩定收入及信用紀錄？",
+    "options": [
+      "評估借款人的還款能力與信用風險",
+      "因為沒有擔保就完全不能授信",
+      "因為只要有工作即保證核准",
+      "因為信用紀錄與還款無關"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義無擔保業務基本規定列穩定薪資收入、收入門檻、信用紀錄等因素。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-mortgage-security",
+    "family": "more29-mortgage-security",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9668.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-products",
+    "q": "房屋貸款與一般無擔保信貸的主要區分之一為何？",
+    "options": [
+      "房貸通常以房屋或相關不動產作擔保",
+      "房貸完全不需查還款能力",
+      "信貸一定以同一房屋設定抵押",
+      "兩者一定使用相同利率與年限"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義房貸定義列房屋或不動產擔保；但擔保不會取代對借款人能力的評估。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-mortgage-not-income",
+    "family": "more29-mortgage-not-income",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9668.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-products",
+    "q": "顧客說「房子價值很高，所以完全不用看收入」，較適當的回應觀念為何？",
+    "options": [
+      "仍須衡量還款來源，擔保價值不是唯一因素",
+      "只要房價高就不需徵信",
+      "只要有房屋就可無限借款",
+      "收入證明只用來決定APP版面"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "授信須同時衡量還款來源與債權保障等5P因素，不能只依擔保品。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-revolver",
+    "family": "more29-revolver",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9673.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-products",
+    "q": "講義循環貸強調「隨借隨還、靈活動用」，最接近何種需求？",
+    "options": [
+      "有彈性的資金週轉",
+      "只能一次全額動用且永不歸還",
+      "只限買基金",
+      "取代所有企業IPO"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "循環貸重點為核定額度內靈活動用與還款，本題不把商品額度或核准當成保證。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-eloan-position",
+    "family": "more29-eloan-position",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9673.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-products",
+    "q": "依講義信貸產品圖，e咪貸的產品定位較接近什麼？",
+    "options": [
+      "小額、較短期的資金需求",
+      "大型企業跨國百億聯貸",
+      "只限30年房貸",
+      "只能購買外國股票"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義e咪貸為較小額與較短年限產品，與一般信貸及循環貸的定位不同。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-general-loan",
+    "family": "more29-general-loan",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9673.jpeg",
+    "page": "照片標記重點",
+    "topic": "loan-products",
+    "q": "一般信貸、e咪貸與循環貸的比較，應優先掌握什麼？",
+    "options": [
+      "客群、額度、期限及動用方式的差異",
+      "全部視為同一商品",
+      "只記廣告字體大小",
+      "只要APP申請就不用還款"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義產品圖以額度高低與客群區分商品，再列期限及動用特色。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-sb-owner",
+    "family": "more29-sb-owner",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9671.jpeg",
+    "page": "照片標記重點",
+    "topic": "consumer-sb",
+    "q": "小型事業經營時，為何同時掌握企業主與事業往來有價值？",
+    "options": [
+      "小型事業的經營與企業主關係密切，可整合金融需求",
+      "企業主資料完全不能幫助理解事業",
+      "只要公司小就不必看財務",
+      "所有小型事業都只需要個人信用卡"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以分行落實企業主經營、整合金融往來及內外資源，協助小型事業發展。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-sb-regional",
+    "family": "more29-sb-regional",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9671.jpeg",
+    "page": "照片標記重點",
+    "topic": "consumer-sb",
+    "q": "以店週為核心的SB經營，講義強調如何扶植在地產業？",
+    "options": [
+      "整合分行及內外部資源，配合地方特色需求",
+      "只服務同一種全國大型企業",
+      "排除所有在地業者",
+      "只提供股票短線當沖"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義以分行為中心落實企業主經營，結合地方創生及特色產業資源。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-digital-services",
+    "family": "more29-digital-services",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9675.jpeg",
+    "page": "照片標記重點",
+    "topic": "consumer-digital",
+    "q": "【複選】消金線上申請專區在講義提供哪些個人服務？",
+    "options": [
+      "房貸額度利率評估與貸款試算",
+      "線上簽訂貸款契約",
+      "查詢、補件與調閱平台",
+      "申請即自動免除所有授信審核"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三項列在講義；數位化便利不代表免審核或保證核准。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-api-homebuying",
+    "family": "more29-api-homebuying",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9675.jpeg",
+    "page": "照片標記重點",
+    "topic": "consumer-digital",
+    "q": "異業合作串接購屋買賣合約，主要希望改善什麼？",
+    "options": [
+      "房貸申請資訊銜接與顧客購屋體驗",
+      "讓所有顧客不必再提供任何必要文件",
+      "讓授信直接變成證券自營",
+      "取消顧客同意與身分核對"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義合作新價值包含API串接買賣合約、線上傳遞文件、分群經營，提高體驗與作業效率。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-outbound-priority",
+    "family": "more29-outbound-priority",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9674.jpeg",
+    "page": "照片標記重點",
+    "topic": "smart-outbound",
+    "q": "將有意願名單轉交OB團隊，較符合哪個經營邏輯？",
+    "options": [
+      "讓人工團隊集中處理較有需求的顧客",
+      "只依名單總量忽略顧客意願",
+      "把有回應名單永久封存",
+      "將所有人直接列為已成交"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "智能外撥先篩選及彙整，OB團隊接續精準行銷，不是把接通當成交。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-smart-closedloop",
+    "family": "more29-smart-closedloop",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9674.jpeg",
+    "page": "照片標記重點",
+    "topic": "smart-outbound",
+    "q": "講義智能外撥的回應結果，為何要再回饋名單分級？",
+    "options": [
+      "有助名單再精進與後續行銷分工",
+      "因為分級後永遠不用更新",
+      "因為回應越多就一定授信越好",
+      "因為只要回應就可免徵信"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "名單分級、接觸、回應及彙整形成循環，幫助提升接觸效率。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-esg-pair-more",
+    "family": "more29-esg-pair-more",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9675.jpeg",
+    "page": "照片標記重點",
+    "topic": "consumer-esg",
+    "q": "【複選】消金ESG四方向配對哪些正確？",
+    "options": [
+      "綠建築—減少不動產碳排與健康生活",
+      "危老都更—改善老舊危險建築及居住安全",
+      "地方創生—協助在地產業",
+      "Farm to Table—只投資高槓桿衍生商品"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三組符合圖示；Farm to Table是綠色食材價值鏈。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-farm-upstream",
+    "family": "more29-farm-upstream",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9676.jpeg",
+    "page": "照片標記重點",
+    "topic": "consumer-esg",
+    "q": "Farm to Table上游生產端，講義的融資方案主要支持哪種轉型？",
+    "options": [
+      "協助農產品經營及加工業者透過永續農業驗證、轉型方案發展",
+      "只補助股票當沖",
+      "只提供一般餐廳裝潢",
+      "排除所有與農業有關的需求"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義上游結合政府輔導資源，支持農產品經營與加工業者的永續轉型。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-farm-downstream",
+    "family": "more29-farm-downstream",
+    "cat": "消費金融與信貸",
+    "src": "消金照片 IMG_9676.jpeg",
+    "page": "照片標記重點",
+    "topic": "consumer-esg",
+    "q": "Farm to Table下游消費端，永續餐飲金融方案鼓勵什麼？",
+    "options": [
+      "餐廳採用永續食材，結合融資及支付等服務",
+      "只擴大一次性餐具使用",
+      "以降低食材來源透明度為目標",
+      "只追求無關農業的短線投機"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義下游提供融資及支付收單方案，鼓勵環保、綠色及溯源餐廳採用永續食材。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-ten",
+    "family": "more29-fair-ten",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9680.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-principles",
+    "q": "【複選】講義公平待客原則有哪些？",
+    "options": [
+      "注意與忠實義務",
+      "商品或服務適合度",
+      "酬金與業績衡平",
+      "業績優先即可免除告知"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三項是原則；公平待客不以業績為理由免除告知與揭露。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-contract-case",
+    "family": "more29-fair-contract-case",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9680.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "銀行把重要契約內容用難以注意的方式呈現，較直接涉及哪項原則？",
+    "options": [
+      "訂約公平誠信",
+      "只屬股價波動",
+      "只屬鈔票觸摸",
+      "只屬基金經理人資格"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義要求重要條款顯著標示與公平合理約款，不能以不透明呈現影響消費者理解。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-blank-doc",
+    "family": "more29-fair-blank-doc",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9681.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "行員為了方便下次交易，私下保管顧客已簽章空白文件，應如何看待？",
+    "options": [
+      "違反注意與忠實義務的風險，不應為便利而私留",
+      "只要熟客就一定可以",
+      "只要沒有當場損失就永遠合規",
+      "只屬APP功能選擇"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義將私留蓋有顧客印章文件列為負面案例，須重視授權、文件管理與顧客權益。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-ad-case",
+    "family": "more29-fair-ad-case",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9681.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "將有投資風險的商品說成「和定存一樣保本」，主要違反哪種精神？",
+    "options": [
+      "廣告招攬真實",
+      "只屬轉帳作業效率",
+      "只屬字體美觀",
+      "只屬印章顏色選擇"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義不得以不當話術行銷，尤其不得誤導顧客把有風險商品當保本存款。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-risk-answer",
+    "family": "more29-fair-risk-answer",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9682.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "為提高商品可銷售範圍，行員引導顧客把風險問卷填成高風險，哪項原則最直接受影響？",
+    "options": [
+      "商品或服務適合度",
+      "只屬誠信外的美術問題",
+      "只屬紙張格式",
+      "只屬印鑑尺寸"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "適合度須真實了解顧客風險屬性，不能為銷售而操弄評估結果。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-kyc-kyp",
+    "family": "more29-fair-kyc-kyp",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9682.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-principles",
+    "q": "KYC與KYP在適合度評估中，分別要了解什麼？",
+    "options": [
+      "顧客與產品",
+      "產品與顧客",
+      "只有顧客的手機與衣服",
+      "只有兩種股票代碼"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "補充筆記KYC認識顧客、KYP了解商品，須結合才能評估適合度。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-final-result",
+    "family": "more29-fair-final-result",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9682.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "完成顧客風險屬性評估後，講義要求應向顧客確認什麼？",
+    "options": [
+      "最終評估結果",
+      "只確認業務員獎金",
+      "只確認APP顏色",
+      "只確認當天股價一定上漲"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義標題明列「應向顧客確認最終評估結果」，避免對風險屬性認知不一致。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-statement",
+    "family": "more29-fair-statement",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9682.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "對帳單揭露資訊完整、並確實通知顧客，主要落實哪項原則？",
+    "options": [
+      "告知與揭露",
+      "只屬授信5P",
+      "只屬基金報酬計算",
+      "只屬新臺幣防偽"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義強調對帳單揭露完整及確實通知，不是只製作文件而不讓顧客知道。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-ad-v-disclosure",
+    "family": "more29-fair-ad-v-disclosure",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9681.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-principles",
+    "q": "廣告招攬真實與告知揭露，哪個理解較正確？",
+    "options": [
+      "前者重廣告話術真實，後者重交易內容及風險充分說明",
+      "兩者都表示只說最高報酬即可",
+      "只要有廣告就永遠不用揭露風險",
+      "只要揭露風險就可以誇大廣告"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "兩原則有不同重點且可同時適用，不能以落實其中一項為由忽略另一項。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-bonus-case",
+    "family": "more29-fair-bonus-case",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9683.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "主管決定獎金只看銷售金額，完全不看客戶權益與風險，主要應改善什麼？",
+    "options": [
+      "酬金與業績衡平",
+      "只換一種報表配色",
+      "只增加廣告字數",
+      "只更換客服電話"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義不能以業績達標為唯一獎酬基礎，須兼顧客戶權益、風險及非財務因素。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-complaint-followup",
+    "family": "more29-fair-complaint-followup",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9683.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "顧客申訴已回覆，但後續原因改善與管理都未處理，是否足夠？",
+    "options": [
+      "不夠，還須落實後續管理與陳報",
+      "足夠，只要回過一次電話",
+      "足夠，結案越快就必然公平",
+      "足夠，顧客不再來就沒有風險"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義要求妥善有效處理申訴並落實後續管理及陳報，不能只求形式結案。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-profession-case",
+    "family": "more29-fair-profession-case",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9684.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "安排具必要證照及資格的人員辦理相關業務，並定期訓練，屬於哪項原則？",
+    "options": [
+      "業務人員專業性",
+      "只屬基金績效排名",
+      "只屬鈔票印刷",
+      "只屬房屋擔保"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "專業性不只是有銷售經驗，還須符合資格與持續教育要求。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-friendly-allstages",
+    "family": "more29-fair-friendly-allstages",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9684.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "產品開發時尚未上線，是否已需要考量高齡、身心障礙等族群？",
+    "options": [
+      "需要，友善服務應納入設計到檢討各階段",
+      "不需要，等有人申訴再說",
+      "不需要，只有臨櫃才須友善",
+      "只有銷售最後一天才需要"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "友善服務不只上線後補救，講義要求在發想、開發、測試等全階段考量。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-access-pair",
+    "family": "more29-fair-access-pair",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9684.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-principles",
+    "q": "【複選】哪些情境符合講義友善服務？",
+    "options": [
+      "提供遠距視訊手語翻譯",
+      "設置合適輪椅高度ATM",
+      "人員引導與無障礙櫃台",
+      "一律拒絕需要協助的顧客"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三項是講義身心障礙友善措施；拒絕協助不符合友善服務。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-reporting",
+    "family": "more29-fair-reporting",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9685.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-governance",
+    "q": "員工發現可能損害顧客權益的不當行為，誠信經營機制希望如何處理？",
+    "options": [
+      "透過適當溝通或檢舉管道反映",
+      "為同事情誼一律隱瞞",
+      "等顧客先承擔損失才處理",
+      "刪除紀錄避免被發現"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義提供員工溝通檢舉管道，鼓勵主動發現並舉報違法或不當行為。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-topdown",
+    "family": "more29-fair-topdown",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9679.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-governance",
+    "q": "講義「由上而下推動公平待客」最接近哪個要求？",
+    "options": [
+      "治理階層統籌，並讓政策、執行、監督與查核連動",
+      "只由第一線自行決定全部規則",
+      "只在廣告上印出四個字",
+      "只要業績好便免除監督"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義透過委員會與三道防線，形成治理、執行、追蹤與查核的機制。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-line-second",
+    "family": "more29-fair-line-second",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9679.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-governance",
+    "q": "公平待客三道防線中，督導與追蹤屬哪一道？",
+    "options": [
+      "第二道防線",
+      "第一道防線",
+      "第三道防線",
+      "不在三道防線之內"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "講義第一道執行落實，第二道督導追蹤，第三道查核建議。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-line-third",
+    "family": "more29-fair-line-third",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9679.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-governance",
+    "q": "查核公平待客作業並提出改善建議，講義歸於哪一道防線？",
+    "options": [
+      "第三道防線",
+      "只有銷售第一線",
+      "只有顧客本人",
+      "完全無須查核"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "第三道為查核與建議，不是代替第一線執行每筆業務。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-five-levels",
+    "family": "more29-fair-five-levels",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9679.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-governance",
+    "q": "【複選】講義公平待客五項執行層級包含哪些？",
+    "options": [
+      "建立重視金融消費者保護的企業文化",
+      "制定政策與策略並執行",
+      "納入內部控制及稽核制度",
+      "只要有一句口號即可完全取代制度"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "五層級從企業文化、政策、策略、執行到內控稽核，須實際落實。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
+  },
+  {
+    "id": "more29-fair-multi-scenarios",
+    "family": "more29-fair-multi-scenarios",
+    "cat": "公平待客",
+    "src": "公平待客照片 IMG_9680.jpeg",
+    "page": "照片標記重點",
+    "topic": "fair-scenarios",
+    "q": "【複選】哪些做法較符合公平待客的整體要求？",
+    "options": [
+      "重要約款顯著標示",
+      "了解顧客及商品風險後評估適合度",
+      "清楚告知交易風險並處理顧客申訴",
+      "以銷售獎金高低作為唯一推薦依據"
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "前三項分別落實公平誠信、適合度、告知揭露及申訴保障；不能只以獎金推薦。",
+    "lang": "zh",
+    "focus": true,
+    "edition": "20261029-more120",
+    "highlight": "本次指定加強"
   }
 ]
