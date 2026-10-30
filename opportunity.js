@@ -1,8 +1,9 @@
+import {snapshotContext} from './handoff-context.js';
 // Shared local-only demo handoff. No network request or bank system integration.
 export const LEADS_KEY = 'esun_sme_demo_leads_v2';
 export const ROUTES_KEY = 'esun_sme_demo_routes_v2';
 export const SETTINGS_KEY = 'esun_sme_demo_settings_v2';
-export const CONSENT_VERSION = 'demo-handoff-v2-20261019';
+export const CONSENT_VERSION = 'demo-handoff-20261030';
 export const SERVICES = Object.freeze({loan:'融資規劃',deposit:'活存與資金管理',collateral:'廠房／店面抵押',payment:'收付通與收款整合',ebank:'企業網路銀行'});
 export const MODELS = Object.freeze({working:'營運週轉金',equipment:'廠房與設備',expansion:'展店與擴張',overseas:'海外投資'});
 export const DEFAULT_SETTINGS = Object.freeze({depositSpread:1,loanSpread:2,paymentRate:0.3});
@@ -125,37 +126,39 @@ export function planSnapshot(plan){
   const inputs={};for(const [k,v]of Object.entries(plan.inputs||{})){if(allowed.has(k)&&typeof v==='number'&&Number.isFinite(v))inputs[k]=v;}
   return {model:plan.model,mode:['twd','usd','dual'].includes(plan.mode)?plan.mode:'twd',inputs,out:{label:String(plan.out.label||'試算需求'),value:Number(plan.out.value),unit:String(plan.out.unit||'萬元')},at:String(plan.at||new Date().toLocaleString('zh-TW'))};
 }
-export function createLead({plan,city,district,services=[],label,source='網站試算（使用者同意）',consent=true}){
+export function createLead({plan,city,district,services=[],label,source='網站試算（使用者同意）',consent=true,context=null}){
   if(!AREAS[city]||!AREAS[city].split(' ').includes(district))throw new Error('請選擇縣市與行政區。');
-  const snapshot=planSnapshot(plan);
+  const snapshot=planSnapshot(plan),handoff=snapshotContext(context);
   const selected=[...new Set(services)].filter(k=>Object.hasOwn(SERVICES,k));if(!selected.length&&snapshot.model!=='overseas')throw new Error('請勾選至少一項想討論的服務。');
   if(!consent)throw new Error('請先勾選同意本次示範轉交。');
   const now=new Date().toISOString(),id=globalThis.crypto?.randomUUID?.()||('demo-'+Date.now()+'-'+Math.random().toString(16).slice(2));
-  return {id,label:label||'網站規劃 '+new Date().toLocaleTimeString('zh-TW',{hour12:false}),city,district,services:selected,source,plan:snapshot,at:now,status:'未分派',assignment:null,finance:emptyFinance(),followups:{},consent:{version:CONSENT_VERSION,at:now,scope:'僅於同一瀏覽器儲存本次試算、地區及服務意願，示範轉交；未實際通知 RM。'}};
+  return {id,label:label||'網站規劃 '+new Date().toLocaleTimeString('zh-TW',{hour12:false}),city,district,services:selected,source,plan:snapshot,...(handoff?{context:handoff}:{}),at:now,status:'未分派',assignment:null,finance:emptyFinance(),followups:{},consent:{version:CONSENT_VERSION,at:now,scope:'僅於同一瀏覽器儲存本次試算、用款月份、還款初步檢查、地區與服務意願，示範分派；未實際通知 RM。'}};
 }
 export function fillCities(select){select.innerHTML='<option value="">請選擇縣市</option>'+Object.keys(AREAS).map(c=>`<option>${esc(c)}</option>`).join('');}
 export function fillDistricts(select,city){select.innerHTML='<option value="">請選擇行政區</option>'+[...new Set((AREAS[city]||'').split(' ').filter(Boolean))].map(d=>`<option>${esc(d)}</option>`).join('');}
 export function serviceChecks(prefix='handoff'){return Object.entries(SERVICES).map(([key,label])=>`<label class="op-check"><input type="checkbox" name="${prefix}Service" value="${key}"><span>${label}</span></label>`).join('');}
 
-export function mountOpportunity({getPlan,target='#resultContent'}={}){
+export function mountOpportunity({getPlan,getContext=()=>null,target='#resultContent',focused=false}={}){
   const host=typeof target==='string'?document.querySelector(target):target;if(!host||typeof getPlan!=='function')return null;
   if(host.querySelector('.opportunity-handoff'))return host.querySelector('.opportunity-handoff');
   if(!document.getElementById('opportunityStyle')){
     const style=document.createElement('style');style.id='opportunityStyle';style.textContent=`.opportunity-handoff{font-size:16px;line-height:1.7;margin-top:26px;padding:24px 0 0;border-top:1px solid #d9e5e8;color:#173548}.opportunity-handoff summary{font-size:20px;font-weight:800;cursor:pointer;color:#006e69}.opportunity-handoff p,.opportunity-handoff label,.opportunity-handoff select,.opportunity-handoff button,.opportunity-handoff a,.opportunity-handoff small{font-size:16px}.opportunity-handoff .op-note{padding:14px;background:#f0f7f7;border-radius:10px}.opportunity-handoff .op-areas{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}.opportunity-handoff .op-areas label{display:grid;gap:6px;font-weight:700}.opportunity-handoff select{border:1px solid #aabec5;border-radius:8px;padding:10px;width:100%;background:white;color:#173548}.opportunity-handoff fieldset{border:0;padding:0;margin:18px 0}.opportunity-handoff legend{font-weight:800;margin-bottom:8px}.opportunity-handoff .op-check{display:flex;align-items:flex-start;gap:10px;margin:10px 0;font-weight:500}.opportunity-handoff .op-check input{margin-top:7px;width:18px;height:18px;flex:none;accent-color:#007d78}.opportunity-handoff .op-consent{background:#f6f8fa;border-radius:10px;padding:14px}.opportunity-handoff .op-submit{padding:12px 20px;border:0;border-radius:8px;background:#007d78;color:#fff;font-weight:800;cursor:pointer}.opportunity-handoff .op-submit:disabled{opacity:.6;cursor:default}.opportunity-handoff .op-feedback{margin:12px 0;color:#006e69;font-weight:700}.opportunity-handoff a{color:#006d77;text-decoration:underline}.opportunity-handoff .op-error{color:#b52c3c}.opportunity-handoff :focus-visible{outline:3px solid #d4a84b;outline-offset:3px}@media(max-width:480px){.opportunity-handoff .op-areas{grid-template-columns:1fr}}`;
     style.textContent+='.opportunity-handoff .op-areas>div{display:grid;gap:6px}';document.head.append(style);
   }
-  const box=document.createElement('details');box.className='opportunity-handoff';box.innerHTML=`<summary>與 RM 討論這份規劃</summary><p>選擇您的營業地區與有興趣的服務，看看規劃如何接續到服務團隊。</p><p class="op-note"><strong>本機示範：</strong>只將本次試算、行政區與服務意願儲存在這個瀏覽器，<strong>不會實際通知 RM</strong>。這裡不填姓名、電話或統一編號；正式諮詢請使用下方玉山官方入口。</p><form class="op-form"><div class="op-areas"><div><label for="opHandoffCity">營業縣市</label><select id="opHandoffCity" name="city" required></select></div><div><label for="opHandoffDistrict">營業行政區</label><select id="opHandoffDistrict" name="district" required><option value="">請先選擇縣市</option></select></div></div><fieldset><legend>希望討論哪些服務？可複選</legend>${serviceChecks()}</fieldset><label class="op-check op-consent"><input type="checkbox" name="consent" required><span>我同意將<strong>本次試算、選擇的地區與服務意願</strong>，儲存至本機的服務團隊示範頁供檢視；我知道這不會實際傳送給銀行或通知 RM。</span></label><button type="submit" class="op-submit">同意並建立示範服務需求 →</button><p class="op-feedback" role="status" aria-live="polite"></p></form><p><a href="https://www.esunbank.com/zh-tw/about/services/customer/message-board" target="_blank" rel="noopener noreferrer">專人聯繫 ↗</a></p>`;
+  const box=document.createElement('details');box.className='opportunity-handoff';box.innerHTML=`<summary>與 RM 討論這份規劃</summary><p>選擇您的營業地區與有興趣的服務，看看規劃如何接續到服務團隊。</p><p class="op-note"><strong>本機示範：</strong>只將本次規劃、用款月份、還款檢查、行政區與服務意願儲存在這個瀏覽器，<strong>不會實際通知 RM</strong>。這裡不填姓名、電話或統一編號；正式諮詢請使用下方玉山官方入口。</p><form class="op-form"><div class="op-areas"><div><label for="opHandoffCity">營業縣市</label><select id="opHandoffCity" name="city" required></select></div><div><label for="opHandoffDistrict">營業行政區</label><select id="opHandoffDistrict" name="district" required><option value="">請先選擇縣市</option></select></div></div><fieldset><legend>希望討論哪些服務？可複選</legend>${serviceChecks()}</fieldset><label class="op-check op-consent"><input type="checkbox" name="consent" required><span>我同意將<strong>本次試算、用款月份、還款檢查、選擇的地區與服務意願</strong>，儲存至本機的服務團隊示範頁供檢視；我知道這不會實際傳送給銀行或通知 RM。</span></label><button type="submit" class="op-submit">同意並建立示範服務需求 →</button><p class="op-feedback" role="status" aria-live="polite"></p></form><p><a href="https://www.esunbank.com/zh-tw/about/services/customer/message-board" target="_blank" rel="noopener noreferrer">專人聯繫 ↗</a></p>`;
+  if(focused){box.open=true;box.querySelector('summary').textContent='確認轉交的地區與服務意願';const fieldset=box.querySelector('fieldset');fieldset.querySelector('legend').textContent='這次希望討論的服務';const others=document.createElement('details');others.innerHTML='<summary>其他服務意願（選填）</summary>';for(const label of [...fieldset.querySelectorAll('label')])if(label.querySelector('input').value!=='loan')others.append(label);fieldset.append(others);}
   host.append(box);const form=box.querySelector('form'),city=form.elements.city,district=form.elements.district,message=box.querySelector('.op-feedback');fillCities(city);city.addEventListener('change',()=>fillDistricts(district,city.value));
   form.addEventListener('submit',e=>{e.preventDefault();message.classList.remove('op-error');try{
     const plan=getPlan();const services=[...form.querySelectorAll('[name="handoffService"]:checked')].map(x=>x.value);
-    const lead=createLead({plan,city:city.value,district:district.value,services,consent:form.elements.consent.checked});
+    const lead=createLead({plan,context:getContext(),city:city.value,district:district.value,services,consent:form.elements.consent.checked});
     const leads=loadDemoLeads();if(leads.length>=200)throw new Error('示範資料已達 200 筆，請先到服務團隊示範頁清除舊資料。');saveDemoLeads([lead,...leads]);
-    message.innerHTML='已建立本機示範需求，尚未通知 RM。<br><a href="internal.html" target="_blank" rel="noopener">開啟服務團隊示範工作台 →</a><br>僅同一瀏覽器、同一網站可檢視，不會跨裝置同步。';form.querySelector('[type="submit"]').disabled=true;
+    message.innerHTML=`<span class="op-success">已建立同一筆示範服務需求。<code>案件編號：${esc(lead.id)}</code><a href="internal.html#lead=${encodeURIComponent(lead.id)}" target="_blank" rel="noopener">在工作台開啟這筆需求 →</a><br>尚未通知 RM。限同一瀏覽器、同一網站檢視。</span>`;form.querySelector('[type="submit"]').disabled=true;
   }catch(error){message.classList.add('op-error');message.textContent=error.message||'無法儲存本機示範，請確認瀏覽器允許本機儲存。';}});
   let planKey='';
-  function refreshPlan(){const plan=getPlan(),key=plan?JSON.stringify({model:plan.model,mode:plan.mode,inputs:plan.inputs,value:plan.out?.value,at:plan.at}):'';if(key===planKey)return;const hadPlan=Boolean(planKey);planKey=key;form.elements.consent.checked=false;form.querySelector('[type="submit"]').disabled=!plan;message.classList.toggle('op-error',!plan);message.textContent=!plan?'試算資料已變更，請先按「更新試算結果」，再確認這次轉交內容。':hadPlan?'規劃已更新，請重新確認服務意願並勾選同意。':'';}
+  function refreshPlan(){const plan=getPlan(),key=plan?JSON.stringify({model:plan.model,mode:plan.mode,inputs:plan.inputs,value:plan.out?.value,at:plan.at,context:getContext()}):'';if(key===planKey)return;const hadPlan=Boolean(planKey);planKey=key;form.elements.consent.checked=false;form.querySelector('[type="submit"]').disabled=!plan;message.classList.toggle('op-error',!plan);message.textContent=!plan?'試算資料已變更，請先按「更新試算結果」，再確認這次轉交內容。':hadPlan?'規劃已更新，請重新確認服務意願並勾選同意。':'';}
   form.addEventListener('change',event=>{if(event.target.name!=='consent'){form.elements.consent.checked=false;message.textContent='轉交內容已變更，請重新勾選同意。';}form.querySelector('[type="submit"]').disabled=!getPlan();});
   const observer=new MutationObserver(refreshPlan);for(const id of ['resultStatus','resultTime']){const element=document.getElementById(id);if(element)observer.observe(element,{childList:true,subtree:true,characterData:true});}
   document.getElementById('modelForm')?.addEventListener('input',refreshPlan);window.addEventListener('esun-plan-updated',refreshPlan);refreshPlan();
   return box;
 }
+
