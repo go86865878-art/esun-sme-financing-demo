@@ -1,23 +1,85 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>財務連動與 PDF 檢查</title><style>body{font:14px/1.7 system-ui;margin:18px;color:#214b60;background:#edf7f4}button{padding:12px;background:#007d78;color:white;border:0;border-radius:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:18px}iframe{display:block;width:390px;max-width:100%;height:730px;border:1px solid #a4c7bc}</style></head><body><h1>財務數字連動與 PDF 下載檢查</h1><button id="runFinanceChecks">執行財務與 PDF 檢查</button><pre id="financeCheckResult">尚未執行</pre><iframe id="financeFrame" title="手機版預覽" src="index.html?v=pdf2"></iframe><script type="module">
-import {DEMO_CASES} from './case-data.js?v=cases1';
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>手動資料轉交檢查</title><style>body{font:14px/1.6 system-ui;background:#edf7f4;color:#214b60;margin:18px}button{background:#007d78;color:#fff;padding:12px;border:0;border-radius:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:16px}iframe{width:390px;max-width:100%;height:680px;border:1px solid #acc}</style></head><body><h1>手動數字、可編輯案例與後台檢查</h1><p>這是獨立驗證頁。按下後使用虛構數字測試，完成時恢復原有本機資料。</p><button id="runFinanceChecks">執行連動檢查</button><pre id="financeCheckResult">尚未執行</pre><div id="frames"></div><script type="module">
+import {calculate,diagnose} from './engine.js';
+import {financingNeed} from './financing-need.js';
+import {LEADS_KEY} from './opportunity.js?v=manual1';
 import {FINANCE_DRAFT_KEY} from './finance-state.js?v=pdf1';
-const frame=document.getElementById('financeFrame'),output=document.getElementById('financeCheckResult'),pause=ms=>new Promise(r=>setTimeout(r,ms));
-async function until(fn){for(let i=0;i<200;i++){if(await fn())return;await pause(100)}throw Error('等待頁面狀態逾時')}
-document.getElementById('runFinanceChecks').onclick=async function(){this.disabled=true;const results=[],log=(name,pass,observed)=>{results.push({name,pass,observed});output.textContent=JSON.stringify({status:'running',results},null,2)};let w,d,before,originalClick,originalURL,originalRevoke,blob=null;
-try{await until(()=>frame.contentDocument?.getElementById('casePicker')?.options.length===4);w=frame.contentWindow;d=w.document;before=w.localStorage.getItem(FINANCE_DRAFT_KEY);await pause(300);
- const apply=id=>{d.getElementById('casePicker').value=id;d.getElementById('applyTeachingCase').click()};
- const set=(id,v)=>{const el=d.getElementById(id);el.value=v;el.dispatchEvent(new w.Event('input',{bubbles:true}))};
- for(const c of DEMO_CASES){apply(c.id);await pause(150);log(c.id+' complete matching health',Object.entries(c.health).every(([k,v])=>Number(d.getElementById('h_'+k).value)===v),Object.fromEntries(Object.keys(c.health).map(k=>[k,d.getElementById('h_'+k).value])));log(c.id+' linked and calculated',!d.getElementById('downloadHealth').disabled&&!d.getElementById('downloadPlan').disabled&&d.getElementById('healthPlanLink').textContent.includes('已連結'),d.getElementById('healthStatus').textContent);}
- apply('01');set('p_sales','15000');d.getElementById('modelForm').requestSubmit();log('annual sales synced',d.getElementById('h_sales').value==='15000'&&!d.getElementById('downloadHealth').disabled,d.getElementById('h_sales').value);log('project amounts not copied as balances',d.getElementById('h_totalDebt').value==='3500'&&d.getElementById('h_cash').value==='500',{debt:d.getElementById('h_totalDebt').value,cash:d.getElementById('h_cash').value});
- set('h_cash','555');d.getElementById('healthForm').requestSubmit();const previousDocument=d;frame.contentWindow.location.reload();await until(()=>frame.contentDocument!==previousDocument&&frame.contentDocument?.readyState==='complete'&&frame.contentDocument?.getElementById('h_cash')?.value==='555');w=frame.contentWindow;d=w.document;
- log('reload retains edits and ready results',d.getElementById('p_sales').value==='15000'&&d.getElementById('h_cash').value==='555'&&!d.getElementById('downloadHealth').disabled,{sales:d.getElementById('p_sales').value,cash:d.getElementById('h_cash').value});
- d.getElementById('businessExample').value='1';d.getElementById('loadBusinessExample').click();log('planning example also updates health',d.getElementById('h_sales').value==='1800'&&d.getElementById('h_profit').value==='54'&&!d.getElementById('downloadHealth').disabled,{sales:d.getElementById('h_sales').value,profit:d.getElementById('h_profit').value});
- d.getElementById('healthScenario').value='stress';d.getElementById('healthExample').click();set('p_sales','2222');d.getElementById('modelForm').requestSubmit();log('independent health scenario preserved',d.getElementById('h_profit').value==='-72'&&d.getElementById('h_sales').value==='900',d.getElementById('healthScenario').value);
- apply('02');await pause(200);originalClick=w.HTMLAnchorElement.prototype.click;originalURL=w.URL.createObjectURL;originalRevoke=w.URL.revokeObjectURL;
- w.HTMLAnchorElement.prototype.click=function(){if(this.download.endsWith('.pdf'))return;return originalClick.call(this)};w.URL.createObjectURL=b=>{blob=b;return 'blob:finance-qa'};w.URL.revokeObjectURL=()=>{};
- for(const id of ['downloadPlan','downloadHealth']){blob=null;d.getElementById(id).click();await until(()=>blob||d.getElementById('toast').textContent.startsWith('PDF 產生失敗'));if(!blob)throw Error(d.getElementById('toast').textContent);const data=new Uint8Array(await blob.arrayBuffer()),txt=new TextDecoder('latin1').decode(data),pages=(txt.match(/\/Type \/Page\b/g)||[]).length;log(id+' real A4 PDF',blob.type==='application/pdf'&&txt.startsWith('%PDF-1.4')&&pages>=2&&txt.includes('595.28 841.89'),{type:blob.type,bytes:blob.size,pages,label:d.getElementById(id).textContent.trim()});await until(()=>!d.getElementById(id).disabled);}
- log('no Excel download labels',!['downloadPlan','downloadHealth'].some(id=>/excel|xlsx/i.test(d.getElementById(id).textContent)),true);
- log('mobile page no overflow',d.documentElement.scrollWidth<=w.innerWidth,{page:d.documentElement.scrollWidth,viewport:w.innerWidth});
- d.getElementById('clearHealth').click();log('clear keeps unknowns blank',[...d.querySelectorAll('#healthFields input')].every(e=>e.value==='')&&d.getElementById('downloadHealth').disabled,true);
-}catch(e){log('unexpected error',false,e.message)}finally{if(w&&originalClick){w.HTMLAnchorElement.prototype.click=originalClick;w.URL.createObjectURL=originalURL;w.URL.revokeObjectURL=originalRevoke;}if(w&&before!==undefined){if(before===null)w.localStorage.removeItem(FINANCE_DRAFT_KEY);else w.localStorage.setItem(FINANCE_DRAFT_KEY,before)}this.disabled=false;window.financeCheckResults=results;output.textContent=JSON.stringify({status:'complete',passed:results.filter(x=>x.pass).length,total:results.length,results},null,2);}};
+const output=document.getElementById('financeCheckResult'),pause=ms=>new Promise(r=>setTimeout(r,ms));
+async function until(fn){for(let i=0;i<200;i++){if(fn())return;await pause(80)}throw Error('timeout');}
+const plans={
+ working:{sales:12345,nextSales:14789,cost:72,dso:55,dio:66,dpo:31,own:512,existing:1900},
+ expansion:{setup:457,reserve:99,equity:187,revenue:109,margin:59,fixed:49,ramp:7,interest:3.2,tenor:6,annualBudget:112},
+ overseas:{investTwd:347,equityTwd:111,investUsd:83,equityUsd:31,fx:32.7,swing:12,buffer:11,months:13},
+ equipment:{invest:5137,equity:1511,interest:3.1,tenor:8,grace:1,annualBudget:987}
+};
+const health={cash:517,receipts:1900,stock:1600,shortDebt:2500,totalDebt:3500,assets:6500,sales:12345,profit:-9.5,annualAvailable:600,annualDebt:0};
+document.getElementById('runFinanceChecks').onclick=async()=>{
+ const button=document.getElementById('runFinanceChecks');button.disabled=true;
+ const keys=[LEADS_KEY,FINANCE_DRAFT_KEY],backup=new Map(keys.map(k=>[k,localStorage.getItem(k)])),rows=[];
+ let frame,back;
+ const log=(name,pass,detail)=>{rows.push({name,pass:!!pass,detail});output.textContent=JSON.stringify({running:true,checks:rows},null,2)};
+ const create=async url=>{const f=document.createElement('iframe');f.src=url;document.getElementById('frames').append(f);await until(()=>f.contentDocument?.readyState==='complete'&&f.contentDocument?.querySelector('#consultationForm,#leadRows'));return f;};
+ try{
+  keys.forEach(k=>localStorage.removeItem(k));
+  frame=await create('index.html?case=02&v=manual1');let w=frame.contentWindow,d=w.document;
+  const set=(id,value)=>{const el=d.getElementById(id);el.value=value;el.dispatchEvent(new w.Event('input',{bubbles:true}));};
+  log('fresh page and old case URL do not fill numbers',[...d.querySelectorAll('#modelFields input,#healthFields input')].every(e=>e.value===''));
+  log('examples start collapsed',[...d.querySelectorAll('.optional-examples')].every(e=>!e.open));
+  back=await create('internal.html?cases=1&v=manual1');
+  log('backend empty, old URL cannot seed samples',!back.contentDocument.getElementById('emptyLeads').hidden&&!back.contentDocument.getElementById('loadSamples')&&JSON.parse(localStorage.getItem(LEADS_KEY)||'[]').length===0);
+  back.remove();back=null;
+  for(const [model,inputs] of Object.entries(plans)){
+   d.querySelector('.model-card[data-model="'+model+'"]').click();
+   for(const [key,value] of Object.entries(inputs))set('p_'+key,value);
+   d.getElementById('modelForm').requestSubmit();
+   log(model+' manual plan calculates',d.getElementById('resultStatus').textContent==='已更新');
+   if(model==='working')log('same-definition sales link to health',d.getElementById('h_sales').value==='12345'&&d.getElementById('h_totalDebt').value==='');
+   for(const [key,value] of Object.entries(health))set('h_'+key,value);
+   const f=d.getElementById('consultationForm').elements;
+   const fill=(name,value)=>{f[name].value=value;f[name].dispatchEvent(new w.Event('input',{bubbles:true}));};
+   fill('company','手動驗證 '+model);fill('businessType','一般中小企業');fill('city','新北市');f.city.dispatchEvent(new w.Event('change',{bubbles:true}));fill('district','新莊區');fill('address','新北市新莊區幸福路171號');fill('note','手動調整金額後送出測試');fill('desiredMonth','2027-03');
+   f.includePlan.checked=true;f.consent.checked=true;d.getElementById('consultationForm').requestSubmit();
+   log(model+' unfinished health blocks stale submission',JSON.parse(localStorage.getItem(LEADS_KEY)||'[]').length===Object.keys(plans).indexOf(model));
+   d.getElementById('healthForm').requestSubmit();
+   f.consent.checked=true;d.getElementById('consultationForm').requestSubmit();
+   const lead=JSON.parse(localStorage.getItem(LEADS_KEY)||'[]')[0];
+   const amount=financingNeed({model,mode:'dual',inputs,out:calculate(model,{...inputs,mode:'dual'})}).amount;
+   log(model+' latest plan values and financing need saved',lead?.plan?.model===model&&Object.entries(inputs).every(([k,v])=>lead.plan.inputs[k]===v)&&Math.abs(lead.consultation.amount-amount)<1e-7,{id:lead?.id,amount:lead?.consultation?.amount});
+   log(model+' all 10 health figures, loss and zero saved',Object.entries(health).every(([k,v])=>lead?.consultation?.healthInputs?.[k]===v),lead?.consultation?.healthInputs);
+   log(model+' address and appointment saved',lead?.consultation?.address==='新北市新莊區幸福路171號'&&lead?.consultation?.desiredMonth==='2027-03');
+  }
+  const lead=JSON.parse(localStorage.getItem(LEADS_KEY))[0];
+  back=await create('internal.html?v=manual1#lead='+lead.id);
+  await until(()=>back.contentDocument.getElementById('leadDialog').open);
+  const bd=back.contentDocument;
+  log('backend displays submitted raw financial figures',bd.querySelector('.received-health-inputs')?.textContent.includes('12,345')&&bd.querySelector('.received-health-inputs')?.textContent.includes('-9.5'));
+  log('backend contains only the four submitted records',bd.querySelectorAll('#leadRows tr').length===4&&!bd.body.textContent.includes('宏禾食品包材'));
+  back.remove();back=null;
+  d.getElementById('casePicker').value='02';d.getElementById('applyTeachingCase').click();
+  set('p_setup',777);d.getElementById('modelForm').requestSubmit();set('h_cash',333);d.getElementById('healthForm').requestSubmit();
+  log('optional preset remains fully editable',d.getElementById('p_setup').value==='777'&&d.getElementById('h_cash').value==='333'&&!d.getElementById('downloadHealth').disabled&&!d.getElementById('p_setup').readOnly);
+  const prior=d;w.location.reload();await until(()=>frame.contentDocument!==prior&&frame.contentDocument?.readyState==='complete'&&frame.contentDocument?.getElementById('consultationForm'));
+  w=frame.contentWindow;d=w.document;
+  log('reopening never forces previous case values',[...d.querySelectorAll('#modelFields input,#healthFields input')].every(e=>e.value==='')&&!d.getElementById('restoreFinanceDraft').hidden);
+  d.getElementById('restoreFinanceDraft').click();
+  log('explicit restore preserves edits instead of preset originals',d.getElementById('p_setup').value==='777'&&d.getElementById('h_cash').value==='333'&&d.getElementById('consultationForm').elements.company.value==='');
+  let blob;
+  const originalClick=w.HTMLAnchorElement.prototype.click,originalURL=w.URL.createObjectURL,originalRevoke=w.URL.revokeObjectURL;
+  w.HTMLAnchorElement.prototype.click=function(){if(!this.download.endsWith('.pdf'))return originalClick.call(this)};
+  w.URL.createObjectURL=b=>{blob=b;return 'blob:manual-qa'};w.URL.revokeObjectURL=()=>{};
+  try{
+   for(const id of ['downloadPlan','downloadHealth']){
+    blob=null;d.getElementById(id).click();await until(()=>blob);
+    const txt=new TextDecoder('latin1').decode(new Uint8Array(await blob.arrayBuffer()));
+    log(id+' valid PDF after editing',blob.type==='application/pdf'&&txt.startsWith('%PDF-1.4')&&txt.includes('595.28 841.89'),{bytes:blob.size});
+    await until(()=>!d.getElementById(id).disabled);
+   }
+  }finally{w.HTMLAnchorElement.prototype.click=originalClick;w.URL.createObjectURL=originalURL;w.URL.revokeObjectURL=originalRevoke;}
+  log('390px mobile layout has no horizontal overflow',d.documentElement.scrollWidth<=w.innerWidth,{page:d.documentElement.scrollWidth,viewport:w.innerWidth});
+ }catch(error){log('exception',false,error.message)}
+ finally{
+  frame?.remove();back?.remove();await pause(100);
+  for(const [key,value]of backup){if(value===null)localStorage.removeItem(key);else localStorage.setItem(key,value);}
+  output.textContent=JSON.stringify({completed:true,passed:rows.filter(x=>x.pass).length,total:rows.length,checks:rows},null,2);button.disabled=false;
+ }
+};
 </script></body></html>

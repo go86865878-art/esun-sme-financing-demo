@@ -1,4 +1,4 @@
-import {sanitizeConsultation,enquiryPlan} from './consultation-context.js';
+import {sanitizeConsultation,enquiryPlan} from './consultation-context.js?v=manual1';
 // Shared local-only demo handoff. No network request or bank system integration.
 export const LEADS_KEY = 'esun_mobile_review_demo_leads_v1';
 export const ROUTES_KEY = 'esun_mobile_review_demo_routes_v1';
@@ -38,7 +38,7 @@ export const AREAS = Object.freeze({
 export const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function readLocal(key,fallback){try{let raw=localStorage.getItem(key);if(raw===null&&key.startsWith('esun_mobile_review_')){const old=localStorage.getItem(key.replace('esun_mobile_review_','esun_franchise_'));if(old!==null){JSON.parse(old);localStorage.setItem(key,old);raw=old;}}return raw?JSON.parse(raw):structuredClone(fallback);}catch{return structuredClone(fallback);}}
 export function writeLocal(key,value){localStorage.setItem(key,JSON.stringify(value));if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent('esun-demo-update'));}
-export function loadDemoLeads(){const rows=readLocal(LEADS_KEY,[]);return Array.isArray(rows)?rows.filter(x=>x&&typeof x.id==='string'&&Array.isArray(x.services)).slice(0,200):[];}
+export function loadDemoLeads(){const rows=readLocal(LEADS_KEY,[]);return Array.isArray(rows)?rows.filter(x=>x&&typeof x.id==='string'&&Array.isArray(x.services)&&!isBuiltInDemoSample(x)).slice(0,200):[];}
 export function saveDemoLeads(rows){writeLocal(LEADS_KEY,rows.slice(0,200));}
 export function loadRoutes(){const rows=readLocal(ROUTES_KEY,DEFAULT_ROUTES);return Array.isArray(rows)?rows.map(r=>({...r,rm:({"示範 RM A":"小宇（示範）","示範 RM B":"小愷（示範）","示範 RM C":"大鈞（示範）","示範 RM D":"小玉（示範）"})[r.rm]||r.rm})):structuredClone(DEFAULT_ROUTES);}
 export function loadSettings(){const s=readLocal(SETTINGS_KEY,DEFAULT_SETTINGS);return {...DEFAULT_SETTINGS,...s};}
@@ -85,7 +85,7 @@ export function updateOpportunityFollowup(lead,key,{status,note},{at=new Date().
 }
 export const DEMO_SAMPLE_SET='esun-sme-built-in-samples-v2';
 const legacySampleKeys=new Set(['假案例 A｜擴充產線','假案例 B｜第二間門市','假案例 C｜批發備貨']);
-export function isBuiltInDemoSample(lead){return lead?.sampleSet===DEMO_SAMPLE_SET||(lead?.source==='手動載入假資料'&&legacySampleKeys.has(lead.sampleKey));}
+export function isBuiltInDemoSample(lead){return lead?.sampleSet==='mobile-complete-cases-20261031'||lead?.sampleSet===DEMO_SAMPLE_SET||(lead?.source==='手動載入假資料'&&legacySampleKeys.has(lead.sampleKey));}
 export function resetDemoSamples(existing,{at=new Date().toISOString()}={}){
   const retained=existing.filter(lead=>!isBuiltInDemoSample(lead));
   if(retained.length>196)throw new Error('保留的非樣本資料超過 196 筆，請先刪除不需要的案例，才能重設 4 筆樣本。');

@@ -11,9 +11,15 @@ export function sanitizeConsultation(value={}){
  if(value.position&&Number.isFinite(value.position.lat)&&Number.isFinite(value.position.lng)&&Math.abs(value.position.lat)<=90&&Math.abs(value.position.lng)<=180){
  position={lat:value.position.lat,lng:value.position.lng,accuracy:Number.isFinite(value.position.accuracy)?Math.max(0,value.position.accuracy):null};
  }
- return {version:1,purpose,businessType,company:clean(value.company,60),contact:clean(value.contact,40),phone:clean(value.phone,40),brand:clean(value.brand,60),storeCount,amount,desiredMonth:month,preferredTime:['平日上午','平日下午','平日傍晚','再與我確認'].includes(value.preferredTime)?value.preferredTime:'再與我確認',note:clean(value.note,1500),address:clean(value.address,160),position,summary:clean(value.summary,18000),health:value.health?{overall:clean(value.health.overall,10),items:Array.isArray(value.health.items)?value.health.items.slice(0,8).map(x=>({label:clean(x.label,80),value:clean(x.value,80),status:clean(x.status,12)})):[]}:null,documents:Array.isArray(value.documents)?value.documents.slice(0,30).map(x=>({title:clean(x.title,150),ready:x.ready===true})):[]};
+ return {version:1,purpose,businessType,company:clean(value.company,60),contact:clean(value.contact,40),phone:clean(value.phone,40),brand:clean(value.brand,60),storeCount,amount,desiredMonth:month,preferredTime:['平日上午','平日下午','平日傍晚','再與我確認'].includes(value.preferredTime)?value.preferredTime:'再與我確認',note:clean(value.note,1500),address:clean(value.address,160),position,summary:clean(value.summary,18000),health:value.health?{overall:clean(value.health.overall,10),items:Array.isArray(value.health.items)?value.health.items.slice(0,8).map(x=>({label:clean(x.label,80),value:clean(x.value,80),status:clean(x.status,12)})):[]}:null,healthInputs:sanitizeHealthInputs(value.healthInputs),healthAt:clean(value.healthAt,80),documents:Array.isArray(value.documents)?value.documents.slice(0,30).map(x=>({title:clean(x.title,150),ready:x.ready===true})):[]};
 }
 export function enquiryPlan(c){
  return {model:c.purpose,mode:'twd',inputs:{},out:{label:'客戶自述融資需求（非試算）',value:c.amount,unit:'萬元'},at:new Date().toLocaleString('zh-TW'),notCalculated:true};
 }
 
+
+const healthKeys=['cash','receipts','stock','shortDebt','totalDebt','assets','sales','profit','annualAvailable','annualDebt'];
+export function sanitizeHealthInputs(value){
+ if(!value||typeof value!=='object')return null;
+ return Object.fromEntries(healthKeys.map(key=>{const v=value[key];return [key,typeof v==='number'&&Number.isFinite(v)?v:null]}));
+}

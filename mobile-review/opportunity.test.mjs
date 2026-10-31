@@ -135,7 +135,7 @@ test('followup state and plain-text notes survive the existing local storage rou
   const descriptor=Object.getOwnPropertyDescriptor(globalThis,'localStorage'),data=new Map();
   Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{getItem:key=>data.get(key)??null,setItem:(key,value)=>data.set(key,value)}});
   t.after(()=>{if(descriptor)Object.defineProperty(globalThis,'localStorage',descriptor);else delete globalThis.localStorage;});
-  const lead=resetDemoSamples([],{at})[3];
+  const lead=resetDemoSamples([],{at})[3];delete lead.sampleSet;delete lead.sampleKey;lead.source='預約諮詢表單（本機示範）';
   const updated=updateOpportunityFollowup(lead,'overseas',{status:'待補資料',note:'假資料：<待確認> 匯款國別\n與換匯時點'},{at});
   saveDemoLeads([updated]);
   const loaded=loadDemoLeads()[0];

@@ -1,10 +1,9 @@
 import {mountDispatchMail} from './dispatch-ui.js?v=supervisor1';
 import {dispatchTarget,dispatchActionLabel} from './dispatch-mail.js?v=supervisor1';
-import {addMissingCaseLeads,prepareCaseRouting} from './demo-cases.js?v=cases1';
-import {receivedConsultationCard} from './planning-cards.js?v=cases1';
+import {receivedConsultationCard} from './planning-cards.js?v=manual1';
 import {mountBranchMap,branchCatalogue,routingThreshold,routeDescription} from './branch-map.js?v=cases1';
 import {suggestAssignment,ROUTING_KEY,BRANCH_COORDS_KEY} from './branch-routing.js?v=cases1';
-import {LEADS_KEY,ROUTES_KEY,SETTINGS_KEY,SERVICES,MODELS,AREAS,DEFAULT_ROUTES,DEFAULT_SETTINGS,FOLLOWUP_STATUSES,esc,loadDemoLeads,saveDemoLeads,loadRoutes,loadSettings,writeLocal,routeFor,calculatePotential,deriveOpportunitySignals,deriveOpportunityDetails,getOpportunityFollowup,updateOpportunityFollowup,resetDemoSamples,createLead,fillCities,fillDistricts,serviceChecks} from './opportunity.js?v=cases1';
+import {LEADS_KEY,ROUTES_KEY,SETTINGS_KEY,SERVICES,MODELS,AREAS,DEFAULT_ROUTES,DEFAULT_SETTINGS,FOLLOWUP_STATUSES,esc,loadDemoLeads,saveDemoLeads,loadRoutes,loadSettings,writeLocal,routeFor,calculatePotential,deriveOpportunitySignals,deriveOpportunityDetails,getOpportunityFollowup,updateOpportunityFollowup,createLead,fillCities,fillDistricts,serviceChecks} from './opportunity.js?v=manual1';
 
 const $=id=>document.getElementById(id);
 const fmt=n=>new Intl.NumberFormat('zh-TW',{maximumFractionDigits:2}).format(n);
@@ -76,21 +75,12 @@ $('routeRows').addEventListener('click',e=>{const b=e.target.closest('[data-dele
 for(const k of Object.keys(DEFAULT_SETTINGS))$(k).value=settings[k];
 $('settingsForm').addEventListener('submit',e=>{e.preventDefault();const next={};for(const k of Object.keys(DEFAULT_SETTINGS)){const n=Number($(k).value);if(!Number.isFinite(n)||n<(k==='paymentRate'?0:-100)||n>100)return announce('請檢查利差或費率，應為有效的百分比。');next[k]=n;}settings=next;writeLocal(SETTINGS_KEY,settings);render();announce('已更新示範假設，所有案例參考值已重新計算。');});
 
-function seedSamples(){try{
- const before=leads.length;leads=addMissingCaseLeads(leads);prepareCaseRouting();routes=loadRoutes();renderRoutes();persist();
- if($('leadDialog').open)$('leadDialog').close();$('serviceFilter').value='';$('statusFilter').value='';render();
- announce('已補入 '+(leads.length-before)+' 筆完整情境案例；既有案件、分派與跟進紀錄均保留。');
-}catch(error){announce(error.message);}}
-$('loadSamples').addEventListener('click',seedSamples);
 $('leadRows').addEventListener('click',e=>{const mail=e.target.closest('[data-dispatch]');if(mail){openDispatchFor(mail.dataset.dispatch);return;}const b=e.target.closest('[data-open]');if(b)openLead(b.dataset.open);});
 $('serviceFilter').innerHTML='<option value="">全部服務與用途線索</option>'+Object.entries(SERVICES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')+'<option value="overseas">海外投資線索（依用途）</option>';
 $('statusFilter').innerHTML='<option value="">全部狀態</option>'+statuses.map(s=>`<option>${s}</option>`).join('');
 $('serviceFilter').addEventListener('change',render);$('statusFilter').addEventListener('change',render);
-$('closeDialog').addEventListener('click',()=>$('leadDialog').close());$('closeNew').addEventListener('click',()=>$('newDialog').close());
+$('closeDialog').addEventListener('click',()=>$('leadDialog').close());
 
-const newForm=$('newDemoForm');newForm.elements.model.innerHTML=Object.entries(MODELS).map(([k,l])=>`<option value="${k}">${l}</option>`).join('');fillCities(newForm.elements.city);newForm.elements.city.addEventListener('change',()=>fillDistricts(newForm.elements.district,newForm.elements.city.value));$('newServices').innerHTML=serviceChecks('new');
-$('addDemo').addEventListener('click',()=>{$('newError').textContent='';$('newDialog').showModal();});
-newForm.addEventListener('submit',e=>{e.preventDefault();try{const f=newForm.elements,need=Number(f.need.value);if(!Number.isFinite(need)||need<0||need>100000000)throw new Error('請填入有效的假設需求金額。');if(!f.fakeOnly.checked)throw new Error('請確認僅使用假資料。');if(leads.length>=200)throw new Error('示範資料已達 200 筆，請先刪除舊資料。');const lead=createLead({plan:{model:f.model.value,inputs:{},out:{label:'假資料規劃需求',value:need,unit:'萬元'},at:new Date().toLocaleString('zh-TW')},city:f.city.value,district:f.district.value,services:[...newForm.querySelectorAll('[name="newService"]:checked')].map(x=>x.value),label:'假資料｜'+f.label.value.trim(),source:'使用者手動假資料'});lead.consent.scope='使用者確認使用假資料，本機操作未實際轉交。';leads.unshift(lead);persist();$('newDialog').close();newForm.reset();fillDistricts(f.district,'');announce('已建立本機假案例，可開啟詳情補填估算假設。');}catch(error){$('newError').textContent=error.message;}});
 $('clearData').addEventListener('click',()=>{if(!leads.length)return announce('目前沒有本機示範需求。');if(!confirm('清除此瀏覽器的全部示範需求？路由表與貢獻假設會保留。'))return;leads=[];persist();announce('已清除本機示範需求。');});
 window.addEventListener('storage',e=>{if([LEADS_KEY,ROUTES_KEY,ROUTING_KEY].includes(e.key)&&$('dispatchDialog')?.open){$('dispatchDialog').close();announce('案件或分派設定已在其他分頁變更，請重新開啟派任通知確認收件人。');}if(e.key===LEADS_KEY){leads=loadDemoLeads();render();if($('leadDialog').open){const id=activeId;if(leads.some(l=>l.id===id))openLead(id);else $('leadDialog').close();}}if(e.key===ROUTES_KEY){routes=loadRoutes();renderRoutes();render();}if(e.key===SETTINGS_KEY){settings=loadSettings();for(const k of Object.keys(DEFAULT_SETTINGS))$(k).value=settings[k];render();}});
 renderRoutes();render();
@@ -109,6 +99,6 @@ function openRequestedLead(){
 }
 addEventListener('hashchange',openRequestedLead);
 addEventListener('storage',event=>{if(event.key===ROUTING_KEY||event.key===BRANCH_COORDS_KEY){mapController?.refresh();render();}});
-if(new URLSearchParams(location.search).get('cases')==='1')seedSamples();
+
 openRequestedLead();
 
