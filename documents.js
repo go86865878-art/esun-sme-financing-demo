@@ -14,6 +14,7 @@ function showStorageStatus(saved){
 }
 function updateProgress(){
  const docs=documentsFor(current),count=docs.filter(x=>checked.has(x[1])).length;
+ $('documentList').querySelectorAll('[data-doc]').forEach(box=>{const ready=checked.has(box.dataset.doc);box.defaultChecked=ready;box.checked=ready;box.closest('label').querySelector('.docs-item-state').textContent=ready?'已備妥':'待準備';});
  $('docCount').textContent=count+' / '+docs.length+' 項';
  $('foldCount').textContent=count+' / '+docs.length+' 已準備';
  $('docProgress').style.width=count/docs.length*100+'%';
@@ -25,9 +26,9 @@ function render(){
  documentsFor(current).forEach((item,index)=>{
   if(index===0||index===baseDocs.length){const group=document.createElement('div');group.className='doc-group';group.textContent=index===0?'共通準備資料':'依本次用途補充';fragment.append(group)}
   const label=document.createElement('label');label.className='doc-item';
-  const box=document.createElement('input');box.type='checkbox';box.dataset.doc=item[1];box.checked=checked.has(item[1]);
+  const box=document.createElement('input');box.type='checkbox';box.dataset.doc=item[1];box.autocomplete='off';box.defaultChecked=checked.has(item[1]);box.checked=checked.has(item[1]);
   const span=document.createElement('span'),title=document.createElement('b'),help=document.createElement('small');
-  title.textContent=item[1];help.textContent=item[2];span.append(title,help);label.append(box,span);fragment.append(label);
+  title.textContent=item[1];help.textContent=item[2];const state=document.createElement('em');state.className='docs-item-state';state.textContent=checked.has(item[1])?'已備妥':'待準備';span.append(title,help,state);label.append(box,span);fragment.append(label);
  });
  $('documentList').replaceChildren(fragment);updateProgress();
 }
@@ -56,4 +57,5 @@ function openLinkedSection(){
  }
 }
 addEventListener('hashchange',openLinkedSection);
+addEventListener('pageshow',()=>{if(lastSaveSucceeded)checked=readDocumentChecks();render();openLinkedSection()});
 render();openLinkedSection();

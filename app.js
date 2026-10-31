@@ -44,11 +44,14 @@ function renderDocs(){
    const anchor=link.dataset.documentLink||'documents';
    link.href='documents.html?model='+encodeURIComponent(current)+'#'+anchor;
  });
- if($('documentsContext'))$('documentsContext').textContent='目前用途：'+models[current].title+'；文件頁會顯示對應的準備項目。';
  refreshDocumentStatus();
 }
 function refreshDocumentStatus(){
  const saved=readDocumentChecks();checkedDocs.clear();saved.forEach(key=>checkedDocs.add(key));
+ const docs=[...baseDocs,...extraDocs[current]],count=docs.filter(x=>checkedDocs.has(x[1])).length;
+ const message='目前用途：'+models[current].title+'；文件已準備 '+count+' / '+docs.length+' 項，勾選狀態會帶入本次諮詢摘要。';
+ if($('documentsContext'))$('documentsContext').textContent=message;
+ if($('consultationDocsState'))$('consultationDocsState').textContent=message;
  updateHandoffState();
 }
 addEventListener('storage',event=>{if(event.key===DOCUMENT_STORAGE_KEY||event.key===null)refreshDocumentStatus()});

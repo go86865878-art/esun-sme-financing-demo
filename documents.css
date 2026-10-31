@@ -95,3 +95,5 @@
  .docs-page .docs-steps li{break-inside:avoid}
  .docs-mobile-entry{display:none}
 }
+
+.docs-item-state{display:inline-block;font-style:normal;font-size:12px;font-weight:700;color:var(--muted);margin-top:6px}.doc-item:has(input:checked) .docs-item-state{color:var(--deep);background:var(--mint);border-radius:4px;padding:1px 8px}
