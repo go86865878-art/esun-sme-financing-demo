@@ -1,3 +1,4 @@
+import {OPERATING_FIELDS} from './operating-plan.js?v=luosifen1';
 import {financingNeed} from './financing-need.js';
 import {PURPOSE_TITLES} from './franchise-scenarios.js';
 export const HEALTH_LABELS={cash:'可動用現金與銀行存款',receipts:'一年內可收回的貨款',stock:'可售庫存成本',shortDebt:'一年內全部應付款',totalDebt:'負債總額',assets:'資產帳面總額',sales:'全年營業收入',profit:'全年營業利益',annualAvailable:'未來一年可還款現金',annualDebt:'原有借款全年本息'};
@@ -46,13 +47,32 @@ class Report{
 async function assets(options={}){const load=options.loadImage||((src)=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=reject;i.src=src}));const [logo,meow]=await Promise.all([load('esun-icon.png').catch(()=>null),load('esun-meow.png').catch(()=>null)]);return {...options,logo,meow}}
 function meta(r,data){r.para(data.company||'企業名稱：________________________',{size:12,bold:true});if(data.address)r.para('營業地址：'+data.address,{size:9,color:C.muted});r.para('資料時間：'+(data.at||data.plan?.at||data.health?.at||'—')+'　｜　金額單位：新臺幣萬元（美元另註）',{size:8.5,color:C.muted});}
 export async function buildPlanPdf(data,options={}){
- const p=data.plan,o=p.out,r=new Report('企業財務規劃報告','先看資金缺口，再安排還款與用款時點。',await assets(options));meta(r,data);r.section('01  本次資金規劃｜'+(PURPOSE_TITLES[p.model]||p.model));
+ const p=data.plan,o=p.out,r=new Report(o.extra?.operating?'螺絲粉營運計畫預估':'企業財務規劃報告','先看資金缺口，再安排還款與用款時點。',await assets(options));meta(r,data);r.section('01  本次資金規劃｜'+(PURPOSE_TITLES[p.model]||p.model));
  const need=financingNeed(p).amount;r.metrics([['融資規劃需求',fmt(need)+' 萬元'],['預計用款',data.month||'待確認'],['規劃用途',PURPOSE_TITLES[p.model]||p.model]]);
  r.para(o.label+'：'+fmt(o.value)+' '+o.unit,{size:12,bold:true});r.para(o.sub,{size:10,color:C.muted});r.pairs(o.metrics.map(x=>[x.label,x.value]));
  if(o.breakdown?.length){r.section('02  資金組成與情境比較');r.bars(o.breakdown.map(x=>[x.label,x.value]));}
  const noteOnSecond=r.y+35+r.lines(o.note,CW,10).length*15.5+40>H-55;if(noteOnSecond)r.newPage();r.section('03  規劃提醒');r.para(o.note,{size:10});r.para('資金缺口不等於可核貸額度；利率、年期與還款方式皆為本次試算假設。',{size:9,color:C.muted});
  if(!noteOnSecond)r.newPage();r.section('04  本次輸入與假設');r.compactPairs(data.fields.filter(f=>p.inputs[f.id]!==undefined&&f.id!=='mode'&&!(p.model==='overseas'&&((p.mode==='usd'&&['investTwd','equityTwd'].includes(f.id))||(p.mode==='twd'&&['investUsd','equityUsd','fx','swing'].includes(f.id))))).map(f=>[f.label,fmt(p.inputs[f.id])+' '+f.unit]));r.para('計算方式：'+o.formula,{size:8.5,color:C.muted});
  if(o.schedule?.length){r.section('05  年度本息安排');const widths=[60,150,150,CW-360];r.row(['年度','本金','利息','本息合計'],widths,{bold:true,fill:true});for(const x of o.schedule)r.row([String(x.year),fmt(x.principal),fmt(x.interest),fmt(x.total)],widths);r.y+=12;}
+ if(o.extra?.operating){
+ const op=o.extra.operating,a=op.annual;
+ r.newPage();r.section('營運假設｜金額單位：萬元，另註除外');
+ r.compactPairs(OPERATING_FIELDS.map(([k,label,unit])=>[label,fmt(op.assumptions[k])+' '+unit]));
+ r.para('老闆補班不另支薪。20坪：廚房與前場各半、約20席。客單價為實收金額。',{size:9,color:C.muted});
+ r.newPage();r.section('逐月損益｜萬元');
+ const widths=[36,69,69,69,69,69,CW-381];
+ r.row(['月','營收','成本','薪資含附加','其他費用','稅金','稅後淨利'],widths,{bold:true,fill:true});
+ for(const m of op.monthly)r.row([m.month,...['revenue','cost','salary','otherExpense','tax','net'].map(k=>fmt(m[k]))],widths);
+ r.row(['全年',...['revenue','cost','salary','otherExpense','tax','net'].map(k=>fmt(a[k]))],widths,{bold:true,fill:true});
+ r.para('其他費用含金流費、折舊、租金、雜支、水電瓦斯與固定調整；利息另扣，全年 '+fmt(a.interest)+' 萬元。',{size:9,color:C.muted});
+ r.section('月分紅與年終');r.pairs([['月分紅合計',fmt(a.bonus)+' 萬元'],['年終獎金',fmt(a.yearEnd)+' 萬元'],['正職每人年終',fmt(op.fullEach)+' 萬元'],['兼職每人年終',fmt(op.partEach)+' 萬元'],['全年分紅後保留',fmt(a.retainedFinal)+' 萬元']]);
+ r.newPage();r.section('逐月現金流｜已扣本金、月分紅與年終');
+ const cw=[36,70,70,70,70,70,CW-386];
+ r.row(['月','月分紅','還本','年終','淨現金流','月初現金','月底現金'],cw,{bold:true,fill:true});
+ for(const m of op.monthly)r.row([m.month,...['bonus','principal','yearEnd','cashChange','cashOpen','cashClose'].map(k=>fmt(m[k]))],cw);
+ r.row(['全年',...['bonus','principal','yearEnd','cashChange','cashOpen','cashClose'].map(k=>fmt(a[k]))],cw,{bold:true,fill:true});
+ r.para('淨現金流＝稅後淨利－月分紅＋折舊－本金－年終；年終12月底一次支付。年終按全年月分紅後保留盈餘提撥，正職與兼職依設定比例分配。',{size:9,color:C.muted});
+ }
  r.section('下一步｜整理申貸資料');const docs=data.documents||[];for(let i=0;i<docs.length;i+=2){const row=docs.slice(i,i+2).map(d=>(d.ready?'☑ ':'□ ')+d.title);while(row.length<2)row.push('');r.row(row,[CW/2,CW/2]);}r.y+=8;r.para('實際徵提資料請與服務單位確認；勾選不代表已送件。',{size:8.5,color:C.muted});
  return r.finish();
 }
@@ -61,7 +81,7 @@ export async function buildHealthPdf(data,options={}){
  for(const item of h.out.items){const lines=r.lines(item.advice,CW-24,9),height=57+lines.length*14;r.ensure(height+8);const y=r.y;r.box(M,y,CW,height);r.text(item.label,M+12,y+9,11,C.ink,true);const color=item.status==='red'?C.red:item.status==='yellow'?C.amber:item.status==='green'?C.green:C.muted;r.text(item.value,M+12,y+29,17,color,true);r.font(9,true);const tag=status[item.status];r.text(tag,W-M-r.ctx.measureText(tag).width-12,y+12,9,color,true);lines.forEach((t,i)=>r.text(t,M+12,y+54+i*14,9,C.ink));r.y+=height+8;}
  if(Number.isFinite(h.inputs.sales)&&Number.isFinite(h.inputs.profit)){r.section('02  獲利結構');r.bars([['營業收入',h.inputs.sales],['成本與營業費用',h.inputs.sales-h.inputs.profit,'#93bfb6'],['營業利益／虧損',h.inputs.profit,h.inputs.profit<0?C.red:'#d6a346']]);}
  r.newPage();r.section('03  本次健檢數字');r.pairs(Object.entries(HEALTH_LABELS).map(([k,label])=>[label,fmt(h.inputs[k])+' 萬元']));
- if(data.plan){r.section('04  已連結的資金規劃');r.para((PURPOSE_TITLES[data.plan.model]||'本次規劃')+'｜融資需求 '+fmt(financingNeed(data.plan).amount)+' 萬元',{bold:true});r.para('此需求為新增規劃，不直接併入上方負債、資產或全年本息。需另依撥款與還款時點評估投資後財務。',{size:9,color:C.muted});}
+ if(data.plan){r.section('04  已連結的資金規劃');r.para((PURPOSE_TITLES[data.plan.model]||'本次規劃')+'｜融資需求 '+fmt(financingNeed(data.plan).amount)+' 萬元',{bold:true});r.para(data.plan.out?.extra?.operating?'螺絲粉情境健檢採開業資產負債與首年預估損益、本息，已含本案融資；自行修改時以實際填寫數值為準。':'此需求為新增規劃，不直接併入上方負債、資產或全年本息。需另依撥款與還款時點評估投資後財務。',{size:9,color:C.muted});}
  r.section('指標定義與判讀標準');for(const item of h.out.items){r.para(item.label,{size:9.5,bold:true,gap:2});r.para(item.definition,{size:8.5,color:C.muted,gap:9})}r.para(h.out.note,{size:8.5,color:C.muted});return r.finish();
 }
 export async function buildCasesPdf(cases,options={}){
@@ -69,7 +89,7 @@ export async function buildCasesPdf(cases,options={}){
  for(let i=0;i<cases.length;i++){if(i)r.newPage();const a=cases[i];r.para(a.title,{size:16,bold:true});meta(r,{company:a.company,address:a.address,at:'2026.10.31'});r.para('案例角色：'+a.rm+'　｜　用款：'+a.month+'　｜　方便聯繫：'+a.time,{size:9,color:C.muted});r.para(a.story,{size:9.5});
   r.section('01  規劃輸入｜同一情境帶入網站');const fields=a.fields.filter(f=>!f[0].includes('拆分'));for(let j=0;j<fields.length;j+=2){const row=fields.slice(j,j+2).flat();while(row.length<4)row.push('');r.row(row,[115,146,115,CW-376],{fill:j%4===0})}r.y+=8;
   r.metrics([['融資規劃需求',fmt(financingNeed(a.plan).amount)+' 萬元'],['營業利益率',fmt(a.health.profit/a.health.sales*100)+'%'],['原有本息覆蓋',fmt(a.health.annualAvailable/a.health.annualDebt)+' 倍']]);r.para(a.insight,{size:9});
-  r.section('02  配對財務健檢｜投資前教學資料');const h=a.health;const rows=Object.entries(HEALTH_LABELS).map(([k,l])=>l+' '+fmt(h[k]));for(let j=0;j<rows.length;j+=2)r.para(rows.slice(j,j+2).join('　／　'),{size:8.8,gap:2});r.para('資產負債為2026/09月底、損益為2026全年預估；本息未計入本案新增借款。',{size:8,color:C.muted});
+  r.section(a.input?.operating?'02  配對財務健檢｜開業與首年預估':'02  配對財務健檢｜投資前教學資料');const h=a.health;const rows=Object.entries(HEALTH_LABELS).map(([k,l])=>l+' '+fmt(h[k]));for(let j=0;j<rows.length;j+=2)r.para(rows.slice(j,j+2).join('　／　'),{size:8.8,gap:2});r.para(a.input?.operating?'開業資產負債＋首年預估損益／本息，已含本案融資；應收與存貨未提供。':'資產負債為2026/09月底、損益為2026全年預估；本息未計入本案新增借款。',{size:8,color:C.muted});
   r.section('03  推薦單位 → 通知主管');r.para(a.notification,{size:9,bold:true});r.para(a.ask.split('？')[0]+'？',{size:8.8});r.para('帶入案例 → 查看試算／健檢 → 建立諮詢需求 → 後台通知主管。',{size:8.5,color:C.muted});
  }return r.finish();
 }

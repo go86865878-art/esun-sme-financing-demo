@@ -1,10 +1,10 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>手動資料轉交檢查</title><style>body{font:14px/1.6 system-ui;background:#edf7f4;color:#214b60;margin:18px}button{background:#007d78;color:#fff;padding:12px;border:0;border-radius:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:16px}iframe{width:390px;max-width:100%;height:680px;border:1px solid #acc}</style></head><body><h1>手動數字、可編輯案例與後台檢查</h1><p>這是獨立驗證頁。按下後使用虛構數字測試，完成時恢復原有本機資料。</p><button id="runFinanceChecks">執行連動檢查</button><pre id="financeCheckResult">尚未執行</pre><div id="frames"></div><script type="module">
-import {estimateRelationship} from './relationship-value.js?v=value2';
-import {calculate,diagnose} from './engine.js';
+import {estimateRelationship} from './relationship-value.js?v=luosifen1';
+import {calculate,diagnose} from './engine.js?v=luosifen1';
 import {financingNeed} from './financing-need.js';
-import {LEADS_KEY} from './opportunity.js?v=value2';
+import {LEADS_KEY} from './opportunity.js?v=luosifen1';
 import {ROUTING_KEY} from './branch-routing.js?v=cases1';
-import {FINANCE_DRAFT_KEY} from './finance-state.js?v=pdf1';
+import {FINANCE_DRAFT_KEY} from './finance-state.js?v=luosifen1';
 const output=document.getElementById('financeCheckResult'),pause=ms=>new Promise(r=>setTimeout(r,ms));
 async function until(fn){for(let i=0;i<200;i++){if(fn())return;await pause(80)}throw Error('timeout');}
 const plans={
@@ -86,6 +86,21 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
   log('backend pricing has no mobile horizontal overflow',bd.getElementById('leadDialog').scrollWidth<=bd.getElementById('leadDialog').clientWidth+1);
   back.remove();back=null;
   d.getElementById('casePicker').value='02';d.getElementById('applyTeachingCase').click();
+  log('approved optional scenario links first-year health and monthly results',d.getElementById('h_sales').value==='1647'&&d.getElementById('operatingResults').textContent.includes('56.4')&&d.getElementById('consultationForm').elements.payrollEmployees.value==='9');
+  set('op_ticket',250);d.getElementById('modelForm').requestSubmit();
+  log('detail edit updates main planning and financial health',d.getElementById('p_revenue').value==='127.5'&&d.getElementById('h_sales').value==='1372.5'&&d.getElementById('resultStatus').textContent==='已更新');
+  set('op_ticket',300);set('op_partTime',5);d.getElementById('modelForm').requestSubmit();
+  log('payroll count follows changed operating headcount',d.getElementById('consultationForm').elements.payrollEmployees.value==='8');
+  set('op_partTime',6);d.getElementById('modelForm').requestSubmit();
+  const keepBefore=localStorage.getItem(LEADS_KEY),of=d.getElementById('consultationForm').elements;
+  of.includePlan.checked=true;of.consent.checked=true;d.getElementById('consultationForm').requestSubmit();
+  const ol=JSON.parse(localStorage.getItem(LEADS_KEY))[0],ov=estimateRelationship(ol);
+  log('operating snapshot carries all data and correct potential total',ol.plan.inputs.operating?.ticket===300&&ol.consultation.healthInputs?.sales===1647&&Math.abs(ov.total-33.26388107001155)<1e-7);
+  back=await create('internal.html?v=luosifen1#lead='+ol.id);await until(()=>back.contentDocument.getElementById('leadDialog').open);
+  const od=back.contentDocument;
+  log('backend renders monthly tables and separate employee components',od.querySelector('[data-operating-result]')&&od.getElementById('relationshipValueResult').textContent.includes('員工年終獎金活存')&&od.getElementById('relationshipValueResult').textContent.includes('33.26'));
+  log('backend operating detail fits 390px',od.getElementById('leadDialog').scrollWidth<=od.getElementById('leadDialog').clientWidth+1);
+  back.remove();back=null;localStorage.setItem(LEADS_KEY,keepBefore);
   set('p_setup',777);d.getElementById('modelForm').requestSubmit();set('h_cash',333);d.getElementById('healthForm').requestSubmit();
   log('optional preset remains fully editable',d.getElementById('p_setup').value==='777'&&d.getElementById('h_cash').value==='333'&&!d.getElementById('downloadHealth').disabled&&!d.getElementById('p_setup').readOnly);
   const prior=d;w.location.reload();await until(()=>frame.contentDocument!==prior&&frame.contentDocument?.readyState==='complete'&&frame.contentDocument?.getElementById('consultationForm'));

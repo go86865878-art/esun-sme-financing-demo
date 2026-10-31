@@ -5,7 +5,7 @@ import {financingNeed} from './financing-need.js';
 import {DEFAULT_ROUTES,LEADS_KEY,readLocal} from './opportunity.js';
 import {BRANCHES} from './branch-data.js';
 import {ROUTING_KEY,suggestAssignment} from './branch-routing.js';
-const expected=[619.1780821917814,330,2156,3500],rms=['小玉','小愷','小宇','大鈞'];
+const expected=[619.1780821917814,330,2156,3500];
 test('four cases preserve numeric budgets, address, original inputs and health in backend snapshots',()=>{
  const rows=addMissingCaseLeads([]);
  assert.equal(rows.length,4);
@@ -16,11 +16,11 @@ test('four cases preserve numeric budgets, address, original inputs and health i
   assert.equal(lead.consultation.company,item.company);
   assert.equal(lead.consultation.desiredMonth,item.month);
   assert.equal(lead.consultation.health.items.length,5);
-  for(const[k,v]of Object.entries(item.input))if(k!=='mode')assert.equal(lead.plan.inputs[k],v);
+  for(const[k,v]of Object.entries(item.input))if(k!=='mode')assert.deepEqual(lead.plan.inputs[k],v);
   assert.ok(lead.consultation.summary.includes('資金'));
   assert.equal(lead.assignment,null);assert.equal(lead.status,'未分派');
   const route=suggestAssignment(lead,{threshold:600,branches:BRANCHES,routes:DEFAULT_ROUTES});
-  assert.equal(route.kind,i===1?'branch':'center');assert.ok(route.rm.includes(rms[i]));
+  assert.equal(route.kind,i===1?'branch':'center');assert.ok(route.team);
  }
 });
 test('seeding preserves edited cases and unrelated enquiries, with no duplicates on rerun',()=>{

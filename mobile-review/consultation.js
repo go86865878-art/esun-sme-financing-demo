@@ -1,3 +1,4 @@
+import {operatingSummary} from './operating-plan-ui.js?v=luosifen1';
 const statusNames={green:'健康',yellow:'注意',red:'警示',na:'不適用'};
 export const CONTACT_URL='https://www.esunbank.com/zh-tw/about/services/customer/message-board';
 export function buildConsultationSummary({plan,health=null,documents=[],timing=null,desiredMonth='',title=''}){
@@ -6,6 +7,7 @@ export function buildConsultationSummary({plan,health=null,documents=[],timing=n
   const n=value=>Number.isFinite(value)?value.toLocaleString('zh-TW',{maximumFractionDigits:2}):'不適用';
   const rows=['企業資金規劃｜諮詢摘要（測試網）',`資金用途：${title}`,`預計用款：${desiredMonth||'待與專人確認'}`,`試算時間：${plan.at}`,`${o.label}：${n(o.value)} ${o.unit}`,...o.metrics.map(x=>`${x.label}：${x.value}`)];
   if(plan.model==='overseas')rows.push(`預算幣別：${{twd:'台幣',usd:'美元',dual:'台幣與美元'}[plan.mode]||'待確認'}`);
+  if(o.extra?.operating)rows.push('',operatingSummary(plan));
   rows.push('', '財務健檢');
   if(health?.out){rows.push(`整體：${statusNames[health.out.overall]||'不適用'}（${health.at}）`,...health.out.items.map(x=>`${x.label}：${statusNames[x.status]}／${x.value}`));}
   else rows.push('尚未完成；可另提供財務資料與專人討論。');

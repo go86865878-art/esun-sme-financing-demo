@@ -1,4 +1,4 @@
-import {DEMO_CASES} from './case-data.js?v=cases1';
+import {DEMO_CASES} from './case-data.js?v=luosifen1';
 import {HEALTH_EXAMPLES,PLAN_EXAMPLES} from './franchise-scenarios.js';
 export const FINANCE_DRAFT_KEY='esun_mobile_review_finance_draft_v1';
 export const HEALTH_KEYS=['cash','receipts','stock','shortDebt','totalDebt','assets','sales','profit','annualAvailable','annualDebt'];
@@ -8,7 +8,7 @@ const c=id=>DEMO_CASES.find(x=>x.id===id).health;
 // substituted for company-wide assets, debt, cash or accounting operating profit.
 const paired={
  working:[{...h('drink'),sales:960,profit:115.2},{...h('food'),sales:1800,profit:54},c('01')],
- expansion:[c('02'),{...h('food'),sales:2880,profit:86.4},{cash:160,receipts:30,stock:40,shortDebt:180,totalDebt:400,assets:800,sales:1800,profit:90,annualAvailable:160,annualDebt:90}],
+ expansion:[{cash:180,receipts:20,stock:25,shortDebt:70,totalDebt:180,assets:450,sales:1200,profit:144,annualAvailable:150,annualDebt:50},{...h('food'),sales:2880,profit:86.4},{cash:160,receipts:30,stock:40,shortDebt:180,totalDebt:400,assets:800,sales:1800,profit:90,annualAvailable:160,annualDebt:90}],
  equipment:[c('04'),h('food')],
  overseas:[c('03'),{cash:1800,receipts:900,stock:600,shortDebt:2200,totalDebt:4000,assets:9000,sales:14000,profit:980,annualAvailable:1300,annualDebt:800}]
 };

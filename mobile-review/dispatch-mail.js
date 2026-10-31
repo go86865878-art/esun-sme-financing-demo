@@ -1,6 +1,6 @@
-import {relationshipMailLines} from './relationship-value.js?v=value2';
+import {relationshipMailLines} from './relationship-value.js?v=luosifen1';
 import {financingNeed} from './financing-need.js';
-import {MODELS,SERVICES} from './opportunity.js?v=value2';
+import {MODELS,SERVICES} from './opportunity.js?v=luosifen1';
 
 import {pricingMailLines} from './relationship-pricing.js?v=value2';
 
