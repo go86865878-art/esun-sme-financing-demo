@@ -1,0 +1,47 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>派任郵件流程檢查</title><style>body{font:14px/1.7 system-ui;background:#edf4f0;color:#234b3c;margin:20px}button{padding:12px;background:#007e6e;color:white;border:0;border-radius:8px;cursor:pointer}iframe{display:block;width:390px;max-width:100%;height:780px;border:1px solid #93bbaa;margin:18px 0;background:white}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:18px;max-width:900px}</style></head><body><h1>派任通知：主管對應與草稿檢查</h1><p>使用虛構案例與 example.invalid 測試信箱，攔截郵件連結及下載；不開啟郵件程式、不寄信。</p><button id="runDispatchChecks">執行派任通知檢查</button><pre id="dispatchCheckResult" role="status">尚未執行</pre><iframe id="dispatchFrame" title="390px手機後台預覽" src="internal.html?cases=1&amp;v=dispatch1"></iframe><script type="module">
+import {DEMO_CASES} from './case-data.js?v=cases1';
+import {LEADS_KEY} from './opportunity.js?v=cases1';
+import {CONTACTS_KEY} from './dispatch-mail.js?v=dispatch1';
+const frame=document.getElementById('dispatchFrame'),output=document.getElementById('dispatchCheckResult');
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function until(fn){for(let i=0;i<100;i++){if(fn())return;await pause(100)}throw Error('wait timed out')}
+document.getElementById('runDispatchChecks').addEventListener('click',async function(){
+ this.disabled=true;const results=[],log=(name,pass,observed)=>{results.push({name,pass,observed});output.textContent=JSON.stringify({status:'running',results},null,2)};
+ let w,d,anchorClick,createURL,revokeURL,originalContacts,touched=new Set();
+ try{
+  await until(()=>frame.contentDocument?.querySelectorAll('[data-dispatch]').length>=4);w=frame.contentWindow;d=w.document;
+  originalContacts=JSON.parse(w.localStorage.getItem(CONTACTS_KEY)||'{}');
+  const contactBefore=JSON.stringify(originalContacts);
+  const launch={href:null,blob:null};anchorClick=w.HTMLAnchorElement.prototype.click;createURL=w.URL.createObjectURL;revokeURL=w.URL.revokeObjectURL;
+  w.HTMLAnchorElement.prototype.click=function(){if(this.href.startsWith('mailto:')||this.download.endsWith('.eml')){launch.href=this.href;return;}return anchorClick.call(this)};
+  w.URL.createObjectURL=blob=>{launch.blob=blob;return 'blob:dispatch-test'};w.URL.revokeObjectURL=()=>{};
+  log('platform name',d.title.includes('潛在客戶案件派任平台')&&d.querySelector('.brand strong').textContent==='潛在客戶案件派任平台',{title:d.title,brand:d.querySelector('.brand strong').textContent});
+  log('mobile page width',d.documentElement.scrollWidth<=w.innerWidth,{viewport:w.innerWidth,page:d.documentElement.scrollWidth});
+  for(let i=0;i<4;i++){
+   const item=DEMO_CASES[i],rows=JSON.parse(w.localStorage.getItem(LEADS_KEY)||'[]'),lead=rows.find(x=>x.sampleKey===item.id&&x.sampleSet==='mobile-complete-cases-20261031');
+   if(!lead)throw Error('Missing fixture '+item.id);
+   const originalState=JSON.stringify(lead);d.querySelector('[data-dispatch="'+lead.id+'"]').click();await pause(80);
+   const dialog=d.getElementById('dispatchDialog'),email=d.getElementById('dispatchEmail'),form=d.getElementById('dispatchMailForm');
+   log(item.id+' target role',dialog.open&&d.getElementById('dispatchRole').textContent.includes(item.rm)&&d.getElementById('dispatchRole').textContent.includes(i===1?'分行經理':'區域中心主管'),{unit:d.getElementById('dispatchUnit').textContent,role:d.getElementById('dispatchRole').textContent});
+   log(item.id+' case summary',d.getElementById('dispatchBody').textContent.includes(item.address)&&d.getElementById('dispatchBody').textContent.includes(['619.18','330','2,156','3,500'][i]+' 萬元'),d.getElementById('dispatchSubject').value);
+   log(item.id+' dialog no overflow',dialog.scrollWidth<=dialog.clientWidth+1,{scrollWidth:dialog.scrollWidth,clientWidth:dialog.clientWidth});
+   email.value='';launch.href=null;form.requestSubmit();await pause(30);log(item.id+' missing email blocked',!!d.getElementById('dispatchError').textContent&&!launch.href,d.getElementById('dispatchError').textContent);
+   email.value='case'+item.id+'@example.invalid';d.getElementById('dispatchManager').value='示範主管';form.requestSubmit();await pause(50);
+   const uri=new URL(launch.href);log(item.id+' encoded mail draft',uri.protocol==='mailto:'&&decodeURIComponent(uri.pathname)===email.value&&uri.searchParams.get('body').includes(item.address)&&uri.searchParams.get('body').includes(item.rm),{protocol:uri.protocol,to:decodeURIComponent(uri.pathname),subject:uri.searchParams.get('subject')});
+   d.getElementById('downloadDispatchMail').click();await pause(30);const eml=await launch.blob.text();log(item.id+' EML unsent draft',eml.startsWith('To: '+email.value+'\r\n')&&eml.includes('\r\nX-Unsent: 1\r\n'),{bytes:launch.blob.size,feedback:d.getElementById('dispatchFeedback').textContent});
+   const after=JSON.parse(w.localStorage.getItem(LEADS_KEY)||'[]').find(x=>x.id===lead.id);log(item.id+' no false sent status',JSON.stringify(after)===originalState,{status:after.status,assignment:after.assignment});
+   const contacts=JSON.parse(w.localStorage.getItem(CONTACTS_KEY)||'{}');Object.keys(contacts).filter(k=>JSON.stringify(contacts[k])!==JSON.stringify(originalContacts[k])).forEach(k=>touched.add(k));
+   d.getElementById('closeDispatch').click();d.querySelector('[data-dispatch="'+lead.id+'"]').click();log(item.id+' unit email remembered',d.getElementById('dispatchEmail').value==='case'+item.id+'@example.invalid',d.getElementById('dispatchEmail').value);d.getElementById('closeDispatch').click();
+  }
+  const shop=JSON.parse(w.localStorage.getItem(LEADS_KEY)||'[]').find(x=>x.sampleKey==='02'&&x.sampleSet==='mobile-complete-cases-20261031');
+  d.querySelector('[data-open="'+shop.id+'"]').click();await pause(60);const select=d.getElementById('assignmentBranch');select.selectedIndex=1;
+  const selectedName=select.selectedOptions[0].textContent.split(' · ')[0];d.getElementById('prepareDispatchMail').click();
+  log('changed branch switches recipient',d.getElementById('dispatchUnit').textContent===selectedName&&d.getElementById('dispatchEmail').value!=='case02@example.invalid',{unit:d.getElementById('dispatchUnit').textContent,expected:selectedName,email:d.getElementById('dispatchEmail').value});
+  d.getElementById('closeDispatch').click();d.getElementById('closeDialog').click();
+ }catch(error){log('unexpected error',false,error.message)}
+ finally{
+  if(w&&anchorClick){w.HTMLAnchorElement.prototype.click=anchorClick;w.URL.createObjectURL=createURL;w.URL.revokeObjectURL=revokeURL;const current=JSON.parse(w.localStorage.getItem(CONTACTS_KEY)||'{}');for(const key of touched){if(Object.hasOwn(originalContacts,key))current[key]=originalContacts[key];else delete current[key]}w.localStorage.setItem(CONTACTS_KEY,JSON.stringify(current));}
+  this.disabled=false;window.dispatchCheckResults=results;output.textContent=JSON.stringify({status:'complete',passed:results.filter(x=>x.pass).length,total:results.length,results},null,2);
+ }
+});
+</script></body></html>
