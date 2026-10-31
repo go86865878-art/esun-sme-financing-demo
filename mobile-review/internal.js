@@ -25,6 +25,8 @@ function optionStatus(value){return statuses.map(s=>`<option ${s===value?'select
 function estimateLabel(lead){const p=estimateRelationship(lead);return p.total===null?'<span class="muted">待補資料</span>':'<span class="amount">'+fmt(p.total)+' 萬</span><small>'+(p.complete?'首年潛在收入，未扣成本':'部分估算；未列入合計')+'</small>';}
 function serviceTags(lead){return deriveOpportunityDetails(lead).map(signal=>{const followup=getOpportunityFollowup(lead,signal.key);return `<details class="opportunity-tag"><summary><span class="tag ${signal.derived?'overseas':''}">${esc(signal.label)}</span><span class="signal-state">${esc(followup.status)}</span></summary><div class="tag-explanation"><small>${esc(signal.origin)}</small><b>觸發原因</b><p>${esc(signal.trigger)}</p><b>待確認問題</b><ul>${signal.questions.map(question=>`<li>${esc(question)}</li>`).join('')}</ul><button class="link-button" data-open="${esc(lead.id)}">記錄這筆案例的線索跟進 →</button></div></details>`;}).join('');}
 function render(){
+  $('clearData').disabled=leads.length===0;
+  $('clearData').textContent=leads.length?'一鍵清除全部案件（'+leads.length+'）':'一鍵清除全部案件';
   const completed=leads.map(l=>({lead:l,p:estimateRelationship(l)})).filter(x=>x.p.complete);
   $('statLeads').textContent=leads.length;$('statInterests').textContent=leads.reduce((n,l)=>n+l.services.length,0);$('statComplete').textContent=completed.length;
   $('statPotential').textContent=completed.length?fmt(completed.reduce((n,x)=>n+x.p.total,0))+'～'+fmt(completed.reduce((n,x)=>n+x.p.totalHigh,0))+' 萬':'—';
@@ -86,7 +88,18 @@ $('statusFilter').innerHTML='<option value="">全部狀態</option>'+statuses.ma
 $('serviceFilter').addEventListener('change',render);$('statusFilter').addEventListener('change',render);
 $('closeDialog').addEventListener('click',()=>$('leadDialog').close());
 
-$('clearData').addEventListener('click',()=>{if(!leads.length)return announce('目前沒有本機示範需求。');if(!confirm('清除此瀏覽器的全部示範需求？路由表與貢獻假設會保留。'))return;leads=[];persist();announce('已清除本機示範需求。');});
+$('clearData').addEventListener('click',()=>{
+ const current=loadDemoLeads();
+ if(!current.length){leads=[];render();return announce('目前沒有可清除的案件。');}
+ if(!confirm('確定清除這個瀏覽器的全部 '+current.length+' 筆案件？\n包含篩選未顯示的案件及其資料、收益假設與跟進紀錄，清除後無法復原。\n服務地區、主管信箱及前台草稿會保留。'))return;
+ try{
+  saveDemoLeads([]);leads=[];activeId=null;
+  $('leadDialog').close();$('dispatchDialog')?.close();
+  $('serviceFilter').value='';$('statusFilter').value='';
+  history.replaceState(null,'',location.pathname+location.search+'#opportunities');
+  render();announce('已清除全部 '+current.length+' 筆案件，可以重新開始展示。');
+ }catch(error){announce('清除失敗，案件尚未清除；請確認瀏覽器允許本機儲存。');}
+});
 window.addEventListener('storage',e=>{if([LEADS_KEY,ROUTES_KEY,ROUTING_KEY].includes(e.key)&&$('dispatchDialog')?.open){$('dispatchDialog').close();announce('案件或分派設定已在其他分頁變更，請重新開啟派任通知確認收件人。');}if(e.key===LEADS_KEY){leads=loadDemoLeads();render();if($('leadDialog').open){const id=activeId;if(leads.some(l=>l.id===id))openLead(id);else $('leadDialog').close();}}if(e.key===ROUTES_KEY){routes=loadRoutes();renderRoutes();render();}if(e.key===SETTINGS_KEY){settings=loadSettings();for(const k of Object.keys(DEFAULT_SETTINGS))$(k).value=settings[k];render();}});
 renderRoutes();render();
 

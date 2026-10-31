@@ -57,7 +57,7 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
   }
   const lead=JSON.parse(localStorage.getItem(LEADS_KEY))[0];
   localStorage.setItem(ROUTING_KEY,JSON.stringify({threshold:600}));
-  back=await create('internal.html?v=value2#lead='+lead.id);
+  back=await create('internal.html?v=clear1#lead='+lead.id);
   await until(()=>back.contentDocument.getElementById('leadDialog').open);
   const bd=back.contentDocument;
   log('backend displays submitted raw financial figures',bd.querySelector('.received-health-inputs')?.textContent.includes('12,345')&&bd.querySelector('.received-health-inputs')?.textContent.includes('-9.5'));
@@ -106,6 +106,20 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
    }
   }finally{w.HTMLAnchorElement.prototype.click=originalClick;w.URL.createObjectURL=originalURL;w.URL.revokeObjectURL=originalRevoke;}
   log('390px mobile layout has no horizontal overflow',d.documentElement.scrollWidth<=w.innerWidth,{page:d.documentElement.scrollWidth,viewport:w.innerWidth});
+  back=await create('internal.html?v=clear1');
+  let clearDoc=back.contentDocument,clearWin=back.contentWindow;
+  const originalConfirm=clearWin.confirm;
+  const kept=new Map(Object.keys(localStorage).filter(k=>k!==LEADS_KEY).map(k=>[k,localStorage.getItem(k)]));
+  clearWin.confirm=()=>false;clearDoc.getElementById('clearData').click();
+  log('cancel clear keeps all cases',JSON.parse(localStorage.getItem(LEADS_KEY)).length===4&&clearDoc.querySelectorAll('#leadRows tr').length===4);
+  const clearFilter=clearDoc.getElementById('serviceFilter');clearFilter.value='payroll';clearFilter.dispatchEvent(new clearWin.Event('change',{bubbles:true}));
+  let confirmText='';clearWin.confirm=text=>{confirmText=text;return true;};clearDoc.getElementById('clearData').click();clearWin.confirm=originalConfirm;
+  log('one-click clear includes filtered-out cases and resets totals',confirmText.includes('全部 4 筆')&&JSON.parse(localStorage.getItem(LEADS_KEY)).length===0&&clearDoc.getElementById('statLeads').textContent==='0'&&clearDoc.querySelectorAll('#leadRows tr').length===0&&clearFilter.value==='');
+  log('case clearing preserves settings and frontend draft',[...kept].every(([k,value])=>localStorage.getItem(k)===value));
+  const oldClearDoc=clearDoc;clearWin.location.reload();await until(()=>back.contentDocument!==oldClearDoc&&back.contentDocument?.readyState==='complete'&&back.contentDocument?.getElementById('clearData'));
+  clearDoc=back.contentDocument;
+  log('cleared cases stay empty after reload and clear button is disabled',JSON.parse(localStorage.getItem(LEADS_KEY)).length===0&&!clearDoc.getElementById('emptyLeads').hidden&&clearDoc.getElementById('clearData').disabled);
+
  }catch(error){log('exception',false,error.message)}
  finally{
   frame?.remove();back?.remove();await pause(100);
