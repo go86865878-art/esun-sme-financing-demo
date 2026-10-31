@@ -1,17 +1,17 @@
 import {sanitizeConsultation,enquiryPlan} from './consultation-context.js';
 // Shared local-only demo handoff. No network request or bank system integration.
-export const LEADS_KEY = 'esun_franchise_demo_leads_v1';
-export const ROUTES_KEY = 'esun_franchise_demo_routes_v1';
-export const SETTINGS_KEY = 'esun_franchise_demo_settings_v1';
+export const LEADS_KEY = 'esun_mobile_review_demo_leads_v1';
+export const ROUTES_KEY = 'esun_mobile_review_demo_routes_v1';
+export const SETTINGS_KEY = 'esun_mobile_review_demo_settings_v1';
 export const CONSENT_VERSION = 'franchise-consultation-v1-20261031';
 export const SERVICES = Object.freeze({loan:'融資規劃',deposit:'活存與資金管理',collateral:'廠房／店面抵押',payment:'收付通與收款整合',ebank:'企業網路銀行'});
 export const MODELS = Object.freeze({working:'營運週轉金',equipment:'中央廚房與設備',expansion:'展店與開張',overseas:'海外投資／拓店'});
 export const DEFAULT_SETTINGS = Object.freeze({depositSpread:1,loanSpread:2,paymentRate:0.3});
 export const DEFAULT_ROUTES = Object.freeze([
-  {city:'臺北市',district:'*',team:'北區示範服務組',rm:'示範 RM A'},
-  {city:'新北市',district:'*',team:'新北示範服務組',rm:'示範 RM B'},
-  {city:'桃園市',district:'*',team:'桃園示範服務組',rm:'示範 RM C'},
-  {city:'臺中市',district:'*',team:'中區示範服務組',rm:'示範 RM D'},
+  {city:'臺北市',district:'*',team:'北區示範服務組',rm:'小宇（示範）'},
+  {city:'新北市',district:'*',team:'新北示範服務組',rm:'小愷（示範）'},
+  {city:'桃園市',district:'*',team:'桃園示範服務組',rm:'大鈞（示範）'},
+  {city:'臺中市',district:'*',team:'中區示範服務組',rm:'小玉（示範）'},
   {city:'高雄市',district:'*',team:'南區示範服務組',rm:'示範 RM E'}
 ]);
 export const AREAS = Object.freeze({
@@ -36,11 +36,11 @@ export const AREAS = Object.freeze({
   '金門縣':'金城鎮 金湖鎮 金沙鎮 金寧鄉 烈嶼鄉 烏坵鄉', '連江縣':'南竿鄉 北竿鄉 莒光鄉 東引鄉'
 });
 export const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export function readLocal(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):structuredClone(fallback);}catch{return structuredClone(fallback);}}
+export function readLocal(key,fallback){try{let raw=localStorage.getItem(key);if(raw===null&&key.startsWith('esun_mobile_review_')){const old=localStorage.getItem(key.replace('esun_mobile_review_','esun_franchise_'));if(old!==null){JSON.parse(old);localStorage.setItem(key,old);raw=old;}}return raw?JSON.parse(raw):structuredClone(fallback);}catch{return structuredClone(fallback);}}
 export function writeLocal(key,value){localStorage.setItem(key,JSON.stringify(value));if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent('esun-demo-update'));}
 export function loadDemoLeads(){const rows=readLocal(LEADS_KEY,[]);return Array.isArray(rows)?rows.filter(x=>x&&typeof x.id==='string'&&Array.isArray(x.services)).slice(0,200):[];}
 export function saveDemoLeads(rows){writeLocal(LEADS_KEY,rows.slice(0,200));}
-export function loadRoutes(){const rows=readLocal(ROUTES_KEY,DEFAULT_ROUTES);return Array.isArray(rows)?rows:structuredClone(DEFAULT_ROUTES);}
+export function loadRoutes(){const rows=readLocal(ROUTES_KEY,DEFAULT_ROUTES);return Array.isArray(rows)?rows.map(r=>({...r,rm:({"示範 RM A":"小宇（示範）","示範 RM B":"小愷（示範）","示範 RM C":"大鈞（示範）","示範 RM D":"小玉（示範）"})[r.rm]||r.rm})):structuredClone(DEFAULT_ROUTES);}
 export function loadSettings(){const s=readLocal(SETTINGS_KEY,DEFAULT_SETTINGS);return {...DEFAULT_SETTINGS,...s};}
 export function routeFor(city,district,routes=loadRoutes()){return routes.find(r=>r.city===city&&r.district===district)||routes.find(r=>r.city===city&&r.district==='*')||null;}
 export function emptyFinance(){return {depositBalance:null,loanBalance:null,monthlyVolume:null,annualEbankFee:null,operatingCost:0,creditCost:0,capitalCost:0};}

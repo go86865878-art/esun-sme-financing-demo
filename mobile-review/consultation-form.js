@@ -1,6 +1,6 @@
 import {financingNeed} from './financing-need.js';
 import {BUSINESS_TYPES,PURPOSE_TITLES} from './franchise-scenarios.js';
-import {createLead,loadDemoLeads,saveDemoLeads,fillCities,fillDistricts,serviceChecks,esc} from './opportunity.js';
+import {createLead,loadDemoLeads,saveDemoLeads,fillCities,fillDistricts,serviceChecks,esc} from './opportunity.js?v=cases1';
 export function mountConsultation({target,getContext}){
  const host=document.querySelector(target);if(!host)return null;
  host.innerHTML='<div class="consultation-heading"><div><div class="eyebrow green">LET US UNDERSTAND YOUR NEXT STEP</div><h2>留下一份需求，接上下一次討論。</h2><p>正在準備開店、擴店或調度資金？讓服務團隊先了解您的經營型態與想談的事。</p></div><img src="esun-meow.png" alt="玉山喵喵"></div><p class="demo-form-note"><strong>展示版諮詢：</strong>本頁僅在同一瀏覽器建立後台示範案件，不會通知銀行或跨裝置收件。請使用假資料體驗。</p><p class="optional-help">選填資料越完整，銀行越能協助資金規劃與整合；金額或時間尚未確定也可以先留白。</p><form id="consultationForm"><div class="consultation-fields"><label>企業／門市稱呼（示範）<input name="company" maxlength="60" placeholder="例如：巷口茶飲示範店" required></label><label>經營型態<select name="businessType">'+BUSINESS_TYPES.map(x=>'<option>'+esc(x)+'</option>').join('')+'</select></label><label>這次主要需求<select name="purpose">'+Object.entries(PURPOSE_TITLES).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')+'</select></label><label>預計融資需求（萬元，選填）<input name="amount" type="number" min="0" max="100000000" step="0.01" placeholder="不確定可先留白"></label><label>營業縣市<select name="city" required></select></label><label>營業行政區<select name="district" required><option value="">請先選縣市</option></select></label><label>方便聯繫時段<select name="preferredTime"><option>再與我確認</option><option>平日上午</option><option>平日下午</option><option>平日傍晚</option></select></label><label>預計用款月份（選填）<input name="desiredMonth" type="month"></label></div><label class="consultation-wide">預約諮詢內容<textarea name="note" maxlength="1500" rows="4" placeholder="例如：預計加盟飲料店，想了解加盟金、裝修設備和開店前半年週轉金怎麼安排。" required></textarea></label><details class="consultation-more"><summary>補充經營與聯絡資料（選填）</summary><p class="optional-help">提供越完整，銀行越能協助評估資金規劃與整合；不確定的內容可以先留白。</p><div class="consultation-fields"><label>加盟／自有品牌<input name="brand" maxlength="60" placeholder="示範品牌名稱"></label><label>目前店數<input name="storeCount" type="number" min="0" max="100000" step="1"></label><label>聯絡稱呼（示範）<input name="contact" maxlength="40" placeholder="請使用假名"></label><label>聯絡電話（示範）<input name="phone" maxlength="40" inputmode="tel" placeholder="請使用示範電話"></label><label class="full-field">營業地址（選填）<input name="address" maxlength="160" placeholder="可先填主要道路，方便討論服務據點"></label></div><div class="position-row"><button type="button" class="outline" id="useBusinessPosition">使用目前位置找附近據點</button><button type="button" class="text-button" id="clearBusinessPosition" hidden>移除定位</button><span id="positionMessage" role="status">請在營業地點附近使用；不定位仍可依行政區提供候選據點。</span></div><fieldset><legend>還想了解哪些服務？</legend>'+serviceChecks('consult')+'</fieldset></details><label class="consultation-attach"><input type="checkbox" name="includePlan" checked>一併附上這次已更新的試算與財務健檢</label><p id="consultationAttachment" class="tiny" role="status"></p><label class="consultation-consent"><input type="checkbox" name="consent" required><span>我同意將本次填寫內容與選擇附上的規劃，保存至此瀏覽器的後台示範工作台；我知道尚未正式送件，也不會收到銀行回覆。</span></label><div class="actions"><button class="button" type="submit">建立諮詢需求 →</button><button class="outline" type="button" id="loadConsultationExample">帶入示範需求</button></div><p id="consultationFeedback" role="status"></p></form>';
@@ -33,6 +33,7 @@ export function mountConsultation({target,getContext}){
   const ctx=getContext(),include=f.includePlan.checked;
   if(include&&(!ctx.plan||ctx.planDirty||ctx.healthDirty||ctx.timingStale))throw Error('規劃內容已變更，請更新試算／健檢後再附上，或取消附上規劃。');
   const data=Object.fromEntries(new FormData(form).entries());
+  if(include)data.amount=financingNeed(ctx.plan).amount;
   const services=['loan',...Array.from(form.querySelectorAll('[name=consultService]:checked'),x=>x.value)];
   const consultation={...data,purpose:include?ctx.plan.model:data.purpose,position,summary:include?ctx.summary:'未附試算，請依客戶自述需求進一步確認。',health:include?ctx.health?.out:null,documents:ctx.documents};
   const lead=createLead({plan:include?ctx.plan:null,city:f.city.value,district:f.district.value,services,consultation,label:f.company.value,source:'預約諮詢表單（本機示範）',consent:f.consent.checked});
@@ -40,6 +41,16 @@ export function mountConsultation({target,getContext}){
   saveDemoLeads([lead,...rows]);saved=true;button.disabled=true;
   message.innerHTML='<div class="consultation-success"><b>已建立這筆示範諮詢</b><span>案件編號：'+esc(lead.id)+'</span><a class="button" href="internal.html#lead='+encodeURIComponent(lead.id)+'" target="_blank" rel="noopener">查看後台這筆需求 ↗</a><small>僅同一瀏覽器可見；未通知銀行或預約實際時段。</small></div>';
  }catch(error){message.textContent=error.message||'無法儲存，請確認瀏覽器允許本機儲存。';message.className='error';}});
- refresh();return {refresh};
+ function fillCase(data){
+  form.reset();position=null;signature='';hadPlan=false;saved=false;previousPurpose=null;
+  f.city.value=data.city;fillDistricts(f.district,data.city);f.district.value=data.district;
+  for(const key of ['company','businessType','purpose','amount','brand','storeCount','contact','phone','preferredTime','desiredMonth','note','address'])if(f[key])f[key].value=data[key]??'';
+  form.querySelectorAll('[name=consultService]').forEach(el=>el.checked=data.services.includes(el.value));
+  f.consent.checked=false;button.disabled=false;message.textContent='已填入案例資料；確認後勾選同意，再建立諮詢需求。';
+  document.getElementById('positionMessage').textContent='案例使用虛構門牌；依縣市與行政區列候選據點，不使用目前裝置位置。';
+  document.getElementById('clearBusinessPosition').hidden=true;
+  refresh();f.includePlan.checked=!!getContext().plan;f.consent.checked=false;
+ }
+ refresh();return {refresh,fillCase};
 }
 

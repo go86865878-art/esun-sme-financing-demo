@@ -1,6 +1,6 @@
 import {BRANCHES,BRANCH_SOURCE} from './branch-data.js';
-import {ROUTING_KEY,BRANCH_COORDS_KEY,validPoint,validThreshold,suggestAssignment} from './branch-routing.js';
-import {esc,readLocal,writeLocal} from './opportunity.js';
+import {ROUTING_KEY,BRANCH_COORDS_KEY,validPoint,validThreshold,suggestAssignment} from './branch-routing.js?v=cases1';
+import {esc,readLocal,writeLocal} from './opportunity.js?v=cases1';
 export function routingThreshold(){try{return validThreshold(readLocal(ROUTING_KEY,{}).threshold)}catch{return null}}
 export function branchCatalogue(){const overrides=readLocal(BRANCH_COORDS_KEY,{});return BRANCHES.map(branch=>{const point=overrides?.[branch.id];return validPoint(point)?{...branch,lat:point.lat,lng:point.lng,coordinateSource:'管理者補登（請覆核）'}:branch;});}
 const number=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:1}):'待確認';

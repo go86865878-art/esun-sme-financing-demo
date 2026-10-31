@@ -1,6 +1,6 @@
 import {financingNeed} from './financing-need.js';
-export const ROUTING_KEY='esun_franchise_routing_v1';
-export const BRANCH_COORDS_KEY='esun_franchise_branch_coords_v1';
+export const ROUTING_KEY='esun_mobile_review_routing_v1';
+export const BRANCH_COORDS_KEY='esun_mobile_review_branch_coords_v1';
 export function validThreshold(raw){
  if(raw===null||raw===undefined||String(raw).trim()==='')return null;
  const n=Number(raw);if(!Number.isFinite(n)||n<=0||n>100000000)throw Error('分派門檻請填大於 0 的有效萬元金額。');return n;
@@ -32,6 +32,7 @@ export function suggestAssignment(lead,{threshold=null,branches=[],routes=[]}={}
   return {kind:'center',label:'建議由區域中心承接',team:route?.team||'區域中心待人工指定',rm:route?.rm||'待指定人員',eligible:!!route,need,candidates,note:'達設定門檻（含），區域中心仍依服務權責人工確認。'};
  }
  const branch=candidates.items[0];
- return {kind:'branch',label:'建議由分行承接',team:branch?.name||'分行待人工選擇',rm:'分行服務窗口（示範）',branch,eligible:!!branch,need,candidates,note:branch?.distance!==null&&branch?.distance!==undefined?'在已載入且有座標的據點中距離較近，仍需人工確認。':'暫以同區／同縣市候選優先；尚非最近距離判定。'};
+ const route=routes.find(r=>r.city===lead.city&&r.district===lead.district)||routes.find(r=>r.city===lead.city&&r.district==='*');
+ return {kind:'branch',label:'建議由分行承接',team:branch?.name||'分行待人工選擇',rm:route?.rm||'分行服務窗口（示範）',branch,eligible:!!branch,need,candidates,note:branch?.distance!==null&&branch?.distance!==undefined?'在已載入且有座標的據點中距離較近，仍需人工確認。':'暫以同區／同縣市候選優先；尚非最近距離判定。'};
 }
 

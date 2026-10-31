@@ -1,5 +1,5 @@
 import {financingNeed} from './financing-need.js';
-import {esc} from './opportunity.js';
+import {esc} from './opportunity.js?v=cases1';
 import {PURPOSE_TITLES} from './franchise-scenarios.js';
 const fmt=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:1}):'待確認';
 const status={green:'健康',yellow:'注意',red:'警示',na:'資料待補'};

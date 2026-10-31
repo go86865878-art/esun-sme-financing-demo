@@ -1,7 +1,8 @@
-import {receivedConsultationCard} from './planning-cards.js';
-import {mountBranchMap,branchCatalogue,routingThreshold,routeDescription} from './branch-map.js';
-import {suggestAssignment,ROUTING_KEY,BRANCH_COORDS_KEY} from './branch-routing.js';
-import {LEADS_KEY,ROUTES_KEY,SETTINGS_KEY,SERVICES,MODELS,AREAS,DEFAULT_ROUTES,DEFAULT_SETTINGS,FOLLOWUP_STATUSES,esc,loadDemoLeads,saveDemoLeads,loadRoutes,loadSettings,writeLocal,routeFor,calculatePotential,deriveOpportunitySignals,deriveOpportunityDetails,getOpportunityFollowup,updateOpportunityFollowup,resetDemoSamples,createLead,fillCities,fillDistricts,serviceChecks} from './opportunity.js';
+import {addMissingCaseLeads,prepareCaseRouting} from './demo-cases.js?v=cases1';
+import {receivedConsultationCard} from './planning-cards.js?v=cases1';
+import {mountBranchMap,branchCatalogue,routingThreshold,routeDescription} from './branch-map.js?v=cases1';
+import {suggestAssignment,ROUTING_KEY,BRANCH_COORDS_KEY} from './branch-routing.js?v=cases1';
+import {LEADS_KEY,ROUTES_KEY,SETTINGS_KEY,SERVICES,MODELS,AREAS,DEFAULT_ROUTES,DEFAULT_SETTINGS,FOLLOWUP_STATUSES,esc,loadDemoLeads,saveDemoLeads,loadRoutes,loadSettings,writeLocal,routeFor,calculatePotential,deriveOpportunitySignals,deriveOpportunityDetails,getOpportunityFollowup,updateOpportunityFollowup,resetDemoSamples,createLead,fillCities,fillDistricts,serviceChecks} from './opportunity.js?v=cases1';
 
 const $=id=>document.getElementById(id);
 const fmt=n=>new Intl.NumberFormat('zh-TW',{maximumFractionDigits:2}).format(n);
@@ -25,7 +26,7 @@ function render(){
   $('filterCount').textContent=`顯示 ${filtered.length} / ${leads.length} 筆`;
   $('emptyLeads').hidden=filtered.length>0;
   if(!filtered.length&&leads.length){$('emptyLeads').innerHTML='<h3>沒有符合條件的案例</h3><p>請調整服務或狀態篩選。</p>';}
-  else if(!leads.length){$('emptyLeads').innerHTML='<span class="empty-icon" aria-hidden="true">▦</span><h3>等待第一份服務需求</h3><p>在客戶規劃頁完成試算，勾選同意並建立示範服務需求；<br>或按「重新載入／重設 4 筆假資料」開始操作。</p><a href="index.html#simulator">前往客戶規劃頁 →</a>';}
+  else if(!leads.length){$('emptyLeads').innerHTML='<span class="empty-icon" aria-hidden="true">▦</span><h3>等待第一份服務需求</h3><p>在客戶規劃頁完成試算，勾選同意並建立示範服務需求；<br>或按「帶入 4 個完整案例」開始操作。</p><a href="index.html#simulator">前往客戶規劃頁 →</a>';}
   $('leadRows').innerHTML=filtered.map(l=>{const suggested=suggestionFor(l),assigned=l.assignment;return `<tr><td><b>${esc(l.label)}</b><small>${esc(MODELS[l.plan?.model]||'未分類規劃')} · ${esc(l.source)}</small><small>${esc(stamp(l.at))}</small>${l.consultation?`<small>${esc(l.consultation.businessType)} · ${esc(l.consultation.preferredTime)}</small>`:''}</td><td>${esc(l.city)}<br>${esc(l.district)}</td><td>${serviceTags(l)}</td><td>${estimateLabel(l)}</td><td>${assigned?`<b>${esc(assigned.rm)}</b><small>${esc(assigned.team)} · 已人工確認</small>`:suggested?`${esc(suggested.rm)}<small>${esc(suggested.team)} · 待確認</small>`:'待人工確認<small>尚未設定相符路由</small>'}</td><td><span>${esc(l.status)}</span></td><td><button class="link-button" data-open="${esc(l.id)}">查看詳情 →</button></td></tr>`;}).join('');
   mapController?.refresh();
 }
@@ -66,7 +67,11 @@ $('routeRows').addEventListener('click',e=>{const b=e.target.closest('[data-dele
 for(const k of Object.keys(DEFAULT_SETTINGS))$(k).value=settings[k];
 $('settingsForm').addEventListener('submit',e=>{e.preventDefault();const next={};for(const k of Object.keys(DEFAULT_SETTINGS)){const n=Number($(k).value);if(!Number.isFinite(n)||n<(k==='paymentRate'?0:-100)||n>100)return announce('請檢查利差或費率，應為有效的百分比。');next[k]=n;}settings=next;writeLocal(SETTINGS_KEY,settings);render();announce('已更新示範假設，所有案例參考值已重新計算。');});
 
-function seedSamples(){try{leads=resetDemoSamples(leads);persist();if($('leadDialog').open)$('leadDialog').close();$('serviceFilter').value='';$('statusFilter').value='';render();announce('已重新載入／重設 4 筆內建假資料，恢復預設金額、未分派與空白分派。其他案例與全站利差／費率設定均保留。');}catch(error){announce(error.message);}}
+function seedSamples(){try{
+ const before=leads.length;leads=addMissingCaseLeads(leads);prepareCaseRouting();routes=loadRoutes();renderRoutes();persist();
+ if($('leadDialog').open)$('leadDialog').close();$('serviceFilter').value='';$('statusFilter').value='';render();
+ announce('已補入 '+(leads.length-before)+' 筆完整情境案例；既有案件、分派與跟進紀錄均保留。');
+}catch(error){announce(error.message);}}
 $('loadSamples').addEventListener('click',seedSamples);
 $('leadRows').addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(b)openLead(b.dataset.open);});
 $('serviceFilter').innerHTML='<option value="">全部服務與用途線索</option>'+Object.entries(SERVICES).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')+'<option value="overseas">海外投資線索（依用途）</option>';
@@ -95,5 +100,6 @@ function openRequestedLead(){
 }
 addEventListener('hashchange',openRequestedLead);
 addEventListener('storage',event=>{if(event.key===ROUTING_KEY||event.key===BRANCH_COORDS_KEY){mapController?.refresh();render();}});
+if(new URLSearchParams(location.search).get('cases')==='1')seedSamples();
 openRequestedLead();
 

@@ -1,7 +1,8 @@
+import {DEMO_CASES,getDemoCase,caseConsultation,prepareCaseRouting} from './demo-cases.js?v=cases1';
 import {financingNeed} from './financing-need.js';
 import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js';
-import {mountConsultation} from './consultation-form.js';
-import {planningCard} from './planning-cards.js';
+import {mountConsultation} from './consultation-form.js?v=cases1';
+import {planningCard} from './planning-cards.js?v=cases1';
 import {PLAN_EXAMPLES,HEALTH_EXAMPLES,PURPOSE_TITLES,profitabilityMarkup} from './franchise-scenarios.js';
 import {mountTiming} from './timing.js';
 import {buildConsultationSummary,consultationPrintHTML} from './consultation.js';
@@ -27,7 +28,7 @@ models.working.desc='從備料、平台撥款到供應商帳期，先估算日�
 models.expansion.desc='把加盟金、裝修、設備與開店爬坡期一起規劃，先看資金，再看店能不能撐過起步期。';
 models.equipment.desc='從中央廚房、冷鏈、製程到門市設備，將大筆投入拆成可掌握的還款安排。';
 models.overseas.desc='海外拓店先分清台幣與美元支出，再看匯率變動會增加多少台幣資金壓力。';
-let consultationFlow=null;
+let consultationFlow=null,activeTeachingCase=null;
 let current='working',mode='dual',lastPlan=null,lastHealth=null,planDirty=false,healthDirty=false;
 const drafts={},checkedDocs=readDocumentChecks();
 let timing=null,timingState={ready:false,stale:false},healthStep=0;
@@ -122,7 +123,7 @@ function planningCover(r){const o=r.out;return {name:'喵喵規劃卡',widths:[2
  ['融資規劃需求',financingNeed(r).amount,'萬元'],
  ['預計用款',$('plannedUseMonth').value||'待確認'],
  ['試算時間',r.at],
- ['參考範例',PLAN_EXAMPLES[r.model][Number($('businessExample').value)||0].name],
+ ['參考範例',activeTeachingCase?.model===r.model?activeTeachingCase.shortName:PLAN_EXAMPLES[r.model][Number($('businessExample').value)||0].name],
  [],[{v:'下一步怎麼走',style:'header'}],
  ['01 看懂數字','確認用途、需求與還款安排。'],
  ['02 備好資料','文件頁提供可勾選的準備方向。'],
@@ -133,3 +134,33 @@ function planningCover(r){const o=r.out;return {name:'喵喵規劃卡',widths:[2
  ['使用說明','此活頁簿保留可編輯的數字與原始輸入；喵喵圖像僅作版面裝飾。']
  ]};}
 
+
+// The full case workflow fills the real calculators and consultation form.
+function applyTeachingCase(id){
+ const item=getDemoCase(id);if(!item)return;
+ document.querySelector('#monthlyPlanner .timing-reset')?.click();
+ current=item.model;mode=item.input.mode||'dual';drafts[current]={...item.input};renderModel();
+ $('plannedUseMonth').value=item.month;
+ healthFields.forEach(field=>$('h_'+field.id).value=item.health[field.id]);
+ doCalculate();doHealth();activeTeachingCase=item;
+ consultationFlow.fillCase({...caseConsultation(item,lastPlan),city:item.city,district:item.district,services:item.services});
+ $('planDataNote').textContent='完整案例：'+item.shortName+'｜RM '+item.rm+'。數值已計算；可修改後重新試算。';
+ $('healthDataNote').textContent='案例健檢：'+item.company+'。為投資前資料，尚未計入本案新增借款。';
+ $('casePicker').value=item.id;
+ $('activeCaseSummary').hidden=false;
+ $('activeCaseName').textContent=item.shortName+' · RM '+item.rm;
+ $('activeCaseStory').textContent=item.story;
+ $('activeCaseAddress').textContent=item.address;
+ $('activeCaseNote').textContent=item.insight;
+ $('activeCaseReport').href='case-guide.html#case-'+item.id;
+ try{prepareCaseRouting();}catch{toast('案例已填入，但瀏覽器無法保存分派設定。');}
+ const url=new URL(location.href);url.searchParams.set('case',item.id);url.hash='simulator';history.replaceState(null,'',url);
+ window.dispatchEvent(new CustomEvent('esun-case-loaded',{detail:{model:item.model}}));
+ updateHandoffState();$('simulator').scrollIntoView({block:'start',behavior:'instant'});
+ toast('已帶入'+item.shortName+'的試算、健檢、地址及諮詢內容。');
+}
+$('casePicker').innerHTML=DEMO_CASES.map(item=>'<option value="'+item.id+'">'+item.shortName+' · '+item.rm+'</option>').join('');
+$('casePicker').value='02';
+$('applyTeachingCase').addEventListener('click',()=>applyTeachingCase($('casePicker').value));
+const requestedCase=new URLSearchParams(location.search).get('case');
+if(requestedCase){if(document.readyState==='complete')applyTeachingCase(requestedCase);else window.addEventListener('load',()=>applyTeachingCase(requestedCase),{once:true});}

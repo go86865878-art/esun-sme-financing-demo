@@ -84,6 +84,11 @@ if(body.classList.contains('mobile-experience')){
   if(mobile.matches){navigate(location.hash.slice(1)||pane);$('mobileModelSelect').value=document.querySelector('.model-card.active')?.dataset.model||'working';}
   if(previousMobile!==mobile.matches){disclosures.forEach(d=>d.open=!mobile.matches);previousMobile=mobile.matches;}
  }
+ window.addEventListener('esun-case-loaded',event=>{
+  $('mobileModelSelect').value=event.detail.model;
+  for(const id of ['simulator','health']){$(id).querySelector('[data-mobile-view=result]').disabled=false;setView(id,'result');}
+  if(mobile.matches)navigate('simulator',{scroll:true});
+ });
  mobile.addEventListener('change',sync);sync();
  function keyboardState(){
   const focused=document.activeElement;
@@ -105,3 +110,4 @@ if(body.classList.contains('mobile-workbench')){
  const table=document.querySelector('.lead-table');
  if(table){const labels=[...table.querySelectorAll('th')].map(x=>x.textContent);const labelRows=()=>table.querySelectorAll('tbody tr').forEach(row=>[...row.cells].forEach((cell,i)=>cell.dataset.label=labels[i]||''));labelRows();new MutationObserver(labelRows).observe($('leadRows'),{childList:true});}
 }
+

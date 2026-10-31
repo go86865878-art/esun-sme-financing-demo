@@ -1,0 +1,40 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>案例流程驗證</title><style>body{font:14px/1.7 system-ui;background:#edf4f0;color:#234b3c;margin:20px}button{padding:12px;background:#007e6e;color:white;border:0;border-radius:8px;cursor:pointer}iframe{display:block;width:390px;max-width:100%;height:780px;border:1px solid #93bbaa;margin:18px 0;background:white}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:18px;max-width:900px}</style></head><body><h1>四案例：前台 → 後台流程檢查</h1><p>以390px手機寬度操作真實表單；只建立虛構測試需求，結束後刪除本次建立的驗證案件。</p><button id="runCaseChecks">執行案例流程檢查</button><pre id="caseCheckResult" role="status">尚未執行</pre><iframe id="caseFrame" title="案例測試畫面" src="index.html?v=cases1"></iframe><script type="module">
+import {DEMO_CASES} from './case-data.js?v=cases1';
+import {LEADS_KEY} from './opportunity.js?v=cases1';
+const frame=document.getElementById('caseFrame'),output=document.getElementById('caseCheckResult');
+const pause=ms=>new Promise(r=>setTimeout(r,ms));
+async function until(fn){for(let i=0;i<100;i++){if(fn())return;await pause(100)}throw Error('wait condition timed out')}
+async function go(url){await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('page load timed out')),15000);frame.onload=()=>{clearTimeout(timer);resolve()};frame.src=url;});await pause(250)}
+document.getElementById('runCaseChecks').addEventListener('click',async function(){
+this.disabled=true;const results=[],created=[];const log=(name,pass,observed)=>{results.push({name,pass,observed});output.textContent=JSON.stringify({status:'running',results},null,2)};
+try{
+for(let i=0;i<4;i++){
+ const item=DEMO_CASES[i];await go('index.html?case='+item.id+'&v=cases1#simulator');
+ const w=frame.contentWindow,d=w.document;await until(()=>d.getElementById('resultStatus')?.textContent==='已更新');
+ const f=d.getElementById('consultationForm').elements;
+ log(item.id+' actual inputs',Object.entries(item.input).every(([key,value])=>key==='mode'||Number(d.getElementById('p_'+key)?.value)===value),Object.fromEntries(Object.keys(item.input).filter(k=>k!=='mode').map(k=>[k,d.getElementById('p_'+k)?.value])));
+ log(item.id+' mobile result',w.innerWidth===390&&d.documentElement.scrollWidth<=390&&d.body.dataset.mobilePane==='simulator'&&d.body.dataset.simulatorView==='result',{width:w.innerWidth,pageWidth:d.documentElement.scrollWidth,pane:d.body.dataset.mobilePane,view:d.body.dataset.simulatorView});
+ log(item.id+' address and amount',f.address.value===item.address&&Math.abs(Number(f.amount.value)-[619.18,330,2156,3500][i])<.005,{address:f.address.value,amount:f.amount.value,company:f.company.value});
+ log(item.id+' consent not prechecked',!f.consent.checked&&f.includePlan.checked,{consent:f.consent.checked,attachment:f.includePlan.checked});
+ const before=JSON.parse(w.localStorage.getItem(LEADS_KEY)||'[]');
+ d.querySelector('#mobileStepNav a[href="#consultation"]').click();f.consent.checked=true;d.getElementById('consultationForm').requestSubmit();await pause(150);
+ const saved=JSON.parse(w.localStorage.getItem(LEADS_KEY)||'[]').filter(row=>!before.some(old=>old.id===row.id));
+ log(item.id+' submitted once',saved.length===1,{newRecords:saved.length,feedback:d.getElementById('consultationFeedback').textContent});
+ if(saved.length!==1)throw Error('Consultation was not stored');
+ const lead=saved[0];created.push(lead.id);
+ log(item.id+' backend snapshot',lead.consultation.address===item.address&&lead.consultation.health.items.length===5&&lead.plan.inputs[Object.keys(item.input).find(k=>k!=='mode')]===item.input[Object.keys(item.input).find(k=>k!=='mode')],{city:lead.city,district:lead.district,address:lead.consultation.address,healthItems:lead.consultation.health.items.length,plan:lead.plan.model});
+ const success=d.querySelector('.consultation-success a');await go(success.href);
+ const b=frame.contentDocument;await until(()=>b.getElementById('leadDialog').open);
+ log(item.id+' backend visible',b.getElementById('detailBody').textContent.includes(item.address)&&b.getElementById('assignmentText').textContent.includes(item.rm),{assignment:b.getElementById('assignmentText').textContent,title:b.getElementById('dialogTitle').textContent});
+ b.getElementById('assignLead').click();await pause(120);
+ const confirmed=JSON.parse(frame.contentWindow.localStorage.getItem(LEADS_KEY)||'[]').find(x=>x.id===lead.id);
+ log(item.id+' confirmed RM',confirmed.assignment?.rm?.includes(item.rm)&&confirmed.assignment.kind===(i===1?'branch':'center'),confirmed.assignment);
+}
+const pdf=await fetch('esun-financing-scenarios-A4.pdf');const bytes=new Uint8Array(await pdf.arrayBuffer());log('PDF directly accessible',pdf.ok&&String.fromCharCode(...bytes.slice(0,5))==='%PDF-',{status:pdf.status,bytes:bytes.length});
+}catch(error){log('unexpected error',false,error.message)}
+finally{
+ const rows=JSON.parse(localStorage.getItem(LEADS_KEY)||'[]');localStorage.setItem(LEADS_KEY,JSON.stringify(rows.filter(row=>!created.includes(row.id))));
+ this.disabled=false;window.caseCheckResults=results;output.textContent=JSON.stringify({status:'complete',passed:results.filter(x=>x.pass).length,total:results.length,results},null,2);
+}
+});
+</script></body></html>
