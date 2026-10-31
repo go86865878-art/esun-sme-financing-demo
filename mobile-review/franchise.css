@@ -42,3 +42,21 @@
 
 .profit-values{display:grid;gap:7px;font-size:13px;margin-top:12px}.profit-values span{display:flex;justify-content:space-between;gap:12px}.profit-values b{white-space:nowrap}
 
+
+.consultation-product-needs{min-width:0;border:1px solid #bddbcf;background:#eef8f3;padding:18px;border-radius:12px;margin:22px 0}
+.consultation-product-needs legend{font-weight:800;color:#006e65;font-size:17px;padding:0 6px}
+.consultation-product-needs>p{font-size:13px;color:#526d63;margin:0 0 12px}
+.product-need-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.product-need{display:flex;align-items:flex-start;gap:9px;border:1px solid #c7dbd1;border-radius:9px;background:#fff;padding:14px;cursor:pointer}
+.product-need:has(input:checked){border-color:#008475;background:#dff2e9}
+.product-need input{width:19px;height:19px;margin-top:3px;flex-shrink:0;accent-color:#007d78}
+.product-need strong{display:block;font-size:15px}.product-need small{display:block;font-size:12px;color:#526d63;margin-top:5px}
+.pricing-rate-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.relationship-pricing input:not([type=checkbox]){display:block;width:100%;min-width:0;border:1px solid #bacdc7;border-radius:8px;padding:9px;font:inherit;background:white;color:#173548}
+.relationship-pricing label{font-size:13px}.pricing-products{display:grid;gap:12px;margin:18px 0}
+.pricing-product{border:1px solid #cfdfd6;border-radius:10px;padding:14px;background:#f8fcfa}
+.pricing-product-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.pricing-product-heading span{font-size:12px;color:#53746a}
+.pricing-confirm{display:flex;align-items:center;gap:8px;margin:12px 0}.pricing-confirm input{width:18px;height:18px;accent-color:#007d78}
+.pricing-product-fields{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:12px}
+.pricing-result{background:#e7f5ef;border-radius:10px;padding:16px;margin:18px 0}.pricing-result strong,.pricing-result small{display:block}.pricing-result strong{font-size:20px;margin:8px 0;color:#006e65}.pricing-result small{color:#526d63}
+@media(max-width:590px){.product-need-options,.pricing-rate-fields,.pricing-product-fields{grid-template-columns:1fr}.consultation-product-needs{padding:14px}.product-need{padding:10px 12px}.product-need small{margin-top:2px}}

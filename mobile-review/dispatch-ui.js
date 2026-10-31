@@ -1,4 +1,4 @@
-import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js?v=supervisor1';
+import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js?v=services1';
 
 export function mountDispatchMail(){
  const dialog=document.createElement('dialog');dialog.id='dispatchDialog';dialog.className='dispatch-dialog';

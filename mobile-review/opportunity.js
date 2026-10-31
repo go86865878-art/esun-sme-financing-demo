@@ -4,7 +4,7 @@ export const LEADS_KEY = 'esun_mobile_review_demo_leads_v1';
 export const ROUTES_KEY = 'esun_mobile_review_demo_routes_v1';
 export const SETTINGS_KEY = 'esun_mobile_review_demo_settings_v1';
 export const CONSENT_VERSION = 'franchise-consultation-v1-20261031';
-export const SERVICES = Object.freeze({loan:'融資規劃',deposit:'活存與資金管理',collateral:'廠房／店面抵押',payment:'收付通與收款整合',ebank:'企業網路銀行'});
+export const SERVICES = Object.freeze({loan:'融資規劃',deposit:'活存與資金管理',collateral:'廠房／店面抵押',payment:'收付通與收款整合',ebank:'企業網路銀行',cardAcquiring:'信用卡收單',payroll:'員工薪轉',accountOpening:'公司戶開立'});
 export const MODELS = Object.freeze({working:'營運週轉金',equipment:'中央廚房與設備',expansion:'展店與開張',overseas:'海外投資／拓店'});
 export const DEFAULT_SETTINGS = Object.freeze({depositSpread:1,loanSpread:2,paymentRate:0.3});
 export const DEFAULT_ROUTES = Object.freeze([
@@ -70,6 +70,9 @@ export function deriveOpportunityDetails(lead){
     {key:'loan',label:model==='working'?'週轉融資':'融資規劃',trigger:`使用者勾選融資服務，規劃用途為「${purpose}」。${need}`,questions:[model==='working'?'新增訂單或營收需要先墊付多久？收款、備貨及付款時間是否符合實際交易？':'實際支出時點、資金用途與還款來源是什麼？是否需要分期動用？','目前可用授信與實際動用餘額多少？預估日平均貸款餘額如何推導？','是否有其他借款、到期集中還款、季節性高峰或尚未揭露的資金需求？']},
     {key:'collateral',label:'廠房／店面抵押',trigger:`使用者勾選廠房／店面抵押討論，${model==='equipment'?'目前亦選擇廠房與設備用途。':'可進一步確認是否有適合本次用途的不動產。'}尚未查證產權、估價或抵押設定，不推定擔保價值。`,questions:['不動產屬誰所有，實際用途及所在地為何？是否涉及興建或購置？','目前有無抵押設定、其他權利、租約或使用限制？應備何種權利文件？','擬議融資與工程／購置款如何銜接？抵押品評估與額度仍需正式審查。']},
     {key:'payment',label:model==='expansion'?'展店收款／收付通':'收付通與收款整合',trigger:`使用者勾選收款整合服務${model==='expansion'?'，並選擇展店與擴張，具門市收款及對帳整合的討論情境。':'，願意討論收付款及對帳流程。'}收付通與收單的計價方式仍應分別確認。`,questions:['有幾個門市或收款通路？目前使用現金、刷卡、轉帳或其他收款方式？','每月可導入的實際交易量、退款、撥款時間與對帳方式為何？','需要收付通、商店收單或兩者整合？實際費率、淨收入與導入成本如何計算？']},
+    {key:'cardAcquiring',label:'信用卡收單',trigger:'顧客勾選信用卡收單需求；先確認通路、交易量與導入條件。',questions:['需要實體門市刷卡、線上收單，或兩者都有？','預計每月刷卡交易量、客單價與撥款週期為何？','現有收單銀行、約定費率與對帳方式為何？']},
+    {key:'payroll',label:'員工薪轉',trigger:'顧客勾選員工薪轉需求；不代表已完成薪轉合作。',questions:['預計薪轉人數、每月薪資總額與發薪日為何？','員工帳戶、批次轉帳與覆核權限如何安排？','預計何時導入，是否需協助員工開戶？']},
+    {key:'accountOpening',label:'公司戶開立',trigger:'顧客勾選公司戶開立需求；開戶與實際金流往來條件仍待確認。',questions:['公司已設立，或仍在籌備？帳戶預計用途為何？','主要收付款、留存餘額與跨境交易需求為何？','預計開戶時間及辦理地區為何？']},
     {key:'ebank',label:'企業網路銀行',trigger:'使用者勾選企業網路銀行服務，願意討論操作權限與付款流程；尚未確認是否開通或有收費收入。',questions:['目前誰經辦、誰覆核？需要多少操作人員及分層授權？','是否有批次付款、薪資、跨境匯款或 ERP 對接需求？','現有網銀功能是否足夠？導入、教育訓練及年度淨手續費需如何確認？']}
   ];
   const details=definitions.filter(d=>selected.has(d.key)).map(d=>({...d,origin:'使用者明確勾選，待進一步確認需求',derived:false}));
@@ -138,7 +141,7 @@ export function createLead({plan,city,district,services=[],label,source='網站�
 }
 export function fillCities(select){select.innerHTML='<option value="">請選擇縣市</option>'+Object.keys(AREAS).map(c=>`<option>${esc(c)}</option>`).join('');}
 export function fillDistricts(select,city){select.innerHTML='<option value="">請選擇行政區</option>'+[...new Set((AREAS[city]||'').split(' ').filter(Boolean))].map(d=>`<option>${esc(d)}</option>`).join('');}
-export function serviceChecks(prefix='handoff'){return Object.entries(SERVICES).map(([key,label])=>`<label class="op-check"><input type="checkbox" name="${prefix}Service" value="${key}"><span>${label}</span></label>`).join('');}
+export function serviceChecks(prefix='handoff',keys=Object.keys(SERVICES)){return keys.filter(key=>Object.hasOwn(SERVICES,key)).map(key=>[key,SERVICES[key]]).map(([key,label])=>`<label class="op-check"><input type="checkbox" name="${prefix}Service" value="${key}"><span>${label}</span></label>`).join('');}
 
 export function mountOpportunity({getPlan,target='#resultContent'}={}){
   const host=typeof target==='string'?document.querySelector(target):target;if(!host||typeof getPlan!=='function')return null;
