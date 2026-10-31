@@ -1,0 +1,9 @@
+{
+  "name": "esun-franchise-financing-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test consultation.test.mjs engine.test.mjs opportunity.test.mjs timing.test.mjs document-data.test.mjs franchise.test.mjs",
+    "start": "node preview-server.mjs"
+  }
+}

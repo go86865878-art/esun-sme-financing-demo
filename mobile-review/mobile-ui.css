@@ -1,0 +1,289 @@
+/* Mobile workspace: readable, task-based views. Desktop retains the full page. */
+.mobile-only{display:none}
+.mobile-disclosure{display:contents}.mobile-disclosure>summary{display:none}
+.mobile-step-detail{border:0;margin:0;padding:0}
+.mobile-step-detail>summary{display:block;list-style:none;font-size:20px;font-weight:750;line-height:1.5;margin:0 0 10px}
+.mobile-step-detail>summary::-webkit-details-marker{display:none}
+.mobile-step-detail>summary small{display:block;font-size:13px;color:var(--muted)}
+.mobile-summary-actions{display:contents}
+@media screen and (max-width:760px){
+ html{scroll-padding-top:72px}
+ body.mobile-experience,body.docs-page{font-size:14px;line-height:1.6}
+ .mobile-experience .wrap,.docs-page .wrap{width:calc(100% - 28px)}
+ .mobile-experience .nav,.docs-page .nav{height:60px;min-height:60px;padding:0;flex-wrap:nowrap;gap:8px}
+ .mobile-experience .brand,.docs-page .brand{font-size:13px;gap:7px;min-width:0}
+ .mobile-experience .brand small,.docs-page .brand small{display:none}
+ .mobile-experience .brandmark,.mobile-experience .brandmark img,.docs-page .brandmark,.docs-page .brandmark img{width:28px;height:28px}
+ .mobile-experience .nav>nav,.mobile-experience .nav>.small,.mobile-experience .nav>.test,.docs-page .nav>.test{display:none}
+ .mobile-doc-link.mobile-only{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-left:auto;padding:7px 10px;border-radius:8px;background:#00786a;color:#fff!important;font-size:12px;font-weight:750;white-space:nowrap}
+ .mobile-experience .docs-mobile-entry{display:none}
+ .mobile-experience .mobile-only{display:flex}
+ .mobile-ready{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+ .mobile-ready main{display:flex;flex-direction:column;min-height:calc(100dvh - 150px)}
+ .mobile-ready[data-mobile-pane]:not([data-mobile-pane=models]) .hero,.mobile-ready[data-mobile-pane]:not([data-mobile-pane=models]) #models,
+ .mobile-ready[data-mobile-pane]:not([data-mobile-pane=simulator]) #simulator,
+ .mobile-ready[data-mobile-pane]:not([data-mobile-pane=health]) #health,
+ .mobile-ready[data-mobile-pane]:not([data-mobile-pane=consultation]) #consultation,
+ .mobile-ready[data-mobile-pane]:not([data-mobile-pane=consultation]) #documents{display:none}
+ .mobile-ready #consultation{order:3}.mobile-ready #documents{order:4}
+ .mobile-experience .section{padding:22px 0}
+ .mobile-experience .section-head{gap:8px;margin-bottom:14px}
+ .mobile-experience .section-head>div{flex-basis:100%}
+ .mobile-experience .section-num{display:none}
+ .mobile-experience h2{font-size:22px;line-height:1.4;margin:4px 0 8px;letter-spacing:-.3px}
+ .mobile-experience .section-head p{font-size:13px;line-height:1.6}
+ .mobile-experience .eyebrow,.mobile-experience .eyebrow.green{font-size:10px;letter-spacing:.7px}
+ .mobile-experience .hero{padding:24px 0 20px}
+ .mobile-experience .hero-grid{display:block}
+ .mobile-experience .hero h1{font-size:29px;line-height:1.35;letter-spacing:-.6px;margin:11px 0 10px}
+ .mobile-experience .hero p{font-size:14px;line-height:1.65;margin:9px 0}
+ .mobile-experience .hero .actions{margin:16px 0 0;gap:16px}
+ .mobile-experience .hero-link{font-size:13px}
+ .mobile-experience .mobile-disclosure{display:block;border:1px solid #d6e4dd;border-radius:10px;padding:0;margin:14px 0 0;background:#fff;font-size:13px;overflow:hidden}
+ .mobile-experience .mobile-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;min-height:44px;font-size:13px;list-style:none}
+ .mobile-disclosure>summary::-webkit-details-marker{display:none}
+ .mobile-experience .mobile-disclosure>summary:after{content:'＋';font-size:18px;font-weight:500;color:#00786a}
+ .mobile-experience .mobile-disclosure[open]>summary:after{content:'－'}
+ .mobile-experience .mobile-journey{margin-top:18px;border-color:#ffffff35;background:#ffffff08}
+ .mobile-experience .mobile-journey>summary,.mobile-experience .mobile-journey>summary:after{color:#d9eee7}
+ .mobile-experience .journey{background:transparent;border:0;padding:0 14px 15px;border-radius:0;box-shadow:none}
+ .mobile-experience .journey h2,.mobile-experience .journey>.eyebrow{display:none}
+ .mobile-experience .journey-step{padding:10px 0;gap:10px}
+ .mobile-experience .journey-step b{font-size:14px}.mobile-experience .journey-step p{font-size:12px}
+ .mobile-experience .journey-step>i{width:30px;height:30px}
+ .mobile-experience .model-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .mobile-experience .model-card,.mobile-experience .model-card.active{padding:14px;min-height:154px;border-radius:12px}
+ .mobile-experience .model-card.active{padding:13px}
+ .mobile-experience .model-card i{width:30px;height:30px;border-radius:8px}
+ .mobile-experience .model-card i svg{width:20px;height:20px}
+ .mobile-experience .model-card h3{font-size:16px;line-height:1.4;margin:11px 0 6px}
+ .mobile-experience .model-card p{display:none}
+ .mobile-experience .model-card small{font-size:12px;line-height:1.6;padding-right:0}
+ .mobile-experience .card-no{font-size:11px;top:16px;right:14px}
+ .mobile-experience .model-card .arrow{bottom:10px;right:12px}
+ .mobile-experience .franchise-offer{display:block;border:0;padding:0 14px 14px;background:transparent;margin:0}
+ .mobile-experience .offer-tag{display:none}.mobile-experience .franchise-offer b{font-size:14px}.mobile-experience .franchise-offer p,.mobile-experience .franchise-offer>a{font-size:13px}
+ .mobile-experience .panel{padding:16px;border-radius:12px}
+ .mobile-experience .panel h3{font-size:18px;line-height:1.5}
+ .mobile-experience .panel-heading h3{font-size:19px}
+ .mobile-experience .panel-heading>i{padding:8px}.mobile-experience .kicker{font-size:9px}
+ .mobile-experience .muted,.mobile-experience .entry-note{font-size:13px;line-height:1.6;margin:10px 0}
+ .mobile-experience .entry-note{padding:9px 11px}
+ .mobile-experience .button,.mobile-experience .outline,.mobile-experience .text-button{font-size:14px;min-height:44px;padding:10px 13px}
+ .mobile-experience .actions{gap:8px;margin-top:14px}
+ .mobile-experience .fields,.mobile-experience .health-layout .fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 10px}
+ .mobile-experience .field{min-width:0}
+ .mobile-experience .field label{font-size:13px;line-height:1.5;margin-bottom:6px;min-height:39px}
+ .mobile-experience .input-wrap input{font-size:16px;line-height:1.5;padding:10px 42px 10px 10px;min-height:44px;font-weight:650}
+ .mobile-experience .input-wrap span{font-size:11px;right:8px;top:14px}
+ .mobile-experience .field>small{display:none}
+ .mobile-experience.mobile-show-help .field>small{display:block;font-size:12px!important;line-height:1.6}
+ .mobile-experience .source-hint{padding:7px}
+ .mobile-experience .mobile-help{padding:7px 0;min-height:44px;border:0;background:none;color:#006e60;font-size:13px;text-decoration:underline}
+ .mobile-experience .business-example{grid-template-columns:minmax(0,1fr) auto;gap:6px 8px;padding:10px;margin:12px 0}
+ .mobile-experience .business-example label{grid-column:1/-1;font-size:13px}
+ .mobile-experience .business-example select,.mobile-experience .health-scenarios select{font-size:16px;min-height:44px;padding:8px}
+ .mobile-experience .business-example small{grid-column:1/-1;font-size:11px}
+ .mobile-experience .business-example .outline{font-size:13px;padding:7px 9px}
+ .mobile-experience .mobile-view-switch{gap:4px;background:#e5efea;border-radius:10px;padding:4px;margin:12px 0 14px}
+ .mobile-view-switch button{flex:1;min-width:0;min-height:44px;border:0;border-radius:7px;background:transparent;color:#496b60;font-size:14px;font-weight:750}
+ .mobile-view-switch button[aria-pressed=true]{background:#fff;color:#006e60;box-shadow:0 2px 7px #184b3420}
+ .mobile-experience .mobile-model-select{align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;font-size:12px;color:#557268}
+ .mobile-model-select select{font-size:16px;min-height:44px;padding:8px;border:1px solid #c9dcd1;border-radius:8px;max-width:70%;color:#174b3d;background:#fff}
+ .mobile-ready .workspace,.mobile-ready .health-layout{display:block}
+ .mobile-ready[data-simulator-view=input] #simulator .result-panel,
+ .mobile-ready[data-simulator-view=input] #simulator .handoff-panel,
+ .mobile-ready[data-simulator-view=input] #simulator .monthly-details,
+ .mobile-ready[data-simulator-view=result] #simulator .input-panel,
+ .mobile-ready[data-health-view=input] #health .health-result,
+ .mobile-ready[data-health-view=result] #health .health-layout>.panel:first-child{display:none}
+ .mobile-experience .result-panel{position:static}
+ .mobile-experience .result-top{margin-bottom:12px;flex-wrap:nowrap}
+ .mobile-experience .result-top>b{font-size:14px}
+ .mobile-experience .status-chip{font-size:11px;padding:4px 6px}
+ .mobile-experience .result-hero{padding:16px;border-radius:10px}
+ .mobile-experience .result-hero strong{font-size:30px}
+ .mobile-experience .result-hero p,.mobile-experience .result-hero>small,.mobile-experience .result-hero span{font-size:12px}
+ .mobile-experience .mobile-calculation-details{padding:0 12px 12px}
+ .mobile-experience .mobile-calculation-details>summary{padding-inline:0}
+ .mobile-experience .mobile-calculation-details:not([open]){padding-bottom:0}
+ .mobile-experience .metric{padding:10px}.mobile-experience .metric small{font-size:12px}.mobile-experience .metric b{font-size:16px}
+ .mobile-experience .bar{font-size:12px}.mobile-experience .cycle>p{font-size:12px}
+ .mobile-experience .mobile-explanation .explanation{border:0;margin:0;padding:0 14px 14px;font-size:12px}
+ .mobile-experience .plan-stale .mobile-calculation-details{filter:grayscale(1);opacity:.5}
+ .mobile-experience .result-disclaimer,.mobile-experience .tiny{font-size:12px;line-height:1.65}
+ .mobile-experience .result-panel .actions .outline,.mobile-experience .result-panel .actions .button{font-size:13px;min-height:44px}
+ .mobile-experience .handoff-panel{margin-top:14px;padding:16px;border-top-width:3px}
+ .mobile-experience .handoff-panel>.eyebrow,.mobile-experience .planning-card-heading,.mobile-experience .planning-metrics{display:none}
+ .mobile-experience .planning-card{margin:12px 0;border-radius:10px}
+ .mobile-experience .planning-kpis{padding:14px;gap:12px;grid-template-columns:1fr 1fr}
+ .mobile-experience .planning-kpis>div:first-child{grid-column:1/-1}
+ .mobile-experience .planning-kpis strong{font-size:24px}.mobile-experience .planning-kpis em{font-size:12px}
+ .mobile-experience .planning-kpis small{font-size:12px}
+ .mobile-experience .planning-health{padding:12px 14px;font-size:12px;gap:6px}
+ .mobile-experience .planning-note{font-size:11px;padding:0 14px 14px}
+ .mobile-experience .handoff-grid{grid-template-columns:1fr;gap:10px}
+ .mobile-experience .handoff-panel p,.mobile-experience .handoff-state{font-size:12px!important;line-height:1.6}
+ .mobile-experience .handoff-panel label{font-size:13px}
+ .mobile-experience .handoff-panel input[type=month]{font-size:16px;min-height:44px;padding:9px}
+ .mobile-experience .handoff-panel .actions{display:block}
+ .mobile-experience .handoff-panel .actions>a{width:100%}
+ .mobile-experience .mobile-summary-actions{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 12px}
+ .mobile-experience .mobile-summary-actions .outline{min-width:0;width:auto;flex:1;font-size:12px}
+ .mobile-experience .handoff-panel textarea{min-height:180px;font-size:14px}
+ .mobile-experience .monthly-details{margin-top:14px;padding:12px 14px}
+ .mobile-experience .monthly-details>summary{font-size:14px;min-height:28px}
+ .mobile-experience .monthly-details>p{font-size:12px}
+ .mobile-experience .health-layout>.panel:first-child>h3{font-size:17px}
+ .mobile-ready:not(.mobile-show-help) .health-layout>.panel:first-child>p.muted{display:none}
+ .mobile-experience .health-scenarios{padding:10px;margin:10px 0}
+ .mobile-experience .health-scenarios label{font-size:13px}.mobile-experience .health-scenarios p{font-size:12px}
+ .mobile-experience .data-actions{gap:10px;margin:4px 0}
+ .mobile-experience .data-actions .text-button{font-size:12px;padding:5px 0}
+ .mobile-experience .health-steps{gap:5px;margin:10px 0}
+ .mobile-experience .health-step{padding:7px 3px;min-height:44px;font-size:12px}
+ .mobile-experience .health-step span{display:none}
+ .mobile-experience .health-step-panel>p,.mobile-experience .health-step-note{font-size:12px;margin:8px 0}
+ .mobile-experience .legend{font-size:12px;margin:12px 0}
+ .mobile-experience .profit-chart{padding:13px 10px;margin:12px 0}
+ .mobile-experience .profit-headline{margin-bottom:12px}
+ .mobile-experience .profit-headline>span{font-size:13px}.mobile-experience .profit-headline strong{font-size:26px}
+ .mobile-experience .health-items{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .mobile-experience .health-item{padding:11px;margin:0;min-width:0}
+ .mobile-experience .health-item-top{display:block}
+ .mobile-experience .health-item b{font-size:13px}.mobile-experience .health-item .score{font-size:21px}
+ .mobile-experience .health-item p{font-size:12px}.mobile-experience .health-item .badge{font-size:11px;display:inline-block;margin-top:5px}
+ .mobile-experience .health-items>.tiny,.mobile-experience .health-items>.empty-result{grid-column:1/-1}
+ .mobile-experience .consultation-section{margin:20px auto;padding:17px 14px;border-radius:12px;box-shadow:none}
+ .mobile-experience .consultation-heading{gap:10px;align-items:flex-start}
+ .mobile-experience .consultation-heading h2{font-size:22px}
+ .mobile-experience .consultation-heading p{font-size:13px;line-height:1.6;margin:8px 0}
+ .mobile-experience .consultation-heading img{width:48px;height:65px}
+ .mobile-experience .consultation-heading .eyebrow{display:none}
+ .mobile-experience .demo-form-note{font-size:12px;padding:10px;margin:12px 0}
+ .mobile-experience .optional-help{font-size:12px;margin:10px 0}
+ .mobile-experience .consultation-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px}
+ .mobile-experience .consultation-fields label,.mobile-experience .consultation-wide{font-size:13px;gap:5px}
+ .mobile-experience .consultation-fields input,.mobile-experience .consultation-fields select,.mobile-experience .consultation-wide textarea{font-size:16px;padding:9px;min-height:44px}
+ .mobile-experience .consultation-wide{margin-top:12px}
+ .mobile-experience .consultation-more{padding:12px;margin:14px 0}
+ .mobile-experience .consultation-more>summary{font-size:14px;min-height:28px}
+ .mobile-experience .consultation-attach,.mobile-experience .consultation-consent{font-size:13px;line-height:1.65;gap:9px}
+ .mobile-experience .consultation-consent{padding:12px}
+ .mobile-experience .consultation-attach input,.mobile-experience .consultation-consent input{width:20px;height:20px}
+ .mobile-experience .consultation-success b{font-size:18px}
+ .mobile-experience .docs-entry-section{padding:16px 0 24px}
+ .mobile-experience .docs-entry{gap:8px}.mobile-experience .docs-entry h2{font-size:19px}
+ .mobile-experience .docs-entry p{font-size:13px}.mobile-experience .docs-entry .eyebrow{display:none}
+ .mobile-experience .integrated-services{margin-top:20px;padding-top:16px}
+ .mobile-experience .integrated-services>div>b{font-size:14px}
+ .mobile-experience .integrated-services p{font-size:12px}
+ .mobile-experience .service-mini-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .mobile-experience .service-mini-grid a{padding:12px;gap:5px}
+ .mobile-experience .service-mini-grid b{font-size:14px}.mobile-experience .service-mini-grid small,.mobile-experience .service-mini-grid span{font-size:11px}
+ .mobile-experience .mobile-bottom-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;position:fixed;inset:auto 0 0;margin:0;padding:7px 12px calc(7px + env(safe-area-inset-bottom));border-top:1px solid #d7e4dd;background:#ffffffed;backdrop-filter:blur(14px);z-index:70;box-shadow:0 -4px 18px #1243310a}
+ .mobile-bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:48px;padding:3px 0;border-radius:9px;font-size:11px;line-height:1.4;color:#62776d}
+ .mobile-bottom-nav a[aria-current=page]{color:#006b5d;background:#e4f2eb;font-weight:800}
+ .mobile-bottom-nav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+ .mobile-experience footer{padding:18px 0 12px}
+ .mobile-experience .footer-top{display:block}.mobile-experience .footer-top>b{font-size:12px}
+ .mobile-experience .footer-nav{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12px;margin-top:10px}
+ .mobile-experience footer p{font-size:11px;line-height:1.7}.mobile-experience .footer-bottom{display:none}
+ .mobile-experience .esun-assistant{right:10px;bottom:calc(85px + env(safe-area-inset-bottom))}
+ .mobile-experience .esun-assistant-launch{width:48px;height:48px;min-height:48px;padding:3px;border-radius:50%}
+ .mobile-experience .esun-assistant-avatar{width:40px;height:40px}
+ .mobile-experience .esun-assistant-launch-text{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .mobile-experience .esun-assistant-panel{bottom:65px;width:calc(100vw - 24px);height:min(650px,calc(100dvh - 175px));max-height:calc(100dvh - 175px)}
+ .mobile-experience .esun-assistant-head h2{font-size:17px}
+ .mobile-experience .esun-assistant-head p,.mobile-experience .esun-assistant p,.mobile-experience .esun-assistant-message{font-size:13px}
+ .mobile-experience .toast{bottom:calc(84px + env(safe-area-inset-bottom));font-size:13px}
+ .mobile-ready.mobile-typing .mobile-bottom-nav{display:none}
+ .mobile-ready.mobile-typing .esun-assistant:not(:has(.esun-assistant-panel:not([hidden]))){display:none}
+ .mobile-experience .stale-warning{font-size:13px;padding:10px}
+ /* Standalone document guide */
+ .docs-page .nav{height:auto;min-height:58px;flex-wrap:wrap;padding:10px 0 8px;gap:4px}
+ .docs-page .nav nav{display:flex;font-size:12px;width:100%;gap:12px;justify-content:space-between}
+ .docs-page .nav nav a{min-height:36px;display:flex;align-items:center}
+ .docs-page .docs-hero{padding:20px 0}
+ .docs-page .docs-back{margin-bottom:10px;font-size:12px}
+ .docs-page .docs-hero h1{font-size:29px;line-height:1.35;margin:8px 0 12px}
+ .docs-page .docs-hero p{font-size:14px;line-height:1.6;margin:0 0 12px}
+ .docs-page .eyebrow{font-size:10px}.docs-page .docs-hero .actions{margin-top:14px}
+ .docs-page .button,.docs-page .outline{font-size:13px;min-height:44px;padding:10px 12px}
+ .docs-page .docs-prep{display:grid;grid-template-columns:1fr;gap:5px;font-size:12px;margin-top:17px;padding-top:13px}
+ .docs-page .section{padding:22px 0}
+ .docs-page .section-head{margin-bottom:14px;gap:4px}.docs-page .section-head p{font-size:13px}
+ .docs-page h2{font-size:21px;margin:4px 0 8px}.docs-page .section-num{display:none}
+ .docs-page .docs-steps{grid-template-columns:1fr;gap:8px;margin:15px 0 0}
+ .docs-page .docs-steps li{display:flex;align-items:flex-start;padding:12px;gap:10px;border-radius:10px}
+ .docs-page .docs-step-no{width:28px;height:28px;font-size:12px;flex-shrink:0;margin:4px 0 0}
+ .docs-page .mobile-step-detail{flex:1;min-width:0}
+ .docs-page .mobile-step-detail>summary{display:block;font-size:14px;min-height:36px;padding:6px 18px 6px 0;margin:0;position:relative}
+ .docs-page .mobile-step-detail>summary:after{content:'＋';position:absolute;right:0;top:6px;color:#00786a}
+ .docs-page .mobile-step-detail[open]>summary:after{content:'－'}
+ .docs-page .mobile-step-detail>summary small{font-size:11px;font-weight:500}
+ .docs-page .docs-steps p,.docs-page .docs-steps a{font-size:13px;line-height:1.65}
+ .docs-page .docs-source,.docs-page .tiny{font-size:12px}
+ .docs-page .docs-purpose{margin:14px 0}.docs-page .docs-purpose label{font-size:14px}
+ .docs-page .docs-purpose select{font-size:16px;min-height:44px}
+ .docs-page .docs-fold>summary{padding:14px 12px;gap:8px}
+ .docs-page .docs-fold>summary b{font-size:16px}.docs-page .docs-fold>summary small{font-size:11px}
+ .docs-page .docs-fold-meta{font-size:11px}.docs-page .docs-fold-body{padding:16px 12px}
+ .docs-page .docs-fold-body h3{font-size:18px}
+ .docs-page .doc-item b{font-size:14px}.docs-page .doc-item small{font-size:12px}
+ .docs-page .download-list{gap:10px}.docs-page .download-item{padding:14px}
+ .docs-page .download-item h4{font-size:15px}.docs-page .download-item p,.docs-page .download-notice,.docs-page .muted{font-size:13px}
+ .docs-page .download-link{font-size:13px;min-height:44px}
+ .docs-page .docs-next h2{font-size:21px}.docs-page .docs-next p,.docs-page footer p{font-size:12px}
+ /* Internal demo: tighter hierarchy and stacked case cards instead of a wide table. */
+ .mobile-workbench{font-size:14px;line-height:1.6}
+ .mobile-workbench .container{width:calc(100% - 24px)}
+ .mobile-workbench .topbar-row{padding:10px 0;min-height:60px;gap:7px}
+ .mobile-workbench .brand strong{font-size:15px}.mobile-workbench .brand small{display:none}
+ .mobile-workbench .demo-badge{font-size:11px;padding:3px 7px}
+ .mobile-workbench .back-link{font-size:12px;min-height:36px}
+ .mobile-workbench h1{font-size:27px;margin:5px 0 10px}.mobile-workbench h2{font-size:20px}.mobile-workbench h3{font-size:17px}
+ .mobile-workbench .eyebrow{font-size:10px}.mobile-workbench .lead-text{font-size:14px}
+ .mobile-workbench .page-heading{padding:20px 0;gap:12px}
+ .mobile-workbench .notice{padding:14px}.mobile-workbench .notice strong{font-size:15px}.mobile-workbench .notice p,.mobile-workbench .notice span{font-size:12px}
+ .mobile-workbench .stats{gap:9px;margin-bottom:18px}.mobile-workbench .stats article{padding:12px}.mobile-workbench .stats span{font-size:12px}.mobile-workbench .stats small{font-size:11px}.mobile-workbench .stats strong{font-size:24px;margin:5px 0}
+ .mobile-workbench .card{padding:16px 12px;margin-bottom:16px}
+ .mobile-workbench .section-nav{flex-wrap:nowrap;overflow:auto;margin-bottom:16px;gap:6px}
+ .mobile-workbench .section-nav a{white-space:nowrap;font-size:12px;padding:8px 10px;min-height:40px}
+ .mobile-workbench .button{font-size:13px;min-height:44px;padding:9px 12px}
+ .mobile-workbench input,.mobile-workbench select,.mobile-workbench textarea{font-size:16px!important;min-height:44px}
+ .mobile-workbench .footnote,.mobile-workbench .local-note,.mobile-workbench small{font-size:12px}
+ .mobile-workbench .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .mobile-workbench .filter-hint{grid-column:1/-1;font-size:12px}
+ .mobile-workbench .lead-table{display:block;min-width:0;width:100%;border:0}
+ .mobile-workbench .lead-table thead{display:none}
+ .mobile-workbench .lead-table tbody{display:grid;gap:12px}
+ .mobile-workbench .lead-table tr{display:grid;grid-template-columns:1fr 1fr;border:1px solid #dce6df;border-radius:10px;overflow:hidden}
+ .mobile-workbench .lead-table td{display:block;min-width:0;width:auto!important;padding:10px;border:0;border-bottom:1px solid #edf2ef;white-space:normal;font-size:13px}
+ .mobile-workbench .lead-table td:before{content:attr(data-label);display:block;font-size:11px;color:#647b6e;margin-bottom:5px}
+ .mobile-workbench .lead-table td:first-child,.mobile-workbench .lead-table td:nth-child(3),.mobile-workbench .lead-table td:last-child{grid-column:1/-1}
+ .mobile-workbench .lead-table td:first-child:before,.mobile-workbench .lead-table td:last-child:before{display:none}
+ .mobile-workbench .lead-table td:last-child .button{width:100%}
+ .mobile-workbench .tag,.mobile-workbench .signal-state,.mobile-workbench .tag-explanation,.mobile-workbench .tag-explanation small{font-size:12px}
+ .mobile-workbench .tag-explanation{min-width:0;max-width:none}
+ .mobile-workbench .map-count{font-size:12px}.mobile-workbench .branch-list button{font-size:13px;padding:10px}
+ .mobile-workbench .branch-list small,.mobile-workbench .map-footnote,.mobile-workbench .map-recommendation{font-size:12px}
+ .mobile-workbench .map-display iframe{height:260px}
+ .mobile-workbench .detail-dialog,.mobile-workbench .new-dialog{padding:16px 12px;width:calc(100% - 16px)}
+ .mobile-workbench .received-consultation{padding:14px}.mobile-workbench .received-heading strong{font-size:20px}
+ .mobile-workbench .received-grid{grid-template-columns:1fr 1fr;gap:12px}.mobile-workbench .received-grid b{font-size:14px}
+ .mobile-workbench .received-consultation pre{font-family:inherit;font-size:12px;line-height:1.7}
+ .mobile-workbench .signal-card{padding:14px 12px}.mobile-workbench .signal-heading h4{font-size:16px}
+ .mobile-workbench .signal-card p,.mobile-workbench .signal-card li,.mobile-workbench .signal-edit label{font-size:13px}
+}
+@media screen and (max-width:350px){
+ .mobile-experience .brand{font-size:12px}.mobile-doc-link.mobile-only{padding:6px 8px;font-size:11px}
+ .mobile-experience .field label{font-size:12px}.mobile-experience .consultation-fields{grid-template-columns:1fr}
+ .mobile-experience .model-card h3{font-size:15px}.mobile-experience .model-card,.mobile-experience .model-card.active{padding:12px}
+}
+@media print{
+ .mobile-only,.mobile-bottom-nav{display:none!important}
+ .mobile-disclosure,.mobile-disclosure>*{display:block}
+ .mobile-disclosure>summary{display:none}
+ .mobile-step-detail>*{display:block!important}
+}
