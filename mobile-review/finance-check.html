@@ -4,7 +4,7 @@ import {calculate,diagnose} from './engine.js?v=luosifen2';
 import {financingNeed} from './financing-need.js';
 import {LEADS_KEY} from './opportunity.js?v=luosifen2';
 import {ROUTING_KEY} from './branch-routing.js?v=cases1';
-import {FINANCE_DRAFT_KEY} from './finance-state.js?v=luosifen2';
+import {FINANCE_DRAFT_KEY} from './finance-state.js?v=presentation1';
 const output=document.getElementById('financeCheckResult'),pause=ms=>new Promise(r=>setTimeout(r,ms));
 async function until(fn){for(let i=0;i<200;i++){if(fn())return;await pause(80)}throw Error('timeout');}
 const plans={
@@ -26,6 +26,7 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
   const set=(id,value)=>{const el=d.getElementById(id);el.value=value;el.dispatchEvent(new w.Event('input',{bubbles:true}));};
   log('fresh page and old case URL do not fill numbers',[...d.querySelectorAll('#modelFields input,#healthFields input')].every(e=>e.value===''));
   log('new service choices visible and initially unselected',d.querySelectorAll('#productNeeds [name=consultService]').length===3&&!d.getElementById('productNeeds').closest('details')&&![...d.querySelectorAll('#productNeeds input')].some(x=>x.checked));
+  log('only the two requested optional cases remain',d.getElementById('casePicker').options.length===2&&d.getElementById('casePicker').textContent.includes('大鈞螺絲粉')&&d.getElementById('casePicker').textContent.includes('小愷央廚'));
   log('examples start collapsed',[...d.querySelectorAll('.optional-examples')].every(e=>!e.open));
   back=await create('internal.html?cases=1&v=value1');
   log('backend empty, old URL cannot seed samples',!back.contentDocument.getElementById('emptyLeads').hidden&&!back.contentDocument.getElementById('loadSamples')&&JSON.parse(localStorage.getItem(LEADS_KEY)||'[]').length===0);
@@ -86,7 +87,7 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
   log('backend pricing has no mobile horizontal overflow',bd.getElementById('leadDialog').scrollWidth<=bd.getElementById('leadDialog').clientWidth+1);
   back.remove();back=null;
   d.getElementById('casePicker').value='02';d.getElementById('applyTeachingCase').click();
-  log('approved optional scenario links first-year health and monthly results',d.getElementById('h_sales').value==='1647'&&d.getElementById('operatingResults').textContent.includes('56.4')&&d.getElementById('consultationForm').elements.payrollEmployees.value==='9');
+  log('approved optional scenario links new capital and health while hiding monthly block',d.getElementById('h_sales').value==='1647'&&!d.getElementById('operatingResults')&&d.getElementById('p_equity').value==='300'&&d.getElementById('p_reserve').value==='180'&&d.getElementById('consultationForm').elements.payrollEmployees.value==='9');
   set('op_ticket',250);d.getElementById('modelForm').requestSubmit();
   log('detail edit updates main planning and financial health',d.getElementById('p_revenue').value==='127.5'&&d.getElementById('h_sales').value==='1372.5'&&d.getElementById('resultStatus').textContent==='已更新');
   set('op_ticket',300);set('op_partTime',5);d.getElementById('modelForm').requestSubmit();
@@ -95,10 +96,10 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
   const keepBefore=localStorage.getItem(LEADS_KEY),of=d.getElementById('consultationForm').elements;
   of.includePlan.checked=true;of.consent.checked=true;d.getElementById('consultationForm').requestSubmit();
   const ol=JSON.parse(localStorage.getItem(LEADS_KEY))[0],ov=estimateRelationship(ol);
-  log('operating snapshot carries all data and correct potential total',ol.plan.inputs.operating?.ticket===300&&ol.consultation.healthInputs?.sales===1647&&Math.abs(ov.total-33.26388107001155)<1e-7);
+  log('operating snapshot carries all data and correct potential total',ol.plan.inputs.operating?.ticket===300&&ol.consultation.healthInputs?.sales===1647&&Math.abs(ov.total-32.716630472887196)<1e-7);
   back=await create('internal.html?v=luosifen2#lead='+ol.id);await until(()=>back.contentDocument.getElementById('leadDialog').open);
   const od=back.contentDocument;
-  log('backend renders monthly tables and separate employee components',od.querySelector('[data-operating-result]')&&od.getElementById('relationshipValueResult').textContent.includes('員工年終獎金活存')&&od.getElementById('relationshipValueResult').textContent.includes('33.26'));
+  log('backend renders monthly tables and separate employee components',od.querySelector('[data-operating-result]')&&od.getElementById('relationshipValueResult').textContent.includes('員工年終獎金活存')&&od.getElementById('relationshipValueResult').textContent.includes('32.72'));
   log('backend operating detail fits 390px',od.getElementById('leadDialog').scrollWidth<=od.getElementById('leadDialog').clientWidth+1);
   back.remove();back=null;localStorage.setItem(LEADS_KEY,keepBefore);
   set('p_setup',777);d.getElementById('modelForm').requestSubmit();set('h_cash',333);d.getElementById('healthForm').requestSubmit();

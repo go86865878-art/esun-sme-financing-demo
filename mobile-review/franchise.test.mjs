@@ -54,7 +54,7 @@ test('USD routing uses explicit FX assumptions and never treats dollar need as T
 test('all franchise and health scenarios are valid; loss remains negative on the chart',()=>{
  for(const [model,examples]of Object.entries(PLAN_EXAMPLES))for(const p of examples){const v={...p.values,...(model==='overseas'?{mode:'dual'}:{})};assert.ok(Number.isFinite(calculate(model,v).value));}
  for(const p of HEALTH_EXAMPLES)assert.ok(diagnose(p.values).items.length===5);
- assert.equal(profitData(HEALTH_EXAMPLES.find(p=>p.id==='stress').values).margin,-8);
+ assert.equal(profitData({sales:100,profit:-8}).margin,-8);
  assert.match(profitabilityMarkup({sales:100,profit:-8}),/-8/);assert.equal(profitData({sales:0,profit:5}),null);
 });
 test('workbook embeds an actual PNG drawing with numeric cells and no formula injection',async()=>{
@@ -69,8 +69,8 @@ test('workbook embeds an actual PNG drawing with numeric cells and no formula in
 });
 
 test('real calculator submissions route on financing demand, not annual payments or monthly surplus',()=>{
- const expected={working:18.378082191780824,equipment:3500,expansion:330,overseas:2156};
- for(const model of Object.keys(PLAN_EXAMPLES)){
+ const expected={equipment:800,expansion:300};
+ for(const model of Object.keys(PLAN_EXAMPLES).filter(m=>PLAN_EXAMPLES[m].length)){
   const inputs={...PLAN_EXAMPLES[model][0].values,mode:'dual'},out=calculate(model,inputs);
   const created=createLead({plan:{model,mode:'dual',inputs,out},city:'新北市',district:'新莊區',services:['loan'],consultation:{...request,purpose:model},consent:true});
   const saved=JSON.parse(JSON.stringify(created));

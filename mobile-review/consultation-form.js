@@ -1,5 +1,5 @@
 import {financingNeed} from './financing-need.js';
-import {BUSINESS_TYPES,PURPOSE_TITLES} from './franchise-scenarios.js';
+import {BUSINESS_TYPES,PURPOSE_TITLES} from './franchise-scenarios.js?v=presentation1';
 import {createLead,loadDemoLeads,saveDemoLeads,fillCities,fillDistricts,serviceChecks,esc} from './opportunity.js?v=luosifen2';
 export function mountConsultation({target,getContext}){
  const host=document.querySelector(target);if(!host)return null;

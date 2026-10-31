@@ -10,9 +10,9 @@ const c=DEMO_CASES.find(c=>c.id==='02'),clone=x=>JSON.parse(JSON.stringify(x)),n
 function lead(p=casePlan(c)){return createLead({plan:p,city:c.city,district:c.district,services:c.services,consent:true,consultation:caseConsultation(c,p)});}
 test('approved PDF financial totals match website with principal and two distributions',()=>{
  const a=casePlan(c).out.extra.operating.annual;
- for(const [k,v]of Object.entries({revenue:1647,cost:576.45,salary:439.56,net:236.14903789577787,bonus:48.14655757915558,yearEnd:56.40074409498669,retainedFinal:131.60173622163563,principal:63.06662011193959,cashClose:242.535116109696}))near(a[k],v);
+ for(const [k,v]of Object.entries({revenue:1647,cost:576.45,salary:439.56,net:236.6531799052526,bonus:48.23613598105053,yearEnd:56.525113177260636,retainedFinal:131.89193074694148,principal:57.3332910108565,cashClose:338.55863973608496}))near(a[k],v);
  near(a.cashChange,a.retainedFinal+a.depreciation-a.principal);
- const p=casePlan(c).out.extra.operating;near(p.fullBonus+p.partBonus,a.yearEnd);near(p.fullEach,15.040198425329785);near(p.partEach,1.8800248031662224);
+ const p=casePlan(c).out.extra.operating;near(p.fullBonus+p.partBonus,a.yearEnd);near(p.fullEach,15.07336351393617);near(p.partEach,1.8841704392420209);
  assert.equal(p.monthly[0].bonus,0);assert.ok(p.monthly[11].cashChange<0);
 });
 test('sanitized backend snapshot preserves and recomputes all editable operating assumptions',()=>{
@@ -22,9 +22,9 @@ test('sanitized backend snapshot preserves and recomputes all editable operating
  assert.ok(l.consultation.summary.includes('年終'));
 });
 test('per-case relationship assumptions reproduce the approved PDF contribution subtotal and total',()=>{
- const r=estimateRelationship(lead());near(r.sales,1647);near(r.total,33.26388107001155);near(r.totalHigh,34.77713514347913);
- near(r.company,32.61681019087742);near(r.employee,.6470708791341221);
- assert.equal(r.rows.find(x=>x.key==='employeeYearEnd').value,0);near(r.employeeYearEnd,302.48838100448535);
+ const r=estimateRelationship(lead());near(r.sales,1647);near(r.total,32.716630472887196);near(r.totalHigh,34.09231599422134);
+ near(r.company,32.0694436791289);near(r.employee,0.6471867937582927);
+ assert.equal(r.rows.find(x=>x.key==='employeeYearEnd').value,0);near(r.employeeYearEnd,302.61674949498666);
  assert.equal(r.a.depositDays,30);assert.equal(r.a.employeeYield,.5);
 });
 test('editing cost, ticket and staff recalculates plan, health and backend revenue',()=>{

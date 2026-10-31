@@ -1,6 +1,6 @@
 import {financingNeed} from './financing-need.js';
 import {esc,SERVICES} from './opportunity.js?v=luosifen2';
-import {PURPOSE_TITLES} from './franchise-scenarios.js';
+import {PURPOSE_TITLES} from './franchise-scenarios.js?v=presentation1';
 const fmt=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:1}):'待確認';
 const status={green:'健康',yellow:'注意',red:'警示',na:'資料待補'};
 export function planningCard(context={}){
