@@ -1,7 +1,8 @@
+import {relationshipMailLines} from './relationship-value.js?v=value2';
 import {financingNeed} from './financing-need.js';
-import {MODELS,SERVICES} from './opportunity.js?v=services1';
+import {MODELS,SERVICES} from './opportunity.js?v=value2';
 
-import {pricingMailLines} from './relationship-pricing.js?v=services1';
+import {pricingMailLines} from './relationship-pricing.js?v=value2';
 
 export const CONTACTS_KEY='esun_mobile_review_dispatch_contacts_v1';
 const clean=(value,max=160)=>String(value??'').replace(/[\u0000-\u001f\u007f]/g,' ').trim().slice(0,max);
@@ -52,7 +53,7 @@ export function buildDispatchMail(lead,target,{email,managerName=''}={}){
   '方便聯繫：'+(clean(info.preferredTime)||'待確認'),'預計用款：'+(clean(info.desiredMonth)||'待確認'),
   '討論服務：'+(lead.services||[]).map(key=>SERVICES[key]).filter(Boolean).join('、'),'',
   '【預約諮詢內容】',shortNote,'',
-  ...pricingMailLines(lead),'【請協助事項】','確認本單位是否承接、指派負責 RM，並回覆預計聯繫時程；若需轉派，請註明建議單位與原因。','',
+  ...relationshipMailLines(lead),...pricingMailLines(lead),'【請協助事項】','確認本單位是否承接、指派負責 RM，並回覆預計聯繫時程；若需轉派，請註明建議單位與原因。','',
   '此為虛構案例的派任流程示範，並非正式授信申請。本平台無法追蹤郵件是否寄出或送達。'
  ].join('\r\n');
  return {to,subject,body,targetKey:target.key};

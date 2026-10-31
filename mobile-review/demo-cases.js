@@ -1,4 +1,4 @@
-import {DEMO_CASES} from './case-data.js?v=cases1';
+import {DEMO_CASES} from './case-data.js?v=value2';
 import {calculate,diagnose} from './engine.js';
 import {financingNeed} from './financing-need.js';
 import {buildConsultationSummary} from './consultation.js';
@@ -10,7 +10,7 @@ export const getDemoCase=id=>DEMO_CASES.find(item=>item.id===id);
 export function casePlan(item){return {model:item.model,mode:item.input.mode||'twd',inputs:{...item.input},out:calculate(item.model,item.input),at:new Date().toLocaleString('zh-TW')};}
 export function caseConsultation(item,plan=casePlan(item)){
  const health={inputs:{...item.health},out:diagnose(item.health),at:plan.at};
- return {company:item.company,businessType:item.businessType,purpose:item.model,amount:Math.round(financingNeed(plan).amount*100)/100,brand:item.brand,storeCount:item.stores,contact:item.contact,phone:'',preferredTime:item.time,desiredMonth:item.month,note:item.note,address:item.address,position:null,health:health.out,documents:[],summary:buildConsultationSummary({plan,health,title:item.shortName,desiredMonth:item.month,documents:[]})};
+ return {payrollEmployees:item.payrollEmployees??null,company:item.company,businessType:item.businessType,purpose:item.model,amount:Math.round(financingNeed(plan).amount*100)/100,brand:item.brand,storeCount:item.stores,contact:item.contact,phone:'',preferredTime:item.time,desiredMonth:item.month,note:item.note,address:item.address,position:null,health:health.out,documents:[],summary:buildConsultationSummary({plan,health,title:item.shortName,desiredMonth:item.month,documents:[]})};
 }
 export function addMissingCaseLeads(existing){
  const pending=DEMO_CASES.filter(item=>!existing.some(lead=>lead.sampleSet===CASE_SET&&lead.sampleKey===item.id));

@@ -1,5 +1,5 @@
 import {financingNeed} from './financing-need.js';
-import {esc,SERVICES} from './opportunity.js?v=services1';
+import {esc,SERVICES} from './opportunity.js?v=value2';
 import {PURPOSE_TITLES} from './franchise-scenarios.js';
 const fmt=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:1}):'待確認';
 const status={green:'健康',yellow:'注意',red:'警示',na:'資料待補'};
@@ -13,7 +13,7 @@ export function planningCard(context={}){
 export function receivedConsultationCard(lead){
  const need=financingNeed(lead.plan),c=lead.consultation;if(!c)return '';
  return '<section class="received-consultation"><div class="received-heading"><span>客戶諮詢資料</span><strong>'+esc(c.company||lead.label)+'</strong><code>'+esc(lead.id)+'</code></div><div class="received-grid">'+[
- ['經營型態',c.businessType],['希望討論的服務',(lead.services||[]).map(key=>SERVICES[key]).filter(Boolean).join('、')||'未填寫'],['品牌／店數',[c.brand,c.storeCount!==null?c.storeCount+' 間店':''].filter(Boolean).join(' · ')||'未提供'],['聯絡稱呼',c.contact||'未提供'],['示範電話',c.phone||'未提供'],['方便聯繫時段',c.preferredTime],['預計用款',c.desiredMonth||'待確認'],['營業地址',c.address||lead.city+' '+lead.district],['需求金額',need.amount!==null?fmt(need.amount)+' 萬元':'待確認']
+ ['經營型態',c.businessType],['預計薪轉人數',c.payrollEmployees==null?'未提供':c.payrollEmployees+' 人'],['客戶另填年導入收款',c.annualReceipts==null?'依規劃／健檢營收估算':fmt(c.annualReceipts)+' 萬元'],['希望討論的服務',(lead.services||[]).map(key=>SERVICES[key]).filter(Boolean).join('、')||'未填寫'],['品牌／店數',[c.brand,c.storeCount!==null?c.storeCount+' 間店':''].filter(Boolean).join(' · ')||'未提供'],['聯絡稱呼',c.contact||'未提供'],['示範電話',c.phone||'未提供'],['方便聯繫時段',c.preferredTime],['預計用款',c.desiredMonth||'待確認'],['營業地址',c.address||lead.city+' '+lead.district],['需求金額',need.amount!==null?fmt(need.amount)+' 萬元':'待確認']
  ].map(([label,value])=>'<div><small>'+label+'</small><b>'+esc(value)+'</b></div>').join('')+'</div><div class="received-note"><b>預約諮詢內容</b><p>'+esc(c.note||'未補充')+'</p></div>'+(c.health?'<p class="local-note">財務健檢：'+esc(status[c.health.overall]||'待確認')+' · '+c.health.items.map(x=>esc(x.label)+' '+esc(x.value)).join('／')+'</p>':'')+healthInputMarkup(c)+(c.summary?'<details><summary>本次保存的完整規劃摘要</summary><pre>'+esc(c.summary)+'</pre></details>':'')+'</section>';
 }
 

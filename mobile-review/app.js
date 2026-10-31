@@ -1,8 +1,8 @@
-import {DEMO_CASES,getDemoCase,caseConsultation} from './demo-cases.js?v=cases1';
+import {DEMO_CASES,getDemoCase,caseConsultation} from './demo-cases.js?v=value2';
 import {financingNeed} from './financing-need.js';
 import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js';
-import {mountConsultation} from './consultation-form.js?v=services1';
-import {planningCard} from './planning-cards.js?v=services1';
+import {mountConsultation} from './consultation-form.js?v=value2';
+import {planningCard} from './planning-cards.js?v=value2';
 import {PLAN_EXAMPLES,HEALTH_EXAMPLES,PURPOSE_TITLES,profitabilityMarkup} from './franchise-scenarios.js';
 import {mountTiming} from './timing.js';
 import {buildConsultationSummary,consultationPrintHTML} from './consultation.js';
@@ -124,21 +124,21 @@ function applyTeachingCase(id){
  setLinkedHealth({values:item.health,name:item.company,note:'完整案例投資前資料，尚未加入本案新增借款。'},'case');
  doCalculate();doHealth();applyingFinance=false;
  consultationFlow.fillCase({...caseConsultation(item,lastPlan),city:item.city,district:item.district,services:item.services});
- $('planDataNote').textContent='完整案例：'+item.shortName+'｜RM '+item.rm+'。數值已計算；可修改後重新試算。';
+ $('planDataNote').textContent='完整案例：'+item.shortName+'。數值已計算；可修改後重新試算。';
  $('healthDataNote').textContent='案例健檢：'+item.company+'。為投資前資料，尚未計入本案新增借款。';
  $('casePicker').value=item.id;
  $('activeCaseSummary').hidden=false;
- $('activeCaseName').textContent=item.shortName+' · RM '+item.rm;
+ $('activeCaseName').textContent=item.company;
  $('activeCaseStory').textContent=item.story;
  $('activeCaseAddress').textContent=item.address;
- $('activeCaseNote').textContent=item.insight;
+ $('activeCaseNote').textContent=item.insight; $('activeCaseNote').hidden=!item.insight;
  $('activeCaseReport').href='case-guide.html#case-'+item.id;
  const url=new URL(location.href);url.searchParams.set('case',item.id);url.hash='simulator';history.replaceState(null,'',url);
  window.dispatchEvent(new CustomEvent('esun-case-loaded',{detail:{model:item.model}}));
  updateHandoffState();$('simulator').scrollIntoView({block:'start',behavior:'instant'});
  toast('已帶入'+item.shortName+'的試算、健檢、地址及諮詢內容。');
 }
-$('casePicker').innerHTML=DEMO_CASES.map(item=>'<option value="'+item.id+'">'+item.shortName+' · '+item.rm+'</option>').join('');
+$('casePicker').innerHTML=DEMO_CASES.map(item=>'<option value="'+item.id+'">'+item.company+'</option>').join('');
 $('casePicker').value='02';
 $('applyTeachingCase').addEventListener('click',()=>applyTeachingCase($('casePicker').value));
 function setLinkedHealth(preset,kind='paired'){

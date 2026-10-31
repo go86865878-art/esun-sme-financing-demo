@@ -1,7 +1,8 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>手動資料轉交檢查</title><style>body{font:14px/1.6 system-ui;background:#edf7f4;color:#214b60;margin:18px}button{background:#007d78;color:#fff;padding:12px;border:0;border-radius:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:16px}iframe{width:390px;max-width:100%;height:680px;border:1px solid #acc}</style></head><body><h1>手動數字、可編輯案例與後台檢查</h1><p>這是獨立驗證頁。按下後使用虛構數字測試，完成時恢復原有本機資料。</p><button id="runFinanceChecks">執行連動檢查</button><pre id="financeCheckResult">尚未執行</pre><div id="frames"></div><script type="module">
+import {estimateRelationship} from './relationship-value.js?v=value2';
 import {calculate,diagnose} from './engine.js';
 import {financingNeed} from './financing-need.js';
-import {LEADS_KEY} from './opportunity.js?v=services1';
+import {LEADS_KEY} from './opportunity.js?v=value2';
 import {ROUTING_KEY} from './branch-routing.js?v=cases1';
 import {FINANCE_DRAFT_KEY} from './finance-state.js?v=pdf1';
 const output=document.getElementById('financeCheckResult'),pause=ms=>new Promise(r=>setTimeout(r,ms));
@@ -21,12 +22,12 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
  const create=async url=>{const f=document.createElement('iframe');f.src=url;document.getElementById('frames').append(f);await until(()=>f.contentDocument?.readyState==='complete'&&f.contentDocument?.querySelector('#consultationForm,#leadRows'));return f;};
  try{
   keys.forEach(k=>localStorage.removeItem(k));
-  frame=await create('index.html?case=02&v=services1');let w=frame.contentWindow,d=w.document;
+  frame=await create('index.html?case=02&v=value1');let w=frame.contentWindow,d=w.document;
   const set=(id,value)=>{const el=d.getElementById(id);el.value=value;el.dispatchEvent(new w.Event('input',{bubbles:true}));};
   log('fresh page and old case URL do not fill numbers',[...d.querySelectorAll('#modelFields input,#healthFields input')].every(e=>e.value===''));
   log('new service choices visible and initially unselected',d.querySelectorAll('#productNeeds [name=consultService]').length===3&&!d.getElementById('productNeeds').closest('details')&&![...d.querySelectorAll('#productNeeds input')].some(x=>x.checked));
   log('examples start collapsed',[...d.querySelectorAll('.optional-examples')].every(e=>!e.open));
-  back=await create('internal.html?cases=1&v=services1');
+  back=await create('internal.html?cases=1&v=value1');
   log('backend empty, old URL cannot seed samples',!back.contentDocument.getElementById('emptyLeads').hidden&&!back.contentDocument.getElementById('loadSamples')&&JSON.parse(localStorage.getItem(LEADS_KEY)||'[]').length===0);
   back.remove();back=null;
   for(const [model,inputs] of Object.entries(plans)){
@@ -40,7 +41,8 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
    const fill=(name,value)=>{f[name].value=value;f[name].dispatchEvent(new w.Event('input',{bubbles:true}));};
    fill('company','手動驗證 '+model);fill('businessType','一般中小企業');fill('city','新北市');f.city.dispatchEvent(new w.Event('change',{bubbles:true}));fill('district','新莊區');fill('address','新北市新莊區幸福路171號');fill('note','手動調整金額後送出測試');fill('desiredMonth','2027-03');
    const selected=model==='expansion'?[]:model==='overseas'?['payroll']:['cardAcquiring','payroll','accountOpening'];
-   for(const checkbox of d.querySelectorAll('#productNeeds input')){checkbox.checked=selected.includes(checkbox.value);checkbox.dispatchEvent(new w.Event('input',{bubbles:true}));}
+   for(const checkbox of d.querySelectorAll('#productNeeds [type=checkbox]')){checkbox.checked=selected.includes(checkbox.value);checkbox.dispatchEvent(new w.Event('input',{bubbles:true}));}
+   if(selected.includes('payroll'))fill('payrollEmployees',10);
    f.includePlan.checked=true;f.consent.checked=true;d.getElementById('consultationForm').requestSubmit();
    log(model+' unfinished health blocks stale submission',JSON.parse(localStorage.getItem(LEADS_KEY)||'[]').length===Object.keys(plans).indexOf(model));
    d.getElementById('healthForm').requestSubmit();
@@ -50,11 +52,12 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
    const amount=financingNeed({model,mode:'dual',inputs,out:calculate(model,{...inputs,mode:'dual'})}).amount;
    log(model+' latest plan values and financing need saved',lead?.plan?.model===model&&Object.entries(inputs).every(([k,v])=>lead.plan.inputs[k]===v)&&Math.abs(lead.consultation.amount-amount)<1e-7,{id:lead?.id,amount:lead?.consultation?.amount});
    log(model+' all 10 health figures, loss and zero saved',Object.entries(health).every(([k,v])=>lead?.consultation?.healthInputs?.[k]===v),lead?.consultation?.healthInputs);
+   log(model+' automatic contribution and payroll count linked',estimateRelationship(lead).total!==null&&lead.consultation.payrollEmployees===(selected.includes('payroll')?10:null));
    log(model+' address and appointment saved',lead?.consultation?.address==='新北市新莊區幸福路171號'&&lead?.consultation?.desiredMonth==='2027-03');
   }
   const lead=JSON.parse(localStorage.getItem(LEADS_KEY))[0];
   localStorage.setItem(ROUTING_KEY,JSON.stringify({threshold:600}));
-  back=await create('internal.html?v=services1#lead='+lead.id);
+  back=await create('internal.html?v=value2#lead='+lead.id);
   await until(()=>back.contentDocument.getElementById('leadDialog').open);
   const bd=back.contentDocument;
   log('backend displays submitted raw financial figures',bd.querySelector('.received-health-inputs')?.textContent.includes('12,345')&&bd.querySelector('.received-health-inputs')?.textContent.includes('-9.5'));
@@ -62,6 +65,9 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
   log('backend product tags and detail reflect selected needs',['信用卡收單','員工薪轉','公司戶開立'].every(label=>bd.querySelector('.received-consultation').textContent.includes(label)&&bd.getElementById('leadRows').textContent.includes(label)));
   const filter=bd.getElementById('serviceFilter');filter.value='payroll';filter.dispatchEvent(new back.contentWindow.Event('change',{bubbles:true}));
   log('new payroll filter finds only requested cases',bd.querySelectorAll('#leadRows tr').length===3);filter.value='';filter.dispatchEvent(new back.contentWindow.Event('change',{bubbles:true}));
+  log('backend auto contribution shows input sources and breakdown',bd.getElementById('relationshipValueResult').textContent.includes('12,345')&&bd.getElementById('relationshipValueResult').textContent.includes('員工延伸貢獻')&&bd.getElementById('relationshipValueResult').textContent.includes('2%～2.5%'));
+  const vf=bd.getElementById('relationshipValueForm');vf.closest('details').open=true;vf.elements.bankShare.value=50;vf.elements.bankShare.dispatchEvent(new back.contentWindow.Event('input',{bubbles:true}));vf.requestSubmit();
+  log('case assumption saves without changing submitted data',JSON.parse(localStorage.getItem(LEADS_KEY))[0].valueAssumptions.bankShare===50&&JSON.parse(localStorage.getItem(LEADS_KEY))[0].consultation.payrollEmployees===10);
   bd.getElementById('relationshipPricing').open=true;
   const pf=bd.getElementById('relationshipPricingForm'),bw=back.contentWindow;
   const change=(el,value,checked=false)=>{if(checked)el.checked=value;else el.value=value;el.dispatchEvent(new bw.Event('input',{bubbles:true}));};
@@ -74,7 +80,7 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
   pf.requestSubmit();
   log('confirmed products save capped and floored proposal',bd.getElementById('relationshipPricingResult').textContent.includes('年利率 2.8%')&&JSON.parse(localStorage.getItem(LEADS_KEY))[0].pricing.products.payroll.confirmed&&bd.getElementById('relationshipPricingFeedback').textContent.includes('已保存'));
   bd.getElementById('prepareDispatchMail').click();await until(()=>bd.getElementById('dispatchDialog').open);
-  log('actual supervisor preview includes service needs and saved rate proposal',['信用卡收單','員工薪轉','公司戶開立','內部試算 2.8%','非正式報價'].every(text=>bd.getElementById('dispatchBody').textContent.includes(text)));
+  log('actual supervisor preview includes service needs and saved rate proposal',['信用卡收單','員工薪轉','公司戶開立','內部試算 2.8%','非正式報價','年度潛在貢獻','本行取得 50%'].every(text=>bd.getElementById('dispatchBody').textContent.includes(text)));
   log('pricing does not change submitted financial figures',JSON.parse(localStorage.getItem(LEADS_KEY))[0].plan.inputs.interest===3.1);
   bd.getElementById('closeDispatch').click();
   log('backend pricing has no mobile horizontal overflow',bd.getElementById('leadDialog').scrollWidth<=bd.getElementById('leadDialog').clientWidth+1);
