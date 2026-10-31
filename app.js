@@ -1,3 +1,4 @@
+import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js';
 import {mountOpportunity} from './opportunity.js';
 import {mountTiming} from './timing.js';
 import {buildConsultationSummary,consultationPrintHTML} from './consultation.js';
@@ -15,10 +16,10 @@ expansion:{title:'展店與擴張',en:'NEW STORE & EXPANSION',icon:'store',desc:
 overseas:{title:'海外投資',en:'OVERSEAS INVESTMENT',icon:'globe',desc:'依實際支付幣別編列預算：只付台幣、只付美元，或兩種幣別同時使用。',fields:[f('investTwd','台幣支出預算',3000,'萬元','以台幣支付的設備、工程或其他投資支出。'),f('equityTwd','可投入的台幣自有資金',1000,'萬元','限對應台幣預算；本次不自動跨幣別抵用。'),f('investUsd','美元支出預算',500,'萬美元','請填實際以美元支付的預算，不把台幣支出再次換算加入。'),f('equityUsd','可投入的美元自有資金',150,'萬美元','限對應美元預算；若要換匯支應其他幣別，需另行規劃。'),f('fx','假設 1 美元兌多少台幣？',32,'元','手動輸入規劃匯率，非即時牌告或成交匯率。',.01,1000),f('swing','美元升值壓力情境',10,'%','例如填 10，表示美元兌台幣比基準貴 10%。',0,100),f('buffer','另外保留的資金緩衝',10,'%','按各幣別尚不足的金額加計，預留成本追加空間。',0,100),f('months','距離投產／開業還有多久？',18,'月','作為計畫提醒；本版未按月份自動估算利息或營運虧損。',1,120)],explain:'<b>先分幣別看缺口，再看匯率。</b>雙幣別指「投資預算」同時有台幣與美元，不等於推薦雙幣借款。每個幣別的自有資金只抵同幣預算，超額不跨幣抵用。<br>美元升值只增加美元部分的台幣等值；不會讓既有美元本金本身變多。海外借款主體、還款收入幣別、稅務與分期撥付，請再與專員討論。'}
 };
 const healthFields=[f('cash','現在可動用的現金與銀行存款',1200,'萬元','同一月底餘額；扣除受限制、質押或不能動用的存款。'),f('receipts','一年內預計收得到的客戶貨款',1800,'萬元','同一月底尚未收回的貨款；扣除預計收不回的部分。'),f('stock','手上可賣的存貨，成本約多少？',1500,'萬元','同一月底的成本金額；扣除過期、呆滯或無法出售部分。'),f('shortDebt','一年內必須付出的款項合計',3000,'萬元','同一月底的短期借款、到期本金、應付貨款、稅款等；不要重複。'),f('totalDebt','公司還欠外面多少錢？',6000,'萬元','同一月底全部借款與應付款，包含上面一年內須支付的款項。'),f('assets','公司擁有的資產帳面總值',10000,'萬元','同一月底現金、貨款、存貨、土地廠房設備等合計；可請會計協助。'),f('sales','一年賣出多少錢？',12000,'萬元','取同一年度營收金額。'),f('profit','一年做生意賺或賠多少？',720,'萬元','同一年度扣成本與營業費用後、未扣利息和稅的營業利益；虧損填負數。',null),f('annualAvailable','未來一年可拿來還款的現金',1200,'萬元','先扣維持營運、稅款、必要投資及週轉需求；不足可填負數，不把新借款當成還款來源。',null),f('annualDebt','未來一年所有借款要還多少本息？',900,'萬元','包括全部銀行及其他借款本金與利息；無借款還款則填 0。')];
-const baseDocs=[['基本資料','公司／商業登記、章程與股東資料','公司型態不同，適用的登記與名冊略有差異。'],['身分證明','負責人及保證人雙證件','國民身分證及第二身分證明文件；種類、正本／影本與核驗方式，請先與銀行確認。'],['財務稅務','最近三年財報、稅務報表與最近期自結報表','有會計師查核或稅簽報告，請一併備妥。'],['營業資料','近一年 401／403／405／406 表','提供公司適用的營業稅申報資料，不需四種都準備。'],['經營說明','營運模式與前十大進銷貨明細','說明賣什麼、向誰買、賣給誰，以及收款與付款條件。'],['往來資料','主要往來存摺、銀行授信及借款明細','依案件準備公司、負責人、保證人等主要往來及資金調度資料。']];
-const extraDocs={working:[['用途補充','應收貨款、存貨與應付貨款明細','依案件補充餘額、帳齡與交易條件。'],['用途補充','明年營收規劃、主要訂單或合約','說明成長來源、備貨高峰與預估資金需求。']],equipment:[['用途補充','興建／購置計畫與工程時程','包括建廠進度、工程預算、估價或工程契約；購置設備附報價與交期。'],['用途補充','營運計畫與預估財務報表','預估損益、資產負債、現金流量及資金來源去路。'],['用途補充','土地建物、許可與自有資金資料','依個案提供權利文件、建照、工廠登記及資金來源證明。']],expansion:[['用途補充','展店計畫、租約與裝修設備預算','說明地點、店數、人力、開幕與裝修時程。'],['用途補充','既有店營運與新店營收、損益預估','分店比較、爬坡金流與還款安排。']],overseas:[['用途補充','集團架構與海外投資計畫','投資地點、子公司、股權與分工；核准文件依適用規定確認。'],['用途補充','分幣別預算、投產進度與預估財報','分列台幣與美元支出、收入、資金來源與還款規劃。']]};
+
+
 let current='working',mode='dual',lastPlan=null,lastHealth=null,planDirty=false,healthDirty=false;
-const drafts={},checkedDocs=new Set();
+const drafts={},checkedDocs=readDocumentChecks();
 let timing=null,timingState={ready:false,stale:false},healthStep=0;
 const healthGroups=[{title:'付款能力',desc:'先盤點手邊資金、待收貨款與近期要付的款項。',ids:['cash','receipts','stock','shortDebt']},{title:'獲利情況',desc:'用同一年度的營收與營業利益，看本業賺不賺錢。',ids:['sales','profit']},{title:'負債與還款',desc:'再看整體負債與未來一年的還款安排。',ids:['totalDebt','assets','annualAvailable','annualDebt']}];
 const healthSources={cash:'銀行存款餘額、公司現金日報或出納紀錄。',receipts:'應收帳款明細；請會計扣除預估收不回的貨款。',stock:'存貨明細或盤點表，以成本金額填寫。',shortDebt:'應付帳款與借款到期明細；可請會計協助合計。',totalDebt:'資產負債表的負債總額，或全部借款、應付款明細。',assets:'同一月底資產負債表的資產總額。',sales:'同一年度損益表營業收入；申報資料可供核對。',profit:'同一年度損益表的營業利益（尚未扣利息與稅）。',annualAvailable:'未來一年資金收支預估；請先保留營運、稅款與必要投資。',annualDebt:'全部借款的還款表，合計未來一年本金與利息。'};
@@ -38,8 +39,22 @@ $('cycleGraphic').hidden=current!=='working';if(current==='working'){$('cycleGra
 $('schedule').hidden=!out.schedule?.length;if(out.schedule?.length)$('schedule').innerHTML='<b class="tiny">每年預計還款金額｜新臺幣萬元</b><table><thead><tr><th>年度</th><th>本金</th><th>利息</th><th>本息合計</th></tr></thead><tbody>'+out.schedule.map(r=>`<tr><td>第 ${r.year} 年</td><td>${fmt(r.principal)}</td><td>${fmt(r.interest)}</td><td>${fmt(r.total)}</td></tr>`).join('')+'</tbody></table>';
 }
 function doCalculate(){try{const v=values(models[current].fields,'p_');if(current==='overseas'){v.mode=mode;if(mode==='twd'){v.fx=32;v.swing=0;}}const out=calculate(current,v);capture();$('validation').textContent='';renderPlan(out,v)}catch(e){$('validation').textContent=e.message;markPlanDirty();}}
-function renderDocs(){const arr=[...baseDocs,...extraDocs[current]];$('docHint').textContent='目前用途：'+models[current].title+'。下列是準備方向，部分項目依案件補充。';let group='';$('documentList').innerHTML=arr.map((x,i)=>{let heading='';const kind=i<baseDocs.length?'共通準備資料':'依本次用途補充';if(kind!==group){heading=`<div class="doc-group">${kind}</div>`;group=kind;}const key=x[1];return heading+`<label class="doc-item"><input type="checkbox" data-doc="${escape(key)}" ${checkedDocs.has(key)?'checked':''}><span><b>${x[1]}</b><small>${x[2]}</small></span></label>`}).join('');updateDocs();}
-function updateDocs(){const boxes=[...$('documentList').querySelectorAll('input')],count=boxes.filter(x=>x.checked).length;$('docCount').textContent=`${count} / ${boxes.length} 項`;$('docProgress').style.width=count/boxes.length*100+'%';updateHandoffState();}
+function renderDocs(){
+ document.querySelectorAll('[data-document-link]').forEach(link=>{
+   const anchor=link.dataset.documentLink||'documents';
+   link.href='documents.html?model='+encodeURIComponent(current)+'#'+anchor;
+ });
+ if($('documentsContext'))$('documentsContext').textContent='目前用途：'+models[current].title+'；文件頁會顯示對應的準備項目。';
+ refreshDocumentStatus();
+}
+function refreshDocumentStatus(){
+ const saved=readDocumentChecks();checkedDocs.clear();saved.forEach(key=>checkedDocs.add(key));
+ updateHandoffState();
+}
+addEventListener('storage',event=>{if(event.key===DOCUMENT_STORAGE_KEY||event.key===null)refreshDocumentStatus()});
+addEventListener('focus',refreshDocumentStatus);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshDocumentStatus()});
+
 const statusNames={green:'健康',yellow:'注意',red:'警示',na:'不適用'};
 function healthDefinitions(items){$('definitionContent').innerHTML=items.map(x=>`<div class="definition"><b>${escape(x.label)}</b><p>${escape(x.definition)}</p></div>`).join('');}
 function doHealth(){try{const v=values(healthFields,'h_');const r=diagnose(v);$('healthError').textContent='';const at=new Date().toLocaleString('zh-TW',{hour12:false});lastHealth={inputs:v,out:r,at};healthDirty=false;$('healthStatus').textContent='整體：'+(statusNames[r.overall]||r.overall);$('healthStatus').classList.remove('dirty');$('healthResults').classList.remove('stale-results');$('healthStaleWarning').hidden=true;$('healthResults').innerHTML=r.items.map(x=>`<div class="health-item ${x.status}"><div class="health-item-top"><b>${escape(x.label)}</b><span class="badge ${x.status}">${statusNames[x.status]}</span></div><div class="score">${escape(x.value)}</div><p>${escape(x.advice)}</p></div>`).join('')+`<p class="tiny">資料更新時間：${at}</p>`;healthDefinitions(r.items);$('downloadHealth').disabled=false;$('printHealth').disabled=false;updateHandoffState();}catch(e){$('healthError').textContent=e.message;markHealthDirty();}}
@@ -52,8 +67,7 @@ function downloadHealth(){if(!lastHealth||healthDirty)return toast('請先更新
 document.querySelectorAll('[data-model]').forEach(b=>b.addEventListener('click',()=>{capture();current=b.dataset.model;renderModel();$('simulator').scrollIntoView({behavior:'smooth'});}));
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;applyMode();clearResult();}));
 $('modelForm').addEventListener('submit',e=>{e.preventDefault();doCalculate()});$('modelForm').addEventListener('input',markPlanDirty);$('reset').addEventListener('click',()=>{delete drafts[current];renderModel()});$('loadExample').addEventListener('click',()=>{const presets={trade:{cost:75,dso:60,dio:75,dpo:45},manufacture:{cost:75,dso:90,dio:90,dpo:60},retail:{cost:65,dso:7,dio:45,dpo:30},service:{cost:50,dso:45,dio:0,dpo:30}};for(const [k,v]of Object.entries(presets[$('industry').value]))$('p_'+k).value=v;markPlanDirty();toast('已帶入操作範例，請按更新試算。')});$('downloadPlan').addEventListener('click',downloadPlan);
-renderHealthSteps();$('healthForm').addEventListener('submit',e=>{e.preventDefault();doHealth()});$('healthForm').addEventListener('input',markHealthDirty);$('downloadHealth').addEventListener('click',downloadHealth);$('printHealth').addEventListener('click',()=>{if(!lastHealth||healthDirty)return;const d=$('healthDefinitions');const was=d.open;d.open=true;window.print();d.open=was});$('documentList').addEventListener('change',e=>{if(!e.target.matches('[data-doc]'))return;e.target.checked?checkedDocs.add(e.target.dataset.doc):checkedDocs.delete(e.target.dataset.doc);updateDocs()});$('downloadDocs').addEventListener('click',()=>{const mascot=Math.random()<0.5?'kumamon-a':'kumamon-b';const a=document.createElement('a');a.href='checklist-'+mascot+'.pdf';a.download='企業申貸文件準備清單.pdf';document.body.append(a);a.click();a.remove();toast('已下載一頁 A4 熊本熊版文件清單。');});
-$('downloadDocsMeow').addEventListener('click',()=>{const a=document.createElement('a');a.href='checklist-meow.pdf';a.download='企業申貸文件準備清單_玉山喵喵版.pdf';document.body.append(a);a.click();a.remove();toast('已下載一頁 A4 玉山喵喵版文件清單。');});
+renderHealthSteps();$('healthForm').addEventListener('submit',e=>{e.preventDefault();doHealth()});$('healthForm').addEventListener('input',markHealthDirty);$('downloadHealth').addEventListener('click',downloadHealth);$('printHealth').addEventListener('click',()=>{if(!lastHealth||healthDirty)return;const d=$('healthDefinitions');const was=d.open;d.open=true;window.print();d.open=was});
 decorate();renderModel();
 mountOpportunity({getPlan:()=>planDirty?null:lastPlan,target:'#resultContent'});
 

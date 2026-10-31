@@ -2,8 +2,8 @@
 (() => {
   'use strict';
   const sources = {
-    documents: { label: '本頁文件準備清單', href: '#documents' },
-    forms: { label: '本頁制式文件下載區', href: '#formDownloads' },
+    documents: { label: '申貸文件準備清單', href: 'documents.html#documents' },
+    forms: { label: '申貸表單下載區', href: 'documents.html#formDownloads' },
     official: { label: '玉山銀行官方表單下載', href: 'https://www.esunbank.com/zh-tw/about/customer-service/applications' },
     rm: { label: '專人聯繫', href: 'https://www.esunbank.com/zh-tw/about/services/customer/message-board' },
     cash: { label: '玉山收付通官方介紹', href: 'https://www.esunbank.com/zh-tw/business/corporate/cash-management/cash-flow' },
@@ -34,13 +34,13 @@
     if (/專人聯繫|留言板|留言聯繫|聯絡|聯繫/.test(q)) return answer('專人聯繫：留言後等候銀行回覆', '請點選下方「專人聯繫」至玉山官方留言板，依官網表單指示留言，由銀行專人回覆。\n\n本頁試算結果、輸入資料與文件不會自動傳送；需要提供試算摘要時，請先與專人確認交付方式。留言不等同申貸送件或核貸。', ['rm']);
     if (/目前用途|現在.*準備|我.*需要.*文件|要準備哪些|文件清單|申貸.*文件|貸款.*文件|申請.*文件|準備.*文件/.test(q)) {
       const key = /建廠|擴廠|興建|廠房|設備/.test(q) ? 'equipment' : /展店|開店|新店|店面/.test(q) ? 'expansion' : /海外|雙幣|美元/.test(q) ? 'overseas' : /週轉|周轉/.test(q) ? 'working' : currentModel();
-      return answer((key === currentModel() ? '您目前選擇：' : '您詢問的用途：') + modelNames[key], commonDocs + '\n\n' + purposeDocs[key] + '\n\n這是討論前的準備方向。實際應備文件、期間與適用表單，請先與服務銀行確認，再進行填寫。制式表單集中在右側下載區。', ['documents', 'forms', 'rm']);
+      return answer((key === currentModel() ? '您目前選擇：' : '您詢問的用途：') + modelNames[key], commonDocs + '\n\n' + purposeDocs[key] + '\n\n這是討論前的準備方向。實際應備文件、期間與適用表單，請先與服務銀行確認，再進行填寫。制式表單集中在申貸流程與文件頁的下載區。', ['documents', 'forms', 'rm']);
     }
-    if (/聯徵|同意書/.test(q)) return answer('聯徵與資料運用同意，先確認適用版本', '聯徵查詢及資料運用同意事項，請由服務銀行確認借款企業、負責人與保證人各自需要簽署的文件及方式。\n\n本頁右側提供已整理的授信相關表單；有些同意事項可能列在申請書內，仍須由銀行確認是否適用、是否另須文件。下載不代表已申請或同意查詢，請勿先自行判斷簽章範圍。', ['forms', 'application', 'official', 'rm']);
+    if (/聯徵|同意書/.test(q)) return answer('聯徵與資料運用同意，先確認適用版本', '聯徵查詢及資料運用同意事項，請由服務銀行確認借款企業、負責人與保證人各自需要簽署的文件及方式。\n\n申貸流程與文件頁提供已整理的授信相關表單；有些同意事項可能列在申請書內，仍須由銀行確認是否適用、是否另須文件。下載不代表已申請或同意查詢，請勿先自行判斷簽章範圍。', ['forms', 'application', 'official', 'rm']);
     if (/關係企業|關係人|股權/.test(q)) return answer('關係企業資料，先釐清企業之間的連結', '可先整理企業之間的持股、經營管理與主要交易關係，並由銀行協助確認申報範圍及認定方式。\n\n右側已提供「法人同一關係企業資料表」。不確定某家公司是否須列入時，請先詢問專員，再填寫適用表單。', ['related', 'forms', 'rm']);
     if (/個人資料表/.test(q)) return answer('個人資料表的填寫範圍，請先與銀行確認', '個人資料表與雙證件是不同的準備項目。負責人或保證人是否須填寫、填寫哪個版本及簽章方式，請由服務銀行依案件確認。\n\n本頁提供附件下載，建議確認後再填寫，並依銀行指定的方式交付文件。', ['personal', 'forms', 'rm']);
-    if (/雙證件|身分證|身份證|證件|負責人|保證人/.test(q)) return answer('負責人、保證人都要準備雙證件', '左側文件清單以「負責人及保證人雙證件」列示。請先備妥身分證與另一項可辨識身分的證件，再向銀行確認可接受的證件種類、是否須攜帶正本及核驗方式。\n\n個人資料表、聯徵同意等制式文件放在右側下載區，適用版本和簽章方式請先與服務銀行確認。此小幫手不收取證件照片。', ['documents', 'forms', 'rm']);
-    if (/企業資料表|制式|表單|申請書|下載文件|怎麼填|如何填/.test(q)) return answer('先下載參考，確認後再填寫', '這裡是文件下載與準備的參考入口。企業資料表、個人資料表、授信申請書、關係企業資料表及相關同意事項，請先與服務銀行確認適用版本、填寫範圍與簽章方式後，再進行填寫。\n\n企業資料表有不同授信金額級距的版本，請勿只依本次試算金額自行選用。右側也備有顧客身分資料表等附件，是否需要仍依案件確認。', ['forms', 'official', 'entity', 'rm']);
+    if (/雙證件|身分證|身份證|證件|負責人|保證人/.test(q)) return answer('負責人、保證人都要準備雙證件', '文件準備清單以「負責人及保證人雙證件」列示。請先備妥身分證與另一項可辨識身分的證件，再向銀行確認可接受的證件種類、是否須攜帶正本及核驗方式。\n\n個人資料表、聯徵同意等制式文件放在申貸流程與文件頁的下載區，適用版本和簽章方式請先與服務銀行確認。此小幫手不收取證件照片。', ['documents', 'forms', 'rm']);
+    if (/企業資料表|制式|表單|申請書|下載文件|怎麼填|如何填/.test(q)) return answer('先下載參考，確認後再填寫', '這裡是文件下載與準備的參考入口。企業資料表、個人資料表、授信申請書、關係企業資料表及相關同意事項，請先與服務銀行確認適用版本、填寫範圍與簽章方式後，再進行填寫。\n\n企業資料表有不同授信金額級距的版本，請勿只依本次試算金額自行選用。文件頁也備有顧客身分資料表等附件，是否需要仍依案件確認。', ['forms', 'official', 'entity', 'rm']);
     if (/委託書|國稅局|稅務資料/.test(q)) return answer('國稅局委託書的用途與簽章，請先確認', '右側提供國稅局委託書附件。是否適用、委託範圍、需備資料與簽章方式，請先由服務銀行說明後再填寫。\n\n這份委託書不等同財報或營業稅申報表，也不代表本網站能代為調閱稅務資料。', ['tax', 'forms', 'rm']);
     if (/401|403|405|406|財報|稅簽|自結|營業稅|損益表|資產負債/.test(q)) return answer('財報、稅簽與 401 表，提供的是不同資訊', '財報：說明公司一段期間的經營成果，以及期末資產、負債與權益。可先備近三年及最近一期自結資料。\n\n查核／稅簽報告：如公司已有會計師查核或稅務簽證報告，可一併準備；是否必要由銀行依案件確認。\n\n401 等營業稅申報資料：協助了解近期銷售與進貨情形，依公司實際申報類型準備，並非每家公司都用同一張表，也不能直接取代完整財報。\n\n資料年度、月份、報表口徑及是否需補充其他文件，請先向銀行確認。', ['documents', 'rm']);
     if (/前十大|進銷貨|進貨明細|銷貨明細|營運模式|營運說明/.test(q)) return answer('把「怎麼做生意、怎麼收付款」說清楚', '營運說明可以用白話整理：賣什麼、向誰買、賣給誰、是否先備貨或接單生產，以及收款和付款大約隔多久。\n\n前十大進貨與銷貨明細，建議分別整理主要交易對象、金額／占比、交易期間及收付款條件；如有關係企業交易，也一併說明。是否須附合約、訂單或其他佐證，由銀行依案件確認。', ['documents', 'rm']);
@@ -97,7 +97,7 @@
           const list = el('ul');
           [...new Set(data.refs)].forEach(key => {
             const src = sources[key]; if (!src) return;
-            const li = el('li'); const link = el('a', '', src.label); link.href = src.href;
+            const li = el('li'); const link = el('a', '', src.label); link.href = src.href.startsWith('documents.html') ? src.href.replace('documents.html','documents.html?model='+currentModel()) : src.href;
             if (!src.href.startsWith('#')) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
             li.append(link); list.append(li);
           }); details.append(list); msg.append(details);
