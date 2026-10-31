@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {dispatchTarget,validateEmail,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js';
+import {dispatchTarget,dispatchActionLabel,validateEmail,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js';
 import {addMissingCaseLeads} from './demo-cases.js';
 import {suggestAssignment} from './branch-routing.js';
 import {DEFAULT_ROUTES} from './opportunity.js';
@@ -9,8 +9,8 @@ const leads=addMissingCaseLeads([]);
 const suggestion=lead=>suggestAssignment(lead,{threshold:600,branches:BRANCHES,routes:DEFAULT_ROUTES});
 test('selected branch and exact regional team resolve to separate manager contact keys',()=>{
  const shop=leads[1],s=suggestion(shop),first=dispatchTarget(shop,s),second=dispatchTarget(shop,s,s.candidates.items[1].id);
- assert.equal(first.role,'分行經理');assert.notEqual(first.key,second.key);assert.equal(second.unit,s.candidates.items[1].name);
- const center=dispatchTarget(leads[2],suggestion(leads[2]));assert.equal(center.role,'區域中心主管');assert.equal(center.unit,'北區示範服務組');assert.ok(center.key.startsWith('center:'));
+ assert.equal(first.role,'分行協理');assert.equal(dispatchActionLabel(first),'通知分行協理');assert.notEqual(first.key,second.key);assert.equal(second.unit,s.candidates.items[1].name);
+ const center=dispatchTarget(leads[2],suggestion(leads[2]));assert.equal(center.role,'區域中心主管');assert.equal(dispatchActionLabel(center),'通知區域中心主管');assert.equal(center.unit,'北區示範服務組');assert.ok(center.key.startsWith('center:'));
  assert.throws(()=>dispatchTarget(shop,s,'invalid'),/找不到/);assert.throws(()=>dispatchTarget(shop,{eligible:false}),/先設定/);
 });
 test('confirmed assignment takes priority over subsequently changed recommendations',()=>{
@@ -23,7 +23,7 @@ test('mail includes loan demand, selected target and appointment fields without 
  const lead=leads[1],before=structuredClone(lead),target=dispatchTarget(lead,suggestion(lead));
  const mail=buildDispatchMail(lead,target,{email:'manager@example.invalid',managerName:'王'});
  assert.ok(mail.body.includes('330 萬元'));assert.ok(!mail.body.includes('6.07 萬元'));
- assert.ok(mail.body.includes(lead.consultation.address));assert.ok(mail.body.includes('小愷'));assert.ok(mail.body.includes('分行經理'));
+ assert.ok(mail.body.includes(lead.consultation.address));assert.ok(!mail.body.includes('建議 RM：'));assert.ok(mail.body.includes('承接人員：由單位主管安排'));assert.ok(mail.body.includes('王 協理您好'));assert.ok(mail.body.includes('分行協理'));
  assert.ok(mail.body.includes(lead.consultation.desiredMonth));assert.ok(mail.body.includes('尚待人工確認'));assert.deepEqual(lead,before);
  const overseas=buildDispatchMail(leads[2],dispatchTarget(leads[2],suggestion(leads[2])),{email:'center@example.invalid'});assert.ok(overseas.body.includes('2,156 萬元'));
 });

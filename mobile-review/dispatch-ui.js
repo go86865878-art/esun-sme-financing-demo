@@ -1,14 +1,14 @@
-import {dispatchTarget,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js?v=dispatch1';
+import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js?v=supervisor1';
 
 export function mountDispatchMail(){
  const dialog=document.createElement('dialog');dialog.id='dispatchDialog';dialog.className='dispatch-dialog';
- dialog.innerHTML=`<div class="dispatch-heading"><div><span class="eyebrow">INTERNAL ASSIGNMENT NOTICE</span><h2>寄送派任通知</h2></div><button type="button" id="closeDispatch" class="close-button" aria-label="關閉派任郵件">×</button></div>
+ dialog.innerHTML=`<div class="dispatch-heading"><div><span class="eyebrow">INTERNAL ASSIGNMENT NOTICE</span><h2 id="dispatchTitle">通知主管</h2></div><button type="button" id="closeDispatch" class="close-button" aria-label="關閉派任郵件">×</button></div>
  <div class="dispatch-target"><small id="dispatchBasis"></small><strong id="dispatchUnit"></strong><span id="dispatchRole"></span></div>
- <form id="dispatchMailForm" novalidate><div class="dispatch-contact"><label>此單位主管信箱<input id="dispatchEmail" name="email" type="email" autocomplete="off" maxlength="254" placeholder="請填寫該單位的內部信箱" required></label><label>主管稱呼（選填）<input id="dispatchManager" name="managerName" maxlength="40" placeholder="例如：王經理"></label></div>
+ <form id="dispatchMailForm" novalidate><div class="dispatch-contact"><label>此單位主管信箱<input id="dispatchEmail" name="email" type="email" autocomplete="off" maxlength="254" placeholder="請填寫該單位的內部信箱" required></label><label>主管稱呼（選填）<input id="dispatchManager" name="managerName" maxlength="40" placeholder="例如：王"></label></div>
  <p class="dispatch-hint">依推薦分行或對應服務組套用收件人；未提供的信箱不會自動猜測。更換單位會使用該單位自己的設定。</p>
  <label class="dispatch-remember"><input type="checkbox" id="rememberDispatch" checked>記住此單位的收件人（僅此瀏覽器）</label>
  <label class="dispatch-subject-label">郵件主旨<input id="dispatchSubject" readonly></label>
- <details class="dispatch-preview" open><summary>案件摘要與派任內容</summary><pre id="dispatchBody"></pre></details>
+ <details class="dispatch-preview" open><summary>案件摘要與承接需求</summary><pre id="dispatchBody"></pre></details>
  <p id="dispatchError" role="alert" class="error"></p><p id="dispatchFeedback" role="status"></p>
  <div class="dispatch-actions"><button type="submit" class="button" id="openDispatchMail">開啟郵件程式</button><button type="button" class="button outline" id="downloadDispatchMail">下載 .eml 草稿</button><button type="button" class="button outline" id="copyDispatchMail">複製內文</button></div>
  <p class="dispatch-hint">請在郵件程式內確認收件人後寄出。開啟或下載草稿不會標記為「已寄送」；此測試網尚未串接銀行郵件系統。若沒有跳出郵件程式，可下載草稿使用。</p></form>`;
@@ -42,7 +42,7 @@ export function mountDispatchMail(){
  return {open(nextLead,suggestion,branchId){
   const nextTarget=dispatchTarget(nextLead,suggestion,branchId);lead=nextLead;target=nextTarget;
   const saved=loadContact(target);form.reset();$('dispatchEmail').value=saved.email;$('dispatchManager').value=saved.managerName;
-  $('dispatchUnit').textContent=target.unit;$('dispatchRole').textContent=target.role+' · RM '+(target.rm||'待指定');
+  $('dispatchUnit').textContent=target.unit;$('dispatchRole').textContent=target.role;$('dispatchTitle').textContent=dispatchActionLabel(target);
   $('dispatchBasis').textContent=target.confirmed?'依已人工確認的承接單位':'依目前推薦單位／所選候選分行';
   $('dispatchError').textContent='';$('dispatchFeedback').textContent='';preview();
   dialog.showModal();if(!saved.email)$('dispatchEmail').focus();else $('openDispatchMail').focus();
