@@ -1,4 +1,4 @@
-import {OPERATING_FIELDS,OPERATING_TITLE} from './operating-plan.js?v=luosifen1';
+import {OPERATING_FIELDS,OPERATING_TITLE} from './operating-plan.js?v=luosifen2';
 const f=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:2}):'—';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function operatingEditor(o){return `<details id="operatingEditor" class="operating-panel"><summary>螺絲粉營運假設｜點開修改</summary><p>20坪、廚房與前場各半、約20席；老闆補班不另支薪。客單價為實收金額。調整後請按更新試算。</p><div class="fields">${OPERATING_FIELDS.map(([key,label,unit,min,max])=>`<div class="field"><label for="op_${key}">${label}</label><div class="input-wrap"><input id="op_${key}" data-operating="${key}" type="number" inputmode="decimal" step="any" min="${min}" max="${max}" value="${esc(o[key])}" required><span>${unit}</span></div></div>`).join('')}</div><p class="tiny">正職與兼職年終比例合計100%；兼職自動取剩餘比例。薪資附加10%為本例概估。每人兼職150小時為可修改假設。</p></details>`;}

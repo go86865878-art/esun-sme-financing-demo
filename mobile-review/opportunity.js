@@ -1,4 +1,4 @@
-import {hasOperatingPlan,normalizeOperating,calculateOperating} from './operating-plan.js?v=luosifen1';
+import {hasOperatingPlan,normalizeOperating,calculateOperating} from './operating-plan.js?v=luosifen2';
 import {sanitizeConsultation,enquiryPlan} from './consultation-context.js?v=value2';
 // Shared local-only demo handoff. No network request or bank system integration.
 export const LEADS_KEY = 'esun_mobile_review_demo_leads_v1';
@@ -128,7 +128,7 @@ export function planSnapshot(plan){
   if(!plan||!Object.hasOwn(MODELS,plan.model)||!plan.out||!Number.isFinite(Number(plan.out.value)))throw new Error('請先完成或更新試算，再轉交這份規劃。');
   const allowed=new Set('sales nextSales cost dso dio dpo own existing invest equity interest tenor grace annualBudget setup reserve revenue margin fixed ramp investTwd equityTwd investUsd equityUsd fx swing buffer months'.split(' '));
   const inputs={};for(const [k,v]of Object.entries(plan.inputs||{})){if(allowed.has(k)&&typeof v==='number'&&Number.isFinite(v))inputs[k]=v;}
-  if(plan.model==='expansion'&&hasOperatingPlan(plan.inputs)){inputs.operating=normalizeOperating(plan.inputs.operating);const out=calculateOperating(inputs);inputs.annualBudget=out.extra.operating.annual.availableForDebt;return {model:plan.model,mode:'twd',inputs,out,at:String(plan.at||new Date().toLocaleString('zh-TW'))};}
+  if(plan.model==='expansion'&&hasOperatingPlan(plan.inputs)){inputs.operating=normalizeOperating(plan.inputs.operating);const out=calculateOperating(inputs);inputs.annualBudget=Math.max(0,out.extra.operating.annual.availableForDebt);return {model:plan.model,mode:'twd',inputs,out,at:String(plan.at||new Date().toLocaleString('zh-TW'))};}
   return {model:plan.model,mode:['twd','usd','dual'].includes(plan.mode)?plan.mode:'twd',inputs,out:{label:String(plan.out.label||'試算需求'),value:Number(plan.out.value),unit:String(plan.out.unit||'萬元')},at:String(plan.at||new Date().toLocaleString('zh-TW'))};
 }
 export function createLead({plan,city,district,services=[],label,source='網站試算（使用者同意）',consent=true,consultation=null}){

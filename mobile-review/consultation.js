@@ -1,4 +1,4 @@
-import {operatingSummary} from './operating-plan-ui.js?v=luosifen1';
+import {operatingSummary} from './operating-plan-ui.js?v=luosifen2';
 const statusNames={green:'健康',yellow:'注意',red:'警示',na:'不適用'};
 export const CONTACT_URL='https://www.esunbank.com/zh-tw/about/services/customer/message-board';
 export function buildConsultationSummary({plan,health=null,documents=[],timing=null,desiredMonth='',title=''}){

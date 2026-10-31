@@ -1,5 +1,5 @@
-import {VALUE_FIELDS,normalizeValueAssumptions,estimateRelationship} from './relationship-value.js?v=luosifen1';
-import {esc} from './opportunity.js?v=luosifen1';
+import {VALUE_FIELDS,normalizeValueAssumptions,estimateRelationship} from './relationship-value.js?v=luosifen2';
+import {esc} from './opportunity.js?v=luosifen2';
 const fmt=v=>v===null?'待補資料':v.toLocaleString('zh-TW',{maximumFractionDigits:2})+' 萬元';
 const range=(low,high)=>low===null||high===null?'待補資料':low.toLocaleString('zh-TW',{maximumFractionDigits:2})+'～'+high.toLocaleString('zh-TW',{maximumFractionDigits:2})+' 萬元';
 function resultMarkup(lead){

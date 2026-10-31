@@ -1,4 +1,4 @@
-import {DEMO_CASES} from './case-data.js?v=luosifen1';
+import {DEMO_CASES} from './case-data.js?v=luosifen2';
 import {HEALTH_EXAMPLES,PLAN_EXAMPLES} from './franchise-scenarios.js';
 export const FINANCE_DRAFT_KEY='esun_mobile_review_finance_draft_v1';
 export const HEALTH_KEYS=['cash','receipts','stock','shortDebt','totalDebt','assets','sales','profit','annualAvailable','annualDebt'];

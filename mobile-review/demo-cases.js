@@ -1,8 +1,8 @@
-import {DEMO_CASES} from './case-data.js?v=luosifen1';
-import {calculate,diagnose} from './engine.js?v=luosifen1';
+import {DEMO_CASES} from './case-data.js?v=luosifen2';
+import {calculate,diagnose} from './engine.js?v=luosifen2';
 import {financingNeed} from './financing-need.js';
-import {buildConsultationSummary} from './consultation.js?v=luosifen1';
-import {createLead,readLocal,writeLocal} from './opportunity.js?v=luosifen1';
+import {buildConsultationSummary} from './consultation.js?v=luosifen2';
+import {createLead,readLocal,writeLocal} from './opportunity.js?v=luosifen2';
 import {ROUTING_KEY} from './branch-routing.js?v=cases1';
 export {DEMO_CASES};
 export const CASE_SET='mobile-complete-cases-20261031';

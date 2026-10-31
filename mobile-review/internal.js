@@ -1,13 +1,13 @@
-import {operatingResults} from './operating-plan-ui.js?v=luosifen1';
-import {estimateRelationship} from './relationship-value.js?v=luosifen1';
-import {valueMarkup,bindValue} from './relationship-value-ui.js?v=luosifen1';
-import {pricingMarkup,bindPricing} from './relationship-pricing-ui.js?v=luosifen1';
-import {mountDispatchMail} from './dispatch-ui.js?v=luosifen1';
-import {dispatchTarget,dispatchActionLabel} from './dispatch-mail.js?v=luosifen1';
-import {receivedConsultationCard} from './planning-cards.js?v=luosifen1';
-import {mountBranchMap,branchCatalogue,routingThreshold,routeDescription} from './branch-map.js?v=luosifen1';
+import {operatingResults} from './operating-plan-ui.js?v=luosifen2';
+import {estimateRelationship} from './relationship-value.js?v=luosifen2';
+import {valueMarkup,bindValue} from './relationship-value-ui.js?v=luosifen2';
+import {pricingMarkup,bindPricing} from './relationship-pricing-ui.js?v=luosifen2';
+import {mountDispatchMail} from './dispatch-ui.js?v=luosifen2';
+import {dispatchTarget,dispatchActionLabel} from './dispatch-mail.js?v=luosifen2';
+import {receivedConsultationCard} from './planning-cards.js?v=luosifen2';
+import {mountBranchMap,branchCatalogue,routingThreshold,routeDescription} from './branch-map.js?v=luosifen2';
 import {suggestAssignment,ROUTING_KEY,BRANCH_COORDS_KEY} from './branch-routing.js?v=cases1';
-import {LEADS_KEY,ROUTES_KEY,SETTINGS_KEY,SERVICES,MODELS,AREAS,DEFAULT_ROUTES,DEFAULT_SETTINGS,FOLLOWUP_STATUSES,esc,loadDemoLeads,saveDemoLeads,loadRoutes,loadSettings,writeLocal,routeFor,calculatePotential,deriveOpportunitySignals,deriveOpportunityDetails,getOpportunityFollowup,updateOpportunityFollowup,createLead,fillCities,fillDistricts,serviceChecks} from './opportunity.js?v=luosifen1';
+import {LEADS_KEY,ROUTES_KEY,SETTINGS_KEY,SERVICES,MODELS,AREAS,DEFAULT_ROUTES,DEFAULT_SETTINGS,FOLLOWUP_STATUSES,esc,loadDemoLeads,saveDemoLeads,loadRoutes,loadSettings,writeLocal,routeFor,calculatePotential,deriveOpportunitySignals,deriveOpportunityDetails,getOpportunityFollowup,updateOpportunityFollowup,createLead,fillCities,fillDistricts,serviceChecks} from './opportunity.js?v=luosifen2';
 
 const $=id=>document.getElementById(id);
 const fmt=n=>new Intl.NumberFormat('zh-TW',{maximumFractionDigits:2}).format(n);

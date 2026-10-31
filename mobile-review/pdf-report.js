@@ -1,4 +1,4 @@
-import {OPERATING_FIELDS} from './operating-plan.js?v=luosifen1';
+import {OPERATING_FIELDS} from './operating-plan.js?v=luosifen2';
 import {financingNeed} from './financing-need.js';
 import {PURPOSE_TITLES} from './franchise-scenarios.js';
 export const HEALTH_LABELS={cash:'可動用現金與銀行存款',receipts:'一年內可收回的貨款',stock:'可售庫存成本',shortDebt:'一年內全部應付款',totalDebt:'負債總額',assets:'資產帳面總額',sales:'全年營業收入',profit:'全年營業利益',annualAvailable:'未來一年可還款現金',annualDebt:'原有借款全年本息'};
