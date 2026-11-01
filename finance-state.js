@@ -1,5 +1,5 @@
-import {DEMO_CASES} from './case-data.js?v=presentation1';
-import {PLAN_EXAMPLES} from './franchise-scenarios.js?v=presentation1';
+import {DEMO_CASES} from './case-data.js?v=health20261101';
+import {PLAN_EXAMPLES} from './franchise-scenarios.js?v=health20261101';
 export const FINANCE_DRAFT_KEY='esun_mobile_review_finance_draft_v1';
 export const HEALTH_KEYS=['cash','receipts','stock','shortDebt','totalDebt','assets','sales','profit','annualAvailable','annualDebt'];
 export function pairedHealth(model,index=0){const example=PLAN_EXAMPLES[model]?.[index],item=DEMO_CASES.find(c=>c.id===example?.caseId);return {values:item?{...item.health}:Object.fromEntries(HEALTH_KEYS.map(k=>[k,null])),name:item?.title||'自行填寫的財務資料',note:item?.input.operating?'開業資產負債＋首年預估損益／本息，已含本案融資。':'僅示範本案還款安排，未提供的公司財務留白。'};}

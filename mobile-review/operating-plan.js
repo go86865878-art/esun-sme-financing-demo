@@ -1,18 +1,20 @@
+import {WORKING_CAPITAL_DEFAULTS,forecastOperatingHealth} from './operating-health.js?v=health20261101';
 // Fictional restaurant operating plan. Currency is TWD ten-thousands unless labelled otherwise.
 export const OPERATING_KIND='luosifen-v1';
 export const OPERATING_TITLE='螺絲粉營運計畫預估';
-export const OPERATING_DEFAULTS=Object.freeze({kind:OPERATING_KIND,ticket:300,days:30,initialDaily:100,matureDaily:170,costPercent:35,fullTime:3,fullSalary:4.5,partTime:6,partHours:150,hourlyWage:220,personnelExtra:10,rent:10,misc:3,utilities:3,fixedAdjustment:0,feeShare:70,merchantRate:4.5,tax:20,monthlyBonus:20,yearEndBonus:30,fullTimeShare:80,depreciationMonths:60});
+export const OPERATING_DEFAULTS=Object.freeze({...WORKING_CAPITAL_DEFAULTS,kind:OPERATING_KIND,ticket:300,days:30,initialDaily:100,matureDaily:170,costPercent:35,fullTime:3,fullSalary:4.5,partTime:6,partHours:150,hourlyWage:220,personnelExtra:10,rent:10,misc:3,utilities:3,fixedAdjustment:0,feeShare:70,merchantRate:4.5,tax:20,monthlyBonus:20,yearEndBonus:30,fullTimeShare:80,depreciationMonths:60});
 export const OPERATING_FIELDS=[
  ['ticket','實收客單價','元',1,100000],['days','每月營業天數','天',1,31],['initialDaily','初期每日交易','筆',0,100000],['matureDaily','成熟期每日交易','筆',0,100000],['costPercent','營業成本率','%',0,100],
  ['fullTime','正職人數','人',0,10000],['fullSalary','每位正職月薪','萬元',0,1000],['partTime','兼職人數','人',0,10000],['partHours','每位兼職月工時','小時',0,744],['hourlyWage','兼職時薪','元',0,100000],['personnelExtra','薪資附加成本','%',0,100],
  ['rent','每月租金','萬元',0,1000000],['misc','每月雜支','萬元',0,1000000],['utilities','每月水電瓦斯','萬元',0,1000000],['fixedAdjustment','其他固定收支調整','萬元',-1000000,1000000],
- ['feeShare','收費交易占比','%',0,100],['merchantRate','金流商戶費率','%',0,100],['tax','所得稅預留','%',0,100],['monthlyBonus','正的稅後淨利月分紅','%',0,100],['yearEndBonus','年終前保留盈餘提撥','%',0,100],['fullTimeShare','年終分給正職','%',0,100],['depreciationMonths','裝修設備攤提','月',1,600]
+ ['feeShare','收費交易占比','%',0,100],['merchantRate','金流商戶費率','%',0,100],['tax','所得稅預留','%',0,100],['monthlyBonus','正的稅後淨利月分紅','%',0,100],['yearEndBonus','年終前保留盈餘提撥','%',0,100],['fullTimeShare','年終分給正職','%',0,100],['depreciationMonths','裝修設備攤提','月',1,600],
+ ['settlementDays','電子支付結算天數（新增假設）','天',0,365],['inventoryDays','備料存貨天數（新增假設）','天',0,365],['payableDays','供應商付款帳期（新增假設）','天',0,365]
 ];
 export const hasOperatingPlan=v=>v?.operating?.kind===OPERATING_KIND;
 export function normalizeOperating(raw){
  if(raw?.kind!==OPERATING_KIND)throw Error('營運情境格式不符。');
  const o={kind:OPERATING_KIND};
- for(const [key,label,,min,max] of OPERATING_FIELDS){const n=Number(raw[key]);if(raw[key]===''||raw[key]==null||!Number.isFinite(n)||n<min||n>max)throw Error('請確認「'+label+'」。');o[key]=n;}
+ for(const [key,label,,min,max] of OPERATING_FIELDS){const value=raw[key]===undefined&&key in WORKING_CAPITAL_DEFAULTS?WORKING_CAPITAL_DEFAULTS[key]:raw[key];const n=Number(value);if(value===''||value==null||!Number.isFinite(n)||n<min||n>max)throw Error('請確認「'+label+'」。');o[key]=n;}
  for(const key of ['fullTime','partTime'])if(!Number.isInteger(o[key]))throw Error('員工人數請填整數。');
  if(o.fullTime+o.partTime===0)throw Error('請至少保留一位員工，或改用一般展店試算。');
  if((!o.fullTime&&o.fullTimeShare>0)||(!o.partTime&&o.fullTimeShare<100))throw Error('年終分配比例須對應有在職員工的組別。');
@@ -50,7 +52,7 @@ export function calculateOperating(v){
  const employeeSalaryAverage=grossSalary*.6*6,employeeBonusAverage=monthly.reduce((n,x)=>n+x.bonus*.6*(12-x.month)/12,0);
  const employeeYearEnd=grossSalary*.6*12+(annual.bonus+annual.yearEnd)*.6;
  const lowestCash=Math.min(openingCash,...monthly.map(x=>x.cashClose)),mature=monthly[Math.min(11,Math.max(0,v.ramp-1))];
- const health={cash:openingCash,receipts:null,stock:null,shortDebt:annual.principal,totalDebt:loan,assets:v.setup+openingCash,sales:annual.revenue,profit:annual.operatingProfit,annualAvailable:annual.availableForDebt,annualDebt:annual.debt};
- const summary={kind:OPERATING_KIND,title:OPERATING_TITLE,assumptions:o,loan,payment,openingCash,grossSalary,salary,monthly,annual,fullBonus,partBonus,fullEach:o.fullTime?fullBonus/o.fullTime:0,partEach:o.partTime?partBonus/o.partTime:0,employeeSalaryAverage,employeeBonusAverage,employeeYearEnd,health};
+ const forecast=forecastOperatingHealth(v,o,annual,monthly,payments),health=forecast.health;
+ const summary={kind:OPERATING_KIND,title:OPERATING_TITLE,assumptions:o,loan,payment,openingCash,grossSalary,salary,monthly,annual,fullBonus,partBonus,fullEach:o.fullTime?fullBonus/o.fullTime:0,partEach:o.partTime?partBonus/o.partTime:0,employeeSalaryAverage,employeeBonusAverage,employeeYearEnd,forecast,health};
  return {label:'需規劃的融資金額',value:loan,unit:'萬元',sub:'首年營收 '+fmt(annual.revenue)+' 萬元；已按月計入利息、還本、稅金預留及分紅。',metrics:[{label:'首年營收',value:fmt(annual.revenue)+' 萬元'},{label:'成熟期月保留（年終前）',value:fmt(mature.retained)+' 萬元'},{label:'年終獎金',value:fmt(annual.yearEnd)+' 萬元'},{label:'全年保留（年終後）',value:fmt(annual.retainedFinal)+' 萬元'},{label:'年底可用現金',value:fmt(annual.cashClose)+' 萬元'},{label:'每月還款本息',value:fmt(payment)+' 萬元'}],breakdown:[{label:'裝修設備',value:v.setup},{label:'營運預備金',value:v.reserve},{label:'自有資金',value:-v.equity},{label:'融資需求',value:loan}],formula:'融資需求＝裝修設備＋預備金－自有資金。首年依初期到成熟期逐月成長計算。',note:'虛構營運預估；老闆補班不另支薪。成本與各項費率均可調。月分紅按正的稅後淨利提撥，年終再從全年保留盈餘提撥，12月底發放。分紅採稅後分配假設，不回推減稅、未另估附加費；收款未另拆營業稅。',schedule,extra:{loan,monthlyPayment:payment,annualDebt:annual.debt,monthlySurplus:mature.cashChange,operatingSurplus:mature.operatingProfit+depreciation,firstYearCash:annual.cashChange,rampFunding:Math.max(0,openingCash-lowestCash),reserveGap:Math.max(0,-lowestCash),annualBudget:annual.availableForDebt,coverage:annual.debt?annual.availableForDebt/annual.debt:null,operating:summary}};
 }

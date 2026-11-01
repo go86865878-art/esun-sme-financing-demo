@@ -1,4 +1,4 @@
-import {baseDocs,documentsFor,modelNames,normalizeModel,readDocumentChecks,saveDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js';
+import {baseDocs,documentsFor,modelNames,normalizeModel,readDocumentChecks,saveDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js?v=health20261101';
 const $=id=>document.getElementById(id);
 const query=new URL(location.href);
 let current=normalizeModel(query.searchParams.get('model'));

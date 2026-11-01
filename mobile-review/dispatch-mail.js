@@ -1,8 +1,8 @@
-import {relationshipMailLines} from './relationship-value.js?v=luosifen2';
-import {financingNeed} from './financing-need.js';
-import {MODELS,SERVICES} from './opportunity.js?v=luosifen2';
+import {relationshipMailLines} from './relationship-value.js?v=health20261101';
+import {financingNeed} from './financing-need.js?v=health20261101';
+import {MODELS,SERVICES} from './opportunity.js?v=health20261101';
 
-import {pricingMailLines} from './relationship-pricing.js?v=value2';
+import {pricingMailLines} from './relationship-pricing.js?v=health20261101';
 
 export const CONTACTS_KEY='esun_mobile_review_dispatch_contacts_v1';
 const clean=(value,max=160)=>String(value??'').replace(/[\u0000-\u001f\u007f]/g,' ').trim().slice(0,max);

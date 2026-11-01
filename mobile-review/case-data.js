@@ -1,3 +1,4 @@
+import {calculateOperating} from './operating-plan.js?v=health20261101';
 // Optional fictional cases; the page never applies these automatically.
 export const DEMO_CASES = [
   {
@@ -29,6 +30,9 @@ export const DEMO_CASES = [
       "annualBudget": 222.05308086537568,
       "operating": {
         "kind": "luosifen-v1",
+        "settlementDays": 7,
+        "inventoryDays": 7,
+        "payableDays": 0,
         "ticket": 300,
         "days": 30,
         "initialDaily": 100,
@@ -201,3 +205,5 @@ export const DEMO_CASES = [
     "payrollEmployees": null
   }
 ];
+
+for (const item of DEMO_CASES) { if(item.input.operating) item.health=calculateOperating(item.input).extra.operating.health; }

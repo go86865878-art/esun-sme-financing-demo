@@ -1,15 +1,16 @@
-import {DEMO_CASES} from './case-data.js?v=presentation1';
-import {calculate,diagnose} from './engine.js?v=luosifen2';
-import {financingNeed} from './financing-need.js';
-import {buildConsultationSummary} from './consultation.js?v=luosifen2';
-import {createLead,readLocal,writeLocal} from './opportunity.js?v=luosifen2';
-import {ROUTING_KEY} from './branch-routing.js?v=cases1';
+import {DEMO_CASES} from './case-data.js?v=health20261101';
+import {calculate,diagnose} from './engine.js?v=health20261101';
+import {financingNeed} from './financing-need.js?v=health20261101';
+import {buildConsultationSummary} from './consultation.js?v=health20261101';
+import {createLead,readLocal,writeLocal} from './opportunity.js?v=health20261101';
+import {ROUTING_KEY} from './branch-routing.js?v=health20261101';
 export {DEMO_CASES};
 export const CASE_SET='mobile-complete-cases-20261031';
 export const getDemoCase=id=>DEMO_CASES.find(item=>item.id===id);
 export function casePlan(item){return {model:item.model,mode:item.input.mode||'twd',inputs:JSON.parse(JSON.stringify(item.input)),out:calculate(item.model,item.input),at:new Date().toLocaleString('zh-TW')};}
 export function caseConsultation(item,plan=casePlan(item)){
- const health={inputs:{...item.health},out:diagnose(item.health),at:plan.at};
+ const values=plan.out.extra?.operating?.health||item.health;
+ const health={inputs:{...values},out:diagnose(values),at:plan.at};
  return {payrollEmployees:item.payrollEmployees??null,company:item.company,businessType:item.businessType,purpose:item.model,amount:Math.round(financingNeed(plan).amount*100)/100,brand:item.brand,storeCount:item.stores,contact:item.contact,phone:'',preferredTime:item.time,desiredMonth:item.month,note:item.note,address:item.address,position:null,health:health.out,healthInputs:health.inputs,healthAt:health.at,documents:[],summary:buildConsultationSummary({plan,health,title:item.shortName,desiredMonth:item.month,documents:[]})};
 }
 export function addMissingCaseLeads(existing){

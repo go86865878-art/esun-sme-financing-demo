@@ -1,10 +1,10 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>手動資料轉交檢查</title><style>body{font:14px/1.6 system-ui;background:#edf7f4;color:#214b60;margin:18px}button{background:#007d78;color:#fff;padding:12px;border:0;border-radius:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:16px}iframe{width:390px;max-width:100%;height:680px;border:1px solid #acc}</style></head><body><h1>手動數字、可編輯案例與後台檢查</h1><p>這是獨立驗證頁。按下後使用虛構數字測試，完成時恢復原有本機資料。</p><button id="runFinanceChecks">執行連動檢查</button><pre id="financeCheckResult">尚未執行</pre><div id="frames"></div><script type="module">
-import {estimateRelationship} from './relationship-value.js?v=luosifen2';
-import {calculate,diagnose} from './engine.js?v=luosifen2';
-import {financingNeed} from './financing-need.js';
-import {LEADS_KEY} from './opportunity.js?v=luosifen2';
-import {ROUTING_KEY} from './branch-routing.js?v=cases1';
-import {FINANCE_DRAFT_KEY} from './finance-state.js?v=presentation1';
+import {estimateRelationship} from './relationship-value.js?v=health20261101';
+import {calculate,diagnose} from './engine.js?v=health20261101';
+import {financingNeed} from './financing-need.js?v=health20261101';
+import {LEADS_KEY} from './opportunity.js?v=health20261101';
+import {ROUTING_KEY} from './branch-routing.js?v=health20261101';
+import {FINANCE_DRAFT_KEY} from './finance-state.js?v=health20261101';
 const output=document.getElementById('financeCheckResult'),pause=ms=>new Promise(r=>setTimeout(r,ms));
 async function until(fn){for(let i=0;i<200;i++){if(fn())return;await pause(80)}throw Error('timeout');}
 const plans={

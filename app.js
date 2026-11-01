@@ -1,17 +1,18 @@
-import {hasOperatingPlan,operatingMainFields,operatingFromMain} from './operating-plan.js?v=luosifen2';
-import {operatingEditor} from './operating-plan-ui.js?v=luosifen2';
-import {DEMO_CASES,getDemoCase,caseConsultation} from './demo-cases.js?v=presentation1';
-import {financingNeed} from './financing-need.js';
-import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js';
-import {mountConsultation} from './consultation-form.js?v=presentation1';
-import {planningCard} from './planning-cards.js?v=presentation1';
-import {PLAN_EXAMPLES,HEALTH_EXAMPLES,PURPOSE_TITLES,profitabilityMarkup} from './franchise-scenarios.js?v=presentation1';
-import {mountTiming} from './timing.js';
-import {buildConsultationSummary,consultationPrintHTML} from './consultation.js?v=luosifen2';
-import {calculate,diagnose} from './engine.js?v=luosifen2';
-import {downloadText} from './report.js';
-import {buildPlanPdf,buildHealthPdf,downloadPdf} from './pdf-report.js?v=presentation1';
-import {pairedHealth,sharedHealthPatch,readFinanceDraft,writeFinanceDraft} from './finance-state.js?v=presentation1';
+import {healthForecastMarkup} from './operating-health-ui.js?v=health20261101';
+import {hasOperatingPlan,operatingMainFields,operatingFromMain} from './operating-plan.js?v=health20261101';
+import {operatingEditor} from './operating-plan-ui.js?v=health20261101';
+import {DEMO_CASES,getDemoCase,caseConsultation} from './demo-cases.js?v=health20261101';
+import {financingNeed} from './financing-need.js?v=health20261101';
+import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js?v=health20261101';
+import {mountConsultation} from './consultation-form.js?v=health20261101';
+import {planningCard} from './planning-cards.js?v=health20261101';
+import {PLAN_EXAMPLES,HEALTH_EXAMPLES,PURPOSE_TITLES,profitabilityMarkup} from './franchise-scenarios.js?v=health20261101';
+import {mountTiming} from './timing.js?v=health20261101';
+import {buildConsultationSummary,consultationPrintHTML} from './consultation.js?v=health20261101';
+import {calculate,diagnose} from './engine.js?v=health20261101';
+import {downloadText} from './report.js?v=health20261101';
+import {buildPlanPdf,buildHealthPdf,downloadPdf} from './pdf-report.js?v=health20261101';
+import {pairedHealth,sharedHealthPatch,readFinanceDraft,writeFinanceDraft} from './finance-state.js?v=health20261101';
 const $=id=>document.getElementById(id);
 const icons={route:'M5 5h5v5H5zM14 14h5v5h-5zM10 7h7v4M7 10v7h4',edit:'m15 4 5 5-11 11H4v-5ZM13 6l5 5M4 4h6M4 8h3',chart:'M4 3v17h17M8 15v-4m5 4V7m5 8V4',chat:'M4 4h16v12H9l-5 4ZM8 8h8M8 12h5',cycle:'M20 10a8 8 0 0 0-14-5L3 8m0-5v5h5M4 14a8 8 0 0 0 14 5l3-3m0 5v-5h-5',factory:'M3 21V9l6 4V7l6 4V3h5l1 18ZM7 17h1m4 0h1m4 0h1',store:'M3 10 5 3h14l2 7M4 10v11h16V10M8 21v-7h5v7M3 10c0 3 5 3 5 0 0 3 5 3 5 0 0 3 5 3 5 0 0 3 3 3 3 0',globe:'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM3 12h18M12 3c-5 5-5 13 0 18 5-5 5-13 0-18Z',scan:'M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5M3 12h18M8 8v1m4-1v1m4-1v1M8 15v1m4-1v1m4-1v1',wallet:'M20 7H4V4h15M3 7v13h18V7ZM17 11h4v5h-4z',download:'M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4',file:'M14 3H5v18h14V8Zm0 0v5h5M8 12h8m-8 4h6',shield:'M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6ZM8 12l3 3 5-6',box:'m3 7 9-4 9 4v10l-9 4-9-4Zm0 0 9 4 9-4M12 11v10M7 5l9 4',truck:'M3 5h11v12H3Zm11 5h4l3 4v3h-7M8 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm12 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z'};
 function icon(name){return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[name]||icons.chart}"/></svg>`}
@@ -102,7 +103,7 @@ function setHealthStep(i){healthStep=Math.max(0,Math.min(2,i));document.querySel
 function updateHandoffState(){refreshHealthLink();saveFinanceProgress();if(!$('copyConsultation'))return;let message='摘要已備妥；可在下方諮詢表單附上這份規劃，建立後台示範需求。';let blocked=false;if(!lastPlan||planDirty){message='請先更新上方試算，才可產生本次摘要。';blocked=true}else if(healthDirty){message='健檢資料已變更，請先更新健檢，再產生合併摘要。';blocked=true}else if(timingState.stale){message='月度資料已變更，請先更新月度資金規劃，或清除月度資料。';blocked=true}$('copyConsultation').disabled=blocked;$('printConsultation').disabled=blocked;$('handoffState').textContent=message;$('consultationPreview').value=blocked?'':getConsultation();$('planningCard').innerHTML=planningCard(getPlanningContext());consultationFlow?.refresh();}
 function getConsultation(){return buildConsultationSummary({plan:lastPlan,health:healthDirty?null:lastHealth,title:models[current].title,desiredMonth:$('plannedUseMonth').value,timing:timing?.getSummary(),documents:[...baseDocs,...extraDocs[current]].map(x=>({title:x[1],ready:checkedDocs.has(x[1])}))});}
 $('clearHealth').addEventListener('click',()=>{financeTouched=true;salesLinked=false;healthLink={kind:'manual',name:'自行填寫的財務資料',note:'未填欄位不作推估。'};healthFields.forEach(f=>$('h_'+f.id).value='');lastHealth=null;healthDirty=false;$('healthResults').innerHTML='<div class="empty-result"><p>填入至少一項金額，按下更新再查看結果。</p></div>';$('healthResults').classList.remove('stale-results');$('healthStaleWarning').hidden=true;$('healthStatus').textContent='等待健檢';$('healthStatus').classList.remove('dirty');$('definitionContent').innerHTML='';$('profitChart').innerHTML=profitabilityMarkup({});$('profitChart').classList.remove('stale-results');$('healthError').textContent='';$('downloadHealth').disabled=true;$('printHealth').disabled=true;$('healthDataNote').textContent='目前為空白欄位；不確定可留白，資料不足的指標不判為健康。';setHealthStep(0);updateHandoffState()});
-$('healthExample').addEventListener('click',()=>{if($('healthScenario').value==='linked'){if(lastPlan?.out?.extra?.operating)setLinkedHealth({values:lastPlan.out.extra.operating.health,name:'螺絲粉營運預估',note:'開業資產負債＋首年預估損益與本息，已含本案融資。'},'case');else if(activeTeachingCase)setLinkedHealth({values:lastPlan?.out?.extra?.operating?.health||activeTeachingCase.health,name:activeTeachingCase.company,note:activeTeachingCase.input.operating?'開業資產負債＋首年預估損益與本息，已含本案融資。':'僅示範本案還款安排，其餘公司財務待補。'},'case');else setLinkedHealth(pairedHealth(current,Number($('businessExample').value)||0));}else{const preset=HEALTH_EXAMPLES.find(x=>x.id===$('healthScenario').value)||HEALTH_EXAMPLES[0];setLinkedHealth({...preset,note:'獨立健檢情境，與本次投資規劃分開判讀。'},'independent');}setHealthStep(1);doHealth();});
+$('healthExample').addEventListener('click',()=>{if($('healthScenario').value==='linked'){if(lastPlan?.out?.extra?.operating)setLinkedHealth({values:lastPlan.out.extra.operating.health,name:'螺絲粉營運預估',note:'首年年底資產負債＋首年損益＋次年還款；另加可修改的收款與備料假設。'},'case');else if(activeTeachingCase)setLinkedHealth({values:lastPlan?.out?.extra?.operating?.health||activeTeachingCase.health,name:activeTeachingCase.company,note:activeTeachingCase.input.operating?'首年年底資產負債＋首年損益＋次年還款；另加可修改的收款與備料假設。':'僅示範本案還款安排，其餘公司財務待補。'},'case');else setLinkedHealth(pairedHealth(current,Number($('businessExample').value)||0));}else{const preset=HEALTH_EXAMPLES.find(x=>x.id===$('healthScenario').value)||HEALTH_EXAMPLES[0];setLinkedHealth({...preset,note:'獨立健檢情境，與本次投資規劃分開判讀。'},'independent');}setHealthStep(1);doHealth();});
 $('plannedUseMonth').addEventListener('input',updateHandoffState);
 $('copyConsultation').addEventListener('click',async()=>{if($('copyConsultation').disabled)return;const text=getConsultation();$('consultationPreview').value=text;try{await navigator.clipboard.writeText(text);toast('已複製本次諮詢摘要，可留存或帶去討論。')}catch{$('consultationPreview').closest('details').open=true;$('consultationPreview').focus();$('consultationPreview').select();toast('請在摘要欄位選取複製。')}});
 $('printConsultation').addEventListener('click',()=>{if($('printConsultation').disabled)return;const w=window.open('','_blank');if(!w)return toast('請允許開啟摘要視窗，或使用複製摘要。');w.document.write(consultationPrintHTML(getConsultation()));w.document.close();w.focus();});
@@ -126,7 +127,7 @@ function applyTeachingCase(id){
  document.querySelector('#monthlyPlanner .timing-reset')?.click();
  financeTouched=true;applyingFinance=true;activeTeachingCase=item;current=item.model;mode=item.input.mode||'dual';drafts[current]=JSON.parse(JSON.stringify(item.input));renderModel();
  $('plannedUseMonth').value=item.month;
- setLinkedHealth({values:item.health,name:item.company,note:item.input.operating?'開業資產負債＋首年預估損益與本息，已含本案融資。':'僅示範本案還款安排，其餘公司財務待補。'},'case');
+ setLinkedHealth({values:item.health,name:item.company,note:item.input.operating?'首年年底資產負債＋首年損益＋次年還款；另加可修改的收款與備料假設。':'僅示範本案還款安排，其餘公司財務待補。'},'case');
  doCalculate();doHealth();applyingFinance=false;
  consultationFlow.fillCase({...caseConsultation(item,lastPlan),city:item.city,district:item.district,services:item.services});
  $('planDataNote').textContent='完整案例：'+item.shortName+'。數值已計算；可修改後重新試算。';
@@ -152,7 +153,7 @@ function setLinkedHealth(preset,kind='paired'){
 }
 function syncHealthFromPlan(){
  if(applyingFinance||restoringFinance||!lastPlan)return;
- if(lastPlan.out.extra?.operating&&healthLink.kind==='case'){setLinkedHealth({values:lastPlan.out.extra.operating.health,name:'螺絲粉營運預估',note:'開業資產負債＋首年預估損益／本息，已含本案融資。'},'case');doHealth();return;}
+ if(lastPlan.out.extra?.operating&&healthLink.kind==='case'){setLinkedHealth({values:lastPlan.out.extra.operating.health,name:'螺絲粉營運預估',note:'首年年底資產負債＋首年損益＋次年還款；另加可修改的收款與備料假設。'},'case');doHealth();return;}
  const wasReady=!!lastHealth&&!healthDirty,patch=sharedHealthPatch(lastPlan);
  if(salesLinked&&Number.isFinite(patch.sales)&&$('h_sales').value!==String(patch.sales)){
   $('h_sales').value=patch.sales;markHealthDirty();
@@ -161,7 +162,7 @@ function syncHealthFromPlan(){
  }
  refreshHealthLink();saveFinanceProgress();
 }
-function refreshHealthLink(){const box=$('healthPlanLink');if(!box)return;if(!lastPlan||planDirty){box.textContent='先更新資金試算，這裡會顯示同一份規劃。';return;}if(lastPlan.out.extra?.operating){box.textContent='螺絲粉營運情境：健檢採開業資產負債及首年預估損益／本息；已包含本案借款。自行修改健檢後，改以您填寫的值為準。';return;}const need=financingNeed(lastPlan),e=lastPlan.out.extra||{};let repayment=Number.isFinite(e.monthlyPayment)?'；本案每月本息 '+fmt(e.monthlyPayment,2)+' 萬元':Number.isFinite(e.peakAnnual)?'；本案最高年度本息 '+fmt(e.peakAnnual,2)+' 萬元':'';box.innerHTML='<b>已連結：'+escape(models[lastPlan.model].title)+'</b><p>融資規劃需求 '+fmt(need.amount,2)+' 萬元'+repayment+'</p><small>新增需求另列，未直接計入公司負債與原有本息。展店營運餘額不等於會計營業利益。</small>';}
+function refreshHealthLink(){const box=$('healthPlanLink');if(!box)return;if(!lastPlan||planDirty){box.textContent='先更新資金試算，這裡會顯示同一份規劃。';return;}if(lastPlan.out.extra?.operating){box.innerHTML=healthForecastMarkup(lastPlan,healthLink.kind==='case');return;}const need=financingNeed(lastPlan),e=lastPlan.out.extra||{};let repayment=Number.isFinite(e.monthlyPayment)?'；本案每月本息 '+fmt(e.monthlyPayment,2)+' 萬元':Number.isFinite(e.peakAnnual)?'；本案最高年度本息 '+fmt(e.peakAnnual,2)+' 萬元':'';box.innerHTML='<b>已連結：'+escape(models[lastPlan.model].title)+'</b><p>融資規劃需求 '+fmt(need.amount,2)+' 萬元'+repayment+'</p><small>新增需求另列，未直接計入公司負債與原有本息。展店營運餘額不等於會計營業利益。</small>';}
 function saveFinanceProgress(){if(!financeReady||!financeTouched||restoringFinance||applyingFinance||!$('h_cash')||!$('p_'+models[current].fields[0].id))return;writeFinanceDraft({current,mode,planInputs:{...Object.fromEntries(models[current].fields.map(f=>[f.id,$('p_'+f.id).value])),...(readOperating()?{operating:readOperating()}:{})},healthInputs:Object.fromEntries(healthFields.map(f=>[f.id,$('h_'+f.id).value])),planReady:!!lastPlan&&!planDirty,healthReady:!!lastHealth&&!healthDirty,healthLink,salesLinked,caseId:activeTeachingCase?.id||null,month:$('plannedUseMonth').value,example:$('businessExample').value});}
 function restoreFinanceProgress(saved){
  restoringFinance=true;financeTouched=true;
@@ -173,7 +174,7 @@ function restoreFinanceProgress(saved){
   salesLinked=saved.salesLinked===true;activeTeachingCase=null;$('activeCaseSummary').hidden=true;
   $('plannedUseMonth').value=saved.month||'';$('businessExample').value=saved.example||'0';
   healthDirty=Object.values(saved.healthInputs).some(v=>v!==''&&v!==null);
-  if(saved.planReady)doCalculate();if(saved.healthReady)doHealth();
+  if(saved.planReady)doCalculate();if(healthLink.kind==='case'&&lastPlan?.out?.extra?.operating?.forecast){healthFields.forEach(f=>$('h_'+f.id).value=lastPlan.out.extra.operating.health[f.id]??'');healthLink.note='首年年底資產負債＋首年損益＋次年還款；新增可修改的收款與備料假設。';}if(saved.healthReady)doHealth();
   $('healthDataNote').textContent='已恢復上次填寫的數字；所有欄位都可修改。';
   $('planDataNote').textContent='已恢復上次填寫的數字；修改後請更新試算。';
  }finally{restoringFinance=false;}updateHandoffState();
