@@ -91,3 +91,29 @@ button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
 /* Compact service links keep promotion in the footer. */
 .footer-services{display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px;margin:16px 0 8px;padding-top:12px;border-top:1px solid #d7e7df;font-size:14px;line-height:1.6}.footer-services span{color:#607c74}.footer-services a{display:inline-flex;align-items:center;min-height:44px;color:#00766b;text-decoration:none}.footer-services a:hover{text-decoration:underline}
 @media(max-width:600px){.footer-services{gap:2px 18px}.footer-services span{flex-basis:100%}}
+
+/* Showcase hero and PDF-style preview */
+.mobile-experience .hero{background:linear-gradient(115deg,#094b48,#08735e);padding:36px 0}
+.mobile-experience .hero-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr);gap:28px}
+.mobile-experience .hero h1{font-size:clamp(32px,3.5vw,53px);line-height:1.45}
+.hero-ball-frame{overflow:hidden;border-radius:20px;box-shadow:0 15px 36px #00352d32;min-width:0}
+.hero-ball-frame img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.summary-preview{margin-top:22px}
+.summary-pdf-frame{position:relative;max-height:650px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:auto;scrollbar-color:#07977f #e0ebe6;border:1px solid #cddfd7;border-radius:12px;background:#e9f1ed;padding:18px}
+.summary-preview-pages{display:grid;gap:16px;max-width:620px;margin:0 auto}
+.summary-preview-pages>svg{display:block;background:#fff;width:100%;height:auto;box-shadow:0 5px 18px #183b3220}
+.summary-copy-actions{margin-top:12px;display:flex;justify-content:flex-end}
+.product-promo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:26px 0}
+.product-promo-card{overflow:hidden;display:grid;grid-template-columns:39% 1fr;min-height:230px;border-radius:18px;background:#eef7f2;text-decoration:none;box-shadow:0 8px 26px #18473a15;transition:transform .18s,box-shadow .18s}
+.product-promo-card:hover{transform:translateY(-3px);box-shadow:0 14px 26px #18473a25}
+.promo-visual{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(135deg,#007e71,#59b8a0);color:white;overflow:hidden}
+.promo-visual:before{content:"";position:absolute;inset:-20%;border:2px solid #ffffff30;border-radius:45%;transform:rotate(25deg)}
+.ebank-ad .promo-visual{background:linear-gradient(135deg,#145a71,#31a99a)}
+.ad-icon{position:relative;z-index:1;width:108px;height:108px;border-radius:25px;background:#ffffff30;display:grid;place-items:center;font-size:68px;font-weight:600;color:#fff;box-shadow:0 9px 20px #04493f33}
+.ad-globe{border-radius:50%}.ad-visual-label{z-index:1;font-size:10px;letter-spacing:2px}
+.promo-copy{display:flex;flex-direction:column;justify-content:center;gap:12px;padding:20px}
+.promo-copy small{font-size:10px;letter-spacing:1px;color:#377b6e}
+.promo-copy strong{font-size:clamp(20px,2vw,31px);font-weight:800;color:#045e52}
+.promo-copy span{font-size:14px;color:#446d60}
+.promo-copy em{font-style:normal;font-weight:700;color:#007b6e;font-size:14px}
+@media(max-width:760px){.mobile-experience .hero-grid{grid-template-columns:1fr}.mobile-experience .hero{padding:24px 0}.hero-ball-frame{margin-top:8px}.product-promo-grid{grid-template-columns:1fr;gap:14px}.product-promo-card{min-height:174px}.ad-icon{width:72px;height:72px;font-size:43px}.summary-pdf-frame{max-height:66vh;padding:8px}}
