@@ -87,3 +87,7 @@ button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
  .mobile-experience .optional-examples{padding:12px}.mobile-experience .optional-examples>summary{font-size:15px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* Compact service links keep promotion in the footer. */
+.footer-services{display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px;margin:16px 0 8px;padding-top:12px;border-top:1px solid #d7e7df;font-size:14px;line-height:1.6}.footer-services span{color:#607c74}.footer-services a{display:inline-flex;align-items:center;min-height:44px;color:#00766b;text-decoration:none}.footer-services a:hover{text-decoration:underline}
+@media(max-width:600px){.footer-services{gap:2px 18px}.footer-services span{flex-basis:100%}}

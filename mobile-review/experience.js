@@ -1,8 +1,7 @@
 // Presentation and navigation only; financial calculations remain in engine.js.
 const main=document.querySelector('main');
 if(document.body.classList.contains('mobile-experience')&&main){
- const hero=main.querySelector('.hero'),banner=main.querySelector('.baseball-banner');
- if(hero&&banner)hero.after(banner);
+ const hero=main.querySelector('.hero');
  const progress=document.createElement('nav');progress.className='experience-progress wrap';progress.setAttribute('aria-label','資金規劃流程');
  const steps=[['models','選擇用途'],['simulator','資金試算'],['health','財務健檢'],['consultation','留下需求']];
  for(const [i,[id,title]]of steps.entries()){const a=document.createElement('a');a.href='#'+id;const n=document.createElement('span');n.textContent=String(i+1);a.append(n,document.createTextNode(title));progress.append(a);}
