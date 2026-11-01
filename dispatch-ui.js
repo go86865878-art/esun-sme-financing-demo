@@ -2,7 +2,7 @@ import {estimateRelationship} from './relationship-value.js?v=deposit20261102';
 import {briefFromLead,visualBriefSvg} from './visual-brief.js?v=visualbrief20261101';
 import {buildVisualReport} from './visual-report.js?v=visualbrief20261101';
 import {downloadPdf} from './pdf-report.js?v=visualbrief20261101';
-import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,visualEmlDraft,loadContact,saveContact} from './dispatch-mail.js?v=visualbrief20261101';
+import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,visualEmlDraft,loadContact,saveContact} from './dispatch-mail.js?v=manager20261102';
 
 export function mountDispatchMail(){
  const dialog=document.createElement('dialog');dialog.id='dispatchDialog';dialog.className='dispatch-dialog';
