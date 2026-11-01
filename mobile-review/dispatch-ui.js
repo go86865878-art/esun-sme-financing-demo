@@ -1,4 +1,4 @@
-import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js?v=roundcharts20261101';
+import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js?v=roundcharts20261101b';
 
 export function mountDispatchMail(){
  const dialog=document.createElement('dialog');dialog.id='dispatchDialog';dialog.className='dispatch-dialog';

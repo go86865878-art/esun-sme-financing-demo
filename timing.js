@@ -1,4 +1,4 @@
-import { addMonths, calculateTiming } from './timing-engine.js?v=roundcharts20261101';
+import { addMonths, calculateTiming } from './timing-engine.js?v=roundcharts20261101b';
 
 const format = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 2 });
 const fmt = n => format.format(n);

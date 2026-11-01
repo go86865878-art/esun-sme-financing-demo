@@ -1,7 +1,7 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>派任郵件流程檢查</title><style>body{font:14px/1.7 system-ui;background:#edf4f0;color:#234b3c;margin:20px}button{padding:12px;background:#007e6e;color:white;border:0;border-radius:8px;cursor:pointer}iframe{display:block;width:390px;max-width:100%;height:780px;border:1px solid #93bbaa;margin:18px 0;background:white}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:18px;max-width:900px}</style></head><body><h1>派任通知：主管對應與草稿檢查</h1><p>使用虛構案例與 example.invalid 測試信箱，攔截郵件連結及下載；不開啟郵件程式、不寄信。</p><button id="runDispatchChecks">執行派任通知檢查</button><pre id="dispatchCheckResult" role="status">尚未執行</pre><iframe id="dispatchFrame" title="390px手機後台預覽" src="internal.html?cases=1&amp;v=supervisor1"></iframe><script type="module">
-import {DEMO_CASES} from './case-data.js?v=roundcharts20261101';
-import {LEADS_KEY} from './opportunity.js?v=roundcharts20261101';
-import {CONTACTS_KEY} from './dispatch-mail.js?v=roundcharts20261101';
+import {DEMO_CASES} from './case-data.js?v=roundcharts20261101b';
+import {LEADS_KEY} from './opportunity.js?v=roundcharts20261101b';
+import {CONTACTS_KEY} from './dispatch-mail.js?v=roundcharts20261101b';
 const frame=document.getElementById('dispatchFrame'),output=document.getElementById('dispatchCheckResult');
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function until(fn){for(let i=0;i<100;i++){if(fn())return;await pause(100)}throw Error('wait timed out')}

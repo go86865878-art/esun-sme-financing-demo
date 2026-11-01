@@ -1,6 +1,6 @@
-import {OPERATING_FIELDS} from './operating-plan.js?v=roundcharts20261101';
-import {financingNeed} from './financing-need.js?v=roundcharts20261101';
-import {PURPOSE_TITLES} from './franchise-scenarios.js?v=roundcharts20261101';
+import {OPERATING_FIELDS} from './operating-plan.js?v=roundcharts20261101b';
+import {financingNeed} from './financing-need.js?v=roundcharts20261101b';
+import {PURPOSE_TITLES} from './franchise-scenarios.js?v=roundcharts20261101b';
 export const HEALTH_LABELS={cash:'可動用現金與銀行存款',receipts:'一年內可收回的貨款',stock:'可售庫存成本',shortDebt:'一年內全部應付款',totalDebt:'負債總額',assets:'資產帳面總額',sales:'全年營業收入',profit:'全年營業利益',annualAvailable:'未來一年可還款現金',annualDebt:'原有借款全年本息'};
 const C={green:'#009b8f',ink:'#214b60',muted:'#76909a',pale:'#edf7f4',line:'#d8e8e8',red:'#b74350',amber:'#956a23',white:'#ffffff'};
 const status={green:'健康',yellow:'注意',red:'警示',na:'資料不足／不適用'};

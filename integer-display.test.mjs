@@ -21,3 +21,5 @@ test('empty charts remain empty and each filtered population reconciles to its o
  const d=pipelineSummary([make('02')]);assert.equal(d.count,1);assert.equal(d.funding[0].amount,300);
  assert.match(caseFinanceCharts(make('02').plan),/逐月營收與稅後淨利/);assert.match(caseFinanceCharts(make('02').plan),/年底資產與資金來源/);
 });
+
+test('legacy case charts reconstruct the forecast without overwriting the submitted snapshot',()=>{const p=make('02').plan;delete p.out.extra.operating.forecast;delete p.inputs.operating.settlementDays;delete p.inputs.operating.inventoryDays;delete p.inputs.operating.payableDays;const before=JSON.stringify(p);assert.match(caseFinanceCharts(p),/年底資產與資金來源/);assert.equal(JSON.stringify(p),before);});
