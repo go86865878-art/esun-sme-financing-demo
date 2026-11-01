@@ -130,7 +130,8 @@ export const DEMO_CASES = [
     "insight": "每月本金列在現金流；折舊列在損益。年終獎金12月底發放。健檢使用開業資產負債與首年預估損益、本息，未填的存貨與應收不作推估。",
     "ask": "請確認實際開店支出、排班、付款時點與收單費率；本例為可修改的假設情境。",
     "shortName": "大鈞螺絲粉",
-    "payrollEmployees": 9
+    "payrollEmployees": 9,
+    "valueAssumptions": {"collectionShare":100,"feeShare":70,"merchantRate":4.5,"bankShare":50,"depositDays":30,"depositYield":0.5,"salary":3.7,"savingShare":100,"employeeYield":0.5,"utilization":100,"loanRate":2,"loanRateHigh":2.5}
   },
   {
     "id": "04",
