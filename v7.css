@@ -2,3 +2,4 @@
 .plan-stale>.opportunity-handoff{opacity:.5;pointer-events:none}
 @media(max-width:590px){.health-steps{gap:5px}.health-step{padding:10px 4px;font-size:14px}.health-step span{font-size:11px}.handoff-grid{grid-template-columns:1fr;gap:12px}.handoff-panel .actions>*{width:100%}.monthly-details{padding:16px}.monthly-details>summary{font-size:18px}.entry-note{font-size:14px}.source-hint{font-size:14px!important}.health-step-panel>p{font-size:15px}.step-actions{align-items:stretch}.step-actions>button{flex:1}.handoff-panel h3{font-size:21px}}
 @media print{.handoff-panel,.monthly-details,.health-steps{display:none!important}.stale-warning:not([hidden]){display:block;background:#fff4d9!important;color:#754d05!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+

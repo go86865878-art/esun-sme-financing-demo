@@ -1,0 +1,89 @@
+/* 2026-11: desktop reading comfort and mobile form flow. */
+:root{--focus-ring:#c18d2a}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body,input,select,textarea,button{font-family:'Microsoft JhengHei','Noto Sans TC',sans-serif}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
+:is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+[hidden]{display:none!important}
+.experience-progress{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid #d7e7df;margin-bottom:12px}
+.experience-progress a{display:flex;gap:10px;align-items:center;min-height:48px;font-size:16px;font-weight:700;color:#376359;text-decoration:none}
+.experience-progress span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e6f2ed;color:#007668;font-size:14px}
+.experience-next{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;padding:18px;background:#e9f5ef;border:1px solid #cae2d7;border-radius:12px}
+.experience-next p{margin:0;color:#315e50;line-height:1.6}.experience-next a{white-space:nowrap}
+.mobile-experience .workspace{align-items:start;gap:28px}
+.mobile-experience .result-panel{max-height:calc(100dvh - 120px);overflow:auto;scrollbar-width:thin}
+.mobile-experience .field label{line-height:1.6}
+.mobile-experience .input-wrap input{font-variant-numeric:tabular-nums}
+.mobile-experience .baseball-banner{max-width:1220px;margin:28px auto;min-height:300px}
+.mobile-experience .baseball-copy{max-width:540px}
+.mobile-experience .baseball-copy p{line-height:1.8}
+.mobile-experience .optional-examples>summary{min-height:48px;display:flex;align-items:center;line-height:1.6}
+.mobile-experience .case-resource-links{display:flex;flex-wrap:wrap;gap:8px 18px}
+.mobile-experience .case-resource-links a{min-height:44px;display:inline-flex;align-items:center}
+.mobile-experience input[aria-invalid=true]{border-color:#a93640;box-shadow:0 0 0 1px #a93640}
+.mobile-experience .hero .journey h2,.mobile-experience .hero .journey-step b{color:#f2fff9}
+.mobile-experience .hero .journey-step>span{color:#bce8d9}
+@media(min-width:761px){
+ .mobile-experience .wrap{max-width:1220px;width:calc(100% - 64px)}
+ .mobile-experience .nav{gap:18px}.mobile-experience .nav nav{gap:20px}
+ .mobile-experience .brand>span:last-child{white-space:normal;font-size:clamp(15px,1.5vw,21px)}
+ .mobile-experience .hero{padding:54px 0}.mobile-experience .hero h1{font-size:clamp(36px,4vw,54px)}
+ .mobile-experience .section{padding:52px 0}.mobile-experience .fields{gap:22px 20px}
+ .mobile-experience input,.mobile-experience select{min-height:48px}
+ .mobile-experience .model-card{transition:transform .15s,border-color .15s}
+ .mobile-experience .model-card:hover{transform:translateY(-3px)}
+}
+@media(min-width:761px) and (max-width:1050px){
+ .mobile-experience .workspace,.mobile-experience .health-layout{grid-template-columns:1fr}
+ .mobile-experience .result-panel{position:static;max-height:none}
+ .mobile-experience .nav nav{gap:12px;font-size:13px}.mobile-experience .brand small{display:none}
+}
+@media(max-width:760px){
+ html{scroll-padding-top:86px}
+ .mobile-experience .wrap{width:calc(100% - 32px)}
+ .mobile-experience .nav{height:auto;min-height:68px;padding:8px 0;gap:8px}
+ .mobile-experience .brand{flex:1;min-width:0;gap:7px}
+ .mobile-experience .brand>span:last-child{white-space:normal!important;font-size:14px!important;line-height:1.4;max-width:185px}
+ .mobile-experience .brandmark{flex:none}
+ .mobile-experience .mobile-doc-link{padding:8px;font-size:12px;min-height:44px;flex:none}
+ .experience-progress{display:none}
+ .mobile-experience .section-head h2{font-size:24px;line-height:1.45}
+ .mobile-experience .section-head p{font-size:15px;line-height:1.7}
+ .mobile-experience .fields,.mobile-experience .health-layout .fields{grid-template-columns:minmax(0,1fr)!important;gap:20px}
+ .mobile-experience .field label{min-height:0;font-size:16px;line-height:1.5;margin-bottom:8px;font-weight:700}
+ .mobile-experience .input-wrap input{min-height:52px;font-size:18px;padding:12px 58px 12px 14px;border-radius:10px}
+ .mobile-experience .input-wrap span{font-size:14px;right:14px;top:16px}
+ .mobile-experience .mobile-help{font-size:14px}
+ .mobile-experience .field>small,.mobile-experience.mobile-show-help .field>small{font-size:14px!important;line-height:1.7}
+ .mobile-experience .button,.mobile-experience .outline,.mobile-experience .text-button{min-height:48px;font-size:16px}
+ .mobile-experience #modelForm>.actions{display:grid;grid-template-columns:1fr;gap:10px}
+ .mobile-experience #reset{color:#6a746d;border-color:#d8e1db;background:#fff}
+ .mobile-experience .result-panel{max-height:none;overflow:visible}
+ .mobile-experience .result-hero strong{font-size:40px}.mobile-experience .result-hero p{font-size:14px}
+ .mobile-experience .mobile-view-switch{position:sticky;top:68px;z-index:25;box-shadow:0 3px 12px #184b3412}
+ .mobile-experience .mobile-view-switch button{font-size:16px;min-height:48px}
+ .mobile-experience .health-items{grid-template-columns:1fr}
+ .mobile-experience .health-item b{font-size:16px}.mobile-experience .health-item p{font-size:14px}
+ .mobile-experience .health-step{font-size:14px;min-height:48px}
+ .mobile-experience .consultation-fields{grid-template-columns:1fr!important;gap:18px}
+ .mobile-experience .consultation-fields label,.mobile-experience #productNeeds legend{font-size:16px}
+ .mobile-experience #consultationForm :is(input:not([type=checkbox]),select,textarea){min-height:52px;font-size:16px}
+ .mobile-experience #consultationForm textarea{min-height:135px}
+ .mobile-experience #consultationForm input[type=checkbox]{width:22px;height:22px;flex:none}
+ .experience-next{display:block;padding:16px}.experience-next p{font-size:15px;margin-bottom:12px}
+ .experience-next a{width:100%;justify-content:center}
+ .mobile-ready[data-mobile-pane]:not([data-mobile-pane=models]) .baseball-banner{display:none}
+ .mobile-experience .baseball-banner{width:calc(100% - 32px);margin:0 auto 24px;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 35%;gap:0;padding:0;align-items:stretch}
+ .mobile-experience .baseball-scene{position:relative;grid-column:2;grid-row:1;width:100%;height:100%;min-height:196px;object-position:right 52%}
+ .mobile-experience .baseball-copy{grid-column:1;grid-row:1;width:100%;padding:16px;max-width:none}
+ .mobile-experience .baseball-copy h2{font-size:18px;line-height:1.55}.mobile-experience .baseball-copy p{display:none}
+ .mobile-experience .baseball-copy .button{font-size:13px;min-height:44px;padding:10px 12px;white-space:normal}
+ .mobile-experience .baseball-copy .eyebrow{display:none}
+ .mobile-experience .mobile-bottom-nav{padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom));z-index:70}
+ .mobile-experience .mobile-bottom-nav a{font-size:12px;min-height:52px}
+ .mobile-experience .model-card{min-height:152px}.mobile-experience .model-card h3{font-size:17px}
+ .mobile-experience .model-card small{font-size:13px}
+ .mobile-experience .esun-assistant-panel{max-height:calc(100dvh - 180px)}
+ .mobile-experience .optional-examples{padding:12px}.mobile-experience .optional-examples>summary{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}

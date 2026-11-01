@@ -1,3 +1,4 @@
+import {operatingSummary} from './operating-plan-ui.js?v=luosifen2';
 const statusNames={green:'健康',yellow:'注意',red:'警示',na:'不適用'};
 export const CONTACT_URL='https://www.esunbank.com/zh-tw/about/services/customer/message-board';
 export function buildConsultationSummary({plan,health=null,documents=[],timing=null,desiredMonth='',title=''}){
@@ -6,6 +7,7 @@ export function buildConsultationSummary({plan,health=null,documents=[],timing=n
   const n=value=>Number.isFinite(value)?value.toLocaleString('zh-TW',{maximumFractionDigits:2}):'不適用';
   const rows=['企業資金規劃｜諮詢摘要（測試網）',`資金用途：${title}`,`預計用款：${desiredMonth||'待與專人確認'}`,`試算時間：${plan.at}`,`${o.label}：${n(o.value)} ${o.unit}`,...o.metrics.map(x=>`${x.label}：${x.value}`)];
   if(plan.model==='overseas')rows.push(`預算幣別：${{twd:'台幣',usd:'美元',dual:'台幣與美元'}[plan.mode]||'待確認'}`);
+  if(o.extra?.operating)rows.push('',operatingSummary(plan));
   rows.push('', '財務健檢');
   if(health?.out){rows.push(`整體：${statusNames[health.out.overall]||'不適用'}（${health.at}）`,...health.out.items.map(x=>`${x.label}：${statusNames[x.status]}／${x.value}`));}
   else rows.push('尚未完成；可另提供財務資料與專人討論。');
@@ -17,3 +19,4 @@ export function consultationPrintHTML(text){
   const safe=String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   return `<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>企業資金規劃諮詢摘要</title><style>@page{size:A4;margin:13mm}body{font:11pt/1.45 "Microsoft JhengHei",sans-serif;color:#173d50;margin:0;border-top:7px solid #008577;padding-top:14px}h1{font-size:18pt;color:#00776d;margin:0 0 10px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;margin:0}button{padding:10px 18px;background:#008577;color:white;border:0;margin:15px 0}@media print{button{display:none}}</style><h1>企業資金規劃諮詢摘要</h1><pre>${safe}</pre><button onclick="window.print()">列印／存成 PDF</button></html>`;
 }
+

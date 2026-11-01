@@ -59,3 +59,4 @@ export function calculateTiming(input) {
   });
   return { startMonth, endMonth: rows.at(-1).month, openingCash, totalReceipts, totalPayments, endingBalance: balance, firstShortfallMonth, maxGap, maxGapMonth, rows, unit: '萬元' };
 }
+

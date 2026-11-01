@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>手機版預覽｜企業・加盟資金規劃</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#e8eeeb;color:#234b3d;font:14px/1.6 system-ui,sans-serif}header{padding:20px;text-align:center}h1{font-size:22px;margin:0 0 6px}p{margin:6px 0}a{color:#007364}button{font:inherit;min-height:42px;border:1px solid #bad0c4;background:white;color:#235b44;border-radius:8px;padding:8px 12px;cursor:pointer}button[aria-pressed=true]{background:#007869;color:white}nav{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:12px 0}.phone{width:max-content;max-width:100%;margin:0 auto 24px;padding:6px;background:#254f40;border-radius:23px;box-shadow:0 15px 45px #284a3520}iframe{display:block;border:0;border-radius:18px;background:white;width:390px;height:844px;max-width:calc(100vw - 24px)}details{max-width:800px;margin:20px auto;padding:16px;background:white;border-radius:12px}pre{white-space:pre-wrap;word-break:break-word;font:12px/1.6 monospace}#previewStatus{text-align:center;font-size:13px}#checkResult{max-height:400px;overflow:auto}@media(max-width:500px){header{padding:14px}h1{font-size:19px}iframe{height:calc(100dvh - 230px);min-height:450px}}</style></head>
+<body><header><h1>手機版預覽</h1><p>底部切換用途、試算、健檢與諮詢，輸入內容會留在原處。</p><a href="index.html">直接開啟網站 ↗</a><nav aria-label="預覽寬度"><button data-width="320">320 px</button><button data-width="390" aria-pressed="true">390 px</button><button data-width="430">430 px</button><button data-width="820">平板 820 px</button></nav><p id="previewStatus" role="status">正在載入…</p></header>
+<div class="phone"><iframe id="deviceFrame" src="index.html?v=mobile1" title="企業加盟資金規劃手機版預覽"></iframe></div>
+<details><summary>互動與版面檢查</summary><p>檢查分頁切換、輸入保留及試算結果；不會建立諮詢案件或傳送資料。</p><button id="runChecks" type="button">執行檢查</button><pre id="checkResult" role="status"></pre></details>
+<script>
+const frame=document.getElementById('deviceFrame'),status=document.getElementById('previewStatus');
+const pause=()=>new Promise(resolve=>setTimeout(resolve,120));
+function measure(){try{const w=frame.contentWindow,d=w.document;return {viewport:w.innerWidth,pageWidth:d.documentElement.scrollWidth,height:d.documentElement.scrollHeight,mobile:d.body.classList.contains('mobile-ready'),pane:d.body.dataset.mobilePane,bodyFont:w.getComputedStyle(d.body).fontSize,headingFont:w.getComputedStyle(d.querySelector('h1')).fontSize};}catch{return null}}
+function update(){const m=measure();status.textContent=m?'內容寬 '+m.viewport+' px · '+(m.mobile?'手機分段操作':'完整頁面'):'正在載入…'}
+document.querySelectorAll('[data-width]').forEach(button=>button.addEventListener('click',async()=>{frame.style.width=button.dataset.width+'px';document.querySelectorAll('[data-width]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));await pause();update()}));
+frame.addEventListener('load',update);
+document.getElementById('runChecks').addEventListener('click',async function(){
+ const results=[];this.disabled=true;const log=(name,pass,observed)=>results.push({name,pass,observed});
+ try{
+  for(const width of [320,390,430]){
+   frame.style.width=width+'px';await pause();
+   const w=frame.contentWindow,d=w.document,click=selector=>{const n=d.querySelector(selector);if(!n)throw Error('missing '+selector);n.click();};
+   click('#mobileStepNav a[href="#models"]');await pause();
+   let m=measure();log('home '+width,m.mobile&&m.viewport===width&&m.pageWidth<=width,m);
+   click('.model-card[data-model="expansion"]');await pause();
+   const setup=d.getElementById('p_setup');setup.value='421';setup.dispatchEvent(new w.Event('input',{bubbles:true}));
+   click('#mobileStepNav a[href="#health"]');await pause();click('#mobileStepNav a[href="#simulator"]');await pause();
+   log('input preserved '+width,d.getElementById('p_setup').value==='421',d.getElementById('p_setup').value);
+   setup.value='420';setup.dispatchEvent(new w.Event('input',{bubbles:true}));
+   click('#modelForm button[type=submit]');await pause();
+   const card=d.getElementById('planningCard').textContent;
+   log('calculation and result view '+width,d.body.dataset.simulatorView==='result'&&card.includes('330')&&d.getElementById('resultStatus').textContent==='已更新',{view:d.body.dataset.simulatorView,card,resultStatus:d.getElementById('resultStatus').textContent});
+   log('result no overflow '+width,measure().pageWidth<=width,measure());
+   click('#mobileStepNav a[href="#health"]');click('#healthExample');await pause();
+   log('health result '+width,d.body.dataset.healthView==='result'&&d.getElementById('healthStatus').textContent.startsWith('整體：'),{view:d.body.dataset.healthView,status:d.getElementById('healthStatus').textContent});
+   click('#mobileStepNav a[href="#consultation"]');await pause();
+   log('consultation no overflow '+width,measure().pageWidth<=width,measure());
+   const inputFont=w.getComputedStyle(d.querySelector('#consultationForm input[name=company]')).fontSize;
+   log('readable inputs '+width,parseFloat(inputFont)>=16,inputFont);
+  }
+  frame.style.width='820px';await pause();
+  let m=measure();log('desktop page restored',!m.mobile,m);
+  frame.style.width='390px';await pause();frame.contentDocument.querySelector('#mobileStepNav a[href="#models"]').click();await pause();
+ }catch(error){log('unexpected error',false,error.message)}
+ finally{this.disabled=false;update();document.getElementById('checkResult').textContent=JSON.stringify({passed:results.filter(x=>x.pass).length,total:results.length,results},null,2);window.mobileCheckResults=results;}
+});
+</script></body></html>

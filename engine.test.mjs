@@ -133,3 +133,4 @@ test('validation rejects invalid data without coercing blanks/booleans to health
   assert.throws(() => calculate('working', { ...working, sales: 1e308, nextSales: 0, dso: 10000 }), /金額過大/);
   assert.throws(() => diagnose({ cash: Infinity }), /數值不合理/);
 });
+

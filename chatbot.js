@@ -5,7 +5,7 @@
     documents: { label: '申貸文件準備清單', href: 'documents.html#documents' },
     forms: { label: '申貸表單下載區', href: 'documents.html#formDownloads' },
     official: { label: '玉山銀行官方表單下載', href: 'https://www.esunbank.com/zh-tw/about/customer-service/applications' },
-    rm: { label: '專人聯繫', href: 'https://www.esunbank.com/zh-tw/about/services/customer/message-board' },
+    rm: { label: '本頁預約諮詢（示範）', href: '#consultation' },
     cash: { label: '玉山收付通官方介紹', href: 'https://www.esunbank.com/zh-tw/business/corporate/cash-management/cash-flow' },
     gib: { label: '玉山全球智匯網官方入口', href: 'https://gib.esunbank.com' },
     models: { label: '本頁試算與模型假設', href: '#simulator' },
@@ -16,11 +16,11 @@
     entity: { label: '附件：非個人戶顧客身分資料表', href: 'entity-identity.pdf' },
     tax: { label: '附件：國稅局委託書', href: 'tax-authorization.pdf' }
   };
-  const modelNames = { working: '營運週轉金', equipment: '廠房與設備', expansion: '展店與擴張', overseas: '海外投資' };
+  const modelNames = { working: '營運週轉金', equipment: '中央廚房與設備', expansion: '展店與開張', overseas: '海外投資' };
   const commonDocs = '可先準備：\n□ 公司／商業登記相關資料\n□ 負責人及保證人雙證件\n□ 近三年財報、最近一期自結資料；如有會計師查核或稅簽報告，一併備妥\n□ 近一年營業稅申報資料（例如 401 表，依實際申報類型）\n□ 營運模式說明、前十大進貨與銷貨明細\n□ 主要往來銀行、借款及存款往來資料';
   const purposeDocs = {
     working: '週轉金再補：收款、存貨及付款情形，主要訂單／合約，以及明年營收預估的依據。讓專員了解錢卡在哪個環節，比只說「想借多少」更有幫助。',
-    equipment: '廠房與設備再補：興建／購置計畫、工程預算與進度、設備報價／合約、營運計畫、預估損益／資產負債／現金流量表及資金來源。土地建物權利資料、相關許可與抵押文件，依案件由銀行確認。',
+    equipment: '中央廚房與設備再補：興建／購置計畫、工程預算與進度、設備報價／合約、營運計畫、預估損益／資產負債／現金流量表及資金來源。土地建物權利資料、相關許可與抵押文件，依案件由銀行確認。',
     expansion: '展店再補：展店計畫、店面租約、裝修／設備預算、既有店營運資料、新店營收與損益預估、爬坡期資金安排及自備款來源。也可以一起討論收款、對帳與企業網銀的需求。',
     overseas: '海外投資再補：投資地點與股權架構、投資與營運計畫、台幣／美元支出明細、預估報表、自備款與借款來源，以及預計用什麼幣別的收入還款。相關投資核准或申報文件，請依實際案件確認。'
   };
@@ -31,7 +31,7 @@
   }
   function knowledge(question) {
     const q = question.toLowerCase().replace(/\s+/g, '');
-    if (/專人聯繫|留言板|留言聯繫|聯絡|聯繫/.test(q)) return answer('專人聯繫：留言後等候銀行回覆', '請點選下方「專人聯繫」至玉山官方留言板，依官網表單指示留言，由銀行專人回覆。\n\n本頁試算結果、輸入資料與文件不會自動傳送；需要提供試算摘要時，請先與專人確認交付方式。留言不等同申貸送件或核貸。', ['rm']);
+    if (/專人聯繫|留言板|留言聯繫|聯絡|聯繫/.test(q)) return answer('專人聯繫：留言後等候銀行回覆', '請點選下方「本頁預約諮詢」，填寫示範門市與想討論的需求；可選擇附上已更新的試算與健檢。\n\n勾選同意後，後台可看到同一筆示範需求。資料只留在同一瀏覽器，不會跨裝置收件或通知銀行；請勿填真實客戶個資。', ['rm']);
     if (/目前用途|現在.*準備|我.*需要.*文件|要準備哪些|文件清單|申貸.*文件|貸款.*文件|申請.*文件|準備.*文件/.test(q)) {
       const key = /建廠|擴廠|興建|廠房|設備/.test(q) ? 'equipment' : /展店|開店|新店|店面/.test(q) ? 'expansion' : /海外|雙幣|美元/.test(q) ? 'overseas' : /週轉|周轉/.test(q) ? 'working' : currentModel();
       return answer((key === currentModel() ? '您目前選擇：' : '您詢問的用途：') + modelNames[key], commonDocs + '\n\n' + purposeDocs[key] + '\n\n這是討論前的準備方向。實際應備文件、期間與適用表單，請先與服務銀行確認，再進行填寫。制式表單集中在申貸流程與文件頁的下載區。', ['documents', 'forms', 'rm']);
@@ -44,7 +44,7 @@
     if (/委託書|國稅局|稅務資料/.test(q)) return answer('國稅局委託書的用途與簽章，請先確認', '右側提供國稅局委託書附件。是否適用、委託範圍、需備資料與簽章方式，請先由服務銀行說明後再填寫。\n\n這份委託書不等同財報或營業稅申報表，也不代表本網站能代為調閱稅務資料。', ['tax', 'forms', 'rm']);
     if (/401|403|405|406|財報|稅簽|自結|營業稅|損益表|資產負債/.test(q)) return answer('財報、稅簽與 401 表，提供的是不同資訊', '財報：說明公司一段期間的經營成果，以及期末資產、負債與權益。可先備近三年及最近一期自結資料。\n\n查核／稅簽報告：如公司已有會計師查核或稅務簽證報告，可一併準備；是否必要由銀行依案件確認。\n\n401 等營業稅申報資料：協助了解近期銷售與進貨情形，依公司實際申報類型準備，並非每家公司都用同一張表，也不能直接取代完整財報。\n\n資料年度、月份、報表口徑及是否需補充其他文件，請先向銀行確認。', ['documents', 'rm']);
     if (/前十大|進銷貨|進貨明細|銷貨明細|營運模式|營運說明/.test(q)) return answer('把「怎麼做生意、怎麼收付款」說清楚', '營運說明可以用白話整理：賣什麼、向誰買、賣給誰、是否先備貨或接單生產，以及收款和付款大約隔多久。\n\n前十大進貨與銷貨明細，建議分別整理主要交易對象、金額／占比、交易期間及收付款條件；如有關係企業交易，也一併說明。是否須附合約、訂單或其他佐證，由銀行依案件確認。', ['documents', 'rm']);
-    if (/建廠|擴廠|興建|建照|廠房|工程|設備/.test(q)) return answer('廠房與設備：計畫、資金與年度還款一起看', purposeDocs.equipment + '\n\n本頁試算先用總預算扣除自有資金，估計需安排的融資；再按假設利率、年限與寬限期列出每年本金及利息。目前採年繳等額本金，實際撥款、還款方式及抵押條件仍須由銀行評估。', ['documents', 'models', 'rm']);
+    if (/建廠|擴廠|興建|建照|廠房|工程|設備/.test(q)) return answer('中央廚房與設備：計畫、資金與年度還款一起看', purposeDocs.equipment + '\n\n本頁試算先用總預算扣除自有資金，估計需安排的融資；再按假設利率、年限與寬限期列出每年本金及利息。目前採年繳等額本金，實際撥款、還款方式及抵押條件仍須由銀行評估。', ['documents', 'models', 'rm']);
     if (/收付通|網銀|智匯|金流|對帳|收款工具/.test(q)) return answer('資金安排之外，也能一起規劃收付款', '玉山收付通與企業網銀可作為進一步討論企業收付款及帳務管理需求的入口。\n\n如果有多店點、頻繁收款、付款或對帳需求，可以先整理目前的作業方式與痛點，再與專員確認適合的服務、申請條件、費用與導入方式。\n\n下方提供收付通介紹與全球智匯網官方入口。本頁不會自動替您申請、開通或連接銀行帳戶。', ['cash', 'gib', 'rm']);
     if (/展店|新店|開店|店面|爬坡/.test(q)) return answer('展店：把開幕前與開幕後的資金分開看', purposeDocs.expansion + '\n\n本頁把裝修設備等一次投入與營運準備金納入資金需求，再檢查穩定營收、變動成本與固定支出。還款採月繳本息攤還並按年彙總；爬坡期的簡化假設仍須按實際營運調整。', ['documents', 'models', 'cash', 'rm']);
     if (/海外|雙幣|台幣|美元|美金|匯率|幣別/.test(q)) return answer('海外投資：台幣、美元各算各的缺口', purposeDocs.overseas + '\n\n目前「雙幣別」指投資支出預算同時包含台幣與美元，各幣別的自有資金分別抵用。匯率情境只換算美元需求的台幣等值，並非美元借款金額變多，也不等同雙幣借款方案。實際借款主體、還款幣別與避險安排，請再與銀行討論。', ['documents', 'models', 'rm']);
@@ -130,3 +130,4 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
 })();
+

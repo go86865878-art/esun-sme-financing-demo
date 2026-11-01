@@ -40,3 +40,4 @@ test('the consultation summary uses the document page preparation state',()=>{
  assert.ok(summary.includes('☑ '+title));assert.ok(summary.includes('☐ '+baseDocs[1][1]));
  assert.ok(summary.includes('619.2'));assert.ok(summary.includes('不會自動傳送給銀行'));
 });
+

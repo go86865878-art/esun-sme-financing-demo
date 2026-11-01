@@ -1,3 +1,4 @@
+import {hasOperatingPlan,calculateOperating} from './operating-plan.js?v=luosifen2';
 // All TWD amounts are in 萬元; USD amounts are in 萬美元. Rates use percent,
 // e.g. 70 means 70%, and fx is TWD per USD. No bank approval is implied.
 const F = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 2 });
@@ -120,7 +121,8 @@ function equipment(v) {
   };
 }
 
-function expansion(v) {
+function expansion(v){
+ if(hasOperatingPlan(v))return calculateOperating(v);
   const setup = number(v, 'setup');
   const reserve = number(v, 'reserve');
   const equity = number(v, 'equity');
@@ -250,3 +252,4 @@ export function diagnose(v) {
   const overall = items.some(i => i.status === 'red') ? 'red' : items.some(i => i.status === 'yellow') ? 'yellow' : items.some(i => i.status === 'na') ? 'na' : 'green';
   return { items, overall, note: '紅黃綠門檻為本測試網自訂參考值，並非銀行授信標準。請以同一期間、同一公司與相同金額單位填寫；資料不足或分母為0不視為健康。' };
 }
+

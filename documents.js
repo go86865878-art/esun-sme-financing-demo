@@ -59,3 +59,4 @@ function openLinkedSection(){
 addEventListener('hashchange',openLinkedSection);
 addEventListener('pageshow',()=>{if(lastSaveSucceeded)checked=readDocumentChecks();render();openLinkedSection()});
 render();openLinkedSection();
+

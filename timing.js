@@ -222,3 +222,4 @@ export function mountTiming({ target, getPlan, onChange } = {}) {
   appendRow(); availability();
   return { getSummary: summaryText, markStale, setPlan };
 }
+

@@ -39,7 +39,7 @@ function textWidth(value) {
     Array.from(line).reduce((n, char) => n + (char.codePointAt(0) > 255 ? 2 : 1), 0)));
 }
 
-function worksheet(sheet) {
+function worksheet(sheet, withBrand = false) {
   const rows = sheet.rows.map(row => row.map(cellData));
   const count = rows.reduce((max, row) => Math.max(max, row.length), Math.max(1, sheet.widths?.length || 0));
   if (count > 16384 || rows.length > 1048576) throw new RangeError('工作表超出 Excel 的列數或欄數上限。');
@@ -75,7 +75,7 @@ function worksheet(sheet) {
   const headerRow = rows.findIndex(row => row.some(cell => cell.style === 'header'));
   const pane = headerRow >= 0
     ? `<pane ySplit="${headerRow + 1}" topLeftCell="A${headerRow + 2}" activePane="bottomLeft" state="frozen"/>` : '';
-  return `${XML_HEAD}<worksheet xmlns="${SS}"><sheetPr><pageSetUpPr fitToPage="1"/></sheetPr><dimension ref="A1:${colName(count - 1)}${Math.max(1, rows.length)}"/>`
+  return `${XML_HEAD}<worksheet xmlns="${SS}" xmlns:r="${REL}"><sheetPr><pageSetUpPr fitToPage="1"/></sheetPr><dimension ref="A1:${colName(count - 1)}${Math.max(1, rows.length)}"/>`
     + `<sheetViews><sheetView workbookViewId="0" showGridLines="0">${pane}</sheetView></sheetViews>`
     + '<sheetFormatPr defaultRowHeight="24"/>'
     + `<cols>${widths.map((width, i) => `<col min="${i + 1}" max="${i + 1}" width="${width}" customWidth="1"/>`).join('')}</cols>`
@@ -83,6 +83,7 @@ function worksheet(sheet) {
     + (merges.length ? `<mergeCells count="${merges.length}">${merges.map(ref => `<mergeCell ref="${ref}"/>`).join('')}</mergeCells>` : '')
     + '<printOptions horizontalCentered="1"/><pageMargins left="0.3" right="0.3" top="0.4" bottom="0.4" header="0.2" footer="0.2"/>'
     + '<pageSetup paperSize="9" orientation="landscape" fitToWidth="1" fitToHeight="0"/>'
+    + (withBrand ? '<drawing r:id="rIdBrand"/>' : '')
     + '</worksheet>';
 }
 
@@ -118,7 +119,7 @@ function zip(files) {
   const dosDate = ((year - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate();
   for (const [path, content] of files) {
     const name = encoder.encode(path);
-    const data = encoder.encode(content);
+    const data = content instanceof Uint8Array ? content : encoder.encode(content);
     if (data.length > 0xFFFFFFFF || offset + data.length + name.length + 30 > 0xFFFFFFFF) {
       throw new RangeError('下載內容過大，請減少資料筆數。');
     }
@@ -166,7 +167,8 @@ function downloadBlob(filename, blob) {
  * @param {Array<{name:string, rows:Array<Array<string|number|{v:string|number,style?:string}>>, widths?:number[]}>} sheets
  * @returns {Blob} The workbook Blob, also useful for previews or automated validation.
  */
-export function downloadWorkbook(filename, sheets) {
+export function buildWorkbook(sheets, {brandImage = null} = {}) {
+  const withBrand=brandImage instanceof Uint8Array && brandImage.length>0;
   if (!Array.isArray(sheets) || !sheets.length) throw new TypeError('請提供至少一張工作表。');
   if (sheets.length > 1000) throw new RangeError('工作表數量過多。');
   const usedNames = new Set();
@@ -185,18 +187,30 @@ export function downloadWorkbook(filename, sheets) {
     return { ...sheet, name };
   });
   const files = [
-    ['[Content_Types].xml', `${XML_HEAD}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${normalized.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`],
+    ['[Content_Types].xml', `${XML_HEAD}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>${withBrand?'<Default Extension="png" ContentType="image/png"/><Override PartName="/xl/drawings/drawing1.xml" ContentType="application/vnd.openxmlformats-officedocument.drawing+xml"/>':''}<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${normalized.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`],
     ['_rels/.rels', `${XML_HEAD}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="${REL}/officeDocument" Target="xl/workbook.xml"/></Relationships>`],
     ['xl/workbook.xml', `${XML_HEAD}<workbook xmlns="${SS}" xmlns:r="${REL}"><bookViews><workbookView activeTab="0"/></bookViews><sheets>${normalized.map((sheet, i) => `<sheet name="${xml(sheet.name)}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join('')}</sheets></workbook>`],
     ['xl/_rels/workbook.xml.rels', `${XML_HEAD}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${normalized.map((_, i) => `<Relationship Id="rId${i + 1}" Type="${REL}/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join('')}<Relationship Id="rId${normalized.length + 1}" Type="${REL}/styles" Target="styles.xml"/></Relationships>`],
     ['xl/styles.xml', stylesXML()],
-    ...normalized.map((sheet, i) => [`xl/worksheets/sheet${i + 1}.xml`, worksheet(sheet)])
+    ...normalized.map((sheet, i) => [`xl/worksheets/sheet${i + 1}.xml`, worksheet(sheet, withBrand && i===0)])
   ];
-  const name = /\.xlsx$/i.test(String(filename || '')) ? String(filename) : `${filename || '企業資金規劃報告'}.xlsx`;
-  return downloadBlob(name, zip(files));
+  if(withBrand){
+    files.push(
+      ['xl/media/esun-meow.png',brandImage],
+      ['xl/worksheets/_rels/sheet1.xml.rels',XML_HEAD+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdBrand" Type="'+REL+'/drawing" Target="../drawings/drawing1.xml"/></Relationships>'],
+      ['xl/drawings/_rels/drawing1.xml.rels',XML_HEAD+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdImage" Type="'+REL+'/image" Target="../media/esun-meow.png"/></Relationships>'],
+      ['xl/drawings/drawing1.xml',XML_HEAD+'<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><xdr:oneCellAnchor><xdr:from><xdr:col>4</xdr:col><xdr:colOff>70000</xdr:colOff><xdr:row>2</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from><xdr:ext cx="1428750" cy="1897433"/><xdr:pic><xdr:nvPicPr><xdr:cNvPr id="1" name="玉山喵喵" descr="玉山喵喵陪您規劃"/><xdr:cNvPicPr><a:picLocks noChangeAspect="1"/></xdr:cNvPicPr></xdr:nvPicPr><xdr:blipFill><a:blip xmlns:r="'+REL+'" r:embed="rIdImage"/><a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1428750" cy="1897433"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic><xdr:clientData/></xdr:oneCellAnchor></xdr:wsDr>']
+    );
+  }
+  return zip(files);
+}
+export function downloadWorkbook(filename,sheets,options={}){
+  const name=/\.xlsx$/i.test(String(filename||''))?String(filename):String(filename||'企業資金規劃報告')+'.xlsx';
+  return downloadBlob(name,buildWorkbook(sheets,options));
 }
 
 /** Download a UTF-8 text file (with BOM for Windows text editors). */
 export function downloadText(filename, text) {
   return downloadBlob(filename || 'report.txt', new Blob(['\uFEFF', String(text ?? '')], { type: 'text/plain;charset=utf-8' }));
 }
+

@@ -31,3 +31,4 @@ if(sections.length){
  if(!watchChat()){const observer=new MutationObserver(()=>{if(watchChat()){observer.disconnect();schedule()}});observer.observe(document.body,{childList:true,subtree:true});}
  update();
 }
+

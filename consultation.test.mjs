@@ -7,3 +7,4 @@ test('未健檢時不產生虛構健康結果',()=>{const text=buildConsultation
 test('部分健檢資料的不適用與資料不足會保留',()=>{const health={at:'測試',out:{overall:'na',items:[{label:'還款餘裕',status:'na',value:'資料不足'}]}};const text=buildConsultationSummary({plan,health});assert.match(text,/整體：不適用/);assert.match(text,/還款餘裕：不適用／資料不足/);});
 test('沒有試算不得產生摘要',()=>{assert.throws(()=>buildConsultationSummary({plan:null}),/請先更新/);});
 test('列印頁以純文字顯示摘要內容',()=>{const html=consultationPrintHTML('<script>bad()</script> & "引號"');assert.doesNotMatch(html,/<script>bad/);assert.match(html,/&lt;script&gt;bad/);assert.match(html,/&amp;/);assert.match(html,/@page\{size:A4/);});
+

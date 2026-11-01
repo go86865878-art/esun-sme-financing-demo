@@ -1,40 +1,11 @@
-# 中小企業資金規劃測試網
+# 玉山中小企業資金規劃平台
 
-四種資金用途：營運週轉金、廠房與設備、展店與擴張、海外投資。另有三步財務健檢、可選月度收支、可複製諮詢摘要、申貸文件下載、A4 勾選清單與商機工作台。
+正式入口：https://go86865878-art.github.io/esun-sme-financing-demo/
 
-展示網站：https://go86865878-art.github.io/esun-sme-financing-demo/
+本次將 `mobile-review/` 展示版完整同步至根目錄，包含大鈞案例、試算、財務健檢、文件下載及內部案件示範。原 `mobile-review/` 網址仍可使用。
 
-規格書：sme-financial-health-spec.pdf（網站頁尾亦可下載）。
+- 大鈞案例：https://go86865878-art.github.io/esun-sme-financing-demo/?case=02#simulator
+- 預覽版：https://go86865878-art.github.io/esun-sme-financing-demo/mobile-review/
+- 執行測試：`node --test`
 
-## 執行
-
-這份 GitHub 匯出版把靜態網站檔案放在儲存庫根目錄，無須安裝前端套件。
-
-1. 在此資料夾啟動靜態 HTTP 伺服器，例如：   `python -m http.server 4177`
-2. 瀏覽 `http://localhost:4177/`。
-3. 內部示範頁為 `internal.html`。
-
-請透過 HTTP 開啟；直接以 file:// 開啟可能無法載入 JavaScript 模組。
-
-## 測試
-
-安裝 Node.js 後執行 `npm test`。涵蓋融資模型、健檢門檻、月度資金缺口、諮詢摘要、商機原因與跟進、重複重設樣本及海外商機標記。
-
-## 示範範圍
-
-- 問答助手為本機文件知識庫，未串接生成式 AI。
-- 商機、路由與估算假設儲存於目前瀏覽器，不跨裝置同步，不連接銀行後台或發送 RM 通知。
-- 「重新載入／重設 4 筆假資料」可反覆測試，保留非內建樣本；全站利差與費率設定另外保留。
-- 海外用途另標記外匯收付、換匯與海外融資線索。尚未確認交易金額與定價前，不預設收益。
-- 表單為本次提供的空白參考文件；適用版本、填寫及用印方式請先向銀行確認。
-
-此儲存庫保存程式與空白文件，沒有網站使用者填寫的 localStorage 資料。
-
-
-## 申貸流程與文件獨立頁
-
-- `documents.html` 說明從申請到撥款的六個步驟；不動產估價及抵押設定標示為有不動產擔保時適用，並附玉山官方流程來源。
-- 首頁上方與原文件區的精簡入口會開啟新分頁，保留原分頁的試算輸入。
-- `?model=working|equipment|expansion|overseas` 帶入目前資金用途；文件清單與九份原有表單預設收合。以 `#checklistFold`、`#formDownloads` 直接連結可展開對應區塊。
-- 文件定義共用 `document-data.js`；勾選進度僅在目前瀏覽器的 `esun_sme_document_checks_v1` 保存，不會傳送銀行。原試算頁會同步勾選狀態到諮詢摘要及 Excel；儲存遭封鎖時，文件頁明確提示無法保留或同步。
-- 清單 PDF 與九份原有表單附件維持原檔；適用版本、填寫方式及徵提項目仍須由銀行確認。
+示範案件只保留在目前瀏覽器，不會跨裝置同步或實際送至銀行；試算結果不等於核貸額度。

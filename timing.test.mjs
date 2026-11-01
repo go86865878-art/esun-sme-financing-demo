@@ -82,3 +82,4 @@ test('invalid calendars and numeric overflow fail clearly; source input is not m
   calculateTiming(input);
   assert.equal(JSON.stringify(input), before);
 });
+

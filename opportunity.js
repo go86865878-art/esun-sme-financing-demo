@@ -1,16 +1,18 @@
+import {hasOperatingPlan,normalizeOperating,calculateOperating} from './operating-plan.js?v=luosifen2';
+import {sanitizeConsultation,enquiryPlan} from './consultation-context.js?v=value2';
 // Shared local-only demo handoff. No network request or bank system integration.
-export const LEADS_KEY = 'esun_sme_demo_leads_v2';
-export const ROUTES_KEY = 'esun_sme_demo_routes_v2';
-export const SETTINGS_KEY = 'esun_sme_demo_settings_v2';
-export const CONSENT_VERSION = 'demo-handoff-v2-20261019';
-export const SERVICES = Object.freeze({loan:'融資規劃',deposit:'活存與資金管理',collateral:'廠房／店面抵押',payment:'收付通與收款整合',ebank:'企業網路銀行'});
-export const MODELS = Object.freeze({working:'營運週轉金',equipment:'廠房與設備',expansion:'展店與擴張',overseas:'海外投資'});
+export const LEADS_KEY = 'esun_mobile_review_demo_leads_v1';
+export const ROUTES_KEY = 'esun_mobile_review_demo_routes_v1';
+export const SETTINGS_KEY = 'esun_mobile_review_demo_settings_v1';
+export const CONSENT_VERSION = 'franchise-consultation-v1-20261031';
+export const SERVICES = Object.freeze({loan:'融資規劃',deposit:'活存與資金管理',collateral:'廠房／店面抵押',payment:'收付通與收款整合',ebank:'企業網路銀行',cardAcquiring:'信用卡收單',payroll:'員工薪轉',accountOpening:'公司戶開立'});
+export const MODELS = Object.freeze({working:'營運週轉金',equipment:'中央廚房與設備',expansion:'展店與開張',overseas:'海外投資／拓店'});
 export const DEFAULT_SETTINGS = Object.freeze({depositSpread:1,loanSpread:2,paymentRate:0.3});
 export const DEFAULT_ROUTES = Object.freeze([
-  {city:'臺北市',district:'*',team:'北區示範服務組',rm:'示範 RM A'},
-  {city:'新北市',district:'*',team:'新北示範服務組',rm:'示範 RM B'},
-  {city:'桃園市',district:'*',team:'桃園示範服務組',rm:'示範 RM C'},
-  {city:'臺中市',district:'*',team:'中區示範服務組',rm:'示範 RM D'},
+  {city:'臺北市',district:'*',team:'北區示範服務組',rm:'小宇（示範）'},
+  {city:'新北市',district:'*',team:'新北示範服務組',rm:'小愷（示範）'},
+  {city:'桃園市',district:'*',team:'桃園示範服務組',rm:'大鈞（示範）'},
+  {city:'臺中市',district:'*',team:'中區示範服務組',rm:'小玉（示範）'},
   {city:'高雄市',district:'*',team:'南區示範服務組',rm:'示範 RM E'}
 ]);
 export const AREAS = Object.freeze({
@@ -35,11 +37,11 @@ export const AREAS = Object.freeze({
   '金門縣':'金城鎮 金湖鎮 金沙鎮 金寧鄉 烈嶼鄉 烏坵鄉', '連江縣':'南竿鄉 北竿鄉 莒光鄉 東引鄉'
 });
 export const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export function readLocal(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):structuredClone(fallback);}catch{return structuredClone(fallback);}}
+export function readLocal(key,fallback){try{let raw=localStorage.getItem(key);if(raw===null&&key.startsWith('esun_mobile_review_')){const old=localStorage.getItem(key.replace('esun_mobile_review_','esun_franchise_'));if(old!==null){JSON.parse(old);localStorage.setItem(key,old);raw=old;}}return raw?JSON.parse(raw):structuredClone(fallback);}catch{return structuredClone(fallback);}}
 export function writeLocal(key,value){localStorage.setItem(key,JSON.stringify(value));if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent('esun-demo-update'));}
-export function loadDemoLeads(){const rows=readLocal(LEADS_KEY,[]);return Array.isArray(rows)?rows.filter(x=>x&&typeof x.id==='string'&&Array.isArray(x.services)).slice(0,200):[];}
+export function loadDemoLeads(){const rows=readLocal(LEADS_KEY,[]);return Array.isArray(rows)?rows.filter(x=>x&&typeof x.id==='string'&&Array.isArray(x.services)&&!isBuiltInDemoSample(x)).slice(0,200):[];}
 export function saveDemoLeads(rows){writeLocal(LEADS_KEY,rows.slice(0,200));}
-export function loadRoutes(){const rows=readLocal(ROUTES_KEY,DEFAULT_ROUTES);return Array.isArray(rows)?rows:structuredClone(DEFAULT_ROUTES);}
+export function loadRoutes(){const rows=readLocal(ROUTES_KEY,DEFAULT_ROUTES);return Array.isArray(rows)?rows.map(r=>({...r,rm:({"示範 RM A":"小宇（示範）","示範 RM B":"小愷（示範）","示範 RM C":"大鈞（示範）","示範 RM D":"小玉（示範）"})[r.rm]||r.rm})):structuredClone(DEFAULT_ROUTES);}
 export function loadSettings(){const s=readLocal(SETTINGS_KEY,DEFAULT_SETTINGS);return {...DEFAULT_SETTINGS,...s};}
 export function routeFor(city,district,routes=loadRoutes()){return routes.find(r=>r.city===city&&r.district===district)||routes.find(r=>r.city===city&&r.district==='*')||null;}
 export function emptyFinance(){return {depositBalance:null,loanBalance:null,monthlyVolume:null,annualEbankFee:null,operatingCost:0,creditCost:0,capitalCost:0};}
@@ -69,6 +71,9 @@ export function deriveOpportunityDetails(lead){
     {key:'loan',label:model==='working'?'週轉融資':'融資規劃',trigger:`使用者勾選融資服務，規劃用途為「${purpose}」。${need}`,questions:[model==='working'?'新增訂單或營收需要先墊付多久？收款、備貨及付款時間是否符合實際交易？':'實際支出時點、資金用途與還款來源是什麼？是否需要分期動用？','目前可用授信與實際動用餘額多少？預估日平均貸款餘額如何推導？','是否有其他借款、到期集中還款、季節性高峰或尚未揭露的資金需求？']},
     {key:'collateral',label:'廠房／店面抵押',trigger:`使用者勾選廠房／店面抵押討論，${model==='equipment'?'目前亦選擇廠房與設備用途。':'可進一步確認是否有適合本次用途的不動產。'}尚未查證產權、估價或抵押設定，不推定擔保價值。`,questions:['不動產屬誰所有，實際用途及所在地為何？是否涉及興建或購置？','目前有無抵押設定、其他權利、租約或使用限制？應備何種權利文件？','擬議融資與工程／購置款如何銜接？抵押品評估與額度仍需正式審查。']},
     {key:'payment',label:model==='expansion'?'展店收款／收付通':'收付通與收款整合',trigger:`使用者勾選收款整合服務${model==='expansion'?'，並選擇展店與擴張，具門市收款及對帳整合的討論情境。':'，願意討論收付款及對帳流程。'}收付通與收單的計價方式仍應分別確認。`,questions:['有幾個門市或收款通路？目前使用現金、刷卡、轉帳或其他收款方式？','每月可導入的實際交易量、退款、撥款時間與對帳方式為何？','需要收付通、商店收單或兩者整合？實際費率、淨收入與導入成本如何計算？']},
+    {key:'cardAcquiring',label:'信用卡收單',trigger:'顧客勾選信用卡收單需求；先確認通路、交易量與導入條件。',questions:['需要實體門市刷卡、線上收單，或兩者都有？','預計每月刷卡交易量、客單價與撥款週期為何？','現有收單銀行、約定費率與對帳方式為何？']},
+    {key:'payroll',label:'員工薪轉',trigger:'顧客勾選員工薪轉需求；不代表已完成薪轉合作。',questions:['預計薪轉人數、每月薪資總額與發薪日為何？','員工帳戶、批次轉帳與覆核權限如何安排？','預計何時導入，是否需協助員工開戶？']},
+    {key:'accountOpening',label:'公司戶開立',trigger:'顧客勾選公司戶開立需求；開戶與實際金流往來條件仍待確認。',questions:['公司已設立，或仍在籌備？帳戶預計用途為何？','主要收付款、留存餘額與跨境交易需求為何？','預計開戶時間及辦理地區為何？']},
     {key:'ebank',label:'企業網路銀行',trigger:'使用者勾選企業網路銀行服務，願意討論操作權限與付款流程；尚未確認是否開通或有收費收入。',questions:['目前誰經辦、誰覆核？需要多少操作人員及分層授權？','是否有批次付款、薪資、跨境匯款或 ERP 對接需求？','現有網銀功能是否足夠？導入、教育訓練及年度淨手續費需如何確認？']}
   ];
   const details=definitions.filter(d=>selected.has(d.key)).map(d=>({...d,origin:'使用者明確勾選，待進一步確認需求',derived:false}));
@@ -84,7 +89,7 @@ export function updateOpportunityFollowup(lead,key,{status,note},{at=new Date().
 }
 export const DEMO_SAMPLE_SET='esun-sme-built-in-samples-v2';
 const legacySampleKeys=new Set(['假案例 A｜擴充產線','假案例 B｜第二間門市','假案例 C｜批發備貨']);
-export function isBuiltInDemoSample(lead){return lead?.sampleSet===DEMO_SAMPLE_SET||(lead?.source==='手動載入假資料'&&legacySampleKeys.has(lead.sampleKey));}
+export function isBuiltInDemoSample(lead){return lead?.sampleSet==='mobile-complete-cases-20261031'||lead?.sampleSet===DEMO_SAMPLE_SET||(lead?.source==='手動載入假資料'&&legacySampleKeys.has(lead.sampleKey));}
 export function resetDemoSamples(existing,{at=new Date().toISOString()}={}){
   const retained=existing.filter(lead=>!isBuiltInDemoSample(lead));
   if(retained.length>196)throw new Error('保留的非樣本資料超過 196 筆，請先刪除不需要的案例，才能重設 4 筆樣本。');
@@ -121,21 +126,24 @@ export function calculatePotential(lead,settings=DEFAULT_SETTINGS){
 }
 export function planSnapshot(plan){
   if(!plan||!Object.hasOwn(MODELS,plan.model)||!plan.out||!Number.isFinite(Number(plan.out.value)))throw new Error('請先完成或更新試算，再轉交這份規劃。');
-  const allowed=new Set('sales nextSales cost dso dio dpo own existing invest equity interest tenor grace annualBudget setup reserve revenue margin fixed ramp investTwd equityTwd investUsd equityUsd fx swing'.split(' '));
+  const allowed=new Set('sales nextSales cost dso dio dpo own existing invest equity interest tenor grace annualBudget setup reserve revenue margin fixed ramp investTwd equityTwd investUsd equityUsd fx swing buffer months'.split(' '));
   const inputs={};for(const [k,v]of Object.entries(plan.inputs||{})){if(allowed.has(k)&&typeof v==='number'&&Number.isFinite(v))inputs[k]=v;}
+  if(plan.model==='expansion'&&hasOperatingPlan(plan.inputs)){inputs.operating=normalizeOperating(plan.inputs.operating);const out=calculateOperating(inputs);inputs.annualBudget=Math.max(0,out.extra.operating.annual.availableForDebt);return {model:plan.model,mode:'twd',inputs,out,at:String(plan.at||new Date().toLocaleString('zh-TW'))};}
   return {model:plan.model,mode:['twd','usd','dual'].includes(plan.mode)?plan.mode:'twd',inputs,out:{label:String(plan.out.label||'試算需求'),value:Number(plan.out.value),unit:String(plan.out.unit||'萬元')},at:String(plan.at||new Date().toLocaleString('zh-TW'))};
 }
-export function createLead({plan,city,district,services=[],label,source='網站試算（使用者同意）',consent=true}){
+export function createLead({plan,city,district,services=[],label,source='網站試算（使用者同意）',consent=true,consultation=null}){
   if(!AREAS[city]||!AREAS[city].split(' ').includes(district))throw new Error('請選擇縣市與行政區。');
-  const snapshot=planSnapshot(plan);
+  const request=consultation?sanitizeConsultation(consultation):null;
+  if(request&&(!request.company||!request.note))throw Error('請填寫門市稱呼與諮詢內容。');
+  const snapshot=plan?planSnapshot(plan):request?enquiryPlan(request):planSnapshot(plan);
   const selected=[...new Set(services)].filter(k=>Object.hasOwn(SERVICES,k));if(!selected.length&&snapshot.model!=='overseas')throw new Error('請勾選至少一項想討論的服務。');
   if(!consent)throw new Error('請先勾選同意本次示範轉交。');
   const now=new Date().toISOString(),id=globalThis.crypto?.randomUUID?.()||('demo-'+Date.now()+'-'+Math.random().toString(16).slice(2));
-  return {id,label:label||'網站規劃 '+new Date().toLocaleTimeString('zh-TW',{hour12:false}),city,district,services:selected,source,plan:snapshot,at:now,status:'未分派',assignment:null,finance:emptyFinance(),followups:{},consent:{version:CONSENT_VERSION,at:now,scope:'僅於同一瀏覽器儲存本次試算、地區及服務意願，示範轉交；未實際通知 RM。'}};
+  return {id,label:label||'網站規劃 '+new Date().toLocaleTimeString('zh-TW',{hour12:false}),city,district,services:selected,source,plan:snapshot,consultation:request,at:now,status:'未分派',assignment:null,finance:emptyFinance(),followups:{},consent:{version:CONSENT_VERSION,at:now,scope:'僅於同一瀏覽器儲存本次諮詢、選擇附上的規劃、地區與服務意願；未正式送件或通知銀行。'}};
 }
 export function fillCities(select){select.innerHTML='<option value="">請選擇縣市</option>'+Object.keys(AREAS).map(c=>`<option>${esc(c)}</option>`).join('');}
 export function fillDistricts(select,city){select.innerHTML='<option value="">請選擇行政區</option>'+[...new Set((AREAS[city]||'').split(' ').filter(Boolean))].map(d=>`<option>${esc(d)}</option>`).join('');}
-export function serviceChecks(prefix='handoff'){return Object.entries(SERVICES).map(([key,label])=>`<label class="op-check"><input type="checkbox" name="${prefix}Service" value="${key}"><span>${label}</span></label>`).join('');}
+export function serviceChecks(prefix='handoff',keys=Object.keys(SERVICES)){return keys.filter(key=>Object.hasOwn(SERVICES,key)).map(key=>[key,SERVICES[key]]).map(([key,label])=>`<label class="op-check"><input type="checkbox" name="${prefix}Service" value="${key}"><span>${label}</span></label>`).join('');}
 
 export function mountOpportunity({getPlan,target='#resultContent'}={}){
   const host=typeof target==='string'?document.querySelector(target):target;if(!host||typeof getPlan!=='function')return null;
@@ -159,3 +167,4 @@ export function mountOpportunity({getPlan,target='#resultContent'}={}){
   document.getElementById('modelForm')?.addEventListener('input',refreshPlan);window.addEventListener('esun-plan-updated',refreshPlan);refreshPlan();
   return box;
 }
+
