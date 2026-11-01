@@ -114,8 +114,8 @@ function equipment(v) {
       { label: '最高年度還款餘裕', value: coverage === null ? '無新增本息／不適用' : ratio(coverage) }
     ],
     breakdown: [{ label: '可投入自有資金', value: Math.min(equity, invest) }, { label: '需規劃借款', value: loan }],
-    formula: '借款＝MAX(0，投資總額－自有資金)；寬限期僅付息；寬限期後每年還本金＝借款÷(總年期－寬限年數)，利息＝當年期初本金×年利率。',
-    note: '採等額本金、每年繳付一次的展示假設，並非銀行報價。還款預算應為扣除營運支出、稅款與其他既有借款本息後，可供本案還款的金額；未納入工程分批撥款、費用與利率變動。' + (coverage !== null && coverage < 1 ? ' 目前預算不足以支付最高年度本息。' : ''),
+    formula: v.repaymentMethod === 'monthly_annuity' ? '借款＝投資總額－非借款資金；採每月本息平均攤還，逐月計算本金與利息，將每 12 個月的本息加總。' : '借款＝MAX(0，投資總額－自有資金)；寬限期僅付息；寬限期後每年還本金＝借款÷(總年期－寬限年數)，利息＝當年期初本金×年利率。',
+    note: (v.repaymentMethod === 'monthly_annuity' ? '本案例採月繳本息平均攤還。' : '本模型採等額本金、每年繳付一次。') + ' 本次為展示試算，並非銀行報價。還款預算應為扣除營運支出、稅款與其他既有借款本息後，可供本案還款的金額；未納入工程分批撥款、費用與利率變動。' + (coverage !== null && coverage < 1 ? ' 目前預算不足以支付最高年度本息。' : ''),
     schedule,
     extra: { loan, peakAnnual, annualBudget, coverage, totalInterest, firstYearPayment: schedule[0].total, firstAmortizationYear: grace + 1, graceAnnualInterest: grace ? loan * interest / 100 : 0 }
   };
