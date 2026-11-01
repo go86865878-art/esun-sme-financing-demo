@@ -1,4 +1,4 @@
-import {DEMO_CASES} from './case-data.js?v=visualbrief20261101';
+import {DEMO_CASES} from './case-data.js?v=deposit20261102';
 import {calculate,diagnose} from './engine.js?v=visualbrief20261101';
 import {financingNeed} from './financing-need.js?v=visualbrief20261101';
 import {buildConsultationSummary} from './consultation.js?v=visualbrief20261101';
