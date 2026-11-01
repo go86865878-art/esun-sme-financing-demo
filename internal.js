@@ -1,6 +1,6 @@
 import {renderPipelineCharts,caseFinanceCharts} from './pipeline-charts.js?v=visualbrief20261101';
 import {operatingResults} from './operating-plan-ui.js?v=visualbrief20261101';
-import {estimateRelationship} from './relationship-value.js?v=visualbrief20261101';
+import {estimateRelationship} from './relationship-value.js?v=deposit20261102';
 import {valueMarkup,bindValue} from './relationship-value-ui.js?v=visualbrief20261101';
 import {pricingMarkup,bindPricing} from './relationship-pricing-ui.js?v=visualbrief20261101';
 import {mountDispatchMail} from './dispatch-ui.js?v=visualbrief20261101';
