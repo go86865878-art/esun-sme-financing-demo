@@ -287,3 +287,35 @@
  .mobile-disclosure>summary{display:none}
  .mobile-step-detail>*{display:block!important}
 }
+
+
+/* Final mobile layout guardrails */
+html,body{max-width:100%;overflow-x:clip}
+.mobile-experience .workspace>*,.mobile-experience .health-layout>*,.mobile-workbench .container>*,.mobile-workbench .detail-dialog>*{min-width:0}
+.mobile-experience img,.mobile-workbench img{max-width:100%;height:auto}
+@media(max-width:760px){
+ .mobile-experience .hero-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+ .mobile-experience .hero h1{font-size:clamp(25px,7vw,37px)!important;line-height:1.36!important;overflow-wrap:anywhere}
+ .mobile-experience .hero h1 span{display:inline}
+ .mobile-experience .hero-ball-frame{width:100%;min-width:0;border-radius:14px}
+ .mobile-experience .hero-ball-frame img{width:100%;aspect-ratio:16/9;object-fit:cover}
+ .mobile-experience .workspace,.mobile-experience .health-layout,.mobile-experience .model-cards{min-width:0}
+ .mobile-experience .panel,.mobile-experience .result-panel,.mobile-experience .handoff-panel{min-width:0;max-width:100%;overflow-wrap:anywhere}
+ .mobile-experience .fields,.mobile-experience .health-layout .fields{grid-template-columns:minmax(0,1fr)!important}
+ .mobile-experience .field,.mobile-experience .input-wrap,.mobile-experience .input-wrap input{min-width:0;max-width:100%}
+ .mobile-experience .product-promo-card{grid-template-columns:minmax(0,41%) minmax(0,59%);min-width:0}
+ .mobile-experience .promo-ad-image{min-width:0;width:100%;object-fit:cover}
+ .mobile-experience .promo-copy{padding:12px;gap:7px;min-width:0}
+ .mobile-experience .promo-copy strong{font-size:18px;overflow-wrap:anywhere}
+ .mobile-experience .promo-copy span{font-size:12px}
+ .mobile-experience .summary-pdf-frame{max-width:100%;overflow-y:auto;overflow-x:hidden}
+ .mobile-workbench .container{max-width:100%;width:calc(100% - 24px)}
+ .mobile-workbench .lead-table tr{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .mobile-workbench .lead-table td{min-width:0;overflow-wrap:anywhere}
+ .mobile-workbench .detail-dialog,.mobile-workbench .dispatch-dialog{max-width:calc(100vw - 12px);width:calc(100vw - 12px);box-sizing:border-box;overflow-x:hidden}
+ .mobile-workbench .detail-dialog .pipeline-grid,.mobile-workbench .detail-dialog .value-rows{grid-template-columns:minmax(0,1fr)}
+ .mobile-workbench .received-grid,.mobile-workbench .manager-bars{grid-template-columns:minmax(0,1fr)!important}
+ .mobile-workbench .case-line-chart,.mobile-workbench svg{max-width:100%}
+ .mobile-workbench .detail-dialog pre{white-space:pre-wrap;overflow-wrap:anywhere}
+}
+@media(max-width:360px){.mobile-experience .model-cards{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.mobile-experience .model-card{padding:10px!important}}
