@@ -57,6 +57,6 @@ test('edited operating assumptions propagate into the actual consultation snapsh
  const c=caseConsultation(source,plan);near(c.healthInputs.stock,24.99);
  near(c.healthInputs.cash,plan.out.extra.operating.forecast.bankCash);
  assert.match(c.summary,/備料 14 天/);
- const markup=healthForecastMarkup(plan);assert.match(markup,/非PDF既載數字/);assert.match(markup,/24.99/);
+ const markup=healthForecastMarkup(plan);assert.match(markup,/非PDF既載數字/);assert.match(markup,/25 萬元/);
  assert.match(healthForecastMarkup(plan,false),/自行填寫/);
 });

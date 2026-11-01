@@ -1,9 +1,9 @@
-import {hasOperatingPlan,calculateOperating} from './operating-plan.js?v=health20261101';
+import {hasOperatingPlan,calculateOperating} from './operating-plan.js?v=roundcharts20261101';
 // All TWD amounts are in 萬元; USD amounts are in 萬美元. Rates use percent,
 // e.g. 70 means 70%, and fx is TWD per USD. No bank approval is implied.
 const F = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 2 });
-const money = n => `${F.format(n)} 萬元`;
-const usd = n => `${F.format(n)} 萬美元`;
+const money = n => `${Math.round(n).toLocaleString('zh-TW')} 萬元`;
+const usd = n => `${Math.round(n).toLocaleString('zh-TW')} 萬美元`;
 const ratio = n => `${F.format(n)} 倍`;
 const percent = n => `${F.format(n * 100)}%`;
 const nearZero = n => Math.abs(n) < 1e-9 ? 0 : n;

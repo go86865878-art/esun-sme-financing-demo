@@ -1,9 +1,9 @@
-import {DEMO_CASES} from './case-data.js?v=health20261101';
+import {DEMO_CASES} from './case-data.js?v=roundcharts20261101';
 export const BUSINESS_TYPES=['加盟飲料','加盟餐飲','自主品牌餐飲','一般中小企業','中央廚房／食品製造','海外拓店'];
 export const PURPOSE_TITLES={working:'營運週轉金',expansion:'展店與開張',overseas:'海外投資／拓店',equipment:'中央廚房與設備'};
 export const PLAN_EXAMPLES=Object.fromEntries(Object.keys(PURPOSE_TITLES).map(model=>[model,DEMO_CASES.filter(c=>c.model===model).map(c=>({name:c.title,caseId:c.id,values:c.input}))]));
 export const HEALTH_EXAMPLES=DEMO_CASES.map(c=>({id:c.id,name:c.title,note:c.input.operating?'首年年底資產負債、首年損益與次年還款；新增收款與備料天數假設。':'僅示範本案還款安排，其餘公司財務待補。',values:c.health}));
-const f=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:1}):'待補資料';
+const f=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:0}):'待補資料';
 export function profitData(v){
  if(!Number.isFinite(v?.sales)||!Number.isFinite(v?.profit)||v.sales<=0)return null;
  return {sales:v.sales,profit:v.profit,expenses:v.sales-v.profit,margin:v.profit/v.sales*100};

@@ -1,18 +1,19 @@
-import {healthForecastMarkup} from './operating-health-ui.js?v=health20261101';
-import {hasOperatingPlan,operatingMainFields,operatingFromMain} from './operating-plan.js?v=health20261101';
-import {operatingEditor} from './operating-plan-ui.js?v=health20261101';
-import {DEMO_CASES,getDemoCase,caseConsultation} from './demo-cases.js?v=health20261101';
-import {financingNeed} from './financing-need.js?v=health20261101';
-import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js?v=health20261101';
-import {mountConsultation} from './consultation-form.js?v=health20261101';
-import {planningCard} from './planning-cards.js?v=health20261101';
-import {PLAN_EXAMPLES,HEALTH_EXAMPLES,PURPOSE_TITLES,profitabilityMarkup} from './franchise-scenarios.js?v=health20261101';
-import {mountTiming} from './timing.js?v=health20261101';
-import {buildConsultationSummary,consultationPrintHTML} from './consultation.js?v=health20261101';
-import {calculate,diagnose} from './engine.js?v=health20261101';
-import {downloadText} from './report.js?v=health20261101';
-import {buildPlanPdf,buildHealthPdf,downloadPdf} from './pdf-report.js?v=health20261101';
-import {pairedHealth,sharedHealthPatch,readFinanceDraft,writeFinanceDraft} from './finance-state.js?v=health20261101';
+import {setIntegerField,exactFieldValue,markIntegerFieldEdited} from './integer-display.js?v=roundcharts20261101';
+import {healthForecastMarkup} from './operating-health-ui.js?v=roundcharts20261101';
+import {hasOperatingPlan,operatingMainFields,operatingFromMain} from './operating-plan.js?v=roundcharts20261101';
+import {operatingEditor} from './operating-plan-ui.js?v=roundcharts20261101';
+import {DEMO_CASES,getDemoCase,caseConsultation} from './demo-cases.js?v=roundcharts20261101';
+import {financingNeed} from './financing-need.js?v=roundcharts20261101';
+import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js?v=roundcharts20261101';
+import {mountConsultation} from './consultation-form.js?v=roundcharts20261101';
+import {planningCard} from './planning-cards.js?v=roundcharts20261101';
+import {PLAN_EXAMPLES,HEALTH_EXAMPLES,PURPOSE_TITLES,profitabilityMarkup} from './franchise-scenarios.js?v=roundcharts20261101';
+import {mountTiming} from './timing.js?v=roundcharts20261101';
+import {buildConsultationSummary,consultationPrintHTML} from './consultation.js?v=roundcharts20261101';
+import {calculate,diagnose} from './engine.js?v=roundcharts20261101';
+import {downloadText} from './report.js?v=roundcharts20261101';
+import {buildPlanPdf,buildHealthPdf,downloadPdf} from './pdf-report.js?v=roundcharts20261101';
+import {pairedHealth,sharedHealthPatch,readFinanceDraft,writeFinanceDraft} from './finance-state.js?v=roundcharts20261101';
 const $=id=>document.getElementById(id);
 const icons={route:'M5 5h5v5H5zM14 14h5v5h-5zM10 7h7v4M7 10v7h4',edit:'m15 4 5 5-11 11H4v-5ZM13 6l5 5M4 4h6M4 8h3',chart:'M4 3v17h17M8 15v-4m5 4V7m5 8V4',chat:'M4 4h16v12H9l-5 4ZM8 8h8M8 12h5',cycle:'M20 10a8 8 0 0 0-14-5L3 8m0-5v5h5M4 14a8 8 0 0 0 14 5l3-3m0 5v-5h-5',factory:'M3 21V9l6 4V7l6 4V3h5l1 18ZM7 17h1m4 0h1m4 0h1',store:'M3 10 5 3h14l2 7M4 10v11h16V10M8 21v-7h5v7M3 10c0 3 5 3 5 0 0 3 5 3 5 0 0 3 5 3 5 0 0 3 3 3 3 0',globe:'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM3 12h18M12 3c-5 5-5 13 0 18 5-5 5-13 0-18Z',scan:'M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5M3 12h18M8 8v1m4-1v1m4-1v1M8 15v1m4-1v1m4-1v1',wallet:'M20 7H4V4h15M3 7v13h18V7ZM17 11h4v5h-4z',download:'M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4',file:'M14 3H5v18h14V8Zm0 0v5h5M8 12h8m-8 4h6',shield:'M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6ZM8 12l3 3 5-6',box:'m3 7 9-4 9 4v10l-9 4-9-4Zm0 0 9 4 9-4M12 11v10M7 5l9 4',truck:'M3 5h11v12H3Zm11 5h4l3 4v3h-7M8 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm12 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z'};
 function icon(name){return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[name]||icons.chart}"/></svg>`}
@@ -40,13 +41,13 @@ const drafts={},checkedDocs=readDocumentChecks();
 let timing=null,timingState={ready:false,stale:false},healthStep=0;
 const healthGroups=[{title:'付款能力',desc:'先盤點手邊資金、待收貨款與近期要付的款項。',ids:['cash','receipts','stock','shortDebt']},{title:'獲利情況',desc:'用同一年度的營收與營業利益，看本業賺不賺錢。',ids:['sales','profit']},{title:'負債與還款',desc:'再看整體負債與未來一年的還款安排。',ids:['totalDebt','assets','annualAvailable','annualDebt']}];
 const healthSources={cash:'銀行存款餘額、公司現金日報或出納紀錄。',receipts:'應收帳款明細；請會計扣除預估收不回的貨款。',stock:'存貨明細或盤點表，以成本金額填寫。',shortDebt:'應付帳款與借款到期明細；可請會計協助合計。',totalDebt:'資產負債表的負債總額，或全部借款、應付款明細。',assets:'同一月底資產負債表的資產總額。',sales:'同一年度損益表營業收入；申報資料可供核對。',profit:'同一年度損益表的營業利益（尚未扣利息與稅）。',annualAvailable:'未來一年資金收支預估；請先保留營運、稅款與必要投資。',annualDebt:'全部借款的還款表，合計未來一年本金與利息。'};
-const fmt=(n,d=1)=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:d}):'不適用';
+const fmt=(n,d=0)=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:d}):'不適用';
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function toast(msg){$('toast').textContent=msg;$('toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').hidden=true,3500)}
 function fieldsMarkup(fields,values,prefix){return fields.map(x=>`<div class="field" data-field="${x.id}"><label for="${prefix}${x.id}">${x.label}</label><div class="input-wrap"><input id="${prefix}${x.id}" name="${x.id}" type="number" inputmode="decimal" step="any" value="${escape(values?.[x.id]??x.value)}" ${x.min!=null?`min="${x.min}"`:''} ${x.max!==undefined?`max="${x.max}"`:''} ${prefix==='h_'?'':'required'} aria-describedby="${prefix}${x.id}_help"><span>${x.unit}</span></div><small id="${prefix}${x.id}_help">${x.help}</small>${prefix==='h_'?`<small class="source-hint"><b>資料可從這裡找：</b>${healthSources[x.id]}</small>`:''}</div>`).join('')}
 function readOperating(){const raw=drafts[current]?.operating;if(current!=='expansion'||!raw||!$('operatingEditor'))return null;return {...raw,...Object.fromEntries([...document.querySelectorAll('[data-operating]')].map(el=>[el.dataset.operating,el.value]))};}
 function capture(){const op=readOperating();drafts[current]=Object.fromEntries(models[current].fields.map(x=>[x.id,$('p_'+x.id).value]));if(op)drafts[current].operating=op;}
-function values(fields,prefix){const v={};for(const f of fields){const el=$(prefix+f.id);if(prefix==='p_'&&el.closest('[hidden]')){v[f.id]=0;continue}if(prefix==='h_'&&el.value.trim()===''){v[f.id]=null;continue}const focus=()=>{if(prefix==='h_')setHealthStep(healthGroups.findIndex(g=>g.ids.includes(f.id)));el.focus()};if(el.value.trim()===''||!Number.isFinite(Number(el.value))){focus();throw Error('請完整填寫「'+f.label+'」。')}const n=Number(el.value);if(f.min!=null&&n<f.min||f.max!==undefined&&n>f.max){focus();throw Error('請確認「'+f.label+'」的數值範圍。')}v[f.id]=n;}if(prefix==='h_'&&Object.values(v).every(x=>x===null))throw Error('請先填寫至少一項金額，或帶入示範值體驗。');return v}
+function values(fields,prefix){const v={};for(const f of fields){const el=$(prefix+f.id);if(prefix==='p_'&&el.closest('[hidden]')){v[f.id]=0;continue}if(prefix==='h_'&&el.value.trim()===''){v[f.id]=null;continue}const focus=()=>{if(prefix==='h_')setHealthStep(healthGroups.findIndex(g=>g.ids.includes(f.id)));el.focus()};if(el.value.trim()===''||!Number.isFinite(Number(el.value))){focus();throw Error('請完整填寫「'+f.label+'」。')}const n=Number(prefix==='h_'?exactFieldValue(el):el.value);if(f.min!=null&&n<f.min||f.max!==undefined&&n>f.max){focus();throw Error('請確認「'+f.label+'」的數值範圍。')}v[f.id]=n;}if(prefix==='h_'&&Object.values(v).every(x=>x===null))throw Error('請先填寫至少一項金額，或帶入示範值體驗。');return v}
 function clearResult(){$('operatingResults')?.remove();lastPlan=null;planDirty=false;$('emptyResult').hidden=false;$('resultContent').hidden=true;$('resultStatus').textContent='等待試算';$('resultStatus').classList.remove('dirty');$('resultContent').classList.remove('plan-stale');$('planStaleWarning').hidden=true;timing?.setPlan(null);updateHandoffState()}
 function renderModel(){const m=models[current];$('modelTitle').textContent=m.title;$('modelKicker').textContent=m.en;$('modelDesc').textContent=m.desc;$('modelIcon').innerHTML=icon(m.icon);$('modelFields').innerHTML=fieldsMarkup(m.fields,drafts[current],'p_')+(current==='expansion'&&hasOperatingPlan(drafts[current])?operatingEditor(drafts[current].operating):'');if($('operatingEditor')){$('p_ramp_help').textContent='從初期交易筆數逐月成長，至此月份達成熟期。';$('p_margin_help').textContent='扣營業成本與金流費用後的比例，與營運明細同步。';$('p_fixed_help').textContent='薪資含附加、租金、雜支與水電瓦斯合計；不含折舊、利息與還本。';$('p_annualBudget').readOnly=true;$('p_annualBudget_help').textContent='由此情境首年現金流自動推算。';}$('explanation').innerHTML=$('operatingEditor')?'<b>按月查看營運、分紅與還本。</b>此情境已計入成本、薪資附加、金流費、折舊、利息及稅金預留。月分紅後的全年保留盈餘再提年終，12月底發放。本金列於現金流，不列損益費用。':m.explain;$('industryRow').hidden=true;$('currencyModes').hidden=current!=='overseas';$('cashServices').hidden=current!=='expansion';$('validation').textContent='';$('planDataNote').innerHTML=drafts[current]?'已保留本次編輯內容；請確認所有金額與單位。':'請自行填入資料；金額單位為萬元。也可展開參考案例，選擇後再帶入。';document.querySelectorAll('[data-model]').forEach(b=>{b.classList.toggle('active',b.dataset.model===current);b.setAttribute('aria-pressed',b.dataset.model===current)});applyMode();clearResult();renderDocs();renderExampleOptions();}
 function applyMode(){if(current!=='overseas')return;document.querySelectorAll('[data-mode]').forEach(b=>{b.classList.toggle('active',b.dataset.mode===mode);b.setAttribute('aria-pressed',b.dataset.mode===mode)});['investTwd','equityTwd'].forEach(id=>{const node=$('p_'+id).closest('.field');node.hidden=mode==='usd';$('p_'+id).disabled=node.hidden});['investUsd','equityUsd'].forEach(id=>{const node=$('p_'+id).closest('.field');node.hidden=mode==='twd';$('p_'+id).disabled=node.hidden});['fx','swing'].forEach(id=>{$('p_'+id).closest('.field').hidden=mode==='twd';$('p_'+id).disabled=mode==='twd'});}
@@ -88,7 +89,7 @@ async function downloadHealth(){if(!lastHealth||healthDirty)return toast('請先
 document.querySelectorAll('[data-model]').forEach(b=>b.addEventListener('click',()=>{capture();current=b.dataset.model;renderModel();$('simulator').scrollIntoView({behavior:'smooth'});}));
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;applyMode();clearResult();}));
 $('modelForm').addEventListener('submit',e=>{e.preventDefault();doCalculate()});$('modelForm').addEventListener('input',event=>{const op=readOperating();if(op){try{if(event.target.dataset.operating){drafts[current].operating=op;for(const [key,value]of Object.entries(operatingMainFields(op)))$('p_'+key).value=value;}else if(['p_revenue','p_margin','p_fixed'].includes(event.target.id)&&event.target.value!==''){const updated=operatingFromMain(op,event.target.id.slice(2),Number(event.target.value));drafts[current].operating=updated;for(const [key,value]of Object.entries(updated))if($('op_'+key))$('op_'+key).value=value;}}catch{/* Validation appears on update; preserve raw edits. */}}markPlanDirty();});$('reset').addEventListener('click',()=>{financeTouched=true;activeTeachingCase=null;$('activeCaseSummary').hidden=true;delete drafts[current];renderModel()});$('downloadPlan').addEventListener('click',downloadPlan);
-renderHealthSteps();$('healthForm').addEventListener('submit',e=>{e.preventDefault();doHealth()});$('healthForm').addEventListener('input',event=>{if(event.target.id==='h_sales')salesLinked=false;healthLink={kind:'manual',name:'自行填寫的財務資料',note:'請確認期間與公司主體一致；新增規劃另列於下方。'};markHealthDirty();saveFinanceProgress();});$('downloadHealth').addEventListener('click',downloadHealth);$('printHealth').addEventListener('click',downloadHealth);
+renderHealthSteps();$('healthForm').addEventListener('submit',e=>{e.preventDefault();doHealth()});$('healthForm').addEventListener('input',event=>{if(event.target.matches('input'))markIntegerFieldEdited(event.target);if(event.target.id==='h_sales')salesLinked=false;healthLink={kind:'manual',name:'自行填寫的財務資料',note:'請確認期間與公司主體一致；新增規劃另列於下方。'};markHealthDirty();saveFinanceProgress();});$('downloadHealth').addEventListener('click',downloadHealth);$('printHealth').addEventListener('click',downloadHealth);
 decorate();renderModel();
 
 
@@ -148,7 +149,7 @@ $('casePicker').innerHTML=DEMO_CASES.map(item=>'<option value="'+item.id+'">'+es
 $('casePicker').value='02';
 $('applyTeachingCase').addEventListener('click',()=>applyTeachingCase($('casePicker').value));
 function setLinkedHealth(preset,kind='paired'){
- financeTouched=true;salesLinked=kind!=='independent';healthLink={kind,name:preset.name,note:preset.note};healthFields.forEach(f=>$('h_'+f.id).value=preset.values[f.id]??'');
+ financeTouched=true;salesLinked=kind!=='independent';healthLink={kind,name:preset.name,note:preset.note};healthFields.forEach(f=>setIntegerField($('h_'+f.id),preset.values[f.id]));
  $('healthScenario').value=(kind==='independent'?(preset.id||''):'linked');$('healthDataNote').textContent='已帶入：'+preset.name+'。'+preset.note;markHealthDirty();
 }
 function syncHealthFromPlan(){
@@ -163,18 +164,18 @@ function syncHealthFromPlan(){
  refreshHealthLink();saveFinanceProgress();
 }
 function refreshHealthLink(){const box=$('healthPlanLink');if(!box)return;if(!lastPlan||planDirty){box.textContent='先更新資金試算，這裡會顯示同一份規劃。';return;}if(lastPlan.out.extra?.operating){box.innerHTML=healthForecastMarkup(lastPlan,healthLink.kind==='case');return;}const need=financingNeed(lastPlan),e=lastPlan.out.extra||{};let repayment=Number.isFinite(e.monthlyPayment)?'；本案每月本息 '+fmt(e.monthlyPayment,2)+' 萬元':Number.isFinite(e.peakAnnual)?'；本案最高年度本息 '+fmt(e.peakAnnual,2)+' 萬元':'';box.innerHTML='<b>已連結：'+escape(models[lastPlan.model].title)+'</b><p>融資規劃需求 '+fmt(need.amount,2)+' 萬元'+repayment+'</p><small>新增需求另列，未直接計入公司負債與原有本息。展店營運餘額不等於會計營業利益。</small>';}
-function saveFinanceProgress(){if(!financeReady||!financeTouched||restoringFinance||applyingFinance||!$('h_cash')||!$('p_'+models[current].fields[0].id))return;writeFinanceDraft({current,mode,planInputs:{...Object.fromEntries(models[current].fields.map(f=>[f.id,$('p_'+f.id).value])),...(readOperating()?{operating:readOperating()}:{})},healthInputs:Object.fromEntries(healthFields.map(f=>[f.id,$('h_'+f.id).value])),planReady:!!lastPlan&&!planDirty,healthReady:!!lastHealth&&!healthDirty,healthLink,salesLinked,caseId:activeTeachingCase?.id||null,month:$('plannedUseMonth').value,example:$('businessExample').value});}
+function saveFinanceProgress(){if(!financeReady||!financeTouched||restoringFinance||applyingFinance||!$('h_cash')||!$('p_'+models[current].fields[0].id))return;writeFinanceDraft({current,mode,planInputs:{...Object.fromEntries(models[current].fields.map(f=>[f.id,$('p_'+f.id).value])),...(readOperating()?{operating:readOperating()}:{})},healthInputs:Object.fromEntries(healthFields.map(f=>[f.id,exactFieldValue($('h_'+f.id))])),planReady:!!lastPlan&&!planDirty,healthReady:!!lastHealth&&!healthDirty,healthLink,salesLinked,caseId:activeTeachingCase?.id||null,month:$('plannedUseMonth').value,example:$('businessExample').value});}
 function restoreFinanceProgress(saved){
  restoringFinance=true;financeTouched=true;
  try{
   current=saved.current;mode=['twd','usd','dual'].includes(saved.mode)?saved.mode:'dual';
   drafts[current]=saved.planInputs;renderModel();
-  healthFields.forEach(f=>$('h_'+f.id).value=saved.healthInputs[f.id]??'');
+  healthFields.forEach(f=>setIntegerField($('h_'+f.id),saved.healthInputs[f.id]));
   healthLink=saved.planInputs.operating&&saved.healthLink?.kind==='case'?saved.healthLink:{kind:'manual',name:'上次填寫的財務資料',note:'所有欄位都能修改，送出前請重新確認。'};
   salesLinked=saved.salesLinked===true;activeTeachingCase=null;$('activeCaseSummary').hidden=true;
   $('plannedUseMonth').value=saved.month||'';$('businessExample').value=saved.example||'0';
   healthDirty=Object.values(saved.healthInputs).some(v=>v!==''&&v!==null);
-  if(saved.planReady)doCalculate();if(healthLink.kind==='case'&&lastPlan?.out?.extra?.operating?.forecast){healthFields.forEach(f=>$('h_'+f.id).value=lastPlan.out.extra.operating.health[f.id]??'');healthLink.note='首年年底資產負債＋首年損益＋次年還款；新增可修改的收款與備料假設。';}if(saved.healthReady)doHealth();
+  if(saved.planReady)doCalculate();if(healthLink.kind==='case'&&lastPlan?.out?.extra?.operating?.forecast){healthFields.forEach(f=>setIntegerField($('h_'+f.id),lastPlan.out.extra.operating.health[f.id]));healthLink.note='首年年底資產負債＋首年損益＋次年還款；新增可修改的收款與備料假設。';}if(saved.healthReady)doHealth();
   $('healthDataNote').textContent='已恢復上次填寫的數字；所有欄位都可修改。';
   $('planDataNote').textContent='已恢復上次填寫的數字；修改後請更新試算。';
  }finally{restoringFinance=false;}updateHandoffState();

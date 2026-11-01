@@ -1,6 +1,6 @@
-import {financingNeed} from './financing-need.js?v=health20261101';
-import {esc,SERVICES} from './opportunity.js?v=health20261101';
-import {PURPOSE_TITLES} from './franchise-scenarios.js?v=health20261101';
+import {financingNeed} from './financing-need.js?v=roundcharts20261101';
+import {esc,SERVICES} from './opportunity.js?v=roundcharts20261101';
+import {PURPOSE_TITLES} from './franchise-scenarios.js?v=roundcharts20261101';
 const fmt=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:1}):'待確認';
 const status={green:'健康',yellow:'注意',red:'警示',na:'資料待補'};
 export function planningCard(context={}){

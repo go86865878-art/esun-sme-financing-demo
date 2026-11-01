@@ -1,4 +1,4 @@
-import {WORKING_CAPITAL_DEFAULTS,forecastOperatingHealth} from './operating-health.js?v=health20261101';
+import {WORKING_CAPITAL_DEFAULTS,forecastOperatingHealth} from './operating-health.js?v=roundcharts20261101';
 // Fictional restaurant operating plan. Currency is TWD ten-thousands unless labelled otherwise.
 export const OPERATING_KIND='luosifen-v1';
 export const OPERATING_TITLE='螺絲粉營運計畫預估';
@@ -23,7 +23,7 @@ export function normalizeOperating(raw){
 export const payrollTotal=o=>o.fullTime*o.fullSalary+o.partTime*o.partHours*o.hourlyWage/10000;
 export function operatingMainFields(raw){const o=normalizeOperating(raw);return {revenue:o.ticket*o.days*o.matureDaily/10000,margin:100-o.costPercent-o.feeShare*o.merchantRate/100,fixed:payrollTotal(o)*(1+o.personnelExtra/100)+o.rent+o.misc+o.utilities+o.fixedAdjustment};}
 export function operatingFromMain(raw,key,value){const o=normalizeOperating(raw);if(key==='revenue')o.matureDaily=value*10000/o.ticket/o.days;if(key==='margin')o.costPercent=100-value-o.feeShare*o.merchantRate/100;if(key==='fixed')o.fixedAdjustment=value-(payrollTotal(o)*(1+o.personnelExtra/100)+o.rent+o.misc+o.utilities);return o;}
-const fmt=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:2}):'不適用';
+const fmt=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:0}):'不適用';
 export function calculateOperating(v){
  const o=normalizeOperating(v.operating);
  for(const key of ['setup','reserve','equity','revenue','fixed','margin','ramp','interest','tenor'])if(typeof v[key]!=='number'||!Number.isFinite(v[key])||v[key]<0)throw Error('請確認展店欄位：'+key);

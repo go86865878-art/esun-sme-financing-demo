@@ -1,13 +1,13 @@
-import {OPERATING_FIELDS,OPERATING_TITLE,normalizeOperating} from './operating-plan.js?v=health20261101';
-const f=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:2}):'—';
+import {OPERATING_FIELDS,OPERATING_TITLE,normalizeOperating} from './operating-plan.js?v=roundcharts20261101';
+const f=(n,d=0)=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:d}):'—';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function operatingEditor(o){o=normalizeOperating(o);return `<details id="operatingEditor" class="operating-panel"><summary>螺絲粉營運假設｜點開修改</summary><p>20坪、廚房與前場各半、約20席；老闆補班不另支薪。客單價為實收金額。調整後請按更新試算。</p><div class="fields">${OPERATING_FIELDS.map(([key,label,unit,min,max])=>`<div class="field"><label for="op_${key}">${label}</label><div class="input-wrap"><input id="op_${key}" data-operating="${key}" type="number" inputmode="decimal" step="any" min="${min}" max="${max}" value="${esc(o[key])}" required><span>${unit}</span></div></div>`).join('')}</div><p class="tiny">正職與兼職年終比例合計100%；兼職自動取剩餘比例。薪資附加10%為本例概估。每人兼職150小時為可修改假設。新增電子支付7天入帳、備料7天及貨款現付，均非PDF既載資料，可修改，採30天月基準。</p></details>`;}
 export function operatingSummary(plan){const p=plan?.out?.extra?.operating;if(!p)return '';const a=p.annual,o=p.assumptions;return [
  OPERATING_TITLE,'客單價 '+f(o.ticket)+' 元；營業 '+f(o.days)+' 天／月；初期 '+f(o.initialDaily)+' → 成熟期 '+f(o.matureDaily)+' 筆／日；第 '+f(plan.inputs.ramp)+' 月成熟。',
- '員工：正職 '+f(o.fullTime)+' 人×'+f(o.fullSalary)+' 萬元；兼職 '+f(o.partTime)+' 人×'+f(o.partHours)+' 小時×'+f(o.hourlyWage)+' 元；薪資含附加 '+f(o.personnelExtra)+'%＝'+f(p.salary)+' 萬元／月。',
- '成本 '+f(o.costPercent)+'%；租金／雜支／水電瓦斯 '+[o.rent,o.misc,o.utilities].map(f).join('／')+' 萬元；其他固定調整 '+f(o.fixedAdjustment)+' 萬元；金流 '+f(o.feeShare)+'%×'+f(o.merchantRate)+'%；稅金預留 '+f(o.tax)+'%。',
+ '員工：正職 '+f(o.fullTime)+' 人×'+f(o.fullSalary,2)+' 萬元；兼職 '+f(o.partTime)+' 人×'+f(o.partHours)+' 小時×'+f(o.hourlyWage)+' 元；薪資含附加 '+f(o.personnelExtra,2)+'%＝'+f(p.salary)+' 萬元／月。',
+ '成本 '+f(o.costPercent,2)+'%；租金／雜支／水電瓦斯 '+[o.rent,o.misc,o.utilities].map(f).join('／')+' 萬元；其他固定調整 '+f(o.fixedAdjustment)+' 萬元；金流 '+f(o.feeShare,2)+'%×'+f(o.merchantRate,2)+'%；稅金預留 '+f(o.tax,2)+'%。',
  '首年營收 '+f(a.revenue)+'；稅後淨利 '+f(a.net)+'；月分紅 '+f(a.bonus)+'；年終 '+f(a.yearEnd)+'；全年分紅後保留 '+f(a.retainedFinal)+'（萬元）。',
- '年終另提全年月分紅後保留盈餘 '+f(o.yearEndBonus)+'%；正職 '+f(o.fullTimeShare)+'%、兼職 '+f(100-o.fullTimeShare)+'%。正職每人 '+f(p.fullEach)+' 萬元；兼職每人 '+f(p.partEach)+' 萬元。',
+ '年終另提全年月分紅後保留盈餘 '+f(o.yearEndBonus,2)+'%；正職 '+f(o.fullTimeShare,2)+'%、兼職 '+f(100-o.fullTimeShare,2)+'%。正職每人 '+f(p.fullEach)+' 萬元；兼職每人 '+f(p.partEach)+' 萬元。',
  '全年還本 '+f(a.principal)+'、利息 '+f(a.interest)+'；年底現金 '+f(a.cashClose)+' 萬元。年終12月底付；本金不列損益費用。',
  '健檢口徑：首年年底資產負債、首年損益與次年還款；電子支付 '+f(o.settlementDays)+' 天、備料 '+f(o.inventoryDays)+' 天、供應商付款 '+f(o.payableDays)+' 天為新增假設，採30天月基準。',
  '年底推估：應收 '+f(p.forecast.receipts)+'、存貨 '+f(p.forecast.stock)+'、應付 '+f(p.forecast.payables)+'、可用現金 '+f(p.forecast.availableCash)+'、銀行存款含稅金預留 '+f(p.forecast.bankCash)+'（萬元）。',

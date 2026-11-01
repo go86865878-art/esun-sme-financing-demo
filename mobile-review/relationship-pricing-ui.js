@@ -1,5 +1,5 @@
-import {RELATIONSHIP_PRODUCTS,normalizePricing,evaluatePricing} from './relationship-pricing.js?v=health20261101';
-import {esc} from './opportunity.js?v=health20261101';
+import {RELATIONSHIP_PRODUCTS,normalizePricing,evaluatePricing} from './relationship-pricing.js?v=roundcharts20261101';
+import {esc} from './opportunity.js?v=roundcharts20261101';
 const fmt=n=>new Intl.NumberFormat('zh-TW',{maximumFractionDigits:4}).format(n);
 export function pricingMarkup(lead){
  let p;try{p=normalizePricing(lead.pricing||{})}catch{p=normalizePricing({})}

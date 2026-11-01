@@ -1,4 +1,4 @@
-import {financingNeed} from './financing-need.js?v=health20261101';
+import {financingNeed} from './financing-need.js?v=roundcharts20261101';
 
 // All amounts are TWD ten-thousands. These are editable teaching assumptions,
 // not E.SUN prices, revenue-sharing terms, FTP or realized profit.
