@@ -1,6 +1,6 @@
-import {OPERATING_FIELDS} from './operating-plan.js?v=roundcharts20261101b';
-import {financingNeed} from './financing-need.js?v=roundcharts20261101b';
-import {PURPOSE_TITLES} from './franchise-scenarios.js?v=roundcharts20261101b';
+import {OPERATING_FIELDS} from './operating-plan.js?v=visualbrief20261101';
+import {financingNeed} from './financing-need.js?v=visualbrief20261101';
+import {PURPOSE_TITLES} from './franchise-scenarios.js?v=visualbrief20261101';
 export const HEALTH_LABELS={cash:'可動用現金與銀行存款',receipts:'一年內可收回的貨款',stock:'可售庫存成本',shortDebt:'一年內全部應付款',totalDebt:'負債總額',assets:'資產帳面總額',sales:'全年營業收入',profit:'全年營業利益',annualAvailable:'未來一年可還款現金',annualDebt:'原有借款全年本息'};
 const C={green:'#009b8f',ink:'#214b60',muted:'#76909a',pale:'#edf7f4',line:'#d8e8e8',red:'#b74350',amber:'#956a23',white:'#ffffff'};
 const status={green:'健康',yellow:'注意',red:'警示',na:'資料不足／不適用'};
@@ -44,7 +44,7 @@ class Report{
  footer(){this.pages.forEach((canvas,i)=>{const ctx=canvas.getContext('2d');ctx.save();ctx.setTransform(this.scale,0,0,this.scale,0,0);ctx.fillStyle=C.white;ctx.fillRect(0,H-45,W,45);ctx.strokeStyle=C.line;ctx.beginPath();ctx.moveTo(M,H-43);ctx.lineTo(W-M,H-43);ctx.stroke();ctx.font='8px "Microsoft JhengHei", "Noto Sans TC", sans-serif';ctx.fillStyle=C.muted;ctx.textBaseline='top';ctx.fillText(this.options.footerText||'測試網・情境規劃參考，非核貸承諾或銀行授信評等。',M,H-32);ctx.fillText((i+1)+' / '+this.pages.length,W-M-30,H-32);ctx.restore()})}
  finish(){this.footer();return imagePagesPdf(this.pages.map(c=>({url:c.toDataURL('image/jpeg',.94),width:c.width,height:c.height})),this.title);}
 }
-async function assets(options={}){const load=options.loadImage||((src)=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=reject;i.src=src}));const [logo,meow]=await Promise.all([load('esun-icon.png').catch(()=>null),load('esun-meow.png').catch(()=>null)]);return {...options,logo,meow}}
+async function assets(options={}){const load=options.loadImage||((src)=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=reject;i.src=src}));const [logo,meow]=await Promise.all([load('esun-icon.png').catch(()=>null),load('business-mascots.png').catch(()=>null)]);return {...options,logo,meow}}
 function meta(r,data){r.para(data.company||'企業名稱：________________________',{size:12,bold:true});if(data.address)r.para('營業地址：'+data.address,{size:9,color:C.muted});r.para('資料時間：'+(data.at||data.plan?.at||data.health?.at||'—')+'　｜　金額單位：新臺幣萬元（美元另註）',{size:8.5,color:C.muted});}
 export async function buildPlanPdf(data,options={}){
  const p=data.plan,o=p.out,r=new Report(o.extra?.operating?'螺絲粉營運計畫預估':'企業財務規劃報告','先看資金缺口，再安排還款與用款時點。',await assets(options));meta(r,data);r.section('01  本次資金規劃｜'+(PURPOSE_TITLES[p.model]||p.model));
@@ -81,7 +81,7 @@ export async function buildHealthPdf(data,options={}){
  for(const item of h.out.items){const lines=r.lines(item.advice,CW-24,9),height=57+lines.length*14;r.ensure(height+8);const y=r.y;r.box(M,y,CW,height);r.text(item.label,M+12,y+9,11,C.ink,true);const color=item.status==='red'?C.red:item.status==='yellow'?C.amber:item.status==='green'?C.green:C.muted;r.text(item.value,M+12,y+29,17,color,true);r.font(9,true);const tag=status[item.status];r.text(tag,W-M-r.ctx.measureText(tag).width-12,y+12,9,color,true);lines.forEach((t,i)=>r.text(t,M+12,y+54+i*14,9,C.ink));r.y+=height+8;}
  if(Number.isFinite(h.inputs.sales)&&Number.isFinite(h.inputs.profit)){r.section('02  獲利結構');r.bars([['營業收入',h.inputs.sales],['成本與營業費用',h.inputs.sales-h.inputs.profit,'#93bfb6'],['營業利益／虧損',h.inputs.profit,h.inputs.profit<0?C.red:'#d6a346']]);}
  r.newPage();r.section('03  本次健檢數字');r.pairs(Object.entries(HEALTH_LABELS).map(([k,label])=>[label,fmt(h.inputs[k])+' 萬元']));
- if(data.plan){r.section('04  已連結的資金規劃');r.para((PURPOSE_TITLES[data.plan.model]||'本次規劃')+'｜融資需求 '+fmt(financingNeed(data.plan).amount)+' 萬元',{bold:true});r.para(data.plan.out?.extra?.operating?'螺絲粉情境健檢採開業資產負債與首年預估損益、本息，已含本案融資；自行修改時以實際填寫數值為準。':'此需求為新增規劃，不直接併入上方負債、資產或全年本息。需另依撥款與還款時點評估投資後財務。',{size:9,color:C.muted});}
+ if(data.plan){r.section('04  已連結的資金規劃');r.para((PURPOSE_TITLES[data.plan.model]||'本次規劃')+'｜融資需求 '+fmt(financingNeed(data.plan).amount)+' 萬元',{bold:true});r.para(data.plan.out?.extra?.operating?'螺絲粉情境健檢採首年年底預估資產負債、首年損益及次年還款，含可修改的收款與備料假設；自行修改時以實際填寫值為準。':'此需求為新增規劃，不直接併入上方負債、資產或全年本息。需另依撥款與還款時點評估投資後財務。',{size:9,color:C.muted});}
  r.section('指標定義與判讀標準');for(const item of h.out.items){r.para(item.label,{size:9.5,bold:true,gap:2});r.para(item.definition,{size:8.5,color:C.muted,gap:9})}r.para(h.out.note,{size:8.5,color:C.muted});return r.finish();
 }
 export async function buildCasesPdf(cases,options={}){

@@ -1,4 +1,4 @@
-import {calculateOperating} from './operating-plan.js?v=roundcharts20261101b';
+import {calculateOperating} from './operating-plan.js?v=visualbrief20261101';
 // Reconstruct charts for legacy snapshots without rewriting the submitted record.
 export function operatingForDisplay(plan){
  const stored=plan?.out?.extra?.operating;if(!stored)return null;

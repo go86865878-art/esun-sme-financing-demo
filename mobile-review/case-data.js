@@ -1,4 +1,4 @@
-import {calculateOperating} from './operating-plan.js?v=roundcharts20261101b';
+import {calculateOperating} from './operating-plan.js?v=visualbrief20261101';
 // Optional fictional cases; the page never applies these automatically.
 export const DEMO_CASES = [
   {

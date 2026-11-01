@@ -1,14 +1,14 @@
-import {financingNeed} from './financing-need.js?v=roundcharts20261101b';
-import {esc,SERVICES} from './opportunity.js?v=roundcharts20261101b';
-import {PURPOSE_TITLES} from './franchise-scenarios.js?v=roundcharts20261101b';
+import {financingNeed} from './financing-need.js?v=visualbrief20261101';
+import {esc,SERVICES} from './opportunity.js?v=visualbrief20261101';
+import {PURPOSE_TITLES} from './franchise-scenarios.js?v=visualbrief20261101';
 const fmt=n=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:1}):'待確認';
 const status={green:'健康',yellow:'注意',red:'警示',na:'資料待補'};
 export function planningCard(context={}){
  const {plan,health,desiredMonth='',documents=[]}=context;
- if(!plan?.out)return '<div class="planning-empty"><img src="esun-meow.png" alt="玉山喵喵"><div><h4>先把數字算清楚，再聊下一步。</h4><p>完成試算後，這裡會整理用途、資金需求、用款時間與財務提醒。也可以直接到下方留下諮詢需求。</p></div></div>';
+ if(!plan?.out)return '<div class="planning-empty"><img src="business-mascots.png" alt="綠領帶熊本熊與綠西裝貓咪"><div><h4>先把數字算清楚，再聊下一步。</h4><p>完成試算後，這裡會整理用途、資金需求、用款時間與財務提醒。也可以直接到下方留下諮詢需求。</p></div></div>';
  const need=financingNeed(plan);
  const ready=documents.filter(x=>x.ready).length;
- return '<article class="planning-card"><div class="planning-card-heading"><div><span>YOUR FINANCING BRIEF</span><h4>'+esc(PURPOSE_TITLES[plan.model])+'</h4><p>一份規劃，接續同一筆服務需求。</p></div><img src="esun-meow.png" alt="玉山喵喵"></div><div class="planning-kpis"><div><small>'+'需規劃的融資金額'+'</small><strong>'+fmt(need.amount)+'<em>'+'萬元'+'</em></strong></div><div><small>預計用款時間</small><strong>'+esc(desiredMonth||'待確認')+'</strong></div><div><small>文件準備</small><strong>'+ready+'<em> / '+documents.length+' 項</em></strong></div></div><div class="planning-metrics">'+(plan.out.metrics||[]).slice(0,4).map(x=>'<div><small>'+esc(x.label)+'</small><b>'+esc(x.value)+'</b></div>').join('')+'</div><div class="planning-health"><b>財務提醒</b>'+(health?.out?health.out.items.map(x=>'<span class="health-chip '+esc(x.status)+'">'+esc(x.label)+'：'+esc(x.value)+'</span>').join(''):'<span>尚未完成健檢，可在諮詢時補充。</span>')+'</div><p class="planning-note">資金缺口是規劃需求，不等於可核貸額度。試算與健檢結果會隨本次諮詢一併保留。</p></article>';
+ return '<article class="planning-card"><div class="planning-card-heading"><div><span>YOUR FINANCING BRIEF</span><h4>'+esc(PURPOSE_TITLES[plan.model])+'</h4><p>一份規劃，接續同一筆服務需求。</p></div><img src="business-mascots.png" alt="綠領帶熊本熊與綠西裝貓咪"></div><div class="planning-kpis"><div><small>'+'需規劃的融資金額'+'</small><strong>'+fmt(need.amount)+'<em>'+'萬元'+'</em></strong></div><div><small>預計用款時間</small><strong>'+esc(desiredMonth||'待確認')+'</strong></div><div><small>文件準備</small><strong>'+ready+'<em> / '+documents.length+' 項</em></strong></div></div><div class="planning-metrics">'+(plan.out.metrics||[]).slice(0,4).map(x=>'<div><small>'+esc(x.label)+'</small><b>'+esc(x.value)+'</b></div>').join('')+'</div><div class="planning-health"><b>財務提醒</b>'+(health?.out?health.out.items.map(x=>'<span class="health-chip '+esc(x.status)+'">'+esc(x.label)+'：'+esc(x.value)+'</span>').join(''):'<span>尚未完成健檢，可在諮詢時補充。</span>')+'</div><p class="planning-note">資金缺口是規劃需求，不等於可核貸額度。試算與健檢結果會隨本次諮詢一併保留。</p></article>';
 }
 export function receivedConsultationCard(lead){
  const need=financingNeed(lead.plan),c=lead.consultation;if(!c)return '';

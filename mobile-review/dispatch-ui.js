@@ -1,4 +1,7 @@
-import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,loadContact,saveContact} from './dispatch-mail.js?v=roundcharts20261101b';
+import {briefFromLead,visualBriefSvg} from './visual-brief.js?v=visualbrief20261101';
+import {buildVisualReport} from './visual-report.js?v=visualbrief20261101';
+import {downloadPdf} from './pdf-report.js?v=visualbrief20261101';
+import {dispatchTarget,dispatchActionLabel,buildDispatchMail,mailtoUrl,emlDraft,visualEmlDraft,loadContact,saveContact} from './dispatch-mail.js?v=visualbrief20261101';
 
 export function mountDispatchMail(){
  const dialog=document.createElement('dialog');dialog.id='dispatchDialog';dialog.className='dispatch-dialog';
@@ -8,17 +11,20 @@ export function mountDispatchMail(){
  <p class="dispatch-hint">依推薦分行或對應服務組套用收件人；未提供的信箱不會自動猜測。更換單位會使用該單位自己的設定。</p>
  <label class="dispatch-remember"><input type="checkbox" id="rememberDispatch" checked>記住此單位的收件人（僅此瀏覽器）</label>
  <label class="dispatch-subject-label">郵件主旨<input id="dispatchSubject" readonly></label>
- <details class="dispatch-preview" open><summary>案件摘要與承接需求</summary><pre id="dispatchBody"></pre></details>
+ <details class="dispatch-visual-preview" open><summary>圖表摘要預覽｜完整兩頁見PDF附件</summary><div id="dispatchVisualBody"></div></details><details class="dispatch-preview"><summary>完整文字內文（備查）</summary><pre id="dispatchBody"></pre></details>
  <p id="dispatchError" role="alert" class="error"></p><p id="dispatchFeedback" role="status"></p>
- <div class="dispatch-actions"><button type="submit" class="button" id="openDispatchMail">開啟郵件程式</button><button type="button" class="button outline" id="downloadDispatchMail">下載 .eml 草稿</button><button type="button" class="button outline" id="copyDispatchMail">複製內文</button></div>
- <p class="dispatch-hint">請在郵件程式內確認收件人後寄出。開啟或下載草稿不會標記為「已寄送」；此測試網尚未串接銀行郵件系統。若沒有跳出郵件程式，可下載草稿使用。</p></form>`;
+ <div class="dispatch-actions"><button type="button" class="button" id="downloadDispatchMail">下載圖表郵件草稿</button><button type="button" class="button outline" id="downloadDispatchPdf">下載圖表 PDF</button><button type="submit" class="button outline" id="openDispatchMail">開啟純文字郵件</button><button type="button" class="button outline" id="copyDispatchMail">複製文字內文</button></div>
+ <p class="dispatch-hint">圖表草稿可用支援.eml的郵件程式開啟，內含圖表與PDF附件；使用純文字郵件時，請手動加入圖表PDF。請在郵件程式確認收件人與附件後寄出。平台只產生草稿，不會標記為已寄送。</p></form>`;
  document.body.append(dialog);
  const $=id=>dialog.querySelector('#'+id),form=$('dispatchMailForm');let lead=null,target=null;
+ const actions=dialog.querySelector('.dispatch-actions');$('dispatchSubject').closest('label').after(actions);
+ function fileStem(){return String(lead.id).replace(/[^a-z0-9_-]/gi,'').slice(0,64);}
+ function downloadEml(text){const url=URL.createObjectURL(new Blob([text],{type:'message/rfc822'}));const a=document.createElement('a');a.href=url;a.download='assignment-'+fileStem()+'.eml';dialog.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
  function contact(){return {email:$('dispatchEmail').value,managerName:$('dispatchManager').value};}
  function preview(){
   if(!lead||!target)return;
   const draft=buildDispatchMail(lead,target,{...contact(),email:'preview@example.invalid'});
-  $('dispatchSubject').value=draft.subject;$('dispatchBody').textContent=draft.body;
+  $('dispatchSubject').value=draft.subject;$('dispatchBody').textContent=draft.body;$('dispatchVisualBody').innerHTML=visualBriefSvg(briefFromLead(lead),1);
  }
  function prepare(){
   $('dispatchError').textContent='';$('dispatchFeedback').textContent='';
@@ -30,11 +36,8 @@ export function mountDispatchMail(){
  form.addEventListener('submit',event=>{
   event.preventDefault();try{const mail=prepare();const link=document.createElement('a');link.href=mailtoUrl(mail);link.style.display='none';dialog.append(link);link.click();link.remove();$('dispatchFeedback').textContent='已嘗試開啟郵件程式；請在郵件程式確認並寄出，平台無法判定是否已寄送。';}catch(error){failure(error);}
  });
- $('downloadDispatchMail').addEventListener('click',()=>{try{
-  const mail=prepare(),url=URL.createObjectURL(new Blob([emlDraft(mail)],{type:'message/rfc822'}));
-  const a=document.createElement('a');a.href=url;a.download='assignment-'+String(lead.id).replace(/[^a-z0-9_-]/gi,'').slice(0,64)+'.eml';dialog.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
-  $('dispatchFeedback').textContent='已產生 .eml 郵件草稿，尚未寄出；案件處理狀態保持不變。';
- }catch(error){failure(error);}});
+ $('downloadDispatchMail').addEventListener('click',async()=>{const button=$('downloadDispatchMail');try{const mail=prepare();button.disabled=true;button.textContent='正在產生圖表與附件…';const packet=await buildVisualReport(briefFromLead(lead));downloadEml(visualEmlDraft(mail,packet));$('dispatchFeedback').textContent='已產生含內嵌圖表與兩頁PDF附件的郵件草稿，尚未寄出；請在郵件程式確認收件人與附件。';}catch(error){failure(error);}finally{button.disabled=false;button.textContent='下載圖表郵件草稿';}});
+ $('downloadDispatchPdf').addEventListener('click',async()=>{const button=$('downloadDispatchPdf');try{button.disabled=true;const packet=await buildVisualReport(briefFromLead(lead));downloadPdf('financial-brief-'+fileStem()+'.pdf',packet.pdf);$('dispatchFeedback').textContent='已產生兩頁圖表PDF，可另行附加到內部郵件。';}catch(error){failure(error);}finally{button.disabled=false;}});
  $('copyDispatchMail').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('dispatchSubject').value+'\n\n'+$('dispatchBody').textContent);$('dispatchFeedback').textContent='已複製主旨及內文，請自行貼入內部郵件並填寫收件人。';}catch{$('dispatchFeedback').textContent='無法自動複製，請選取下方內文複製。';const selection=getSelection(),range=document.createRange();range.selectNodeContents($('dispatchBody'));selection.removeAllRanges();selection.addRange(range);}});
  $('dispatchManager').addEventListener('input',preview);
  $('dispatchEmail').addEventListener('input',()=>{$('dispatchError').textContent='';$('dispatchFeedback').textContent='';});
@@ -45,6 +48,6 @@ export function mountDispatchMail(){
   $('dispatchUnit').textContent=target.unit;$('dispatchRole').textContent=target.role;$('dispatchTitle').textContent=dispatchActionLabel(target);
   $('dispatchBasis').textContent=target.confirmed?'依已人工確認的承接單位':'依目前推薦單位／所選候選分行';
   $('dispatchError').textContent='';$('dispatchFeedback').textContent='';preview();
-  dialog.showModal();if(!saved.email)$('dispatchEmail').focus();else $('openDispatchMail').focus();
+  dialog.showModal();if(!saved.email)$('dispatchEmail').focus();else $('downloadDispatchMail').focus();
  }};
 }

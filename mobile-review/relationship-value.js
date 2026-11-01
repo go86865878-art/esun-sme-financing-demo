@@ -1,4 +1,4 @@
-import {financingNeed} from './financing-need.js?v=roundcharts20261101b';
+import {financingNeed} from './financing-need.js?v=visualbrief20261101';
 
 // All amounts are TWD ten-thousands. These are editable teaching assumptions,
 // not E.SUN prices, revenue-sharing terms, FTP or realized profit.

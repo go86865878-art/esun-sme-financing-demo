@@ -1,7 +1,7 @@
-import {operatingForDisplay} from './operating-view.js?v=roundcharts20261101b';
-import {financingNeed} from './financing-need.js?v=roundcharts20261101b';
-import {estimateRelationship} from './relationship-value.js?v=roundcharts20261101b';
-import {MODELS,SERVICES,esc} from './opportunity.js?v=roundcharts20261101b';
+import {operatingForDisplay} from './operating-view.js?v=visualbrief20261101';
+import {financingNeed} from './financing-need.js?v=visualbrief20261101';
+import {estimateRelationship} from './relationship-value.js?v=visualbrief20261101';
+import {MODELS,SERVICES,esc} from './opportunity.js?v=visualbrief20261101';
 const n=x=>Number.isFinite(x)?Math.round(x).toLocaleString('zh-TW'):'待補';
 const colors=['#008577','#58a893','#e6b95c','#5b8398','#9cabb1','#97c8c0','#8d9b75'];
 export function pipelineSummary(leads){

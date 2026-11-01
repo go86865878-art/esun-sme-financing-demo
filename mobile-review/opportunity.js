@@ -1,5 +1,5 @@
-import {hasOperatingPlan,normalizeOperating,calculateOperating} from './operating-plan.js?v=roundcharts20261101b';
-import {sanitizeConsultation,enquiryPlan} from './consultation-context.js?v=roundcharts20261101b';
+import {hasOperatingPlan,normalizeOperating,calculateOperating} from './operating-plan.js?v=visualbrief20261101';
+import {sanitizeConsultation,enquiryPlan} from './consultation-context.js?v=visualbrief20261101';
 // Shared local-only demo handoff. No network request or bank system integration.
 export const LEADS_KEY = 'esun_mobile_review_demo_leads_v1';
 export const ROUTES_KEY = 'esun_mobile_review_demo_routes_v1';

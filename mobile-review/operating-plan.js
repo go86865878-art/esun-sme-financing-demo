@@ -1,4 +1,4 @@
-import {WORKING_CAPITAL_DEFAULTS,forecastOperatingHealth} from './operating-health.js?v=roundcharts20261101b';
+import {WORKING_CAPITAL_DEFAULTS,forecastOperatingHealth} from './operating-health.js?v=visualbrief20261101';
 // Fictional restaurant operating plan. Currency is TWD ten-thousands unless labelled otherwise.
 export const OPERATING_KIND='luosifen-v1';
 export const OPERATING_TITLE='螺絲粉營運計畫預估';

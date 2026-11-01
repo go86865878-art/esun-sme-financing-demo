@@ -60,3 +60,5 @@
 .pricing-product-fields{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:12px}
 .pricing-result{background:#e7f5ef;border-radius:10px;padding:16px;margin:18px 0}.pricing-result strong,.pricing-result small{display:block}.pricing-result strong{font-size:20px;margin:8px 0;color:#006e65}.pricing-result small{color:#526d63}
 @media(max-width:590px){.product-need-options,.pricing-rate-fields,.pricing-product-fields{grid-template-columns:1fr}.consultation-product-needs{padding:14px}.product-need{padding:10px 12px}.product-need small{margin-top:2px}}
+
+.planning-card-heading img,.planning-empty img,.consultation-heading img{width:132px;height:122px;object-fit:contain;flex:none;background:transparent;border:0;border-radius:0;box-shadow:none}@media(max-width:590px){.planning-card-heading img,.planning-empty img,.consultation-heading img{width:94px;height:94px}}

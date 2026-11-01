@@ -1,14 +1,14 @@
-import {renderPipelineCharts,caseFinanceCharts} from './pipeline-charts.js?v=roundcharts20261101b';
-import {operatingResults} from './operating-plan-ui.js?v=roundcharts20261101b';
-import {estimateRelationship} from './relationship-value.js?v=roundcharts20261101b';
-import {valueMarkup,bindValue} from './relationship-value-ui.js?v=roundcharts20261101b';
-import {pricingMarkup,bindPricing} from './relationship-pricing-ui.js?v=roundcharts20261101b';
-import {mountDispatchMail} from './dispatch-ui.js?v=roundcharts20261101b';
-import {dispatchTarget,dispatchActionLabel} from './dispatch-mail.js?v=roundcharts20261101b';
-import {receivedConsultationCard} from './planning-cards.js?v=roundcharts20261101b';
-import {mountBranchMap,branchCatalogue,routingThreshold,routeDescription} from './branch-map.js?v=roundcharts20261101b';
-import {suggestAssignment,ROUTING_KEY,BRANCH_COORDS_KEY} from './branch-routing.js?v=roundcharts20261101b';
-import {LEADS_KEY,ROUTES_KEY,SETTINGS_KEY,SERVICES,MODELS,AREAS,DEFAULT_ROUTES,DEFAULT_SETTINGS,FOLLOWUP_STATUSES,esc,loadDemoLeads,saveDemoLeads,loadRoutes,loadSettings,writeLocal,routeFor,calculatePotential,deriveOpportunitySignals,deriveOpportunityDetails,getOpportunityFollowup,updateOpportunityFollowup,createLead,fillCities,fillDistricts,serviceChecks} from './opportunity.js?v=roundcharts20261101b';
+import {renderPipelineCharts,caseFinanceCharts} from './pipeline-charts.js?v=visualbrief20261101';
+import {operatingResults} from './operating-plan-ui.js?v=visualbrief20261101';
+import {estimateRelationship} from './relationship-value.js?v=visualbrief20261101';
+import {valueMarkup,bindValue} from './relationship-value-ui.js?v=visualbrief20261101';
+import {pricingMarkup,bindPricing} from './relationship-pricing-ui.js?v=visualbrief20261101';
+import {mountDispatchMail} from './dispatch-ui.js?v=visualbrief20261101';
+import {dispatchTarget,dispatchActionLabel} from './dispatch-mail.js?v=visualbrief20261101';
+import {receivedConsultationCard} from './planning-cards.js?v=visualbrief20261101';
+import {mountBranchMap,branchCatalogue,routingThreshold,routeDescription} from './branch-map.js?v=visualbrief20261101';
+import {suggestAssignment,ROUTING_KEY,BRANCH_COORDS_KEY} from './branch-routing.js?v=visualbrief20261101';
+import {LEADS_KEY,ROUTES_KEY,SETTINGS_KEY,SERVICES,MODELS,AREAS,DEFAULT_ROUTES,DEFAULT_SETTINGS,FOLLOWUP_STATUSES,esc,loadDemoLeads,saveDemoLeads,loadRoutes,loadSettings,writeLocal,routeFor,calculatePotential,deriveOpportunitySignals,deriveOpportunityDetails,getOpportunityFollowup,updateOpportunityFollowup,createLead,fillCities,fillDistricts,serviceChecks} from './opportunity.js?v=visualbrief20261101';
 
 const $=id=>document.getElementById(id);
 const fmt=n=>new Intl.NumberFormat('zh-TW',{maximumFractionDigits:0}).format(n);

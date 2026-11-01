@@ -1,4 +1,4 @@
-import {baseDocs,documentsFor,modelNames,normalizeModel,readDocumentChecks,saveDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js?v=roundcharts20261101b';
+import {baseDocs,documentsFor,modelNames,normalizeModel,readDocumentChecks,saveDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js?v=visualbrief20261101';
 const $=id=>document.getElementById(id);
 const query=new URL(location.href);
 let current=normalizeModel(query.searchParams.get('model'));

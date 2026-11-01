@@ -1,5 +1,5 @@
-import {operatingForDisplay} from './operating-view.js?v=roundcharts20261101b';
-import {OPERATING_FIELDS,OPERATING_TITLE,normalizeOperating} from './operating-plan.js?v=roundcharts20261101b';
+import {operatingForDisplay} from './operating-view.js?v=visualbrief20261101';
+import {OPERATING_FIELDS,OPERATING_TITLE,normalizeOperating} from './operating-plan.js?v=visualbrief20261101';
 const f=(n,d=0)=>Number.isFinite(n)?n.toLocaleString('zh-TW',{maximumFractionDigits:d}):'—';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function operatingEditor(o){o=normalizeOperating(o);return `<details id="operatingEditor" class="operating-panel"><summary>螺絲粉營運假設｜點開修改</summary><p>20坪、廚房與前場各半、約20席；老闆補班不另支薪。客單價為實收金額。調整後請按更新試算。</p><div class="fields">${OPERATING_FIELDS.map(([key,label,unit,min,max])=>`<div class="field"><label for="op_${key}">${label}</label><div class="input-wrap"><input id="op_${key}" data-operating="${key}" type="number" inputmode="decimal" step="any" min="${min}" max="${max}" value="${esc(o[key])}" required><span>${unit}</span></div></div>`).join('')}</div><p class="tiny">正職與兼職年終比例合計100%；兼職自動取剩餘比例。薪資附加10%為本例概估。每人兼職150小時為可修改假設。新增電子支付7天入帳、備料7天及貨款現付，均非PDF既載資料，可修改，採30天月基準。</p></details>`;}

@@ -1,19 +1,19 @@
-import {setIntegerField,exactFieldValue,markIntegerFieldEdited} from './integer-display.js?v=roundcharts20261101b';
-import {healthForecastMarkup} from './operating-health-ui.js?v=roundcharts20261101b';
-import {hasOperatingPlan,operatingMainFields,operatingFromMain} from './operating-plan.js?v=roundcharts20261101b';
-import {operatingEditor} from './operating-plan-ui.js?v=roundcharts20261101b';
-import {DEMO_CASES,getDemoCase,caseConsultation} from './demo-cases.js?v=roundcharts20261101b';
-import {financingNeed} from './financing-need.js?v=roundcharts20261101b';
-import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js?v=roundcharts20261101b';
-import {mountConsultation} from './consultation-form.js?v=roundcharts20261101b';
-import {planningCard} from './planning-cards.js?v=roundcharts20261101b';
-import {PLAN_EXAMPLES,HEALTH_EXAMPLES,PURPOSE_TITLES,profitabilityMarkup} from './franchise-scenarios.js?v=roundcharts20261101b';
-import {mountTiming} from './timing.js?v=roundcharts20261101b';
-import {buildConsultationSummary,consultationPrintHTML} from './consultation.js?v=roundcharts20261101b';
-import {calculate,diagnose} from './engine.js?v=roundcharts20261101b';
-import {downloadText} from './report.js?v=roundcharts20261101b';
-import {buildPlanPdf,buildHealthPdf,downloadPdf} from './pdf-report.js?v=roundcharts20261101b';
-import {pairedHealth,sharedHealthPatch,readFinanceDraft,writeFinanceDraft} from './finance-state.js?v=roundcharts20261101b';
+import {setIntegerField,exactFieldValue,markIntegerFieldEdited} from './integer-display.js?v=visualbrief20261101';
+import {healthForecastMarkup} from './operating-health-ui.js?v=visualbrief20261101';
+import {hasOperatingPlan,operatingMainFields,operatingFromMain} from './operating-plan.js?v=visualbrief20261101';
+import {operatingEditor} from './operating-plan-ui.js?v=visualbrief20261101';
+import {DEMO_CASES,getDemoCase,caseConsultation} from './demo-cases.js?v=visualbrief20261101';
+import {financingNeed} from './financing-need.js?v=visualbrief20261101';
+import {baseDocs,extraDocs,readDocumentChecks,DOCUMENT_STORAGE_KEY} from './document-data.js?v=visualbrief20261101';
+import {mountConsultation} from './consultation-form.js?v=visualbrief20261101';
+import {planningCard} from './planning-cards.js?v=visualbrief20261101';
+import {PLAN_EXAMPLES,HEALTH_EXAMPLES,PURPOSE_TITLES,profitabilityMarkup} from './franchise-scenarios.js?v=visualbrief20261101';
+import {mountTiming} from './timing.js?v=visualbrief20261101';
+import {buildConsultationSummary,consultationPrintHTML} from './consultation.js?v=visualbrief20261101';
+import {calculate,diagnose} from './engine.js?v=visualbrief20261101';
+import {downloadText} from './report.js?v=visualbrief20261101';
+import {buildPlanPdf,buildHealthPdf,downloadPdf} from './pdf-report.js?v=visualbrief20261101';
+import {pairedHealth,sharedHealthPatch,readFinanceDraft,writeFinanceDraft} from './finance-state.js?v=visualbrief20261101';
 const $=id=>document.getElementById(id);
 const icons={route:'M5 5h5v5H5zM14 14h5v5h-5zM10 7h7v4M7 10v7h4',edit:'m15 4 5 5-11 11H4v-5ZM13 6l5 5M4 4h6M4 8h3',chart:'M4 3v17h17M8 15v-4m5 4V7m5 8V4',chat:'M4 4h16v12H9l-5 4ZM8 8h8M8 12h5',cycle:'M20 10a8 8 0 0 0-14-5L3 8m0-5v5h5M4 14a8 8 0 0 0 14 5l3-3m0 5v-5h-5',factory:'M3 21V9l6 4V7l6 4V3h5l1 18ZM7 17h1m4 0h1m4 0h1',store:'M3 10 5 3h14l2 7M4 10v11h16V10M8 21v-7h5v7M3 10c0 3 5 3 5 0 0 3 5 3 5 0 0 3 5 3 5 0 0 3 3 3 3 0',globe:'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM3 12h18M12 3c-5 5-5 13 0 18 5-5 5-13 0-18Z',scan:'M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5M3 12h18M8 8v1m4-1v1m4-1v1M8 15v1m4-1v1m4-1v1',wallet:'M20 7H4V4h15M3 7v13h18V7ZM17 11h4v5h-4z',download:'M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4',file:'M14 3H5v18h14V8Zm0 0v5h5M8 12h8m-8 4h6',shield:'M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6ZM8 12l3 3 5-6',box:'m3 7 9-4 9 4v10l-9 4-9-4Zm0 0 9 4 9-4M12 11v10M7 5l9 4',truck:'M3 5h11v12H3Zm11 5h4l3 4v3h-7M8 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm12 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z'};
 function icon(name){return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[name]||icons.chart}"/></svg>`}
@@ -107,7 +107,7 @@ $('clearHealth').addEventListener('click',()=>{financeTouched=true;salesLinked=f
 $('healthExample').addEventListener('click',()=>{if($('healthScenario').value==='linked'){if(lastPlan?.out?.extra?.operating)setLinkedHealth({values:lastPlan.out.extra.operating.health,name:'螺絲粉營運預估',note:'首年年底資產負債＋首年損益＋次年還款；另加可修改的收款與備料假設。'},'case');else if(activeTeachingCase)setLinkedHealth({values:lastPlan?.out?.extra?.operating?.health||activeTeachingCase.health,name:activeTeachingCase.company,note:activeTeachingCase.input.operating?'首年年底資產負債＋首年損益＋次年還款；另加可修改的收款與備料假設。':'僅示範本案還款安排，其餘公司財務待補。'},'case');else setLinkedHealth(pairedHealth(current,Number($('businessExample').value)||0));}else{const preset=HEALTH_EXAMPLES.find(x=>x.id===$('healthScenario').value)||HEALTH_EXAMPLES[0];setLinkedHealth({...preset,note:'獨立健檢情境，與本次投資規劃分開判讀。'},'independent');}setHealthStep(1);doHealth();});
 $('plannedUseMonth').addEventListener('input',updateHandoffState);
 $('copyConsultation').addEventListener('click',async()=>{if($('copyConsultation').disabled)return;const text=getConsultation();$('consultationPreview').value=text;try{await navigator.clipboard.writeText(text);toast('已複製本次諮詢摘要，可留存或帶去討論。')}catch{$('consultationPreview').closest('details').open=true;$('consultationPreview').focus();$('consultationPreview').select();toast('請在摘要欄位選取複製。')}});
-$('printConsultation').addEventListener('click',()=>{if($('printConsultation').disabled)return;const w=window.open('','_blank');if(!w)return toast('請允許開啟摘要視窗，或使用複製摘要。');w.document.write(consultationPrintHTML(getConsultation()));w.document.close();w.focus();});
+$('printConsultation').addEventListener('click',()=>{if($('printConsultation').disabled)return;const w=window.open('','_blank');if(!w)return toast('請允許開啟摘要視窗，或使用複製摘要。');w.document.write(consultationPrintHTML(getConsultation(),pdfData()));w.document.close();w.focus();});
 timing=mountTiming({target:'#monthlyPlanner',getPlan:()=>planDirty?null:lastPlan,onChange:state=>{timingState=state;updateHandoffState()}});
 updateHandoffState();
 

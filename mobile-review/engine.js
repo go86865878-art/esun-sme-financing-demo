@@ -1,4 +1,4 @@
-import {hasOperatingPlan,calculateOperating} from './operating-plan.js?v=roundcharts20261101b';
+import {hasOperatingPlan,calculateOperating} from './operating-plan.js?v=visualbrief20261101';
 // All TWD amounts are in 萬元; USD amounts are in 萬美元. Rates use percent,
 // e.g. 70 means 70%, and fx is TWD per USD. No bank approval is implied.
 const F = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 2 });

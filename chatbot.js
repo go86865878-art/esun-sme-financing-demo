@@ -63,7 +63,7 @@
   }
   function chatAvatar() {
     const avatar = el('span', 'esun-assistant-avatar'); avatar.setAttribute('aria-hidden', 'true');
-    const image = el('img'); image.src = 'esun-meow.png'; image.alt = ''; image.width = 448; image.height = 602;
+    const image = el('img'); image.src = 'business-mascots.png'; image.alt = ''; image.width = 448; image.height = 602;
     avatar.append(image); return avatar;
   }
   function init() {

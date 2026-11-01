@@ -1,5 +1,5 @@
-import {VALUE_FIELDS,normalizeValueAssumptions,estimateRelationship} from './relationship-value.js?v=roundcharts20261101b';
-import {esc} from './opportunity.js?v=roundcharts20261101b';
+import {VALUE_FIELDS,normalizeValueAssumptions,estimateRelationship} from './relationship-value.js?v=visualbrief20261101';
+import {esc} from './opportunity.js?v=visualbrief20261101';
 const fmt=v=>v===null?'待補資料':Math.abs(v)<10?Math.round(v*10000).toLocaleString('zh-TW')+' 元':Math.round(v).toLocaleString('zh-TW')+' 萬元';
 const range=(low,high)=>low===null||high===null?'待補資料':low.toLocaleString('zh-TW',{maximumFractionDigits:0})+'～'+high.toLocaleString('zh-TW',{maximumFractionDigits:0})+' 萬元';
 function resultMarkup(lead){
