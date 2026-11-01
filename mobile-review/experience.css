@@ -21,6 +21,8 @@ button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
 .mobile-experience .case-resource-links{display:flex;flex-wrap:wrap;gap:8px 18px}
 .mobile-experience .case-resource-links a{min-height:44px;display:inline-flex;align-items:center}
 .mobile-experience input[aria-invalid=true]{border-color:#a93640;box-shadow:0 0 0 1px #a93640}
+.mobile-experience .hero .journey h2,.mobile-experience .hero .journey-step b{color:#f2fff9}
+.mobile-experience .hero .journey-step>span{color:#bce8d9}
 @media(min-width:761px){
  .mobile-experience .wrap{max-width:1220px;width:calc(100% - 64px)}
  .mobile-experience .nav{gap:18px}.mobile-experience .nav nav{gap:20px}
@@ -71,10 +73,11 @@ button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}
  .experience-next{display:block;padding:16px}.experience-next p{font-size:15px;margin-bottom:12px}
  .experience-next a{width:100%;justify-content:center}
  .mobile-ready[data-mobile-pane]:not([data-mobile-pane=models]) .baseball-banner{display:none}
- .mobile-experience .baseball-banner{width:calc(100% - 32px);margin:0 auto 24px;min-height:0}
- .mobile-experience .baseball-scene{height:175px;object-position:right 48%}
- .mobile-experience .baseball-copy{width:100%;padding:18px;max-width:none}
- .mobile-experience .baseball-copy h2{font-size:21px}.mobile-experience .baseball-copy p{font-size:14px}
+ .mobile-experience .baseball-banner{width:calc(100% - 32px);margin:0 auto 24px;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 35%;gap:0;padding:0;align-items:stretch}
+ .mobile-experience .baseball-scene{position:relative;grid-column:2;grid-row:1;width:100%;height:100%;min-height:196px;object-position:right 52%}
+ .mobile-experience .baseball-copy{grid-column:1;grid-row:1;width:100%;padding:16px;max-width:none}
+ .mobile-experience .baseball-copy h2{font-size:18px;line-height:1.55}.mobile-experience .baseball-copy p{display:none}
+ .mobile-experience .baseball-copy .button{font-size:13px;min-height:44px;padding:10px 12px;white-space:normal}
  .mobile-experience .baseball-copy .eyebrow{display:none}
  .mobile-experience .mobile-bottom-nav{padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom));z-index:70}
  .mobile-experience .mobile-bottom-nav a{font-size:12px;min-height:52px}
