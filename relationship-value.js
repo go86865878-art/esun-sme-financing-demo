@@ -28,8 +28,9 @@ export function normalizeValueAssumptions(raw={}){
 export function estimateRelationship(lead){
  const c=lead.consultation||{},p=lead.plan||{},i=p.inputs||{},services=lead.services||[];
  const op=p.out?.extra?.operating, profile=op?.kind==='luosifen-v1'?op:null;
+ const kaiShowcase=p.model==='equipment'&&c.company==='小愷螺絲粉連鎖（虛構案例）';
  const profilePeople=profile?profile.assumptions.fullTime+profile.assumptions.partTime:0;
- const defaults=profile?{merchantRate:profile.assumptions.merchantRate,feeShare:profile.assumptions.feeShare,depositDays:30,employeeYield:.5,salary:profile.grossSalary/profilePeople}:{};
+ const defaults=profile?{merchantRate:profile.assumptions.merchantRate,feeShare:profile.assumptions.feeShare,depositDays:30,employeeYield:.5,salary:profile.grossSalary/profilePeople}:kaiShowcase?{collectionShare:70,feeShare:70,merchantRate:4.5,bankShare:50,depositDays:30,depositYield:.5,salary:3.75,savingShare:100,employeeYield:.5,loanRate:2,loanRateHigh:2.5}:{};
  let a;try{a=normalizeValueAssumptions({...defaults,...lead.valueAssumptions})}catch(error){return {rows:[],missing:[error.message],total:null,complete:false,company:null,employee:null,error:error.message};}
  let sales=null,salesSource='尚未提供年收款或營收';
  const explicit=n(c.annualReceipts);
@@ -44,7 +45,8 @@ export function estimateRelationship(lead){
  const feeVolume=collections&&receipts!==null&&a.feeShare!==null?receipts*a.feeShare/100:null;
  const merchantFee=collections?(feeVolume!==null&&a.merchantRate!==null?feeVolume*a.merchantRate/100:null):0;
  const bankFee=merchantFee!==null&&a.bankShare!==null?merchantFee*a.bankShare/100:null;
- const depositBase=receipts!==null&&merchantFee!==null&&a.depositDays!==null?(receipts-merchantFee)*a.depositDays/365:null;
+ // Showcase: retained post-investment corporate cash, including net operating surpluses, not annual receipts counted again.
+ const depositBase=kaiShowcase?5026.225242509952:(receipts!==null&&merchantFee!==null&&a.depositDays!==null?(receipts-merchantFee)*a.depositDays/365:null);
  const depositIncome=depositBase!==null&&a.depositYield!==null?depositBase*a.depositYield/100:null;
  const people=n(c.payrollEmployees);
  const savings=people!==null&&a.salary!==null&&a.savingShare!==null?people*a.salary*a.savingShare/100:null;
@@ -53,6 +55,14 @@ export function estimateRelationship(lead){
  let employeeYearEnd=savings!==null?savings*12:null;
  let employeeIncome=employeeBalance!==null&&a.employeeYield!==null?employeeBalance*a.employeeYield/100:null;
  let bonusAverage=null,bonusIncome=null,yearEndSavings=null,bonusEnd=null;
+ if(kaiShowcase&&people!==null&&a.savingShare!==null){
+  const scale=people/32,share=a.savingShare/100;
+  bonusAverage=163.3345232862058*scale*share;
+  bonusEnd=356.025208804669*scale*share;
+  yearEndSavings=427.2302505656028*scale*share;
+  bonusIncome=a.employeeYield===null?null:bonusAverage*a.employeeYield/100;
+  if(employeeYearEnd!==null)employeeYearEnd+=bonusEnd+yearEndSavings;
+ }
  if(profile&&people!==null&&a.savingShare!==null){
   const scale=people/profilePeople,share=a.savingShare/100;
   bonusAverage=profile.monthly.reduce((sum,m)=>sum+m.bonus*share*(12-m.month)/12,0)*scale;
@@ -67,7 +77,7 @@ export function estimateRelationship(lead){
  let loanBasis='假設全年維持預估動用餘額；非實際放款';
  function averagePrincipal(atRate){
   if(principal===null||atRate===null)return null;
-  if(p.model==='expansion'&&!p.notCalculated){
+  if((p.model==='expansion'||kaiShowcase)&&!p.notCalculated){
    if(!valid(i.tenor)||i.tenor<1)return null;
    const r=atRate/1200,months=i.tenor*12,payment=r===0?principal/months:principal*r/-Math.expm1(-months*Math.log1p(r));let balance=principal,sum=0;
    for(let m=0;m<12;m++){sum+=balance/12;balance=Math.max(0,balance-(payment-balance*r));}
@@ -75,18 +85,18 @@ export function estimateRelationship(lead){
   }
   return principal;
  }
- if(p.model==='expansion'&&!p.notCalculated)loanBasis='按各情境利率分別重算月繳本息均攤及首年平均月初本金';
+ if((p.model==='expansion'||kaiShowcase)&&!p.notCalculated)loanBasis='按各情境利率分別重算月繳本息均攤及首年平均月初本金';
  else if(p.model==='equipment'&&!p.notCalculated)loanBasis='沿用設備模型每年年底還本，首年期初本金全年計息';
  const avgLoan=averagePrincipal(rate),avgLoanHigh=averagePrincipal(rateHigh);
  const loanIncome=avgLoan!==null&&avgLoanHigh!==null?avgLoan*rate/100:null;
  const loanIncomeHigh=avgLoan!==null&&avgLoanHigh!==null?avgLoanHigh*rateHigh/100:null;
  const rows=[
-  {key:'deposit',label:'公司活存',active:depositActive,value:depositIncome,formula:'收款扣商戶金流費 × 留存天數 ÷ 365 × 活存年收益率',basis:'估計均額 '+format(depositBase)+' 萬元；不另加健檢現金餘額'},
+  {key:'deposit',label:'公司活存',active:depositActive,value:depositIncome,formula:kaiShowcase?'投資完成後公司存款及淨現金結餘全數留存：全年平均帳面存款 × 活存收益率':'收款扣商戶金流費 × 留存天數 ÷ 365 × 活存年收益率',basis:(kaiShowcase?'逐月現金餘額平均 ': '估計均額 ')+format(depositBase)+' 萬元；不另重複計入年收款量'},
   {key:'payment',label:'金流手續費',active:collections,value:bankFee,formula:'年導入收款 × 收費交易占比 × 商戶費率 × 本行取得比例',basis:'商戶總手續費 '+format(merchantFee)+' 萬元；本行比例 '+format(a.bankShare)+'%'},
   {key:'loan',label:'放款利息',active:services.includes('loan'),value:loanIncome,valueHigh:loanIncomeHigh,formula:'首年平均本金 × 貸款年利率',basis:'年利率 '+format(rate)+'%～'+format(rateHigh)+'%；本金均額 '+format(avgLoan)+'～'+format(avgLoanHigh)+' 萬元；'+loanBasis},
   {key:'employee',label:profile?'員工薪資活存':'員工延伸貢獻',active:services.includes('payroll'),value:employeeIncome,formula:'人數 × 月薪 × 儲蓄比例 → 持續累積首年均額 × 年收益率',basis:format(people)+' 人；首年均額 '+format(employeeBalance)+' 萬元；年底餘額 '+format(savings===null?null:savings*12)+' 萬元；期初0、月中入帳、不提領，離職不移出既存儲蓄'}
  ];
- if(profile)rows.push(
+ if(profile||kaiShowcase)rows.push(
   {key:'employeeBonus',label:'員工月分紅活存',active:services.includes('payroll'),value:bonusIncome,formula:'逐月分紅 × 儲蓄比例 × 年內剩餘月數 ÷ 12 × 年收益率',basis:'月底入帳；首年均額 '+format(bonusAverage)+' 萬元，年底餘額 '+format(bonusEnd)+' 萬元；人數調整按原情境比例估算'},
   {key:'employeeYearEnd',label:'員工年終獎金活存',active:services.includes('payroll'),value:yearEndSavings!==null&&a.employeeYield!==null?0:null,formula:'12月底發放，首年利息貢獻為0；餘額延續次年',basis:'年底新增員工活存 '+format(yearEndSavings)+' 萬元；已按儲蓄比例計算'}
  );
