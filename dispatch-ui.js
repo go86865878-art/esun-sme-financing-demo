@@ -1,3 +1,4 @@
+import {estimateRelationship} from './relationship-value.js?v=deposit20261102';
 import {briefFromLead,visualBriefSvg} from './visual-brief.js?v=visualbrief20261101';
 import {buildVisualReport} from './visual-report.js?v=visualbrief20261101';
 import {downloadPdf} from './pdf-report.js?v=visualbrief20261101';
@@ -11,7 +12,7 @@ export function mountDispatchMail(){
  <p class="dispatch-hint">依推薦分行或對應服務組套用收件人；未提供的信箱不會自動猜測。更換單位會使用該單位自己的設定。</p>
  <label class="dispatch-remember"><input type="checkbox" id="rememberDispatch" checked>記住此單位的收件人（僅此瀏覽器）</label>
  <label class="dispatch-subject-label">郵件主旨<input id="dispatchSubject" readonly></label>
- <details class="dispatch-visual-preview" open><summary>圖表摘要預覽｜完整兩頁見PDF附件</summary><div id="dispatchVisualBody"></div></details><details class="dispatch-preview"><summary>完整文字內文（備查）</summary><pre id="dispatchBody"></pre></details>
+ <section id="managerContribution" class="manager-contribution" aria-label="主管潛在收益摘要"></section><details class="dispatch-visual-preview" open><summary>圖表摘要預覽｜完整兩頁見PDF附件</summary><div id="dispatchVisualBody"></div></details><details class="dispatch-preview"><summary>完整文字內文（備查）</summary><pre id="dispatchBody"></pre></details>
  <p id="dispatchError" role="alert" class="error"></p><p id="dispatchFeedback" role="status"></p>
  <div class="dispatch-actions"><button type="button" class="button" id="downloadDispatchMail">下載圖表郵件草稿</button><button type="button" class="button outline" id="downloadDispatchPdf">下載圖表 PDF</button><button type="submit" class="button outline" id="openDispatchMail">開啟純文字郵件</button><button type="button" class="button outline" id="copyDispatchMail">複製文字內文</button></div>
  <p class="dispatch-hint">圖表草稿可用支援.eml的郵件程式開啟，內含圖表與PDF附件；使用純文字郵件時，請手動加入圖表PDF。請在郵件程式確認收件人與附件後寄出。平台只產生草稿，不會標記為已寄送。</p></form>`;
@@ -25,6 +26,10 @@ export function mountDispatchMail(){
   if(!lead||!target)return;
   const draft=buildDispatchMail(lead,target,{...contact(),email:'preview@example.invalid'});
   $('dispatchSubject').value=draft.subject;$('dispatchBody').textContent=draft.body;$('dispatchVisualBody').innerHTML=visualBriefSvg(briefFromLead(lead),1);
+  const contribution=estimateRelationship(lead);const fmt=v=>Number.isFinite(v)?(Math.abs(v)<10?Math.round(v*10000).toLocaleString('zh-TW')+' 元':Math.round(v).toLocaleString('zh-TW')+' 萬元'):'待補';
+  const range=(a,b)=>Number.isFinite(a)&&Number.isFinite(b)?Math.round(a).toLocaleString('zh-TW')+'～'+Math.round(b).toLocaleString('zh-TW')+' 萬元':'待補';
+  const max=Math.max(1,...contribution.rows.filter(x=>x.active).map(x=>Number(x.value)||0));
+  $('managerContribution').innerHTML='<h3>主管一眼看懂｜首年潛在貢獻</h3><div class="manager-kpis"><div><small>企業貢獻</small><b>'+range(contribution.company,contribution.companyHigh)+'</b></div><div><small>員工延伸貢獻</small><b>'+fmt(contribution.employee)+'</b></div><div><small>首年潛在貢獻</small><b>'+range(contribution.total,contribution.totalHigh)+'</b></div></div><div class="manager-bars">'+contribution.rows.filter(x=>x.active).map(x=>'<article><div><strong>'+x.label+'</strong><b>'+(x.valueHigh!==undefined?range(x.value,x.valueHigh):fmt(x.value))+'</b></div><div class="manager-track"><span style="width:'+Math.max(1,(Number(x.value)||0)/max*100)+'%"></span></div></article>').join('')+'</div><small>依案例假設估算，包含融資、金流、活存及薪轉；不是實際獲利。</small>';
  }
  function prepare(){
   $('dispatchError').textContent='';$('dispatchFeedback').textContent='';
