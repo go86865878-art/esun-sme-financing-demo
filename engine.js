@@ -100,13 +100,13 @@ function equipment(v) {
   const grace = number(v, 'grace', { max: tenor - 1, integer: true, fallback: 0 });
   const annualBudget = number(v, 'annualBudget');
   const loan = Math.max(0, invest - equity);
-  const schedule = annualEqualPrincipal(loan, interest, tenor, grace);
+  const schedule = v.repaymentMethod === 'monthly_annuity' ? monthlyAnnuity(loan, interest, tenor).schedule : annualEqualPrincipal(loan, interest, tenor, grace);
   const peakAnnual = Math.max(...schedule.map(row => row.total));
   const totalInterest = schedule.reduce((sum, row) => sum + row.interest, 0);
   const coverage = peakAnnual > 0 ? annualBudget / peakAnnual : null;
   return {
     label: '每年預計還款金額', value: peakAnnual, unit: '萬元／年',
-    sub: loan > 0 ? `第 ${grace + 1} 年開始還本金；此處顯示最高年度本息，之後逐年遞減。` : '自有資金已涵蓋本次投資，試算無新增借款。',
+    sub: loan > 0 ? (v.repaymentMethod === 'monthly_annuity' ? '月繳本息平均攤還；此處顯示第一年度本息。' : `第 ${grace + 1} 年開始還本金；此處顯示最高年度本息，之後逐年遞減。`) : '自有資金已涵蓋本次投資，試算無新增借款。',
     metrics: [
       { label: '需規劃的借款金額', value: money(loan) },
       { label: '寬限期間每年利息', value: grace ? money(loan * interest / 100) : '未設定寬限期' },
