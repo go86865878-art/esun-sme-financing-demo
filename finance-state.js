@@ -1,4 +1,4 @@
-import {DEMO_CASES} from './case-data.js?v=visualbrief20261101';
+import {DEMO_CASES} from './case-data.js?v=deposit20261102';
 import {PLAN_EXAMPLES} from './franchise-scenarios.js?v=visualbrief20261101';
 export const FINANCE_DRAFT_KEY='esun_mobile_review_finance_draft_v1';
 export const HEALTH_KEYS=['cash','receipts','stock','shortDebt','totalDebt','assets','sales','profit','annualAvailable','annualDebt'];
