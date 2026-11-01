@@ -1,4 +1,4 @@
-import {DEMO_CASES} from './case-data.js?v=deposit20261102';
+import {DEMO_CASES} from './case-data.js?v=final20261102';
 export const BUSINESS_TYPES=['加盟飲料','加盟餐飲','自主品牌餐飲','一般中小企業','中央廚房／食品製造','海外拓店'];
 export const PURPOSE_TITLES={working:'營運週轉金',expansion:'展店與開張',overseas:'海外投資／拓店',equipment:'中央廚房與設備'};
 export const PLAN_EXAMPLES=Object.fromEntries(Object.keys(PURPOSE_TITLES).map(model=>[model,DEMO_CASES.filter(c=>c.model===model).map(c=>({name:c.title,caseId:c.id,values:c.input}))]));
