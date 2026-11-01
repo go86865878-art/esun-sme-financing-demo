@@ -29,6 +29,7 @@ export function estimateRelationship(lead){
  const c=lead.consultation||{},p=lead.plan||{},i=p.inputs||{},services=lead.services||[];
  const op=p.out?.extra?.operating, profile=op?.kind==='luosifen-v1'?op:null;
  const kaiShowcase=p.model==='equipment'&&c.company==='小愷螺絲粉連鎖（虛構案例）';
+ const dajunShowcase=profile&&c.company==='大鈞螺絲粉（虛構案例）';
  const profilePeople=profile?profile.assumptions.fullTime+profile.assumptions.partTime:0;
  const defaults=profile?{merchantRate:profile.assumptions.merchantRate,feeShare:profile.assumptions.feeShare,depositDays:30,employeeYield:.5,salary:profile.grossSalary/profilePeople}:kaiShowcase?{collectionShare:70,feeShare:70,merchantRate:4.5,bankShare:50,depositDays:30,depositYield:.5,salary:3.75,savingShare:100,employeeYield:.5,loanRate:2,loanRateHigh:2.5}:{};
  let a;try{a=normalizeValueAssumptions({...defaults,...lead.valueAssumptions})}catch(error){return {rows:[],missing:[error.message],total:null,complete:false,company:null,employee:null,error:error.message};}
@@ -46,7 +47,7 @@ export function estimateRelationship(lead){
  const merchantFee=collections?(feeVolume!==null&&a.merchantRate!==null?feeVolume*a.merchantRate/100:null):0;
  const bankFee=merchantFee!==null&&a.bankShare!==null?merchantFee*a.bankShare/100:null;
  // Showcase: retained post-investment corporate cash, including net operating surpluses, not annual receipts counted again.
- const depositBase=kaiShowcase?5026.225242509952:(receipts!==null&&merchantFee!==null&&a.depositDays!==null?(receipts-merchantFee)*a.depositDays/365:null);
+ const depositBase=kaiShowcase?5026.225242509952:dajunShowcase?258.50083333333333:(receipts!==null&&merchantFee!==null&&a.depositDays!==null?(receipts-merchantFee)*a.depositDays/365:null);
  const depositIncome=depositBase!==null&&a.depositYield!==null?depositBase*a.depositYield/100:null;
  const people=n(c.payrollEmployees);
  const savings=people!==null&&a.salary!==null&&a.savingShare!==null?people*a.salary*a.savingShare/100:null;
@@ -91,7 +92,7 @@ export function estimateRelationship(lead){
  const loanIncome=avgLoan!==null&&avgLoanHigh!==null?avgLoan*rate/100:null;
  const loanIncomeHigh=avgLoan!==null&&avgLoanHigh!==null?avgLoanHigh*rateHigh/100:null;
  const rows=[
-  {key:'deposit',label:'公司活存',active:depositActive,value:depositIncome,formula:kaiShowcase?'投資完成後公司存款及淨現金結餘全數留存：全年平均帳面存款 × 活存收益率':'收款扣商戶金流費 × 留存天數 ÷ 365 × 活存年收益率',basis:(kaiShowcase?'逐月現金餘額平均 ': '估計均額 ')+format(depositBase)+' 萬元；不另重複計入年收款量'},
+  {key:'deposit',label:'公司活存',active:depositActive,value:depositIncome,formula:(kaiShowcase||dajunShowcase)?'公司營運現金與逐月淨結餘全數留存：全年平均存款 × 活存收益率':'收款扣商戶金流費 × 留存天數 ÷ 365 × 活存年收益率',basis:((kaiShowcase||dajunShowcase)?'逐月營運現金均額 ':'估計均額 ')+format(depositBase)+' 萬元；不另重複計入年收款量'},
   {key:'payment',label:'金流手續費',active:collections,value:bankFee,formula:'年導入收款 × 收費交易占比 × 商戶費率 × 本行取得比例',basis:'商戶總手續費 '+format(merchantFee)+' 萬元；本行比例 '+format(a.bankShare)+'%'},
   {key:'loan',label:'放款利息',active:services.includes('loan'),value:loanIncome,valueHigh:loanIncomeHigh,formula:'首年平均本金 × 貸款年利率',basis:'年利率 '+format(rate)+'%～'+format(rateHigh)+'%；本金均額 '+format(avgLoan)+'～'+format(avgLoanHigh)+' 萬元；'+loanBasis},
   {key:'employee',label:profile?'員工薪資活存':'員工延伸貢獻',active:services.includes('payroll'),value:employeeIncome,formula:'人數 × 月薪 × 儲蓄比例 → 持續累積首年均額 × 年收益率',basis:format(people)+' 人；首年均額 '+format(employeeBalance)+' 萬元；年底餘額 '+format(savings===null?null:savings*12)+' 萬元；期初0、月中入帳、不提領，離職不移出既存儲蓄'}
