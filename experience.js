@@ -19,6 +19,17 @@ if(document.body.classList.contains('mobile-experience')&&main){
    error.setAttribute('tabindex','-1');error.focus({preventScroll:true});error.scrollIntoView({block:'center',behavior:'smooth'});
   }));
  }
+
+ // The PDF-style preview has its own reading progress, independent of page scrolling.
+ const previewFrame=document.getElementById('summaryPdfFrame');
+ if(previewFrame){
+  const wrapper=previewFrame.closest('.summary-preview'),rail=document.createElement('div'),fill=document.createElement('span');
+  rail.className='summary-pdf-progress';rail.setAttribute('aria-hidden','true');rail.append(fill);wrapper?.append(rail);
+  const reflect=()=>{const limit=Math.max(1,previewFrame.scrollHeight-previewFrame.clientHeight);fill.style.height=Math.max(0,Math.min(100,previewFrame.scrollTop/limit*100))+'%';};
+  previewFrame.addEventListener('scroll',reflect,{passive:true});
+  window.addEventListener('resize',reflect,{passive:true});reflect();
+ }
+
  // A hidden destination must become visible before native hash scrolling occurs.
  document.addEventListener('click',e=>{
   const a=e.target.closest('.experience-next a');if(!a||!matchMedia('(max-width:760px)').matches)return;
