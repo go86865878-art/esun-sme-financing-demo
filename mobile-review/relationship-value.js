@@ -34,7 +34,7 @@ export function estimateRelationship(lead){
  let sales=null,salesSource='尚未提供年收款或營收';
  const explicit=n(c.annualReceipts);
  if(explicit!==null){sales=explicit;salesSource='客戶另填的預計導入本行年收款';}
- else if(profile&&valid(profile.annual.revenue)){sales=profile.annual.revenue;salesSource='螺絲粉營運計畫：首年逐月營收合計';}
+ else if(profile&&valid(profile.annual.revenue)){sales=profile.annual.revenue;salesSource='螺螄粉營運計畫：首年逐月營收合計';}
  else if(p.model==='expansion'&&valid(i.revenue)&&valid(i.ramp)){sales=i.revenue*(12-Math.min(i.ramp,12)*0.5);salesSource='新店首年營收：爬坡期按成熟期50%';}
  else if(p.model==='working'&&valid(i.nextSales)){sales=i.nextSales;salesSource='週轉規劃的明年全年營收';}
  else if(valid(c.healthInputs?.sales)){sales=c.healthInputs.sales;salesSource='財務健檢的公司全年營收（非新增投資營收）';}

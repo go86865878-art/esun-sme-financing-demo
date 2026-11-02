@@ -26,7 +26,7 @@ document.getElementById('runFinanceChecks').onclick=async()=>{
   const set=(id,value)=>{const el=d.getElementById(id);el.value=value;el.dispatchEvent(new w.Event('input',{bubbles:true}));};
   log('fresh page and old case URL do not fill numbers',[...d.querySelectorAll('#modelFields input,#healthFields input')].every(e=>e.value===''));
   log('new service choices visible and initially unselected',d.querySelectorAll('#productNeeds [name=consultService]').length===3&&!d.getElementById('productNeeds').closest('details')&&![...d.querySelectorAll('#productNeeds input')].some(x=>x.checked));
-  log('only the two requested optional cases remain',d.getElementById('casePicker').options.length===2&&d.getElementById('casePicker').textContent.includes('大鈞螺絲粉')&&d.getElementById('casePicker').textContent.includes('小愷央廚'));
+  log('only the two requested optional cases remain',d.getElementById('casePicker').options.length===2&&d.getElementById('casePicker').textContent.includes('大鈞螺螄粉')&&d.getElementById('casePicker').textContent.includes('小愷央廚'));
   log('examples start collapsed',[...d.querySelectorAll('.optional-examples')].every(e=>!e.open));
   back=await create('internal.html?cases=1&v=value1');
   log('backend empty, old URL cannot seed samples',!back.contentDocument.getElementById('emptyLeads').hidden&&!back.contentDocument.getElementById('loadSamples')&&JSON.parse(localStorage.getItem(LEADS_KEY)||'[]').length===0);

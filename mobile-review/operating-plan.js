@@ -1,7 +1,7 @@
 import {WORKING_CAPITAL_DEFAULTS,forecastOperatingHealth} from './operating-health.js?v=visualbrief20261101';
 // Fictional restaurant operating plan. Currency is TWD ten-thousands unless labelled otherwise.
 export const OPERATING_KIND='luosifen-v1';
-export const OPERATING_TITLE='螺絲粉營運計畫預估';
+export const OPERATING_TITLE='螺螄粉營運計畫預估';
 export const OPERATING_DEFAULTS=Object.freeze({...WORKING_CAPITAL_DEFAULTS,kind:OPERATING_KIND,ticket:300,days:30,initialDaily:100,matureDaily:170,costPercent:35,fullTime:3,fullSalary:4.5,partTime:6,partHours:150,hourlyWage:220,personnelExtra:10,rent:10,misc:3,utilities:3,fixedAdjustment:0,feeShare:70,merchantRate:4.5,tax:20,monthlyBonus:20,yearEndBonus:30,fullTimeShare:80,depreciationMonths:60});
 export const OPERATING_FIELDS=[
  ['ticket','實收客單價','元',1,100000],['days','每月營業天數','天',1,31],['initialDaily','初期每日交易','筆',0,100000],['matureDaily','成熟期每日交易','筆',0,100000],['costPercent','營業成本率','%',0,100],

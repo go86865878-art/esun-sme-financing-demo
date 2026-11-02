@@ -36,7 +36,7 @@ export const AREAS = Object.freeze({
   '金門縣':'金城鎮 金湖鎮 金沙鎮 金寧鄉 烈嶼鄉 烏坵鄉', '連江縣':'南竿鄉 北竿鄉 莒光鄉 東引鄉'
 });
 export const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export function readLocal(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):structuredClone(fallback);}catch{return structuredClone(fallback);}}
+export function readLocal(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw,(_,value)=>typeof value==='string'?value.replaceAll('螺\u7d72粉','螺螄粉'):value):structuredClone(fallback);}catch{return structuredClone(fallback);}}
 export function writeLocal(key,value){localStorage.setItem(key,JSON.stringify(value));if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent('esun-demo-update'));}
 export function loadDemoLeads(){const rows=readLocal(LEADS_KEY,[]);return Array.isArray(rows)?rows.filter(x=>x&&typeof x.id==='string'&&Array.isArray(x.services)).slice(0,200):[];}
 export function saveDemoLeads(rows){writeLocal(LEADS_KEY,rows.slice(0,200));}

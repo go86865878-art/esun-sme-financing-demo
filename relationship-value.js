@@ -28,15 +28,15 @@ export function normalizeValueAssumptions(raw={}){
 export function estimateRelationship(lead){
  const c=lead.consultation||{},p=lead.plan||{},i=p.inputs||{},services=lead.services||[];
  const op=p.out?.extra?.operating, profile=op?.kind==='luosifen-v1'?op:null;
- const kaiShowcase=p.model==='equipment'&&c.company==='小愷螺絲粉連鎖（虛構案例）';
- const dajunShowcase=profile&&c.company==='大鈞螺絲粉（虛構案例）';
+ const kaiShowcase=p.model==='equipment'&&c.company==='小愷螺螄粉連鎖（虛構案例）';
+ const dajunShowcase=profile&&c.company==='大鈞螺螄粉（虛構案例）';
  const profilePeople=profile?profile.assumptions.fullTime+profile.assumptions.partTime:0;
  const defaults=profile?{merchantRate:profile.assumptions.merchantRate,feeShare:profile.assumptions.feeShare,depositDays:30,employeeYield:.5,salary:profile.grossSalary/profilePeople}:kaiShowcase?{collectionShare:70,feeShare:70,merchantRate:4.5,bankShare:50,depositDays:30,depositYield:.5,salary:3.75,savingShare:100,employeeYield:.5,loanRate:2,loanRateHigh:2.5}:{};
  let a;try{a=normalizeValueAssumptions({...defaults,...lead.valueAssumptions})}catch(error){return {rows:[],missing:[error.message],total:null,complete:false,company:null,employee:null,error:error.message};}
  let sales=null,salesSource='尚未提供年收款或營收';
  const explicit=n(c.annualReceipts);
  if(explicit!==null){sales=explicit;salesSource='客戶另填的預計導入本行年收款';}
- else if(profile&&valid(profile.annual.revenue)){sales=profile.annual.revenue;salesSource='螺絲粉營運計畫：首年逐月營收合計';}
+ else if(profile&&valid(profile.annual.revenue)){sales=profile.annual.revenue;salesSource='螺螄粉營運計畫：首年逐月營收合計';}
  else if(p.model==='expansion'&&valid(i.revenue)&&valid(i.ramp)){sales=i.revenue*(12-Math.min(i.ramp,12)*0.5);salesSource='新店首年營收：爬坡期按成熟期50%';}
  else if(p.model==='working'&&valid(i.nextSales)){sales=i.nextSales;salesSource='週轉規劃的明年全年營收';}
  else if(valid(c.healthInputs?.sales)){sales=c.healthInputs.sales;salesSource='財務健檢的公司全年營收（非新增投資營收）';}
